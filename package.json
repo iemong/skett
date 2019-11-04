@@ -5,12 +5,23 @@
   "author": "iemong",
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.6.4",
     "@emotion/core": "^10.0.21",
     "@emotion/styled": "^10.0.17",
+    "@storybook/addon-actions": "^5.2.5",
+    "@storybook/addon-console": "^1.2.1",
+    "@storybook/addon-info": "^5.2.5",
+    "@storybook/addon-knobs": "^5.2.5",
+    "@storybook/addon-links": "^5.2.5",
+    "@storybook/addon-storysource": "^5.2.5",
+    "@storybook/addon-viewport": "^5.2.5",
+    "@storybook/addons": "^5.2.5",
+    "@storybook/react": "^5.2.5",
     "@types/node": "^12.11.1",
     "@types/react": "^16.9.9",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
+    "babel-loader": "^8.0.6",
     "emotion": "^10.0.17",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
@@ -19,12 +30,16 @@
     "next": "^9.1.1",
     "prettier": "^1.18.2",
     "react": "^16.10.2",
+    "react-docgen-typescript-loader": "^3.3.0",
     "react-dom": "^16.10.2",
     "typescript": "^3.6.4"
   },
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
-  }
+    "start": "next start",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {}
 }
