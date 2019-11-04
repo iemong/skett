@@ -10,6 +10,8 @@ enum StyleType {
 }
 
 type StyleProps = {
+    width?: string
+    height?: string
     styleType: keyof typeof StyleType
     className?: string
 }
@@ -19,11 +21,11 @@ type Props = StyleProps & {
 }
 
 const Button = (props: Props) => {
-    const { children, styleType, className } = props
+    const { children, styleType, className, width, height } = props
 
     if (styleType === 'twitter') {
         return (
-            <ButtonStyle role="button" className={className} styleType={styleType}>
+            <ButtonStyle role="button" className={className} styleType={styleType} width={width} height={height}>
                 <React.Fragment>
                     <p>twitter</p>
                     <img src="/img/svg/icn_twitter.svg" width={22} alt="twitter" />
@@ -55,29 +57,31 @@ export default Button
 const AdditionalStyle = (props: StyleProps) => {
     if (props.styleType === 'default') {
         return css({
+            width: props.width,
+            height: props.height,
             background: 'linear-gradient(to right, #FFB300, #FF8000)',
         })
     } else if (props.styleType === 'twitter') {
         return css({
-            width: `${320 / 2}px`,
+            width: props.width ? props.width : `${320 / 2}px`,
+            height: props.height,
             justifyContent: 'space-between',
             padding: '0 15px 0 20px',
             backgroundColor: '#359DC5',
         })
     } else if (props.styleType === 'facebook') {
         return css({
-            width: `${320 / 2}px`,
+            width: props.width ? props.width : `${320 / 2}px`,
+            height: props.height,
             justifyContent: 'space-between',
             padding: '0 15px 0 20px',
             backgroundColor: '#495996',
         })
     } else if (props.styleType === 'cancel') {
         return css({
+            width: props.width,
+            height: props.height,
             background: 'linear-gradient(to right, #BFBFBF, #999)',
-        })
-    } else {
-        return css({
-            background: 'red',
         })
     }
 }
