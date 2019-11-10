@@ -1,11 +1,18 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
+import Main from '../components/templates/layouts/Main'
 
-const Home = () => <Title>Hello, world!</Title>
+const Home = () => {
+    return (
+        <Main>
+            <Title>Hello, world!</Title>
+        </Main>
+    )
+}
 
 export default Home
 
 const Title = styled.h1`
-  font-size: 20px;
-  color: red;
+    font-size: 20px;
+    color: red;
 `
