@@ -22,6 +22,7 @@
     "@types/storybook__addon-info": "^4.1.2",
     "@typescript-eslint/eslint-plugin": "^2.4.0",
     "@typescript-eslint/parser": "^2.4.0",
+    "@zeit/next-css": "^1.0.1",
     "babel-loader": "^8.0.6",
     "emotion": "^10.0.17",
     "eslint": "^6.5.1",
@@ -29,19 +30,22 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react-hooks": "^2.1.2",
     "express": "^4.17.1",
+    "firebase": "^7.3.0",
     "fork-ts-checker-webpack-plugin": "^3.0.1",
     "next": "^9.1.1",
     "prettier": "^1.18.2",
     "react": "^16.10.2",
     "react-docgen-typescript-loader": "^3.3.0",
     "react-dom": "^16.10.2",
+    "react-firebaseui": "^4.0.0",
     "react-scripts": "^3.2.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.7.2"
   },
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
+    "generate": "next export",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
