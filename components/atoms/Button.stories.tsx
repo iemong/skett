@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { storiesOf } from '@storybook/react'
-import Button from './Button'
+import Button from '@components/atoms/Button'
 
 storiesOf('Atoms/Button', module).add('Button', () => (
     <React.Fragment>

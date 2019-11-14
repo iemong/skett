@@ -1,9 +1,9 @@
 import * as React from 'react'
 import * as firebase from 'firebase/app'
-import Main from '../components/templates/layouts/Main'
 import { FirebaseAuth } from 'react-firebaseui'
+import Main from '@components/templates/layouts/Main'
 
-import '../assets/css/firebaseui-styling.global.css'
+import '@assets/css/firebaseui-styling.global.css'
 
 const Login = () => {
     const provider = new firebase.auth.FacebookAuthProvider()

@@ -1,10 +1,10 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import useForm from 'react-hook-form'
-import Main from '../components/templates/layouts/Main'
-import firebaseApp from '../assets/utils/firebaseApp'
-import { COLLECTIONS } from '../assets/constant'
 import { DateTime } from 'luxon'
+import Main from '@components/templates/layouts/Main'
+import firebaseApp from '@assets/utils/firebaseApp'
+import { COLLECTIONS } from '@assets/constant'
 
 type PostType = {
     userId: number

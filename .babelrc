@@ -1,4 +1,21 @@
 {
     "presets": ["next/babel"],
-    "plugins": ["@babel/plugin-proposal-nullish-coalescing-operator"]
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": ["./"],
+                "alias": {
+                    "@components": "./components",
+                    "@reducers": "./reducers",
+                    "@store": "./store",
+                    "@types": "./types",
+                    "@utils": "./utils",
+                    "@assets": "./assets"
+                },
+                "extensions": [".js", ".jsx", ".ts", ".tsx"]
+            }
+        ],
+        "@babel/plugin-proposal-nullish-coalescing-operator"
+    ]
 }
