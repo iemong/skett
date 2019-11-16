@@ -1,19 +1,9 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import Main from '@components/templates/layouts/Main'
-import firebaseApp from '@assets/utils/firebaseApp'
-import { COLLECTIONS } from '@assets/constant'
-
-type PostType = {
-    userId: number
-    title: string
-    description: string
-    isOpen: boolean
-    createDate: string
-    updateDate: string
-    url: string
-    imageUrl: string
-}
+import Main from 'components/templates/layouts/Main'
+import firebaseApp from 'assets/utils/firebaseApp'
+import { COLLECTIONS } from 'assets/constant'
+import { PostType } from 'types/index'
 
 type Props = {
     data: PostType[]

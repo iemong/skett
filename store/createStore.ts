@@ -1,9 +1,9 @@
 import { connectRouter, routerMiddleware } from 'connected-react-router'
 import { History } from 'history'
-import rootReducer from 'reducers'
 import { applyMiddleware, combineReducers, createStore } from 'redux'
 import loggerMiddleware from 'redux-logger'
 import thunkMiddleware from 'redux-thunk'
+import rootReducer from 'reducers'
 
 export default (history: History) => {
     const middlewares = [thunkMiddleware, routerMiddleware(history)]

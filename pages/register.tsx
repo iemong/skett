@@ -2,9 +2,9 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import useForm from 'react-hook-form'
 import { DateTime } from 'luxon'
-import Main from '@components/templates/layouts/Main'
-import firebaseApp from '@assets/utils/firebaseApp'
-import { COLLECTIONS } from '@assets/constant'
+import Main from 'components/templates/layouts/Main'
+import firebaseApp from 'assets/utils/firebaseApp'
+import { COLLECTIONS, STRAGE_BACKET } from 'assets/constant'
 
 type PostType = {
     userId: number
@@ -19,12 +19,19 @@ type PostType = {
 
 const Register = () => {
     const db = firebaseApp.firestore()
+    const storage = firebaseApp.storage(STRAGE_BACKET)
+    const storageRef = storage.ref()
 
     const { register, handleSubmit, watch, errors } = useForm()
 
-    const onSubmit = (data: Record<string, any>) => {
+    const onSubmit = async (data: Record<string, any>) => {
         console.log('send', data)
         const now = DateTime.local().toString()
+        const fileList: FileList = data.image
+        const file = fileList[0]
+        const imageRef = storageRef.child(`images/${file.name}_${Date.now()}.jpg`)
+        const snapshot = await imageRef.put(file)
+        console.log(snapshot)
         const postData: PostType = {
             userId: 1,
             title: data.title,
@@ -33,9 +40,9 @@ const Register = () => {
             createDate: now,
             updateDate: now,
             url: 'google.com',
-            imageUrl:
-                'https://4.bp.blogspot.com/-qMTjibkyRbo/WFo-02D7bBI/AAAAAAABAik/DWHWfaI-37A8WMNfBo0CvmNlzyjkwojUgCLcB/s800/gake_tasukeru.png',
+            imageUrl: `${snapshot.metadata.fullPath}`,
         }
+
         db.collection(COLLECTIONS.POSTS)
             .add(postData)
             .then(docRef => {

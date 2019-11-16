@@ -1,5 +1,5 @@
-import user, { State as UserState } from '@reducers/user'
 import { combineReducers } from 'redux'
+import user, { State as UserState } from 'reducers/user'
 
 export interface State {
     rootReducer: {

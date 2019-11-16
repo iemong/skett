@@ -1,14 +1,14 @@
-import { Action } from '@reducers/user/actions'
-import { INITIALIZE } from '@reducers/user/types'
+import { Action } from 'reducers/user/actions'
+import { INITIALIZE } from 'reducers/user/types'
+import { UserType } from 'types/index'
 
-export type State = {
-    id: string
-    name: string
-}
+export type State = UserType
 
 const initialState: State = {
-    id: '',
-    name: '',
+    displayName: '',
+    email: '',
+    url: '',
+    uid: '',
 }
 
 export default (state: State = initialState, action: Action) => {
@@ -17,8 +17,7 @@ export default (state: State = initialState, action: Action) => {
             const { user } = action.payload
             return {
                 ...state,
-                id: user.id,
-                name: user.name,
+                ...user,
             }
         }
         default:

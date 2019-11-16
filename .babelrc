@@ -6,12 +6,12 @@
             {
                 "root": ["./"],
                 "alias": {
-                    "@components": "./components",
-                    "@reducers": "./reducers",
-                    "@store": "./store",
-                    "@types": "./types",
-                    "@utils": "./utils",
-                    "@assets": "./assets"
+                    "components": "./components",
+                    "reducers": "./reducers",
+                    "store": "./store",
+                    "types": "./types",
+                    "utils": "./utils",
+                    "assets": "./assets"
                 },
                 "extensions": [".js", ".jsx", ".ts", ".tsx"]
             }
