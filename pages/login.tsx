@@ -1,9 +1,11 @@
 import * as React from 'react'
 import * as firebase from 'firebase/app'
 import { FirebaseAuth } from 'react-firebaseui'
-import Main from 'components/templates/layouts/Main'
-
 import 'assets/css/firebaseui-styling.global.css'
+import { bindActionCreators } from 'redux'
+import { useDispatch } from 'react-redux'
+import * as Actions from 'reducers/user/actions'
+import Main from 'components/templates/layouts/Main'
 
 const Login = () => {
     const [user, setUser] = React.useState<any>(null)
@@ -36,7 +38,10 @@ const Login = () => {
     }, [])
 
     React.useEffect(() => {
-        console.log(user)
+        if (user) {
+            console.log(user)
+            actions.initialize(user)
+        }
     }, [user])
 
     return (

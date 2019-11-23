@@ -13,7 +13,7 @@ type Initialize = {
 export type Action = Initialize
 
 export const initialize = (user: UserType): ThunkAction<Promise<void>, State, undefined, Initialize> => {
-    return async dispatch => {
+    return async (dispatch): Promise<void> => {
         try {
             dispatch({
                 type: INITIALIZE,

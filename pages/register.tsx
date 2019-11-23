@@ -29,9 +29,9 @@ const Register = () => {
         const now = DateTime.local().toString()
         const fileList: FileList = data.image
         const file = fileList[0]
-        const imageRef = storageRef.child(`images/${file.name}_${Date.now()}.jpg`)
+        if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
+        const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${Date.now()}.jpg`)
         const snapshot = await imageRef.put(file)
-        console.log(snapshot)
         const postData: PostType = {
             userId: 1,
             title: data.title,
@@ -52,8 +52,6 @@ const Register = () => {
                 console.error(error)
             })
     }
-
-    console.log(watch('title'))
 
     return (
         <Main>
