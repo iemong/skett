@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Head from 'next/head'
-import firebase from '../../../assets/utils/firebase'
+import firebase from '../../../assets/utils/firebaseApp'
 import 'firebase/analytics'
 
 type Props = {
