@@ -15,7 +15,7 @@ const Home = (props: Props): JSX.Element => {
         <Card
             key={index}
             imgUrl={post.imageUrl}
-            description={post.description}
+            description={post.title}
             link={`/posts/${post.id ?? ''}`}
             side={'help'}
         />
