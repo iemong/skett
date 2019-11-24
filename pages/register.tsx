@@ -5,17 +5,7 @@ import { DateTime } from 'luxon'
 import Main from 'components/templates/layouts/Main'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS, STRAGE_BACKET } from 'assets/constant'
-
-type PostType = {
-    userId: number
-    title: string
-    description: string
-    isOpen: boolean
-    createDate: string
-    updateDate: string
-    url: string
-    imageUrl: string
-}
+import { PostType } from 'types/index'
 
 const Register = () => {
     const db = firebaseApp.firestore()
@@ -41,6 +31,7 @@ const Register = () => {
             updateDate: now,
             url: 'google.com',
             imageUrl: `${snapshot.metadata.fullPath}`,
+            side: 'help',
         }
 
         db.collection(COLLECTIONS.POSTS)

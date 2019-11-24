@@ -12,11 +12,23 @@ const Home = (props: Props): JSX.Element => {
     const { data: posts } = props
     // TODO ちゃんとしたID渡す
     const helpPosts = posts.map((post, index) => (
-        <Card key={index} imgUrl={post.imageUrl} description={post.description} link={post.url} side={'help'} />
+        <Card
+            key={index}
+            imgUrl={post.imageUrl}
+            description={post.description}
+            link={`/posts/${post.id ?? ''}`}
+            side={'help'}
+        />
     ))
 
     const supportPosts = posts.map((post, index) => (
-        <Card key={index} imgUrl={post.imageUrl} description={post.description} link={post.url} side={'help'} />
+        <Card
+            key={index}
+            imgUrl={post.imageUrl}
+            description={post.description}
+            link={`/posts/${post.id ?? ''}`}
+            side={'support'}
+        />
     ))
 
     const helpPostElement = <ItemWrapper>{helpPosts}</ItemWrapper>

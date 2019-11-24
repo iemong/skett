@@ -17,7 +17,11 @@ PageHome.getInitialProps = async (): Promise<{ data: void | firebase.firestore.D
     const db = firebaseApp.firestore()
     const docRef = db.collection(COLLECTIONS.POSTS)
     const postData = await docRef.get().catch(e => console.error(e))
-    const data = postData && postData.docs.map(doc => doc.data())
+    const data =
+        postData &&
+        postData.docs.map(doc => {
+            return { ...doc.data(), id: doc.id }
+        })
     return { data }
 }
 
