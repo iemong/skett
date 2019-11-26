@@ -11,7 +11,7 @@ type Props = {
     children: JSX.Element | string
 }
 
-const Main = (props: Props) => {
+const Main = (props: Props): JSX.Element => {
     const { children } = props
     React.useEffect(() => {
         firebase.analytics()
@@ -29,6 +29,21 @@ const Main = (props: Props) => {
                         position: absolute;
                         width: 100%;
                         height: 100%;
+                    }
+                    input {
+                        padding: 0;
+                        border: none;
+                        border-radius: 0;
+                        outline: none;
+                        background: none;
+                    }
+                    textarea {
+                        appearance: none;
+                        resize: none;
+                        padding: 0;
+                        border: 0;
+                        outline: none;
+                        background: transparent;
                     }
                     button {
                         background-color: transparent;

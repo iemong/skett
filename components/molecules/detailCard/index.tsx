@@ -9,12 +9,13 @@ type Props = {
     side: 'help' | 'support'
     userId: number
     updateDate: string
+    className?: string
 }
 
 const DetailCard = (props: Props): JSX.Element => {
-    const { imgUrl, title, description, side, userId, updateDate } = props
+    const { imgUrl, title, description, side, userId, updateDate, className } = props
     return (
-        <Wrapper data-side={side}>
+        <Wrapper data-side={side} className={className}>
             <ThumbnailWrapper>
                 <Thumbnail src={imgUrl} alt="description" />
             </ThumbnailWrapper>

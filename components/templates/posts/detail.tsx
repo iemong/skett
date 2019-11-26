@@ -1,5 +1,7 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
+import Link from 'next/link'
+import Router from 'next/router'
 import Main from 'components/templates/layouts/Main'
 import { PostType } from 'types/index'
 import Tab from 'components/organisms/tab'
@@ -13,7 +15,7 @@ const PostDetail = (props: Props): JSX.Element => {
     const { data } = props
     const helpPostElement = (
         <Wrapper>
-            <DetailCard
+            <DetailCardWithMargin
                 imgUrl={data.imageUrl}
                 title={data.title}
                 description={data.description}
@@ -21,6 +23,10 @@ const PostDetail = (props: Props): JSX.Element => {
                 side={'help'}
                 updateDate={data.updateDate}
             />
+            <Link href={'/apply'}>
+                <ApplyButton />
+            </Link>
+            <BackButton onClick={(): void => Router.back()} />
         </Wrapper>
     )
     return (
@@ -34,4 +40,24 @@ export default PostDetail
 
 const Wrapper = styled.div`
     margin-top: 60px;
+`
+
+const DetailCardWithMargin = styled(DetailCard)`
+    margin-bottom: 80px;
+`
+
+const ApplyButton = styled.button`
+    display: block;
+    width: 401px;
+    height: 81px;
+    background-image: url(/img/btn_apply_help.png);
+    margin: 0 auto 48px;
+`
+
+const BackButton = styled.button`
+    display: block;
+    width: 401px;
+    height: 81px;
+    background-image: url(/img/btn_back.png);
+    margin: 0 auto;
 `
