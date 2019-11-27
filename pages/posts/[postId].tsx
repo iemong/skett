@@ -1,18 +1,30 @@
 import * as React from 'react'
-import styled from '@emotion/styled'
-import Main from 'components/templates/layouts/Main'
+import firebaseApp from 'assets/utils/firebaseApp'
+import { COLLECTIONS } from 'assets/constant'
+import { PostType } from 'types/index'
+import PostDetail from 'components/templates/posts/detail'
 
-const Home = () => {
-    return (
-        <Main>
-            <Title>This is Post Page</Title>
-        </Main>
-    )
+type Props = {
+    data: PostType
 }
 
-export default Home
+const PagePostDetail = (props: Props) => {
+    return <PostDetail data={props.data} />
+}
 
-const Title = styled.h1`
-    font-size: 20px;
-    color: red;
-`
+PagePostDetail.getInitialProps = async ({
+    query,
+}: {
+    query: { postId: string }
+}): Promise<{ data: null | firebase.firestore.DocumentData | '' }> => {
+    const db = firebaseApp.firestore()
+    const docRef = db.collection(COLLECTIONS.POSTS)
+    const postData = await docRef
+        .doc(query.postId)
+        .get()
+        .catch(e => console.error(e))
+    const data = postData && postData.exists ? { ...postData.data(), id: postData.id } : null
+    return { data: data }
+}
+
+export default PagePostDetail

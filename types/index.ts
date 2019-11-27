@@ -6,6 +6,7 @@ export type UserType = {
 }
 
 export type PostType = {
+    id?: string
     userId: number
     title: string
     description: string
@@ -14,4 +15,5 @@ export type PostType = {
     updateDate: string
     url: string
     imageUrl: string
+    side: 'help' | 'support'
 }
