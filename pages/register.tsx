@@ -7,6 +7,7 @@ import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS, STRAGE_BACKET } from 'assets/constant'
 import { PostType } from 'types/index'
 import Tab from 'components/organisms/tab'
+import DetailCard from 'components/molecules/detailCard'
 
 const Register = () => {
     const db = firebaseApp.firestore()
@@ -14,22 +15,41 @@ const Register = () => {
     const storageRef = storage.ref()
 
     const { register, handleSubmit, watch, errors } = useForm()
+    const [currentFormData, setCurrentFormData] = React.useState<Record<string, any> | null>(null)
+    const [time, setTime] = React.useState<string | null>(null)
+    const [currentImgSrc, setCurrentImgSrc] = React.useState<string | null>(null)
 
-    const onSubmit = async (data: Record<string, any>) => {
+    const onRegister = async (data: Record<string, any>) => {
         console.log('send', data)
+        setCurrentFormData(data)
         const now = DateTime.local().toString()
-        const fileList: FileList = data.image
+        setTime(now)
+    }
+
+    React.useEffect(() => {
+        if (!currentFormData) return
+        const fileList: FileList = currentFormData.image
+        const file = fileList[0]
+        if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
+        const reader = new FileReader()
+        reader.onload = (e: any) => setCurrentImgSrc(e.target.result)
+        reader.readAsDataURL(file)
+    }, [currentFormData])
+
+    const onSubmit = React.useCallback(async () => {
+        if (!(currentFormData && time)) return
+        const fileList: FileList = currentFormData.image
         const file = fileList[0]
         if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
         const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${Date.now()}.jpg`)
         const snapshot = await imageRef.put(file)
         const postData: PostType = {
             userId: 1,
-            title: data.title,
-            description: data.description ?? '',
+            title: currentFormData.title,
+            description: currentFormData.description ?? '',
             isOpen: true,
-            createDate: now,
-            updateDate: now,
+            createDate: time,
+            updateDate: time,
             url: 'google.com',
             imageUrl: `${snapshot.metadata.fullPath}`,
             side: 'help',
@@ -43,51 +63,69 @@ const Register = () => {
             .catch(error => {
                 console.error(error)
             })
-    }
+    }, [])
 
     return (
         <Main>
             <Tab
                 leftContent={
                     <Wrapper>
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <FormBox>
-                                <Title>募集を作る</Title>
-                                <FormTitle>
-                                    <TitleLabel htmlFor="title">題名</TitleLabel>
-                                    <InputText
-                                        type="text"
-                                        id="title"
-                                        name="title"
-                                        placeholder="募集したいことを書いてください"
-                                        ref={register({ required: true })}
-                                    />
-                                    {errors.title && <span>This field is required</span>}
-                                </FormTitle>
-                                <FormDescription>
-                                    <TitleLabel htmlFor="description">内容</TitleLabel>
-                                    <TextArea
-                                        id="description"
-                                        name="description"
-                                        placeholder="詳細内容を書いてください"
-                                        ref={register}
-                                    />
-                                </FormDescription>
-                                <FormImage>
-                                    <TitleLabel htmlFor="image">写真アップロード</TitleLabel>
-                                    <ImageLabelBox htmlFor="image">ファイルを選択</ImageLabelBox>
-                                    <InputImage
-                                        type="file"
-                                        id="image"
-                                        name="image"
-                                        ref={register({ required: true })}
-                                    />
-                                </FormImage>
-                            </FormBox>
-                            <Howto>使いかた</Howto>
-                            <ConfirmButton type="submit">送信</ConfirmButton>
-                            <BackButton>戻る</BackButton>
-                        </form>
+                        {!(currentFormData && currentImgSrc && time) ? (
+                            <form onSubmit={handleSubmit(onRegister)}>
+                                <FormBox>
+                                    <Title>募集を作る</Title>
+                                    <FormTitle>
+                                        <TitleLabel htmlFor="title">題名</TitleLabel>
+                                        <InputText
+                                            type="text"
+                                            id="title"
+                                            name="title"
+                                            placeholder="募集したいことを書いてください"
+                                            ref={register({ required: true })}
+                                        />
+                                        {errors.title && <span>This field is required</span>}
+                                    </FormTitle>
+                                    <FormDescription>
+                                        <TitleLabel htmlFor="description">内容</TitleLabel>
+                                        <TextArea
+                                            id="description"
+                                            name="description"
+                                            placeholder="詳細内容を書いてください"
+                                            ref={register}
+                                        />
+                                    </FormDescription>
+                                    <FormImage>
+                                        <TitleLabel htmlFor="image">写真アップロード</TitleLabel>
+                                        <ImageLabelBox htmlFor="image">ファイルを選択</ImageLabelBox>
+                                        <InputImage
+                                            type="file"
+                                            id="image"
+                                            name="image"
+                                            ref={register({ required: true })}
+                                        />
+                                    </FormImage>
+                                </FormBox>
+                                <Howto>使いかた</Howto>
+                                <ConfirmButton type="submit">送信</ConfirmButton>
+                                <BackButton>戻る</BackButton>
+                            </form>
+                        ) : (
+                            <Confirm>
+                                <ConfirmTitleWrapper>
+                                    <ConfirmTitle>内容確認</ConfirmTitle>
+                                </ConfirmTitleWrapper>
+                                <DetailCard
+                                    imgUrl={currentImgSrc}
+                                    title={currentFormData.title}
+                                    description={currentFormData.description}
+                                    side={'help'}
+                                    userId={1}
+                                    updateDate={time}
+                                />
+                                <RegisterButton>声を作る</RegisterButton>
+                                <BackButton>戻る</BackButton>
+                            </Confirm>
+                        )}
                     </Wrapper>
                 }
             />
@@ -192,6 +230,48 @@ const ConfirmButton = styled.button`
     width: 400px;
     height: 80px;
     background-image: url(/img/btn_confirm_help.png);
+    color: transparent;
+`
+
+const Confirm = styled.div`
+    margin: 60px auto 0;
+`
+
+const ConfirmTitleWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 230px;
+    margin: 0 auto 80px;
+    border-radius: 16px;
+    background-color: #fff;
+`
+
+const ConfirmTitle = styled.h1`
+    position: relative;
+    padding-bottom: 33px;
+    font-size: 38px;
+    text-align: center;
+    color: #000;
+    &::before {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 100px;
+        height: 5px;
+        background-image: linear-gradient(to left, #00b4ed, #0091db);
+        transform: translateX(-50%);
+    }
+`
+
+const RegisterButton = styled.button`
+    display: block;
+    margin: 0 auto 50px;
+    width: 400px;
+    height: 80px;
+    background-image: url(/img/btn_register_help.png);
     color: transparent;
 `
 

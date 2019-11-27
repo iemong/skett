@@ -1,5 +1,6 @@
 module.exports = {
     parser: '@typescript-eslint/parser',
+    plugins: ['react-hooks'],
     extends: [
         'plugin:react/recommended',
         'plugin:@typescript-eslint/recommended',
@@ -17,6 +18,8 @@ module.exports = {
     },
     rules: {
         'import/order': ['error'],
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
     },
     settings: {
         'import/resolver': {
