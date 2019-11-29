@@ -4,6 +4,7 @@ import { PostType } from 'types/index'
 import Main from 'components/templates/layouts/Main'
 import Tab from 'components/organisms/tab'
 import Card from 'components/molecules/card'
+import Link from 'next/link'
 
 type Props = {
     data: PostType[]
@@ -36,7 +37,12 @@ const Home = (props: Props): JSX.Element => {
 
     return (
         <Main>
-            <Tab leftContent={helpPostElement} rightContent={supportPostElement} />
+            <React.Fragment>
+                <Tab leftContent={helpPostElement} rightContent={supportPostElement} />
+                <Link href={'/register'}>
+                    <AddButton>声の追加</AddButton>
+                </Link>
+            </React.Fragment>
         </Main>
     )
 }
@@ -45,4 +51,15 @@ export default Home
 
 const ItemWrapper = styled.div`
     margin-top: 60px;
+`
+
+const AddButton = styled.button`
+    position: fixed;
+    right: 0;
+    bottom: 100px;
+    display: block;
+    width: 251px;
+    height: 81px;
+    background-image: url(/img/btn_add.png);
+    color: transparent;
 `
