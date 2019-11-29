@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import * as Actions from 'reducers/user/actions'
 import Main from 'components/templates/layouts/Main'
 
-const Login = () => {
+const Login = (): JSX.Element => {
     const [user, setUser] = React.useState<any>(null)
     const dispatch = useDispatch()
     const actions = React.useMemo(() => {
