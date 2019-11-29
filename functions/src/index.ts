@@ -1,11 +1,6 @@
 import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
-import express from 'express'
-
-enum COLLECTIONS {
-    USERS = 'users',
-    POSTS = 'posts',
-}
+import * as express from 'express'
 
 type PostType = {
     id?: string
@@ -19,9 +14,8 @@ type PostType = {
     imageUrl: string
     side: 'help' | 'support'
 }
-
 // initialise
-admin.initializeApp()
+admin.initializeApp(functions.config().firebase)
 const db = admin.firestore()
 const app = express()
 
@@ -69,15 +63,12 @@ const generateHtml = (url: string) => `
 `
 
 app.get('/:id', async (req: any, res: any) => {
-    console.log(req, res)
-    const postId = ''
-    const docRef = db.collection(COLLECTIONS.POSTS)
+    const docRef = db.collection('posts')
     const postData = await docRef
-        .doc(postId)
+        .doc(req.params.id)
         .get()
         .catch(e => console.error(e))
     const data = postData && postData.exists ? ({ ...postData.data(), id: postData.id } as PostType) : null
-
     if (!data) {
         res.status(404).send('404 Not Exist')
     } else {
