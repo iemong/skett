@@ -47,6 +47,10 @@ const Register = (): JSX.Element => {
         const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${Date.now()}.jpg`)
         await imageRef.put(file)
         const imageUrl = await imageRef.getDownloadURL()
+
+        const uniqId = db.collection(COLLECTIONS.POSTS).doc()
+        const uniqUrl = `BASE_OGP_URL${uniqId}`
+
         const postData: PostType = {
             userId: 1,
             title: currentFormData.title,
@@ -54,22 +58,15 @@ const Register = (): JSX.Element => {
             isOpen: true,
             createDate: time,
             updateDate: time,
-            url: 'google.com',
+            url: uniqUrl,
             imageUrl,
             side: 'help',
         }
 
-        await db
-            .collection(COLLECTIONS.POSTS)
-            .add(postData)
-            .then(docRef => {
-                console.log('Document written with ID: ', docRef.id)
-            })
-            .catch(error => {
-                console.error(error)
-            })
-        // TODO シェアURL
-        setPostUrl('google.com')
+        await uniqId.set(postData).catch(error => {
+            console.error(error)
+        })
+        setPostUrl(uniqUrl)
     }, [currentFormData, db, storageRef, time])
 
     return (
