@@ -45,7 +45,8 @@ const Register = (): JSX.Element => {
         const file = fileList[0]
         if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
         const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${Date.now()}.jpg`)
-        const snapshot = await imageRef.put(file)
+        await imageRef.put(file)
+        const imageUrl = await imageRef.getDownloadURL()
         const postData: PostType = {
             userId: 1,
             title: currentFormData.title,
@@ -54,7 +55,7 @@ const Register = (): JSX.Element => {
             createDate: time,
             updateDate: time,
             url: 'google.com',
-            imageUrl: `${snapshot.metadata.fullPath}`,
+            imageUrl,
             side: 'help',
         }
 
