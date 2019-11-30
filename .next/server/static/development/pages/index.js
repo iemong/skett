@@ -419,11 +419,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @emotion/styled */ "@emotion/styled");
 /* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_emotion_styled__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _layouts_Main__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../layouts/Main */ "./components/templates/layouts/Main.tsx");
-/* harmony import */ var _organisms_tab__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../organisms/tab */ "./components/organisms/tab/index.tsx");
-/* harmony import */ var _molecules_card__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../molecules/card */ "./components/molecules/card/index.tsx");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _layouts_Main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layouts/Main */ "./components/templates/layouts/Main.tsx");
+/* harmony import */ var _organisms_tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../organisms/tab */ "./components/organisms/tab/index.tsx");
+/* harmony import */ var _molecules_card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../molecules/card */ "./components/molecules/card/index.tsx");
 var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/templates/home/index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0__["createElement"];
 
@@ -438,10 +438,11 @@ const Home = props => {
     data: posts
   } = props; // TODO ちゃんとしたID渡す
 
+  if (!posts) return __jsx(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, "loading");
   const helpPosts = posts.map((post, index) => {
     var _post$id;
 
-    return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: index,
       imgUrl: post.imageUrl,
       description: post.title,
@@ -449,7 +450,7 @@ const Home = props => {
       side: 'help',
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 16
+        lineNumber: 17
       },
       __self: undefined
     });
@@ -457,7 +458,7 @@ const Home = props => {
   const supportPosts = posts.map((post, index) => {
     var _post$id2;
 
-    return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_5__["default"], {
       key: index,
       imgUrl: post.imageUrl,
       description: post.description,
@@ -465,7 +466,7 @@ const Home = props => {
       side: 'support',
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 26
+        lineNumber: 27
       },
       __self: undefined
     });
@@ -474,7 +475,7 @@ const Home = props => {
   const helpPostElement = __jsx(ItemWrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 36
     },
     __self: undefined
   }, helpPosts);
@@ -482,42 +483,42 @@ const Home = props => {
   const supportPostElement = __jsx(ItemWrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 37
     },
     __self: undefined
   }, supportPosts);
 
-  return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39
-    },
-    __self: undefined
-  }, __jsx(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], {
+  return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_3__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 40
     },
     __self: undefined
-  }, __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    leftContent: helpPostElement,
-    rightContent: supportPostElement,
+  }, __jsx(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 41
     },
     __self: undefined
-  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_5___default.a, {
-    href: '/register',
+  }, __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    leftContent: helpPostElement,
+    rightContent: supportPostElement,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 42
     },
     __self: undefined
-  }, __jsx(AddButton, {
+  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    href: '/register',
     __source: {
       fileName: _jsxFileName,
       lineNumber: 43
+    },
+    __self: undefined
+  }, __jsx(AddButton, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
     },
     __self: undefined
   }, "\u58F0\u306E\u8FFD\u52A0"))));
@@ -5969,24 +5970,30 @@ const PageHome = props => {
     data: data,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 14
     },
     __self: undefined
   });
 };
 
-PageHome.getInitialProps = async () => {
-  const db = _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_2__["default"].firestore();
-  const docRef = db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_3__["COLLECTIONS"].POSTS);
-  const postData = await docRef.get().catch(e => console.error(e));
-  const data = postData && postData.docs.map(doc => {
-    return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, doc.data(), {
-      id: doc.id
+PageHome.getInitialProps = async ({
+  req
+}) => {
+  if (req) {
+    return {
+      data: null
+    };
+  } else {
+    const db = _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_2__["default"].firestore();
+    const docRef = db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_3__["COLLECTIONS"].POSTS);
+    const postData = await docRef.orderBy('timestamp', 'desc').get().catch(e => console.error(e));
+    const data = postData && postData.docs.map(doc => {
+      return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, doc.data());
     });
-  });
-  return {
-    data
-  };
+    return {
+      data
+    };
+  }
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PageHome);

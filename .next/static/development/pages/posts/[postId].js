@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/register.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/posts/[postId].js"],{
 
 /***/ "./assets/constant.ts":
 /*!****************************!*\
@@ -64,53 +64,6 @@ var firebaseConfig = {
   measurementId: 'G-LBFMB8G803'
 };
 /* harmony default export */ __webpack_exports__["default"] = (!firebase_app__WEBPACK_IMPORTED_MODULE_0__["apps"].length ? firebase_app__WEBPACK_IMPORTED_MODULE_0__["initializeApp"](firebaseConfig) : firebase_app__WEBPACK_IMPORTED_MODULE_0__["app"]());
-
-/***/ }),
-
-/***/ "./assets/utils/queryString.ts":
-/*!*************************************!*\
-  !*** ./assets/utils/queryString.ts ***!
-  \*************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
-
-
-var queryString = function queryString(params) {
-  return _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(params).map(function (key) {
-    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-  }).join('&');
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (queryString);
-
-/***/ }),
-
-/***/ "./assets/utils/share.ts":
-/*!*******************************!*\
-  !*** ./assets/utils/share.ts ***!
-  \*******************************/
-/*! exports provided: createTwitterIntent, createFacebookIntent */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTwitterIntent", function() { return createTwitterIntent; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFacebookIntent", function() { return createFacebookIntent; });
-/* harmony import */ var _queryString__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./queryString */ "./assets/utils/queryString.ts");
-
-var createTwitterIntent = function createTwitterIntent(opts) {
-  return "http://twitter.com/intent/tweet?".concat(Object(_queryString__WEBPACK_IMPORTED_MODULE_0__["default"])(opts));
-};
-var createFacebookIntent = function createFacebookIntent(url) {
-  return "http://www.facebook.com/share.php?".concat(Object(_queryString__WEBPACK_IMPORTED_MODULE_0__["default"])({
-    u: url
-  }));
-};
 
 /***/ }),
 
@@ -413,376 +366,6 @@ var Facebook = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_temp
 
 /***/ }),
 
-/***/ "./components/organisms/register/confirm/index.tsx":
-/*!*********************************************************!*\
-  !*** ./components/organisms/register/confirm/index.tsx ***!
-  \*********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/extends */ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
-/* harmony import */ var _molecules_detailCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../molecules/detailCard */ "./components/molecules/detailCard/index.tsx");
-
-
-
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/organisms/register/confirm/index.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_3__["createElement"];
-
-function _templateObject5() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 400px;\n    height: 80px;\n    margin: 0 auto;\n    background-image: url(/img/btn_back.png);\n    color: transparent;\n"]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    margin: 0 auto 50px;\n    width: 400px;\n    height: 80px;\n    background-image: url(/img/btn_register_help.png);\n    color: transparent;\n"]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    padding-bottom: 33px;\n    font-size: 38px;\n    text-align: center;\n    color: #000;\n    &::before {\n        content: '';\n        position: absolute;\n        left: 50%;\n        bottom: 0;\n        width: 100px;\n        height: 5px;\n        background-image: linear-gradient(to left, #00b4ed, #0091db);\n        transform: translateX(-50%);\n    }\n"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    width: 600px;\n    height: 230px;\n    margin: 0 auto 80px;\n    border-radius: 16px;\n    background-color: #fff;\n"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin: 60px auto 0;\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-
-
-
-
-var Confirm = function Confirm(props) {
-  var onSubmit = props.onSubmit,
-      cardProps = Object(_babel_runtime_corejs2_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_2__["default"])(props, ["onSubmit"]);
-
-  return __jsx(Wrapper, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 16
-    },
-    __self: this
-  }, __jsx(ConfirmTitleWrapper, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
-    },
-    __self: this
-  }, __jsx(ConfirmTitle, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 18
-    },
-    __self: this
-  }, "\u5185\u5BB9\u78BA\u8A8D")), __jsx(_molecules_detailCard__WEBPACK_IMPORTED_MODULE_5__["default"], Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, cardProps, {
-    side: 'help',
-    userId: 1,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20
-    },
-    __self: this
-  })), __jsx(RegisterButton, {
-    onClick: onSubmit,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21
-    },
-    __self: this
-  }, "\u58F0\u3092\u4F5C\u308B"), __jsx(BackButton, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22
-    },
-    __self: this
-  }, "\u623B\u308B"));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Confirm);
-var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject());
-var ConfirmTitleWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_4__["default"].div(_templateObject2());
-var ConfirmTitle = _emotion_styled__WEBPACK_IMPORTED_MODULE_4__["default"].h1(_templateObject3());
-var RegisterButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_4__["default"].button(_templateObject4());
-var BackButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_4__["default"].button(_templateObject5());
-
-/***/ }),
-
-/***/ "./components/organisms/register/result/index.tsx":
-/*!********************************************************!*\
-  !*** ./components/organisms/register/result/index.tsx ***!
-  \********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _assets_utils_share__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../assets/utils/share */ "./assets/utils/share.ts");
-
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/organisms/register/result/index.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
-
-function _templateObject10() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 400px;\n    height: 80px;\n    margin: 0 auto;\n    background-image: url(/img/btn_back.png);\n    color: transparent;\n"]);
-
-  _templateObject10 = function _templateObject10() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject9() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 241px;\n    height: 201px;\n    background-image: url(/img/btn_facebook.png);\n"]);
-
-  _templateObject9 = function _templateObject9() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject8() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 241px;\n    height: 201px;\n    background-image: url(/img/btn_twitter.png);\n"]);
-
-  _templateObject8 = function _templateObject8() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject7() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    justify-content: space-between;\n"]);
-
-  _templateObject7 = function _templateObject7() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject6() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 600px;\n    margin: 0 auto 80px;\n    padding: 70px 45px 70px;\n    border-radius: 16px;\n    background-color: #fff;\n    box-sizing: border-box;\n"]);
-
-  _templateObject6 = function _templateObject6() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject5() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 515px;\n    height: 56px;\n    border: 2px solid #f39800;\n    font-size: 20px;\n    line-height: 56px;\n    text-indent: 1em;\n"]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-bottom: 40px;\n    line-height: 1.5;\n    text-align: center;\n    font-size: 22px;\n"]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    margin-bottom: 55px;\n    padding-bottom: 33px;\n    font-size: 38px;\n    text-align: center;\n    color: #000;\n    &::before {\n        content: '';\n        position: absolute;\n        left: 50%;\n        bottom: 0;\n        width: 100px;\n        height: 5px;\n        background-image: linear-gradient(to left, #00b4ed, #0091db);\n        transform: translateX(-50%);\n    }\n"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 600px;\n    margin: 0 auto 80px;\n    padding: 70px 45px 100px;\n    border-radius: 16px;\n    background-color: #fff;\n    box-sizing: border-box;\n"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-top: 60px;\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-
-
-
-
-
-var Result = function Result(props) {
-  var url = props.url;
-  return __jsx(Wrapper, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 14
-    },
-    __self: this
-  }, __jsx(TitleWrapper, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 15
-    },
-    __self: this
-  }, __jsx(Title, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 16
-    },
-    __self: this
-  }, "\u4F5C\u6210\u5B8C\u4E86"), __jsx(Lead, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
-    },
-    __self: this
-  }, "\u3042\u306A\u305F\u306E\u52DF\u96C6\u306E\u4F5C\u6210\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F\u3002", __jsx("br", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19
-    },
-    __self: this
-  }), "\u4E0B\u8A18\u306EURL\u5148\u3067\u516C\u958B\u3055\u308C\u307E\u3059\u3002"), __jsx(LinkText, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22
-    },
-    __self: this
-  }, url)), __jsx(ShareWrapper, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 24
-    },
-    __self: this
-  }, __jsx(Title, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 25
-    },
-    __self: this
-  }, "\u3053\u306E\u58F0\u3092\u30B7\u30A7\u30A2\u3059\u308B"), __jsx(Lead, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 26
-    },
-    __self: this
-  }, "SNS\u3067\u3042\u306A\u305F\u306E\u58F0\u3092\u30B7\u30A7\u30A2\u3057\u3088\u3046\u3002"), __jsx(ShareInner, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 27
-    },
-    __self: this
-  }, __jsx(TwitterButton, {
-    href: Object(_assets_utils_share__WEBPACK_IMPORTED_MODULE_4__["createTwitterIntent"])({
-      url: url,
-      text: '',
-      hashtags: 'skett'
-    }),
-    target: "_blank",
-    rel: "noopener",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 28
-    },
-    __self: this
-  }), __jsx(FacebookButton, {
-    href: Object(_assets_utils_share__WEBPACK_IMPORTED_MODULE_4__["createFacebookIntent"])(url),
-    target: "_blank",
-    rel: "noopener",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 37
-    },
-    __self: this
-  }))), __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
-    href: '/',
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 40
-    },
-    __self: this
-  }, __jsx(BackButton, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 41
-    },
-    __self: this
-  }, "TOP\u3078")));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Result);
-var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject());
-var TitleWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject2());
-var Title = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].h1(_templateObject3());
-var Lead = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].p(_templateObject4());
-var LinkText = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].p(_templateObject5());
-var ShareWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject6());
-var ShareInner = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject7());
-var TwitterButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].a(_templateObject8());
-var FacebookButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].a(_templateObject9());
-var BackButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].button(_templateObject10());
-
-/***/ }),
-
 /***/ "./components/organisms/tab/index.tsx":
 /*!********************************************!*\
   !*** ./components/organisms/tab/index.tsx ***!
@@ -1057,144 +640,32 @@ var Button = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].button(_tem
 
 /***/ }),
 
-/***/ "./components/templates/register/index.tsx":
-/*!*************************************************!*\
-  !*** ./components/templates/register/index.tsx ***!
-  \*************************************************/
+/***/ "./components/templates/posts/detail.tsx":
+/*!***********************************************!*\
+  !*** ./components/templates/posts/detail.tsx ***!
+  \***********************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/date/now */ "./node_modules/@babel/runtime-corejs2/core-js/date/now.js");
-/* harmony import */ var _babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
-/* harmony import */ var react_hook_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-hook-form */ "./node_modules/react-hook-form/dist/react-hook-form.es.js");
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! luxon */ "./node_modules/luxon/build/cjs-browser/luxon.js");
-/* harmony import */ var luxon__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(luxon__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _layouts_Main__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../layouts/Main */ "./components/templates/layouts/Main.tsx");
-/* harmony import */ var _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../assets/utils/firebaseApp */ "./assets/utils/firebaseApp.ts");
-/* harmony import */ var _assets_constant__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../assets/constant */ "./assets/constant.ts");
-/* harmony import */ var _organisms_tab__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../organisms/tab */ "./components/organisms/tab/index.tsx");
-/* harmony import */ var _organisms_register_confirm__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../organisms/register/confirm */ "./components/organisms/register/confirm/index.tsx");
-/* harmony import */ var _organisms_register_result__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../organisms/register/result */ "./components/organisms/register/result/index.tsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _layouts_Main__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../layouts/Main */ "./components/templates/layouts/Main.tsx");
+/* harmony import */ var _organisms_tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../organisms/tab */ "./components/organisms/tab/index.tsx");
+/* harmony import */ var _molecules_detailCard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../molecules/detailCard */ "./components/molecules/detailCard/index.tsx");
 
-
-
-
-
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/templates/register/index.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_5__["createElement"];
-
-function _templateObject14() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 400px;\n    height: 80px;\n    margin: 0 auto;\n    background-image: url(/img/btn_back.png);\n    color: transparent;\n"]);
-
-  _templateObject14 = function _templateObject14() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject13() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    margin: 0 auto 50px;\n    width: 400px;\n    height: 80px;\n    background-image: url(/img/btn_confirm_help.png);\n    color: transparent;\n"]);
-
-  _templateObject13 = function _templateObject13() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject12() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 4em;\n    margin: 80px auto;\n    text-decoration: underline;\n    font-size: 24px;\n"]);
-
-  _templateObject12 = function _templateObject12() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject11() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: none;\n"]);
-
-  _templateObject11 = function _templateObject11() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject10() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 520px;\n    height: 56px;\n    text-align: center;\n    line-height: 56px;\n    background-color: #efefef;\n    font-size: 18px;\n    color: #9fa0a0;\n"]);
-
-  _templateObject10 = function _templateObject10() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject9() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 520px;\n    min-height: 320px;\n    font-size: 18px;\n    background-color: #efefef;\n    padding: 17px 22px;\n    box-sizing: border-box;\n"]);
-
-  _templateObject9 = function _templateObject9() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject8() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 520px;\n    height: 56px;\n    font-size: 18px;\n    background-color: #efefef;\n    text-indent: 1em;\n"]);
-
-  _templateObject8 = function _templateObject8() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject7() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    margin-bottom: 0.5em;\n    font-size: 22px;\n"]);
-
-  _templateObject7 = function _templateObject7() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject6() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
-
-  _templateObject6 = function _templateObject6() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject5() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-bottom: 50px;\n"]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/templates/posts/detail.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
 
 function _templateObject4() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-bottom: 50px;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 401px;\n    height: 81px;\n    background-image: url(/img/btn_back.png);\n    margin: 0 auto;\n"]);
 
   _templateObject4 = function _templateObject4() {
     return data;
@@ -1204,7 +675,7 @@ function _templateObject4() {
 }
 
 function _templateObject3() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    margin-bottom: 45px;\n    padding-bottom: 33px;\n    font-size: 38px;\n    text-align: center;\n    color: #000;\n    &::before {\n        content: '';\n        position: absolute;\n        left: 50%;\n        bottom: 0;\n        width: 100px;\n        height: 5px;\n        background-image: linear-gradient(to left, #00b4ed, #0091db);\n        transform: translateX(-50%);\n    }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 401px;\n    height: 81px;\n    background-image: url(/img/btn_apply_help.png);\n    margin: 0 auto 48px;\n"]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -1214,7 +685,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 600px;\n    height: 950px;\n    margin: 60px auto 0;\n    padding: 75px 40px 102px;\n    background-color: #fff;\n    border-radius: 16px;\n    box-sizing: border-box;\n    overflow: hidden;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-bottom: 80px;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -1224,7 +695,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    padding-bottom: 100px;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-top: 60px;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -1241,309 +712,73 @@ function _templateObject() {
 
 
 
+var PostDetail = function PostDetail(props) {
+  var data = props.data;
+  if (!data) return __jsx(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, "Loading");
 
-
-
-var Register = function Register() {
-  var db = _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_10__["default"].firestore();
-  var storage = _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_10__["default"].storage(_assets_constant__WEBPACK_IMPORTED_MODULE_11__["STRAGE_BACKET"]);
-  var storageRef = storage.ref();
-
-  var _useForm = Object(react_hook_form__WEBPACK_IMPORTED_MODULE_7__["default"])(),
-      register = _useForm.register,
-      handleSubmit = _useForm.handleSubmit,
-      errors = _useForm.errors; // eslint-disable-next-line @typescript-eslint/no-explicit-any
-
-
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_5__["useState"](null),
-      _React$useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__["default"])(_React$useState, 2),
-      currentFormData = _React$useState2[0],
-      setCurrentFormData = _React$useState2[1];
-
-  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_5__["useState"](null),
-      _React$useState4 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__["default"])(_React$useState3, 2),
-      time = _React$useState4[0],
-      setTime = _React$useState4[1];
-
-  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_5__["useState"](null),
-      _React$useState6 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__["default"])(_React$useState5, 2),
-      currentImgSrc = _React$useState6[0],
-      setCurrentImgSrc = _React$useState6[1];
-
-  var _React$useState7 = react__WEBPACK_IMPORTED_MODULE_5__["useState"](''),
-      _React$useState8 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__["default"])(_React$useState7, 2),
-      postUrl = _React$useState8[0],
-      setPostUrl = _React$useState8[1];
-
-  var onRegister = function onRegister(data) {
-    console.log('send', data);
-    setCurrentFormData(data);
-    var now = luxon__WEBPACK_IMPORTED_MODULE_8__["DateTime"].local().toString();
-    setTime(now);
-  };
-
-  react__WEBPACK_IMPORTED_MODULE_5__["useEffect"](function () {
-    if (!currentFormData) return;
-    var fileList = currentFormData.image;
-    var file = fileList[0];
-    if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません');
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      return setCurrentImgSrc(e.target.result);
-    };
-
-    reader.readAsDataURL(file);
-  }, [currentFormData]);
-  var onSubmit = react__WEBPACK_IMPORTED_MODULE_5__["useCallback"](
-  /*#__PURE__*/
-  Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
-  /*#__PURE__*/
-  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee() {
-    var _currentFormData$desc;
-
-    var fileList, file, imageRef, imageUrl, uniqId, uniqUrl, postData;
-    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            if (currentFormData && time) {
-              _context.next = 2;
-              break;
-            }
-
-            return _context.abrupt("return");
-
-          case 2:
-            fileList = currentFormData.image;
-            file = fileList[0];
-
-            if (['image/jpeg', 'image/png'].includes(file.type)) {
-              _context.next = 6;
-              break;
-            }
-
-            throw new Error('画像形式がサポートされていません');
-
-          case 6:
-            imageRef = storageRef.child("images/".concat(file.name.split('.')[0], "_").concat(_babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_2___default()(), ".jpg"));
-            _context.next = 9;
-            return imageRef.put(file);
-
-          case 9:
-            _context.next = 11;
-            return imageRef.getDownloadURL();
-
-          case 11:
-            imageUrl = _context.sent;
-            uniqId = db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_11__["COLLECTIONS"].POSTS).doc();
-            uniqUrl = "BASE_OGP_URL".concat(uniqId);
-            postData = {
-              userId: 1,
-              title: currentFormData.title,
-              description: (_currentFormData$desc = currentFormData.description) !== null && _currentFormData$desc !== void 0 ? _currentFormData$desc : '',
-              isOpen: true,
-              createDate: time,
-              updateDate: time,
-              url: uniqUrl,
-              imageUrl: imageUrl,
-              side: 'help'
-            };
-            _context.next = 17;
-            return uniqId.set(postData)["catch"](function (error) {
-              console.error(error);
-            });
-
-          case 17:
-            setPostUrl(uniqUrl);
-
-          case 18:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  })), [currentFormData, db, storageRef, time]);
-  return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_9__["default"], {
+  var helpPostElement = __jsx(Wrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 73
+      lineNumber: 18
     },
     __self: this
-  }, __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_12__["default"], {
-    leftContent: __jsx(Wrapper, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 76
-      },
-      __self: this
-    }, !postUrl ? !(currentFormData && currentImgSrc && time) ? __jsx("form", {
-      onSubmit: handleSubmit(onRegister),
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 79
-      },
-      __self: this
-    }, __jsx(FormBox, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 80
-      },
-      __self: this
-    }, __jsx(Title, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 81
-      },
-      __self: this
-    }, "\u52DF\u96C6\u3092\u4F5C\u308B"), __jsx(FormTitle, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 82
-      },
-      __self: this
-    }, __jsx(TitleLabel, {
-      htmlFor: "title",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 83
-      },
-      __self: this
-    }, "\u984C\u540D"), __jsx(InputText, {
-      type: "text",
-      id: "title",
-      name: "title",
-      placeholder: "\u52DF\u96C6\u3057\u305F\u3044\u3053\u3068\u3092\u66F8\u3044\u3066\u304F\u3060\u3055\u3044",
-      ref: register({
-        required: true
-      }),
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 84
-      },
-      __self: this
-    }), errors.title && __jsx("span", {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 91
-      },
-      __self: this
-    }, "This field is required")), __jsx(FormDescription, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 93
-      },
-      __self: this
-    }, __jsx(TitleLabel, {
-      htmlFor: "description",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 94
-      },
-      __self: this
-    }, "\u5185\u5BB9"), __jsx(TextArea, {
-      id: "description",
-      name: "description",
-      placeholder: "\u8A73\u7D30\u5185\u5BB9\u3092\u66F8\u3044\u3066\u304F\u3060\u3055\u3044",
-      ref: register,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 95
-      },
-      __self: this
-    })), __jsx(FormImage, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 102
-      },
-      __self: this
-    }, __jsx(TitleLabel, {
-      htmlFor: "image",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 103
-      },
-      __self: this
-    }, "\u5199\u771F\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9"), __jsx(ImageLabelBox, {
-      htmlFor: "image",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 104
-      },
-      __self: this
-    }, "\u30D5\u30A1\u30A4\u30EB\u3092\u9078\u629E"), __jsx(InputImage, {
-      type: "file",
-      id: "image",
-      name: "image",
-      ref: register({
-        required: true
-      }),
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 105
-      },
-      __self: this
-    }))), __jsx(Howto, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 113
-      },
-      __self: this
-    }, "\u4F7F\u3044\u304B\u305F"), __jsx(ConfirmButton, {
-      type: "submit",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 114
-      },
-      __self: this
-    }, "\u9001\u4FE1"), __jsx(BackButton, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 115
-      },
-      __self: this
-    }, "\u623B\u308B")) : __jsx(_organisms_register_confirm__WEBPACK_IMPORTED_MODULE_13__["default"], {
-      title: currentFormData.title,
-      description: currentFormData.description,
-      imgUrl: currentImgSrc,
-      updateDate: time,
-      onSubmit: onSubmit,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 118
-      },
-      __self: this
-    }) : __jsx(_organisms_register_result__WEBPACK_IMPORTED_MODULE_14__["default"], {
-      url: postUrl,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 127
-      },
-      __self: this
-    })),
+  }, __jsx(DetailCardWithMargin, {
+    imgUrl: data.imageUrl,
+    title: data.title,
+    description: data.description,
+    userId: data.userId,
+    side: 'help',
+    updateDate: data.updateDate,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 19
+    },
+    __self: this
+  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    href: '/apply',
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: this
+  }, __jsx(ApplyButton, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28
+    },
+    __self: this
+  })), __jsx(BackButton, {
+    onClick: function onClick() {
+      return next_router__WEBPACK_IMPORTED_MODULE_4___default.a.back();
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 30
+    },
+    __self: this
+  }));
+
+  return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: this
+  }, __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    leftContent: helpPostElement,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
     },
     __self: this
   }));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Register);
-var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].div(_templateObject());
-var FormBox = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].div(_templateObject2());
-var Title = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].h1(_templateObject3());
-var FormTitle = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].div(_templateObject4());
-var FormDescription = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].div(_templateObject5());
-var FormImage = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].div(_templateObject6());
-var TitleLabel = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].label(_templateObject7());
-var InputText = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].input(_templateObject8());
-var TextArea = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].textarea(_templateObject9());
-var ImageLabelBox = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].label(_templateObject10());
-var InputImage = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].input(_templateObject11());
-var Howto = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].p(_templateObject12());
-var ConfirmButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].button(_templateObject13());
-var BackButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].button(_templateObject14());
+/* harmony default export */ __webpack_exports__["default"] = (PostDetail);
+var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject());
+var DetailCardWithMargin = Object(_emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"])(_molecules_detailCard__WEBPACK_IMPORTED_MODULE_7__["default"])(_templateObject2());
+var ApplyButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].button(_templateObject3());
+var BackButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].button(_templateObject4());
 
 /***/ }),
 
@@ -1555,17 +790,6 @@ var BackButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_6__["default"].button(
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! core-js/library/fn/array/is-array */ "./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/fn/array/is-array.js");
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/core-js/date/now.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/core-js/date/now.js ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! core-js/library/fn/date/now */ "./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/fn/date/now.js");
 
 /***/ }),
 
@@ -1993,35 +1217,32 @@ function _asyncToGenerator(fn) {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js":
-/*!********************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/extends.js ***!
-  \********************************************************************/
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js ***!
+  \***************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _extends; });
-/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/assign */ "./node_modules/@babel/runtime-corejs2/core-js/object/assign.js");
-/* harmony import */ var _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_assign__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _defineProperty; });
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
 
-function _extends() {
-  _extends = _core_js_object_assign__WEBPACK_IMPORTED_MODULE_0___default.a || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    _core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
 
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
+  return obj;
 }
 
 /***/ }),
@@ -2083,67 +1304,42 @@ function _nonIterableRest() {
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js":
-/*!************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutProperties.js ***!
-  \************************************************************************************/
+/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js":
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js ***!
+  \*************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutProperties; });
-/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
-/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectSpread; });
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _defineProperty__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
 
 
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = Object(_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(source, excluded);
-  var key, i;
 
-  if (_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0___default.a) {
-    var sourceSymbolKeys = _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_0___default()(source);
 
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    var ownKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(source);
+
+    if (typeof _core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default.a === 'function') {
+      ownKeys = ownKeys.concat(_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_1___default()(source).filter(function (sym) {
+        return _core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_0___default()(source, sym).enumerable;
+      }));
     }
-  }
 
-  return target;
-}
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutPropertiesLoose.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/helpers/esm/objectWithoutPropertiesLoose.js ***!
-  \*****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _objectWithoutPropertiesLoose; });
-/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
-/* harmony import */ var _core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
-
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-
-  var sourceKeys = _core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(source);
-
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
+    ownKeys.forEach(function (key) {
+      Object(_defineProperty__WEBPACK_IMPORTED_MODULE_3__["default"])(target, key, source[key]);
+    });
   }
 
   return target;
@@ -2503,19 +1699,6 @@ module.exports = _typeof;
 
 __webpack_require__(/*! ../../modules/es6.array.is-array */ "./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/modules/es6.array.is-array.js");
 module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/modules/_core.js").Array.isArray;
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/fn/date/now.js":
-/*!*****************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/fn/date/now.js ***!
-  \*****************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ../../modules/es6.date.now */ "./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/modules/es6.date.now.js");
-module.exports = __webpack_require__(/*! ../../modules/_core */ "./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/modules/_core.js").Date.now;
 
 
 /***/ }),
@@ -5168,21 +4351,6 @@ Iterators.Arguments = Iterators.Array;
 addToUnscopables('keys');
 addToUnscopables('values');
 addToUnscopables('entries');
-
-
-/***/ }),
-
-/***/ "./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/modules/es6.date.now.js":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/modules/es6.date.now.js ***!
-  \**************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-// 20.3.3.1 / 15.9.4.4 Date.now()
-var $export = __webpack_require__(/*! ./_export */ "./node_modules/@babel/runtime-corejs2/node_modules/core-js/library/modules/_export.js");
-
-$export($export.S, 'Date', { now: function () { return new Date().getTime(); } });
 
 
 /***/ }),
@@ -48945,21 +48113,21 @@ exports.Zone = Zone;
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fregister&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fregister%2Findex.tsx!./":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fregister&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fregister%2Findex.tsx ***!
-  \******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx!./":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx ***!
+  \**********************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/register", function() {
-      var mod = __webpack_require__(/*! ./pages/register/index.tsx */ "./pages/register/index.tsx")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/posts/[postId]", function() {
+      var mod = __webpack_require__(/*! ./pages/posts/[postId].tsx */ "./pages/posts/[postId].tsx")
       if(true) {
-        module.hot.accept(/*! ./pages/register/index.tsx */ "./pages/register/index.tsx", function() {
-          if(!next.router.components["/register"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/register/index.tsx */ "./pages/register/index.tsx")
-          next.router.update("/register", updatedPage)
+        module.hot.accept(/*! ./pages/posts/[postId].tsx */ "./pages/posts/[postId].tsx", function() {
+          if(!next.router.components["/posts/[postId]"]) return
+          var updatedPage = __webpack_require__(/*! ./pages/posts/[postId].tsx */ "./pages/posts/[postId].tsx")
+          next.router.update("/posts/[postId]", updatedPage)
         })
       }
       return mod
@@ -53422,1135 +52590,6 @@ exports.encode = exports.stringify = __webpack_require__(/*! ./encode */ "./node
 
 /***/ }),
 
-/***/ "./node_modules/react-hook-form/dist/react-hook-form.es.js":
-/*!*****************************************************************!*\
-  !*** ./node_modules/react-hook-form/dist/react-hook-form.es.js ***!
-  \*****************************************************************/
-/*! exports provided: default, FormContext, useFormContext */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormContext", function() { return FormContext; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useFormContext", function() { return useFormContext; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-
-
-
-var isCheckBoxInput = (type) => type === 'checkbox';
-
-const VALIDATION_MODE = {
-    onBlur: 'onBlur',
-    onChange: 'onChange',
-    onSubmit: 'onSubmit',
-};
-const RADIO_INPUT = 'radio';
-const REQUIRED_ATTRIBUTE = 'required';
-const PATTERN_ATTRIBUTE = 'pattern';
-const UNDEFINED = 'undefined';
-const EVENTS = {
-    BLUR: 'blur',
-    CHANGE: 'change',
-    INPUT: 'input',
-};
-
-function attachEventListeners({ field, validateAndStateUpdate, isRadio, }) {
-    const { ref } = field;
-    if (!ref.addEventListener) {
-        return;
-    }
-    ref.addEventListener(isCheckBoxInput(ref.type) || isRadio ? EVENTS.CHANGE : EVENTS.INPUT, validateAndStateUpdate);
-    ref.addEventListener(EVENTS.BLUR, validateAndStateUpdate);
-}
-
-var isUndefined = (val) => val === undefined;
-
-var isNullOrUndefined = (value) => value === null || isUndefined(value);
-
-var isArray = (value) => Array.isArray(value);
-
-var isObject = (value) => !isNullOrUndefined(value) && !isArray(value) && typeof value === 'object';
-
-const reIsDeepProp = /\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/;
-const reIsPlainProp = /^\w*$/;
-const rePropName = /[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g;
-const reEscapeChar = /\\(\\)?/g;
-const reIsUint = /^(?:0|[1-9]\d*)$/;
-function isIndex(value) {
-    return reIsUint.test(value) && value > -1;
-}
-function isKey(value) {
-    if (isArray(value)) {
-        return false;
-    }
-    return reIsPlainProp.test(value) || !reIsDeepProp.test(value);
-}
-const stringToPath = (string) => {
-    const result = [];
-    string.replace(rePropName, (match, number, quote, string) => {
-        result.push(quote ? string.replace(reEscapeChar, '$1') : number || match);
-    });
-    return result;
-};
-function set(object, path, value) {
-    let index = -1;
-    const tempPath = isKey(path) ? [path] : stringToPath(path);
-    const length = tempPath.length;
-    const lastIndex = length - 1;
-    while (++index < length) {
-        const key = tempPath[index];
-        let newValue = value;
-        if (index !== lastIndex) {
-            const objValue = object[key];
-            newValue =
-                isObject(objValue) || isArray(objValue)
-                    ? objValue
-                    : isIndex(tempPath[index + 1])
-                        ? []
-                        : {};
-        }
-        object[key] = newValue;
-        object = object[key];
-    }
-    return object;
-}
-
-var combineFieldValues = (data) => Object.entries(data).reduce((previous, [key, value]) => {
-    if (!!key.match(/\[.+\]/gi) || key.indexOf('.') > 0) {
-        set(previous, key, value);
-        return previous;
-    }
-    return Object.assign(Object.assign({}, previous), { [key]: value });
-}, {});
-
-var removeAllEventListeners = (ref, validateWithStateUpdate) => {
-    if (!ref.removeEventListener) {
-        return;
-    }
-    ref.removeEventListener(EVENTS.INPUT, validateWithStateUpdate);
-    ref.removeEventListener(EVENTS.CHANGE, validateWithStateUpdate);
-    ref.removeEventListener(EVENTS.BLUR, validateWithStateUpdate);
-};
-
-var isRadioInput = (type) => type === RADIO_INPUT;
-
-function isDetached(element) {
-    if (!element) {
-        return true;
-    }
-    if (!(element instanceof HTMLElement) ||
-        element.nodeType === Node.DOCUMENT_NODE) {
-        return false;
-    }
-    return isDetached(element.parentNode);
-}
-
-function findRemovedFieldAndRemoveListener(fields, validateWithStateUpdate = () => { }, field, forceDelete = false) {
-    if (!field) {
-        return;
-    }
-    const { ref, mutationWatcher, options } = field;
-    if (!ref || !ref.type) {
-        return;
-    }
-    const { name, type } = ref;
-    if (isRadioInput(type) && options) {
-        options.forEach(({ ref }, index) => {
-            if ((options[index] && isDetached(ref)) || forceDelete) {
-                removeAllEventListeners(options[index], validateWithStateUpdate);
-                (options[index].mutationWatcher || { disconnect: () => { } }).disconnect();
-                options.splice(index, 1);
-            }
-        });
-        if (!options.length) {
-            delete fields[name];
-        }
-    }
-    else if (isDetached(ref) || forceDelete) {
-        removeAllEventListeners(ref, validateWithStateUpdate);
-        if (mutationWatcher) {
-            mutationWatcher.disconnect();
-        }
-        delete fields[name];
-    }
-}
-
-const defaultReturn = {
-    isValid: false,
-    value: '',
-};
-var getRadioValue = (options) => isArray(options)
-    ? options.reduce((previous, { ref: { checked, value } }) => checked
-        ? {
-            isValid: true,
-            value,
-        }
-        : previous, defaultReturn)
-    : defaultReturn;
-
-var getMultipleSelectValue = (options) => [...options]
-    .filter(({ selected }) => selected)
-    .map(({ value }) => value);
-
-var isMultipleSelect = (type) => type === 'select-multiple';
-
-var isEmptyString = (value) => value === '';
-
-function getFieldValue(fields, ref) {
-    const { type, name, options, checked, value, files } = ref;
-    if (type === 'file') {
-        return files;
-    }
-    if (isRadioInput(type)) {
-        const field = fields[name];
-        return field ? getRadioValue(field.options).value : '';
-    }
-    if (isMultipleSelect(type)) {
-        return getMultipleSelectValue(options);
-    }
-    if (isCheckBoxInput(type)) {
-        if (checked) {
-            return ref.attributes && ref.attributes.value
-                ? isUndefined(value) || isEmptyString(value)
-                    ? true
-                    : value
-                : true;
-        }
-        return false;
-    }
-    return value;
-}
-
-var getFieldsValues = (fields) => Object.values(fields).reduce((previous, { ref, ref: { name } }) => (Object.assign(Object.assign({}, previous), { [name]: getFieldValue(fields, ref) })), {});
-
-var isEmptyObject = (value) => isObject(value) && Object.keys(value).length === 0;
-
-var isSameError = (error, type, message) => isObject(error) && (error.type === type && error.message === message);
-
-function shouldUpdateWithError({ errors, name, error, validFields, fieldsWithValidation, schemaErrors, }) {
-    const isFieldValid = isEmptyObject(error);
-    const isFormValid = isEmptyObject(errors);
-    const currentFieldError = error[name];
-    const existFieldError = errors[name];
-    if ((isFieldValid && validFields.has(name)) ||
-        (existFieldError && existFieldError.isManual)) {
-        return false;
-    }
-    if (isFormValid !== isFieldValid ||
-        (!isFormValid && !existFieldError) ||
-        (isFieldValid &&
-            fieldsWithValidation.has(name) &&
-            !validFields.has(name)) ||
-        (!isUndefined(schemaErrors) && isEmptyObject(schemaErrors) !== isFormValid)) {
-        return true;
-    }
-    return (currentFieldError &&
-        !isSameError(existFieldError, currentFieldError.type, currentFieldError.message));
-}
-
-var isRegex = (value) => value instanceof RegExp;
-
-var getValueAndMessage = (validationData) => ({
-    value: isObject(validationData) && !isRegex(validationData)
-        ? validationData.value
-        : validationData,
-    message: isObject(validationData) && !isRegex(validationData)
-        ? validationData.message
-        : '',
-});
-
-var isString = (value) => typeof value === 'string';
-
-var displayNativeError = (nativeValidation, ref, message) => {
-    if (nativeValidation && isString(message)) {
-        ref.setCustomValidity(message);
-    }
-};
-
-var isFunction = (value) => typeof value === 'function';
-
-var isBoolean = (value) => typeof value === 'boolean';
-
-function getValidateFunctionErrorObject(result, ref, nativeError, type = 'validate') {
-    const isStringValue = isString(result);
-    if (isStringValue || (isBoolean(result) && !result)) {
-        const message = isStringValue ? result : '';
-        const error = {
-            type,
-            message,
-            ref,
-        };
-        nativeError(message);
-        return error;
-    }
-    return;
-}
-
-var validateField = async ({ ref, ref: { type, value, name, checked }, options, required, maxLength, minLength, min, max, pattern, validate, }, fields, nativeValidation) => {
-    const error = {};
-    const isRadio = isRadioInput(type);
-    const isCheckBox = isCheckBoxInput(type);
-    const isEmpty = isEmptyString(value);
-    const nativeError = displayNativeError.bind(null, nativeValidation, ref);
-    const typedName = name;
-    if (required &&
-        ((isCheckBox && !checked) ||
-            (!isCheckBox && !isRadio && isEmpty) ||
-            (isRadio && !getRadioValue(fields[typedName].options).isValid) ||
-            (type !== RADIO_INPUT && isNullOrUndefined(value)))) {
-        error[typedName] = {
-            type: REQUIRED_ATTRIBUTE,
-            message: isString(required) ? required : '',
-            ref: isRadio ? fields[typedName].options[0].ref : ref,
-        };
-        nativeError(required);
-        return error;
-    }
-    if (!isNullOrUndefined(min) || !isNullOrUndefined(max)) {
-        let exceedMax;
-        let exceedMin;
-        const { value: maxValue, message: maxMessage } = getValueAndMessage(max);
-        const { value: minValue, message: minMessage } = getValueAndMessage(min);
-        if (type === 'number') {
-            const valueNumber = parseFloat(value);
-            if (!isNullOrUndefined(maxValue)) {
-                exceedMax = valueNumber > maxValue;
-            }
-            if (!isNullOrUndefined(minValue)) {
-                exceedMin = valueNumber < minValue;
-            }
-        }
-        else {
-            if (isString(maxValue)) {
-                exceedMax = new Date(value) > new Date(maxValue);
-            }
-            if (isString(minValue)) {
-                exceedMin = new Date(value) < new Date(minValue);
-            }
-        }
-        if (exceedMax || exceedMin) {
-            const message = exceedMax ? maxMessage : minMessage;
-            error[typedName] = {
-                type: exceedMax ? 'max' : 'min',
-                message,
-                ref,
-            };
-            nativeError(message);
-            return error;
-        }
-    }
-    if (isString(value) && !isEmpty && (maxLength || minLength)) {
-        const { value: maxLengthValue, message: maxLengthMessage, } = getValueAndMessage(maxLength);
-        const { value: minLengthValue, message: minLengthMessage, } = getValueAndMessage(minLength);
-        const inputLength = value.toString().length;
-        const exceedMax = maxLength && inputLength > maxLengthValue;
-        const exceedMin = minLength && inputLength < minLengthValue;
-        if (exceedMax || exceedMin) {
-            const message = exceedMax ? maxLengthMessage : minLengthMessage;
-            error[typedName] = {
-                type: exceedMax ? 'maxLength' : 'minLength',
-                message,
-                ref,
-            };
-            nativeError(message);
-            return error;
-        }
-    }
-    if (pattern && !isEmpty) {
-        const { value: patternValue, message: patternMessage } = getValueAndMessage(pattern);
-        if (isRegex(patternValue) && !patternValue.test(value)) {
-            error[typedName] = {
-                type: PATTERN_ATTRIBUTE,
-                message: patternMessage,
-                ref,
-            };
-            nativeError(patternMessage);
-            return error;
-        }
-    }
-    if (validate) {
-        const fieldValue = getFieldValue(fields, ref);
-        const validateRef = isRadio && options ? options[0].ref : ref;
-        if (isFunction(validate)) {
-            const result = await validate(fieldValue);
-            const errorObject = getValidateFunctionErrorObject(result, validateRef, nativeError);
-            if (errorObject) {
-                error[typedName] = errorObject;
-                return error;
-            }
-        }
-        else if (isObject(validate)) {
-            const validationResult = await new Promise((resolve) => {
-                const values = Object.entries(validate);
-                values.reduce(async (previous, [key, validate], index) => {
-                    if (!isEmptyObject(await previous)) {
-                        return resolve(previous);
-                    }
-                    const lastChild = values.length - 1 === index;
-                    if (isFunction(validate)) {
-                        const result = await validate(fieldValue);
-                        const errorObject = getValidateFunctionErrorObject(result, validateRef, nativeError, key);
-                        if (errorObject) {
-                            return lastChild ? resolve(errorObject) : errorObject;
-                        }
-                    }
-                    return lastChild ? resolve(previous) : previous;
-                }, {});
-            });
-            if (!isEmptyObject(validationResult)) {
-                error[typedName] = Object.assign({ ref: validateRef }, validationResult);
-                return error;
-            }
-        }
-    }
-    if (nativeValidation) {
-        ref.setCustomValidity('');
-    }
-    return error;
-};
-
-// TODO: Fix these types
-const parseErrorSchema = (error) => error.inner.length
-    ? error.inner.reduce((previous, { path, message, type }) => (Object.assign(Object.assign({}, previous), { [path]: { message, ref: {}, type } })), {})
-    : {
-        [error.path]: { message: error.message, ref: {}, type: error.type },
-    };
-async function validateWithSchema(validationSchema, validationSchemaOption, data) {
-    try {
-        return {
-            result: await validationSchema.validate(data, validationSchemaOption),
-            fieldErrors: {},
-        };
-    }
-    catch (e) {
-        return {
-            result: {},
-            fieldErrors: parseErrorSchema(e),
-        };
-    }
-}
-
-function attachNativeValidation(ref, rules) {
-    Object.entries(rules).forEach(([key, value]) => {
-        if (key === PATTERN_ATTRIBUTE && isRegex(value)) {
-            ref[key] = value.source;
-        }
-        else {
-            ref[key] = key === REQUIRED_ATTRIBUTE ? true : value;
-        }
-    });
-}
-
-var get = (obj, path, defaultValue) => {
-    const result = path
-        .split(/[,[\].]+?/)
-        .filter(Boolean)
-        .reduce((result, key) => (!isNullOrUndefined(result) ? result[key] : result), obj);
-    return isUndefined(result) || result === obj ? defaultValue : result;
-};
-
-var getDefaultValue = (defaultValues, name, defaultValue) => isUndefined(defaultValues[name])
-    ? get(defaultValues, name, defaultValue)
-    : defaultValues[name];
-
-function flatArray(list) {
-    return list.reduce((a, b) => a.concat(isArray(b) ? flatArray(b) : b), []);
-}
-
-const getPath = (path, values) => isArray(values)
-    ? values.map((item, index) => {
-        const pathWithIndex = `${path}[${index}]`;
-        if (isArray(item)) {
-            return getPath(pathWithIndex, item);
-        }
-        else if (isObject(item)) {
-            return Object.entries(item).map(([key, objectValue]) => isString(objectValue)
-                ? `${pathWithIndex}.${key}`
-                : getPath(`${pathWithIndex}.${key}`, objectValue));
-        }
-        return pathWithIndex;
-    })
-    : Object.entries(values).map(([key, objectValue]) => isString(objectValue) ? `${path}.${key}` : getPath(path, objectValue));
-var getPath$1 = (parentPath, value) => flatArray(getPath(parentPath, value));
-
-var assignWatchFields = (fieldValues, fieldName, watchFields) => {
-    if (isEmptyObject(fieldValues)) {
-        return undefined;
-    }
-    if (!isUndefined(fieldValues[fieldName])) {
-        watchFields.add(fieldName);
-        return fieldValues[fieldName];
-    }
-    const values = get(combineFieldValues(fieldValues), fieldName);
-    if (!isUndefined(values)) {
-        getPath$1(fieldName, values).forEach(name => watchFields.add(name));
-    }
-    return values;
-};
-
-var omitValidFields = (errorFields, validFieldNames) => Object.entries(errorFields).reduce((previous, [name, error]) => validFieldNames.some((validFieldName) => validFieldName === name)
-    ? previous
-    : Object.assign(Object.assign({}, previous), { [name]: error }), {});
-
-function onDomRemove(element, onDetachCallback) {
-    const observer = new MutationObserver(() => {
-        if (isDetached(element)) {
-            observer.disconnect();
-            onDetachCallback();
-        }
-    });
-    observer.observe(window.document, {
-        childList: true,
-        subtree: true,
-    });
-    return observer;
-}
-
-var modeChecker = (mode) => ({
-    isOnSubmit: !mode || mode === VALIDATION_MODE.onSubmit,
-    isOnBlur: mode === VALIDATION_MODE.onBlur,
-    isOnChange: mode === VALIDATION_MODE.onChange,
-});
-
-var pickErrors = (errors, pickList) => Object.entries(errors).reduce((previous, [key, error]) => (Object.assign(Object.assign({}, previous), (pickList.includes(key) ? { [key]: error } : null))), {});
-
-const { useRef, useState, useCallback, useEffect } = react__WEBPACK_IMPORTED_MODULE_0__;
-function useForm({ mode = VALIDATION_MODE.onSubmit, reValidateMode = VALIDATION_MODE.onChange, validationSchema, defaultValues = {}, validationFields, nativeValidation, submitFocusError = true, validationSchemaOption = { abortEarly: false }, } = {}) {
-    const fieldsRef = useRef({});
-    const errorsRef = useRef({});
-    const schemaErrorsRef = useRef({});
-    const touchedFieldsRef = useRef(new Set());
-    const watchFieldsRef = useRef(new Set());
-    const dirtyFieldsRef = useRef(new Set());
-    const fieldsWithValidationRef = useRef(new Set());
-    const validFieldsRef = useRef(new Set());
-    const defaultValuesRef = useRef({});
-    const isUnMount = useRef(false);
-    const isWatchAllRef = useRef(false);
-    const isSubmittedRef = useRef(false);
-    const isDirtyRef = useRef(false);
-    const submitCountRef = useRef(0);
-    const isSubmittingRef = useRef(false);
-    const isSchemaValidateTriggeredRef = useRef(false);
-    const validationFieldsRef = useRef(validationFields);
-    const validateAndUpdateStateRef = useRef();
-    const [, render] = useState();
-    const { isOnBlur, isOnSubmit } = useRef(modeChecker(mode)).current;
-    const isWindowUndefined = typeof window === UNDEFINED;
-    const isWeb = typeof document !== UNDEFINED &&
-        !isWindowUndefined &&
-        !isUndefined(window.HTMLElement);
-    const isProxyEnabled = !isWindowUndefined && 'Proxy' in window;
-    const readFormState = useRef({
-        dirty: !isProxyEnabled,
-        isSubmitted: isOnSubmit,
-        submitCount: !isProxyEnabled,
-        touched: !isProxyEnabled,
-        isSubmitting: !isProxyEnabled,
-        isValid: !isProxyEnabled,
-    });
-    const { isOnBlur: isReValidateOnBlur, isOnSubmit: isReValidateOnSubmit, } = useRef(modeChecker(reValidateMode)).current;
-    const validationSchemaOptionRef = useRef(validationSchemaOption);
-    validationFieldsRef.current = validationFields;
-    const combineErrorsRef = (data) => (Object.assign(Object.assign({}, errorsRef.current), data));
-    const renderBaseOnError = useCallback((name, error, shouldRender = false) => {
-        let reRender = shouldRender;
-        if (isEmptyObject(error)) {
-            if (fieldsWithValidationRef.current.has(name) || validationSchema) {
-                validFieldsRef.current.add(name);
-                reRender = reRender || errorsRef.current[name];
-            }
-            delete errorsRef.current[name];
-        }
-        else {
-            validFieldsRef.current.delete(name);
-            reRender = reRender || !errorsRef.current[name];
-        }
-        errorsRef.current = validationSchema
-            ? schemaErrorsRef.current
-            : combineErrorsRef(error);
-        if (reRender) {
-            render({});
-        }
-    }, [validationSchema]);
-    const setFieldValue = useCallback((name, rawValue) => {
-        const field = fieldsRef.current[name];
-        if (!field) {
-            return false;
-        }
-        const ref = field.ref;
-        const { type } = ref;
-        const options = field.options;
-        const value = isWeb &&
-            ref instanceof window.HTMLElement &&
-            isNullOrUndefined(rawValue)
-            ? ''
-            : rawValue;
-        if (isRadioInput(type) && options) {
-            options.forEach(({ ref: radioRef }) => (radioRef.checked = radioRef.value === value));
-        }
-        else if (isMultipleSelect(type)) {
-            [...ref.options].forEach(selectRef => (selectRef.selected = value.includes(selectRef.value)));
-        }
-        else {
-            ref[isCheckBoxInput(type) ? 'checked' : 'value'] = value;
-        }
-        return type;
-    }, [isWeb]);
-    const setDirty = (name) => {
-        if (!fieldsRef.current[name]) {
-            return false;
-        }
-        const isDirty = defaultValuesRef.current[name] !==
-            getFieldValue(fieldsRef.current, fieldsRef.current[name].ref);
-        const isDirtyChanged = dirtyFieldsRef.current.has(name) !== isDirty;
-        if (isDirty) {
-            dirtyFieldsRef.current.add(name);
-        }
-        else {
-            dirtyFieldsRef.current.delete(name);
-        }
-        isDirtyRef.current = !!dirtyFieldsRef.current.size;
-        return isDirtyChanged && readFormState.current.dirty;
-    };
-    const setInternalValue = useCallback((name, value) => {
-        const shouldRender = setFieldValue(name, value);
-        if (setDirty(name) ||
-            shouldRender ||
-            (!touchedFieldsRef.current.has(name) && readFormState.current.touched)) {
-            touchedFieldsRef.current.add(name);
-            return true;
-        }
-    }, [setFieldValue]);
-    const executeValidation = useCallback(async ({ name, value, }, shouldRender) => {
-        const field = fieldsRef.current[name];
-        if (!field) {
-            return false;
-        }
-        if (!isUndefined(value)) {
-            setInternalValue(name, value);
-        }
-        const error = await validateField(field, fieldsRef.current);
-        renderBaseOnError(name, error, shouldRender);
-        return isEmptyObject(error);
-    }, [renderBaseOnError, setInternalValue]);
-    const validateWithSchemaCurry = useCallback(validateWithSchema.bind(null, validationSchema, validationSchemaOptionRef.current), [validationSchema]);
-    const executeSchemaValidation = useCallback(async (payload) => {
-        const { fieldErrors } = await validateWithSchemaCurry(combineFieldValues(getFieldsValues(fieldsRef.current)));
-        const names = isArray(payload)
-            ? payload.map(({ name }) => name)
-            : [payload.name];
-        const validFieldNames = names.filter(name => !fieldErrors[name]);
-        schemaErrorsRef.current = fieldErrors;
-        isSchemaValidateTriggeredRef.current = true;
-        errorsRef.current = omitValidFields(combineErrorsRef(Object.entries(fieldErrors)
-            .filter(([key]) => names.includes(key))
-            .reduce((previous, [name, error]) => (Object.assign(Object.assign({}, previous), { [name]: error })), {})), validFieldNames);
-        render({});
-        return isEmptyObject(errorsRef.current);
-    }, [validateWithSchemaCurry]);
-    const triggerValidation = useCallback(async (payload, shouldRender = false) => {
-        const fields = payload || Object.keys(fieldsRef.current).map(name => ({ name }));
-        if (validationSchema) {
-            return executeSchemaValidation(fields);
-        }
-        if (isArray(fields)) {
-            const result = await Promise.all(fields.map(async (data) => await executeValidation(data, false)));
-            render({});
-            return result.every(Boolean);
-        }
-        return await executeValidation(fields, shouldRender);
-    }, [executeSchemaValidation, executeValidation, validationSchema]);
-    const setValue = useCallback((name, value, shouldValidate = false) => {
-        const shouldRender = setInternalValue(name, value) ||
-            isWatchAllRef.current ||
-            watchFieldsRef.current.has(name);
-        if (shouldValidate) {
-            return triggerValidation({ name }, shouldRender);
-        }
-        if (shouldRender) {
-            render({});
-        }
-        return;
-    }, [setInternalValue, triggerValidation]);
-    validateAndUpdateStateRef.current = validateAndUpdateStateRef.current
-        ? validateAndUpdateStateRef.current
-        : async (event) => {
-            const { type, target } = event;
-            const name = target ? target.name : '';
-            if (isArray(validationFieldsRef.current) &&
-                !validationFieldsRef.current.includes(name)) {
-                return;
-            }
-            const fields = fieldsRef.current;
-            const errors = errorsRef.current;
-            const ref = fields[name];
-            const currentError = errors[name];
-            let error;
-            if (!ref) {
-                return;
-            }
-            const isBlurEvent = type === EVENTS.BLUR;
-            const shouldSkipValidation = (isOnSubmit && !isSubmittedRef.current) ||
-                (isOnBlur && !isBlurEvent && !currentError) ||
-                (isReValidateOnBlur && !isBlurEvent && currentError) ||
-                (isReValidateOnSubmit && currentError);
-            const shouldUpdateDirty = setDirty(name);
-            let shouldUpdateState = isWatchAllRef.current ||
-                watchFieldsRef.current.has(name) ||
-                shouldUpdateDirty;
-            if (isBlurEvent &&
-                !touchedFieldsRef.current.has(name) &&
-                readFormState.current.touched) {
-                touchedFieldsRef.current.add(name);
-                shouldUpdateState = true;
-            }
-            if (shouldSkipValidation) {
-                return shouldUpdateState ? render({}) : undefined;
-            }
-            if (validationSchema) {
-                const { fieldErrors } = await validateWithSchemaCurry(combineFieldValues(getFieldsValues(fields)));
-                Object.keys(fieldErrors).forEach(name => validFieldsRef.current.delete(name));
-                schemaErrorsRef.current = fieldErrors;
-                isSchemaValidateTriggeredRef.current = true;
-                error = fieldErrors[name]
-                    ? { [name]: fieldErrors[name] }
-                    : {};
-            }
-            else {
-                error = await validateField(ref, fields, nativeValidation);
-            }
-            const shouldUpdate = shouldUpdateWithError({
-                errors,
-                error,
-                name,
-                validFields: validFieldsRef.current,
-                fieldsWithValidation: fieldsWithValidationRef.current,
-                schemaErrors: isSchemaValidateTriggeredRef.current
-                    ? schemaErrorsRef.current
-                    : undefined,
-            });
-            if (shouldUpdate) {
-                renderBaseOnError(name, error, shouldUpdate);
-                return;
-            }
-            if (shouldUpdateState) {
-                render({});
-            }
-        };
-    const resetFieldRef = (name) => {
-        delete errorsRef.current[name];
-        delete fieldsRef.current[name];
-        delete defaultValuesRef.current[name];
-        [
-            touchedFieldsRef,
-            dirtyFieldsRef,
-            fieldsWithValidationRef,
-            validFieldsRef,
-            watchFieldsRef,
-        ].forEach(data => data.current.delete(name));
-        if (readFormState.current.isValid || readFormState.current.touched) {
-            render({});
-        }
-    };
-    const removeEventListenerAndRef = useCallback((field, forceDelete) => {
-        if (!field) {
-            return;
-        }
-        findRemovedFieldAndRemoveListener(fieldsRef.current, validateAndUpdateStateRef.current, field, forceDelete);
-        resetFieldRef(field.ref.name);
-    }, []);
-    function clearError(name) {
-        if (isUndefined(name)) {
-            errorsRef.current = {};
-        }
-        else {
-            (isArray(name) ? name : [name]).forEach(fieldName => delete errorsRef.current[fieldName]);
-        }
-        render({});
-    }
-    const setInternalError = ({ name, type, message, reRender = true, }) => {
-        const errors = errorsRef.current;
-        if (!isSameError(errors[name], type, message)) {
-            errors[name] = {
-                type,
-                message,
-                ref: {},
-                isManual: true,
-            };
-            if (reRender) {
-                render({});
-            }
-        }
-    };
-    function setError(name, type = '', message) {
-        if (isString(name)) {
-            setInternalError({ name, type, message });
-        }
-        else {
-            name.forEach(error => setInternalError(Object.assign(Object.assign({}, error), { reRender: false })));
-            render({});
-        }
-    }
-    function watch(fieldNames, defaultValue) {
-        const combinedDefaultValues = defaultValue || defaultValues || {};
-        const fieldValues = getFieldsValues(fieldsRef.current);
-        const watchFields = watchFieldsRef.current;
-        if (isProxyEnabled) {
-            readFormState.current.dirty = true;
-        }
-        if (isString(fieldNames)) {
-            const value = assignWatchFields(fieldValues, fieldNames, watchFields);
-            return isUndefined(value)
-                ? getDefaultValue(combinedDefaultValues, fieldNames)
-                : value;
-        }
-        if (isArray(fieldNames)) {
-            return fieldNames.reduce((previous, name) => {
-                let value = null;
-                if (isEmptyObject(fieldsRef.current) &&
-                    isObject(combinedDefaultValues)) {
-                    value = getDefaultValue(combinedDefaultValues, name);
-                }
-                else {
-                    const tempValue = assignWatchFields(fieldValues, name, watchFields);
-                    if (!isUndefined(tempValue)) {
-                        value = tempValue;
-                    }
-                }
-                return Object.assign(Object.assign({}, previous), { [name]: value });
-            }, {});
-        }
-        isWatchAllRef.current = true;
-        return ((!isEmptyObject(fieldValues) && fieldValues) ||
-            defaultValue ||
-            defaultValues);
-    }
-    function registerIntoFieldsRef(ref, validateOptions = {}) {
-        if (!ref.name) {
-            return console.warn('Missing name at', ref);
-        }
-        const { name, type, value } = ref;
-        const typedName = name;
-        const fieldAttributes = Object.assign({ ref }, validateOptions);
-        const fields = fieldsRef.current;
-        const isRadio = isRadioInput(type);
-        let currentField = fields[typedName];
-        const isRegistered = isRadio
-            ? currentField &&
-                isArray(currentField.options) &&
-                currentField.options.find(({ ref }) => value === ref.value)
-            : currentField;
-        if (isRegistered) {
-            fields[typedName] = Object.assign(Object.assign({}, currentField), validateOptions);
-            return;
-        }
-        if (type) {
-            const mutationWatcher = onDomRemove(ref, () => removeEventListenerAndRef(fieldAttributes));
-            if (isRadio) {
-                currentField = Object.assign({ options: [
-                        ...(currentField && currentField.options
-                            ? currentField.options
-                            : []),
-                        {
-                            ref,
-                            mutationWatcher,
-                        },
-                    ], ref: { type: RADIO_INPUT, name } }, validateOptions);
-            }
-            else {
-                currentField = Object.assign(Object.assign({}, fieldAttributes), { mutationWatcher });
-            }
-        }
-        else {
-            currentField = fieldAttributes;
-        }
-        fields[typedName] = currentField;
-        if (!isEmptyObject(defaultValues)) {
-            const defaultValue = getDefaultValue(defaultValues, name);
-            if (!isUndefined(defaultValue)) {
-                setFieldValue(name, defaultValue);
-            }
-        }
-        if (validateOptions && !isEmptyObject(validateOptions)) {
-            if (!validationFields || validationFields.includes(name)) {
-                fieldsWithValidationRef.current.add(name);
-            }
-            if (!isOnSubmit && readFormState.current.isValid) {
-                if (validationSchema) {
-                    isSchemaValidateTriggeredRef.current = true;
-                    validateWithSchemaCurry(combineFieldValues(getFieldsValues(fields))).then(({ fieldErrors }) => {
-                        schemaErrorsRef.current = fieldErrors;
-                        if (isEmptyObject(schemaErrorsRef.current)) {
-                            render({});
-                        }
-                    });
-                }
-                else {
-                    validateField(currentField, fields).then(error => {
-                        if (isEmptyObject(error)) {
-                            validFieldsRef.current.add(name);
-                        }
-                        if (validFieldsRef.current.size <=
-                            fieldsWithValidationRef.current.size) {
-                            render({});
-                        }
-                    });
-                }
-            }
-        }
-        if (!defaultValuesRef.current[typedName]) {
-            defaultValuesRef.current[typedName] = getFieldValue(fields, currentField.ref);
-        }
-        if (!type) {
-            return;
-        }
-        const fieldToAttachListener = isRadio && currentField.options
-            ? currentField.options[currentField.options.length - 1]
-            : currentField;
-        if (nativeValidation && validateOptions) {
-            attachNativeValidation(ref, validateOptions);
-        }
-        else {
-            attachEventListeners({
-                field: fieldToAttachListener,
-                isRadio,
-                validateAndStateUpdate: validateAndUpdateStateRef.current,
-            });
-        }
-    }
-    function register(refOrValidateRule, validationOptions) {
-        if (isWindowUndefined || !refOrValidateRule) {
-            return;
-        }
-        if (validationOptions && isString(validationOptions.name)) {
-            registerIntoFieldsRef({ name: validationOptions.name }, validationOptions);
-            return;
-        }
-        if (isObject(refOrValidateRule) &&
-            (validationOptions || 'name' in refOrValidateRule)) {
-            registerIntoFieldsRef(refOrValidateRule, validationOptions);
-            return;
-        }
-        return (ref) => ref && registerIntoFieldsRef(ref, refOrValidateRule);
-    }
-    function unregister(names) {
-        if (!isEmptyObject(fieldsRef.current)) {
-            (isArray(names) ? names : [names]).forEach(fieldName => removeEventListenerAndRef(fieldsRef.current[fieldName], true));
-        }
-    }
-    const handleSubmit = (callback) => async (e) => {
-        if (e) {
-            e.preventDefault();
-            e.persist();
-        }
-        let fieldErrors;
-        let fieldValues;
-        const fields = fieldsRef.current;
-        const fieldsToValidate = validationFields
-            ? validationFields.map(name => fieldsRef.current[name])
-            : Object.values(fields);
-        if (readFormState.current.isSubmitting) {
-            isSubmittingRef.current = true;
-            render({});
-        }
-        try {
-            if (validationSchema) {
-                fieldValues = getFieldsValues(fields);
-                const output = await validateWithSchemaCurry(combineFieldValues(fieldValues));
-                schemaErrorsRef.current = output.fieldErrors;
-                fieldErrors = output.fieldErrors;
-                fieldValues = output.result;
-            }
-            else {
-                const { errors, values, } = await fieldsToValidate.reduce(async (previous, field) => {
-                    if (!field) {
-                        return previous;
-                    }
-                    const resolvedPrevious = await previous;
-                    const { ref, ref: { name }, } = field;
-                    if (!fields[name]) {
-                        return Promise.resolve(resolvedPrevious);
-                    }
-                    const fieldError = await validateField(field, fields, nativeValidation);
-                    if (fieldError[name]) {
-                        resolvedPrevious.errors = Object.assign(Object.assign({}, resolvedPrevious.errors), fieldError);
-                        validFieldsRef.current.delete(name);
-                        return Promise.resolve(resolvedPrevious);
-                    }
-                    if (fieldsWithValidationRef.current.has(name)) {
-                        validFieldsRef.current.add(name);
-                    }
-                    resolvedPrevious.values[name] = getFieldValue(fields, ref);
-                    return Promise.resolve(resolvedPrevious);
-                }, Promise.resolve({
-                    errors: {},
-                    values: {},
-                }));
-                fieldErrors = errors;
-                fieldValues = values;
-            }
-            if (isEmptyObject(fieldErrors)) {
-                errorsRef.current = {};
-                await callback(combineFieldValues(fieldValues), e);
-            }
-            else {
-                if (submitFocusError) {
-                    Object.keys(fieldErrors).reduce((previous, current) => {
-                        const field = fields[current];
-                        if (field && field.ref.focus && previous) {
-                            field.ref.focus();
-                            return false;
-                        }
-                        return previous;
-                    }, true);
-                }
-                errorsRef.current = fieldErrors;
-            }
-        }
-        finally {
-            if (isUnMount.current) {
-                return;
-            }
-            isSubmittedRef.current = true;
-            isSubmittingRef.current = false;
-            submitCountRef.current = submitCountRef.current + 1;
-            render({});
-        }
-    };
-    const resetRefs = () => {
-        errorsRef.current = {};
-        defaultValuesRef.current = {};
-        schemaErrorsRef.current = {};
-        touchedFieldsRef.current = new Set();
-        watchFieldsRef.current = new Set();
-        dirtyFieldsRef.current = new Set();
-        fieldsWithValidationRef.current = new Set();
-        validFieldsRef.current = new Set();
-        isWatchAllRef.current = false;
-        isSubmittedRef.current = false;
-        isDirtyRef.current = false;
-        isSchemaValidateTriggeredRef.current = false;
-        submitCountRef.current = 0;
-    };
-    const reset = useCallback((values) => {
-        const fieldsKeyValue = Object.entries(fieldsRef.current);
-        for (const [, value] of fieldsKeyValue) {
-            if (value && value.ref && value.ref.closest) {
-                try {
-                    value.ref.closest('form').reset();
-                    break;
-                }
-                catch (_a) { }
-            }
-        }
-        resetRefs();
-        if (values) {
-            fieldsKeyValue.forEach(([key]) => setFieldValue(key, getDefaultValue(values, key)));
-            defaultValuesRef.current = Object.assign({}, values);
-        }
-        render({});
-    }, [setFieldValue]);
-    const getValues = (payload) => {
-        const fieldValues = getFieldsValues(fieldsRef.current);
-        const outputValues = isEmptyObject(fieldValues)
-            ? defaultValues
-            : fieldValues;
-        return payload && payload.nest
-            ? combineFieldValues(outputValues)
-            : outputValues;
-    };
-    useEffect(() => () => {
-        isUnMount.current = true;
-        fieldsRef.current &&
-            Object.values(fieldsRef.current).forEach((field) => removeEventListenerAndRef(field, true));
-    }, [removeEventListenerAndRef]);
-    const formState = Object.assign({ dirty: isDirtyRef.current, isSubmitted: isSubmittedRef.current, submitCount: submitCountRef.current, touched: [...touchedFieldsRef.current], isSubmitting: isSubmittingRef.current }, (isOnSubmit
-        ? {
-            isValid: isSubmittedRef.current && isEmptyObject(errorsRef.current),
-        }
-        : {
-            isValid: validationSchema
-                ? isSchemaValidateTriggeredRef.current &&
-                    isEmptyObject(schemaErrorsRef.current)
-                : fieldsWithValidationRef.current.size
-                    ? !isEmptyObject(fieldsRef.current) &&
-                        validFieldsRef.current.size >=
-                            fieldsWithValidationRef.current.size
-                    : !isEmptyObject(fieldsRef.current),
-        }));
-    return {
-        register: useCallback(register, []),
-        unregister: useCallback(unregister, [removeEventListenerAndRef]),
-        handleSubmit,
-        watch,
-        reset,
-        clearError,
-        setError,
-        setValue,
-        triggerValidation,
-        getValues,
-        errors: validationFields
-            ? pickErrors(errorsRef.current, validationFields)
-            : errorsRef.current,
-        formState: isProxyEnabled
-            ? new Proxy(formState, {
-                get: (obj, prop) => {
-                    if (!(prop in obj)) {
-                        return {};
-                    }
-                    readFormState.current[prop] = true;
-                    return obj[prop];
-                },
-            })
-            : formState,
-    };
-}
-
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation. All rights reserved.
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use
-this file except in compliance with the License. You may obtain a copy of the
-License at http://www.apache.org/licenses/LICENSE-2.0
-
-THIS CODE IS PROVIDED ON AN *AS IS* BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-KIND, EITHER EXPRESS OR IMPLIED, INCLUDING WITHOUT LIMITATION ANY IMPLIED
-WARRANTIES OR CONDITIONS OF TITLE, FITNESS FOR A PARTICULAR PURPOSE,
-MERCHANTABLITY OR NON-INFRINGEMENT.
-
-See the Apache Version 2.0 License for specific language governing permissions
-and limitations under the License.
-***************************************************************************** */
-
-function __rest(s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-}
-
-const FormGlobalContext = Object(react__WEBPACK_IMPORTED_MODULE_0__["createContext"])(null);
-function useFormContext() {
-    return Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(FormGlobalContext);
-}
-function FormContext(props) {
-    const { children, formState, errors } = props, restMethods = __rest(props, ["children", "formState", "errors"]);
-    const restRef = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(restMethods);
-    return (Object(react__WEBPACK_IMPORTED_MODULE_0__["createElement"])(FormGlobalContext.Provider, { value: Object.assign(Object.assign({}, restRef.current), { formState, errors }) }, children));
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (useForm);
-
-
-
-/***/ }),
-
 /***/ "./node_modules/react/index.js":
 /*!*******************************************************************************************!*\
   !*** delegated ./node_modules/react/index.js from dll-reference dll_13346faca0e924a89b24 ***!
@@ -56300,45 +54339,109 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./pages/register/index.tsx":
+/***/ "./pages/posts/[postId].tsx":
 /*!**********************************!*\
-  !*** ./pages/register/index.tsx ***!
+  !*** ./pages/posts/[postId].tsx ***!
   \**********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_templates_register__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/templates/register */ "./components/templates/register/index.tsx");
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/pages/register/index.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0__["createElement"];
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/utils/firebaseApp */ "./assets/utils/firebaseApp.ts");
+/* harmony import */ var _assets_constant__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/constant */ "./assets/constant.ts");
+/* harmony import */ var _components_templates_posts_detail__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/templates/posts/detail */ "./components/templates/posts/detail.tsx");
 
 
 
-var PageRegister = function PageRegister() {
-  return __jsx(_components_templates_register__WEBPACK_IMPORTED_MODULE_1__["default"], {
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/pages/posts/[postId].tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_3__["createElement"];
+
+
+
+
+
+var PagePostDetail = function PagePostDetail(props) {
+  return __jsx(_components_templates_posts_detail__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    data: props.data,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 5
+      lineNumber: 12
     },
     __self: this
   });
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (PageRegister);
+PagePostDetail.getInitialProps =
+/*#__PURE__*/
+function () {
+  var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+    var query, req, db, docRef, postData, data;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            query = _ref.query, req = _ref.req;
+
+            if (!req) {
+              _context.next = 5;
+              break;
+            }
+
+            return _context.abrupt("return", {
+              data: null
+            });
+
+          case 5:
+            db = _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_4__["default"].firestore();
+            docRef = db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_5__["COLLECTIONS"].POSTS);
+            _context.next = 9;
+            return docRef.doc(query.postId).get()["catch"](function (e) {
+              return console.error(e);
+            });
+
+          case 9:
+            postData = _context.sent;
+            data = postData && postData.exists ? Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, postData.data(), {
+              id: postData.id
+            }) : null;
+            return _context.abrupt("return", {
+              data: data
+            });
+
+          case 12:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function (_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (PagePostDetail);
 
 /***/ }),
 
-/***/ 2:
-/*!**********************************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2Fregister&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fregister%2Findex.tsx ***!
-  \**********************************************************************************************************************************************************************/
+/***/ 3:
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx ***!
+  \**************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fregister&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fregister%2Findex.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fregister&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fregister%2Findex.tsx!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx!./");
 
 
 /***/ }),
@@ -56354,5 +54457,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
-//# sourceMappingURL=register.js.map
+},[[3,"static/runtime/webpack.js"]]]);
+//# sourceMappingURL=[postId].js.map

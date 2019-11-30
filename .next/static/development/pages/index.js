@@ -377,11 +377,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
-/* harmony import */ var _layouts_Main__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../layouts/Main */ "./components/templates/layouts/Main.tsx");
-/* harmony import */ var _organisms_tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../organisms/tab */ "./components/organisms/tab/index.tsx");
-/* harmony import */ var _molecules_card__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../molecules/card */ "./components/molecules/card/index.tsx");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _layouts_Main__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../layouts/Main */ "./components/templates/layouts/Main.tsx");
+/* harmony import */ var _organisms_tab__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../organisms/tab */ "./components/organisms/tab/index.tsx");
+/* harmony import */ var _molecules_card__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../molecules/card */ "./components/molecules/card/index.tsx");
 
 var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/templates/home/index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
@@ -416,10 +416,11 @@ function _templateObject() {
 var Home = function Home(props) {
   var posts = props.data; // TODO ちゃんとしたID渡す
 
+  if (!posts) return __jsx(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, "loading");
   var helpPosts = posts.map(function (post, index) {
     var _post$id;
 
-    return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       key: index,
       imgUrl: post.imageUrl,
       description: post.title,
@@ -427,7 +428,7 @@ var Home = function Home(props) {
       side: 'help',
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 16
+        lineNumber: 17
       },
       __self: this
     });
@@ -435,7 +436,7 @@ var Home = function Home(props) {
   var supportPosts = posts.map(function (post, index) {
     var _post$id2;
 
-    return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       key: index,
       imgUrl: post.imageUrl,
       description: post.description,
@@ -443,7 +444,7 @@ var Home = function Home(props) {
       side: 'support',
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 26
+        lineNumber: 27
       },
       __self: this
     });
@@ -452,7 +453,7 @@ var Home = function Home(props) {
   var helpPostElement = __jsx(ItemWrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 36
     },
     __self: this
   }, helpPosts);
@@ -460,42 +461,42 @@ var Home = function Home(props) {
   var supportPostElement = __jsx(ItemWrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 37
     },
     __self: this
   }, supportPosts);
 
-  return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39
-    },
-    __self: this
-  }, __jsx(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], {
+  return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_4__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 40
     },
     __self: this
-  }, __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    leftContent: helpPostElement,
-    rightContent: supportPostElement,
+  }, __jsx(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 41
     },
     __self: this
-  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    href: '/register',
+  }, __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    leftContent: helpPostElement,
+    rightContent: supportPostElement,
     __source: {
       fileName: _jsxFileName,
       lineNumber: 42
     },
     __self: this
-  }, __jsx(AddButton, {
+  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    href: '/register',
     __source: {
       fileName: _jsxFileName,
       lineNumber: 43
+    },
+    __self: this
+  }, __jsx(AddButton, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
     },
     __self: this
   }, "\u58F0\u306E\u8FFD\u52A0"))));
@@ -45906,7 +45907,7 @@ var PageHome = function PageHome(props) {
     data: data,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 14
     },
     __self: this
   });
@@ -45914,39 +45915,56 @@ var PageHome = function PageHome(props) {
 
 PageHome.getInitialProps =
 /*#__PURE__*/
-Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-/*#__PURE__*/
-_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-  var db, docRef, postData, data;
-  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-    while (1) {
-      switch (_context.prev = _context.next) {
-        case 0:
-          db = _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_4__["default"].firestore();
-          docRef = db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_5__["COLLECTIONS"].POSTS);
-          _context.next = 4;
-          return docRef.get()["catch"](function (e) {
-            return console.error(e);
-          });
+function () {
+  var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+    var req, db, docRef, postData, data;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            req = _ref.req;
 
-        case 4:
-          postData = _context.sent;
-          data = postData && postData.docs.map(function (doc) {
-            return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, doc.data(), {
-              id: doc.id
+            if (!req) {
+              _context.next = 5;
+              break;
+            }
+
+            return _context.abrupt("return", {
+              data: null
             });
-          });
-          return _context.abrupt("return", {
-            data: data
-          });
 
-        case 7:
-        case "end":
-          return _context.stop();
+          case 5:
+            db = _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_4__["default"].firestore();
+            docRef = db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_5__["COLLECTIONS"].POSTS);
+            _context.next = 9;
+            return docRef.orderBy('timestamp', 'desc').get()["catch"](function (e) {
+              return console.error(e);
+            });
+
+          case 9:
+            postData = _context.sent;
+            data = postData && postData.docs.map(function (doc) {
+              return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_1__["default"])({}, doc.data());
+            });
+            return _context.abrupt("return", {
+              data: data
+            });
+
+          case 12:
+          case "end":
+            return _context.stop();
+        }
       }
-    }
-  }, _callee);
-}));
+    }, _callee);
+  }));
+
+  return function (_x) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+
 /* harmony default export */ __webpack_exports__["default"] = (PageHome);
 
 /***/ }),

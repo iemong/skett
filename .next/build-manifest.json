@@ -20,7 +20,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/register": [
+    "/posts/[postId]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
