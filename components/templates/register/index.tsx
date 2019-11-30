@@ -51,8 +51,9 @@ const Register = (): JSX.Element => {
 
         const uniqId = db.collection(COLLECTIONS.POSTS).doc()
         const uniqUrl = `BASE_OGP_URL${uniqId}`
-
+        console.log(uniqId)
         const postData: PostType = {
+            id: String(uniqId),
             userId: 1,
             title: currentFormData.title,
             description: currentFormData.description ?? '',
@@ -62,6 +63,7 @@ const Register = (): JSX.Element => {
             url: uniqUrl,
             imageUrl,
             side: 'help',
+            timestamp: Date.now(),
         }
 
         await uniqId.set(postData).catch(error => {
