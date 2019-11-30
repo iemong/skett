@@ -14,17 +14,23 @@ const PagePostDetail = (props: Props) => {
 
 PagePostDetail.getInitialProps = async ({
     query,
+    req,
 }: {
     query: { postId: string }
+    req: any
 }): Promise<{ data: null | firebase.firestore.DocumentData | '' }> => {
-    const db = firebaseApp.firestore()
-    const docRef = db.collection(COLLECTIONS.POSTS)
-    const postData = await docRef
-        .doc(query.postId)
-        .get()
-        .catch(e => console.error(e))
-    const data = postData && postData.exists ? { ...postData.data(), id: postData.id } : null
-    return { data: data }
+    if (req) {
+        return { data: null }
+    } else {
+        const db = firebaseApp.firestore()
+        const docRef = db.collection(COLLECTIONS.POSTS)
+        const postData = await docRef
+            .doc(query.postId)
+            .get()
+            .catch(e => console.error(e))
+        const data = postData && postData.exists ? { ...postData.data(), id: postData.id } : null
+        return { data: data }
+    }
 }
 
 export default PagePostDetail

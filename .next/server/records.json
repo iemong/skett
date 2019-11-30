@@ -1,0 +1,51 @@
+{
+  "modules": {
+    "byIdentifier": {
+      "multi private-next-pages/_app.tsx": 0,
+      "multi private-next-pages/index.tsx": 1,
+      "multi private-next-pages/login/index.tsx": 2,
+      "multi private-next-pages/mypage/index.tsx": 3,
+      "multi private-next-pages/posts/[postId].tsx": 4,
+      "multi private-next-pages/posts/index.tsx": 5,
+      "multi private-next-pages/register/index.tsx": 6,
+      "multi next/dist/pages/_error": 7,
+      "multi next/dist/pages/_document": 8
+    },
+    "usedIds": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8
+    }
+  },
+  "chunks": {
+    "byName": {
+      "static/-vJMoqlwjVh36Vs_NlWYZ/pages/_app.js": 0,
+      "static/-vJMoqlwjVh36Vs_NlWYZ/pages/_document.js": 1,
+      "static/-vJMoqlwjVh36Vs_NlWYZ/pages/_error.js": 2,
+      "static/-vJMoqlwjVh36Vs_NlWYZ/pages/index.js": 3,
+      "static/-vJMoqlwjVh36Vs_NlWYZ/pages/login.js": 4,
+      "static/-vJMoqlwjVh36Vs_NlWYZ/pages/mypage.js": 5,
+      "static/-vJMoqlwjVh36Vs_NlWYZ/pages/posts.js": 6,
+      "static/-vJMoqlwjVh36Vs_NlWYZ/pages/posts/[postId].js": 7,
+      "static/-vJMoqlwjVh36Vs_NlWYZ/pages/register.js": 8
+    },
+    "bySource": {},
+    "usedIds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  }
+}

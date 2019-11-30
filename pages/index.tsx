@@ -1,7 +1,7 @@
 import * as React from 'react'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
-import Home from 'components/templates/Home'
+import Home from 'components/templates/home'
 import { PostType } from 'types/index'
 
 type Props = {

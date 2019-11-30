@@ -8,11 +8,12 @@ import Tab from 'components/organisms/tab'
 import DetailCard from 'components/molecules/detailCard'
 
 type Props = {
-    data: PostType
+    data: PostType | null
 }
 
 const PostDetail = (props: Props): JSX.Element => {
     const { data } = props
+    if (!data) return <>Loading</>
     const helpPostElement = (
         <Wrapper>
             <DetailCardWithMargin
