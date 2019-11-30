@@ -79,4 +79,4 @@ app.get('/:id', async (req: any, res: any) => {
     }
 })
 
-export const ogpPage = functions.https.onRequest(app)
+export const s = functions.https.onRequest(app)
