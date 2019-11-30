@@ -97,7 +97,7 @@ module.exports =
 /*!****************************!*\
   !*** ./assets/constant.ts ***!
   \****************************/
-/*! exports provided: COLLECTIONS, STRAGE_BACKET, Z_INDEX_LIST */
+/*! exports provided: COLLECTIONS, STRAGE_BACKET, Z_INDEX_LIST, BASE_OGP_URL */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105,6 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "COLLECTIONS", function() { return COLLECTIONS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "STRAGE_BACKET", function() { return STRAGE_BACKET; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Z_INDEX_LIST", function() { return Z_INDEX_LIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BASE_OGP_URL", function() { return BASE_OGP_URL; });
 let COLLECTIONS;
 
 (function (COLLECTIONS) {
@@ -120,6 +121,8 @@ let Z_INDEX_LIST;
   Z_INDEX_LIST[Z_INDEX_LIST["TAB_BACK"] = 1] = "TAB_BACK";
   Z_INDEX_LIST[Z_INDEX_LIST["TAB_FRONT"] = 2] = "TAB_FRONT";
 })(Z_INDEX_LIST || (Z_INDEX_LIST = {}));
+
+const BASE_OGP_URL = 'https://skett-ffff1.firebaseapp.com/s/';
 
 /***/ }),
 
@@ -158,6 +161,45 @@ const firebaseConfig = {
   measurementId: 'G-LBFMB8G803'
 };
 /* harmony default export */ __webpack_exports__["default"] = (!firebase_app__WEBPACK_IMPORTED_MODULE_0__["apps"].length ? firebase_app__WEBPACK_IMPORTED_MODULE_0__["initializeApp"](firebaseConfig) : firebase_app__WEBPACK_IMPORTED_MODULE_0__["app"]());
+
+/***/ }),
+
+/***/ "./assets/utils/queryString.ts":
+/*!*************************************!*\
+  !*** ./assets/utils/queryString.ts ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
+
+
+const queryString = params => _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(params).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key])).join('&');
+
+/* harmony default export */ __webpack_exports__["default"] = (queryString);
+
+/***/ }),
+
+/***/ "./assets/utils/share.ts":
+/*!*******************************!*\
+  !*** ./assets/utils/share.ts ***!
+  \*******************************/
+/*! exports provided: createTwitterIntent, createFacebookIntent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTwitterIntent", function() { return createTwitterIntent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFacebookIntent", function() { return createFacebookIntent; });
+/* harmony import */ var _queryString__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./queryString */ "./assets/utils/queryString.ts");
+
+const createTwitterIntent = opts => `http://twitter.com/intent/tweet?${Object(_queryString__WEBPACK_IMPORTED_MODULE_0__["default"])(opts)}`;
+const createFacebookIntent = url => `http://www.facebook.com/share.php?${Object(_queryString__WEBPACK_IMPORTED_MODULE_0__["default"])({
+  u: url
+})}`;
 
 /***/ }),
 
@@ -519,8 +561,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_emotion_styled__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _assets_utils_share__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../assets/utils/share */ "./assets/utils/share.ts");
 var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/organisms/register/result/index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0__["createElement"];
+
 
 
 
@@ -532,86 +576,96 @@ const Result = props => {
   return __jsx(Wrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 14
     },
     __self: undefined
   }, __jsx(TitleWrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
+      lineNumber: 15
     },
     __self: undefined
   }, __jsx(Title, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 16
     },
     __self: undefined
   }, "\u4F5C\u6210\u5B8C\u4E86"), __jsx(Lead, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 17
     },
     __self: undefined
   }, "\u3042\u306A\u305F\u306E\u52DF\u96C6\u306E\u4F5C\u6210\u304C\u5B8C\u4E86\u3057\u307E\u3057\u305F\u3002", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 19
     },
     __self: undefined
   }), "\u4E0B\u8A18\u306EURL\u5148\u3067\u516C\u958B\u3055\u308C\u307E\u3059\u3002"), __jsx(LinkText, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 22
     },
     __self: undefined
   }, url)), __jsx(ShareWrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 24
     },
     __self: undefined
   }, __jsx(Title, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
+      lineNumber: 25
     },
     __self: undefined
   }, "\u3053\u306E\u58F0\u3092\u30B7\u30A7\u30A2\u3059\u308B"), __jsx(Lead, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 26
     },
     __self: undefined
   }, "SNS\u3067\u3042\u306A\u305F\u306E\u58F0\u3092\u30B7\u30A7\u30A2\u3057\u3088\u3046\u3002"), __jsx(ShareInner, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 27
     },
     __self: undefined
   }, __jsx(TwitterButton, {
+    href: Object(_assets_utils_share__WEBPACK_IMPORTED_MODULE_3__["createTwitterIntent"])({
+      url,
+      text: '',
+      hashtags: 'skett'
+    }),
+    target: "_blank",
+    rel: "noopener",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 28
     },
     __self: undefined
   }), __jsx(FacebookButton, {
+    href: Object(_assets_utils_share__WEBPACK_IMPORTED_MODULE_3__["createFacebookIntent"])(url),
+    target: "_blank",
+    rel: "noopener",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 37
     },
     __self: undefined
   }))), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
     href: '/',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 40
     },
     __self: undefined
   }, __jsx(BackButton, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 41
     },
     __self: undefined
   }, "TOP\u3078")));
@@ -997,6 +1051,8 @@ const Register = () => {
     const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${_babel_runtime_corejs2_core_js_date_now__WEBPACK_IMPORTED_MODULE_0___default()()}.jpg`);
     await imageRef.put(file);
     const imageUrl = await imageRef.getDownloadURL();
+    const uniqId = db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_7__["COLLECTIONS"].POSTS).doc();
+    const uniqUrl = `BASE_OGP_URL${uniqId}`;
     const postData = {
       userId: 1,
       title: currentFormData.title,
@@ -1004,61 +1060,58 @@ const Register = () => {
       isOpen: true,
       createDate: time,
       updateDate: time,
-      url: 'google.com',
+      url: uniqUrl,
       imageUrl,
       side: 'help'
     };
-    await db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_7__["COLLECTIONS"].POSTS).add(postData).then(docRef => {
-      console.log('Document written with ID: ', docRef.id);
-    }).catch(error => {
+    await uniqId.set(postData).catch(error => {
       console.error(error);
-    }); // TODO シェアURL
-
-    setPostUrl('google.com');
+    });
+    setPostUrl(uniqUrl);
   }, [currentFormData, db, storageRef, time]);
   return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_5__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 76
+      lineNumber: 73
     },
     __self: undefined
   }, __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_8__["default"], {
     leftContent: __jsx(Wrapper, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 79
+        lineNumber: 76
       },
       __self: undefined
     }, !postUrl ? !(currentFormData && currentImgSrc && time) ? __jsx("form", {
       onSubmit: handleSubmit(onRegister),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 82
+        lineNumber: 79
       },
       __self: undefined
     }, __jsx(FormBox, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 83
+        lineNumber: 80
       },
       __self: undefined
     }, __jsx(Title, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 84
+        lineNumber: 81
       },
       __self: undefined
     }, "\u52DF\u96C6\u3092\u4F5C\u308B"), __jsx(FormTitle, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 85
+        lineNumber: 82
       },
       __self: undefined
     }, __jsx(TitleLabel, {
       htmlFor: "title",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 86
+        lineNumber: 83
       },
       __self: undefined
     }, "\u984C\u540D"), __jsx(InputText, {
@@ -1071,26 +1124,26 @@ const Register = () => {
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 87
+        lineNumber: 84
       },
       __self: undefined
     }), errors.title && __jsx("span", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 94
+        lineNumber: 91
       },
       __self: undefined
     }, "This field is required")), __jsx(FormDescription, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 96
+        lineNumber: 93
       },
       __self: undefined
     }, __jsx(TitleLabel, {
       htmlFor: "description",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 97
+        lineNumber: 94
       },
       __self: undefined
     }, "\u5185\u5BB9"), __jsx(TextArea, {
@@ -1100,27 +1153,27 @@ const Register = () => {
       ref: register,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 98
+        lineNumber: 95
       },
       __self: undefined
     })), __jsx(FormImage, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 105
+        lineNumber: 102
       },
       __self: undefined
     }, __jsx(TitleLabel, {
       htmlFor: "image",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 106
+        lineNumber: 103
       },
       __self: undefined
     }, "\u5199\u771F\u30A2\u30C3\u30D7\u30ED\u30FC\u30C9"), __jsx(ImageLabelBox, {
       htmlFor: "image",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 107
+        lineNumber: 104
       },
       __self: undefined
     }, "\u30D5\u30A1\u30A4\u30EB\u3092\u9078\u629E"), __jsx(InputImage, {
@@ -1132,26 +1185,26 @@ const Register = () => {
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 108
+        lineNumber: 105
       },
       __self: undefined
     }))), __jsx(Howto, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 116
+        lineNumber: 113
       },
       __self: undefined
     }, "\u4F7F\u3044\u304B\u305F"), __jsx(ConfirmButton, {
       type: "submit",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 117
+        lineNumber: 114
       },
       __self: undefined
     }, "\u9001\u4FE1"), __jsx(BackButton, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 118
+        lineNumber: 115
       },
       __self: undefined
     }, "\u623B\u308B")) : __jsx(_organisms_register_confirm__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -1162,20 +1215,20 @@ const Register = () => {
       onSubmit: onSubmit,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 121
+        lineNumber: 118
       },
       __self: undefined
     }) : __jsx(_organisms_register_result__WEBPACK_IMPORTED_MODULE_10__["default"], {
       url: postUrl,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 130
+        lineNumber: 127
       },
       __self: undefined
     })),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 77
+      lineNumber: 74
     },
     __self: undefined
   }));
