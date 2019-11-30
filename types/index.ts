@@ -16,4 +16,5 @@ export type PostType = {
     url: string
     imageUrl: string
     side: 'help' | 'support'
+    timestamp: number
 }

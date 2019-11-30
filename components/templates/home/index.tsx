@@ -1,10 +1,10 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import { PostType } from 'types/index'
 import Main from 'components/templates/layouts/Main'
 import Tab from 'components/organisms/tab'
 import Card from 'components/molecules/card'
-import Link from 'next/link'
 
 type Props = {
     data: PostType[]

@@ -1,4 +1,5 @@
 import * as React from 'react'
+import firebase from 'firebase'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
 import Home from 'components/templates/home'
@@ -16,11 +17,14 @@ const PageHome = (props: Props): JSX.Element => {
 PageHome.getInitialProps = async (): Promise<{ data: void | firebase.firestore.DocumentData[] }> => {
     const db = firebaseApp.firestore()
     const docRef = db.collection(COLLECTIONS.POSTS)
-    const postData = await docRef.get().catch(e => console.error(e))
+    const postData = await docRef
+        .orderBy('timestamp', 'desc')
+        .get()
+        .catch(e => console.error(e))
     const data =
         postData &&
         postData.docs.map(doc => {
-            return { ...doc.data(), id: doc.id }
+            return { ...doc.data() }
         })
     return { data }
 }
