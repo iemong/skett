@@ -5,7 +5,7 @@ import { DateTime } from 'luxon'
 import Link from 'next/link'
 import Main from 'components/templates/layouts/Main'
 import firebaseApp from 'assets/utils/firebaseApp'
-import { COLLECTIONS, STRAGE_BACKET } from 'assets/constant'
+import { BASE_OGP_URL, COLLECTIONS, STRAGE_BACKET } from 'assets/constant'
 import { PostType } from 'types/index'
 import Tab from 'components/organisms/tab'
 import Confirm from 'components/organisms/register/confirm'
@@ -49,11 +49,10 @@ const Register = (): JSX.Element => {
         await imageRef.put(file)
         const imageUrl = await imageRef.getDownloadURL()
 
-        const uniqId = db.collection(COLLECTIONS.POSTS).doc()
-        const uniqUrl = `BASE_OGP_URL${uniqId}`
-        console.log(uniqId)
+        const uniqDocRef = db.collection(COLLECTIONS.POSTS).doc()
+        const uniqUrl = `${BASE_OGP_URL}${uniqDocRef.id}`
         const postData: PostType = {
-            id: String(uniqId),
+            id: uniqDocRef.id,
             userId: 1,
             title: currentFormData.title,
             description: currentFormData.description ?? '',
@@ -66,7 +65,7 @@ const Register = (): JSX.Element => {
             timestamp: Date.now(),
         }
 
-        await uniqId.set(postData).catch(error => {
+        await uniqDocRef.set(postData).catch(error => {
             console.error(error)
         })
         setPostUrl(uniqUrl)
