@@ -4,12 +4,20 @@
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "rewrites": [
             {
-                "source": "/s/**",
-                "function": "ogpPage"
+                "source": "/login/**",
+                "destination": "/login.html"
             },
             {
-                "source": "/posts/**",
-                "destination": "/posts/[postId].html"
+                "source": "/register/**",
+                "destination": "/register/index.html"
+            },
+            {
+                "source": "/mypage/**",
+                "destination": "/mypage.html"
+            },
+            {
+                "source": "/s/**",
+                "function": "ogpPage"
             }
         ]
     },
