@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { INITIALIZE } from \"./types\";\nexport const initialize = user => {\n  return async dispatch => {\n    try {\n      dispatch({\n        type: INITIALIZE,\n        payload: {\n          user\n        }\n      });\n    } catch (e) {\n      console.error(e);\n    }\n  };\n};","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport * as React from 'react';\nimport Register from \"../../components/templates/register\";\n\nconst PageRegister = () => {\n  return __jsx(Register, null);\n};\n\nexport default PageRegister;","map":null,"metadata":{},"sourceType":"module"}
