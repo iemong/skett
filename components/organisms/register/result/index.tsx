@@ -1,8 +1,7 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import Main from 'components/templates/layouts/Main'
-import Tab from 'components/organisms/tab'
 import Link from 'next/link'
+import { createFacebookIntent, createTwitterIntent } from 'assets/utils/share'
 
 type Props = {
     url: string
@@ -26,8 +25,16 @@ const Result = (props: Props): JSX.Element => {
                 <Title>この声をシェアする</Title>
                 <Lead>SNSであなたの声をシェアしよう。</Lead>
                 <ShareInner>
-                    <TwitterButton />
-                    <FacebookButton />
+                    <TwitterButton
+                        href={createTwitterIntent({
+                            url,
+                            text: '',
+                            hashtags: 'skett',
+                        })}
+                        target="_blank"
+                        rel="noopener"
+                    />
+                    <FacebookButton href={createFacebookIntent(url)} target="_blank" rel="noopener" />
                 </ShareInner>
             </ShareWrapper>
             <Link href={'/'}>
