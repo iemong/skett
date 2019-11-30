@@ -8,7 +8,7 @@
                 "function": "ogpPage"
             },
             {
-                "source": "/s/**",
+                "source": "/posts/**",
                 "destination": "/posts/[postId].html"
             }
         ]
