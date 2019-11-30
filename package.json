@@ -60,6 +60,7 @@
         "start": "next start",
         "lint": "eslint --ext .ts,.tsx .",
         "generate": "next export",
+        "deploy": "firebase deploy",
         "storybook": "start-storybook -p 6006",
         "build-storybook": "build-storybook"
     },
