@@ -4,7 +4,7 @@
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "rewrites": [
             {
-                "source": "/s/**",
+                "source": "/share/*",
                 "function": "s"
             },
             {
@@ -22,6 +22,10 @@
             {
                 "source": "/posts/**",
                 "destination": "/posts/[postId].html"
+            },
+            {
+                "source": "**",
+                "destination": "/index.html"
             }
         ],
         "cleanUrls": true,

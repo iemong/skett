@@ -26,7 +26,7 @@ const Home = (): JSX.Element => {
 
     React.useEffect(() => {
         loadPostsData()
-    }, [loadPostsData])
+    }, [])
 
     const helpPosts = React.useMemo(
         () =>
