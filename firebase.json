@@ -6,6 +6,10 @@
             {
                 "source": "/s/**",
                 "function": "ogpPage"
+            },
+            {
+                "source": "/s/**",
+                "destination": "/posts/[postId].html"
             }
         ]
     },
