@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import useForm from 'react-hook-form'
 import { DateTime } from 'luxon'
+import Link from 'next/link'
 import Main from 'components/templates/layouts/Main'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS, STRAGE_BACKET } from 'assets/constant'
@@ -15,7 +16,7 @@ const Register = (): JSX.Element => {
     const storage = firebaseApp.storage(STRAGE_BACKET)
     const storageRef = storage.ref()
 
-    const { register, handleSubmit, errors } = useForm()
+    const { register, handleSubmit, errors, reset } = useForm()
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [currentFormData, setCurrentFormData] = React.useState<Record<string, any> | null>(null)
     const [time, setTime] = React.useState<string | null>(null)
@@ -69,6 +70,13 @@ const Register = (): JSX.Element => {
         setPostUrl(uniqUrl)
     }, [currentFormData, db, storageRef, time])
 
+    const onBack = React.useCallback(() => {
+        reset()
+        setCurrentFormData(null)
+        setTime(null)
+        setCurrentImgSrc(null)
+    }, [reset])
+
     return (
         <Main>
             <Tab
@@ -112,7 +120,9 @@ const Register = (): JSX.Element => {
                                     </FormBox>
                                     <Howto>使いかた</Howto>
                                     <ConfirmButton type="submit">送信</ConfirmButton>
-                                    <BackButton>戻る</BackButton>
+                                    <Link href={'/'}>
+                                        <BackButton>戻る</BackButton>
+                                    </Link>
                                 </form>
                             ) : (
                                 <Confirm
@@ -121,6 +131,7 @@ const Register = (): JSX.Element => {
                                     imgUrl={currentImgSrc}
                                     updateDate={time}
                                     onSubmit={onSubmit}
+                                    onBack={onBack}
                                 />
                             )
                         ) : (

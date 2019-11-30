@@ -8,10 +8,11 @@ type Props = {
     description: string
     updateDate: string
     onSubmit: () => void
+    onBack: () => void
 }
 
 const Confirm = (props: Props): JSX.Element => {
-    const { onSubmit, ...cardProps } = props
+    const { onSubmit, onBack, ...cardProps } = props
     return (
         <Wrapper>
             <ConfirmTitleWrapper>
@@ -19,7 +20,7 @@ const Confirm = (props: Props): JSX.Element => {
             </ConfirmTitleWrapper>
             <DetailCard {...cardProps} side={'help'} userId={1} />
             <RegisterButton onClick={onSubmit}>声を作る</RegisterButton>
-            <BackButton>戻る</BackButton>
+            <BackButton onClick={onBack}>戻る</BackButton>
         </Wrapper>
     )
 }
