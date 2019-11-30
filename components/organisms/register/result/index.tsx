@@ -86,11 +86,13 @@ const Lead = styled.p`
 
 const LinkText = styled.p`
     width: 515px;
-    height: 56px;
+    height: auto;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    line-height: 1.5;
+    word-break: break-all;
     border: 2px solid #f39800;
     font-size: 20px;
-    line-height: 56px;
-    text-indent: 1em;
 `
 
 const ShareWrapper = styled.div`
