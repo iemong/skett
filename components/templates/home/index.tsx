@@ -7,11 +7,12 @@ import Tab from 'components/organisms/tab'
 import Card from 'components/molecules/card'
 
 type Props = {
-    data: PostType[]
+    data: PostType[] | null
 }
 const Home = (props: Props): JSX.Element => {
     const { data: posts } = props
     // TODO ちゃんとしたID渡す
+    if (!posts) return <>loading</>
     const helpPosts = posts.map((post, index) => (
         <Card
             key={index}
