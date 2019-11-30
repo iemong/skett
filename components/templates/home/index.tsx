@@ -5,33 +5,56 @@ import { PostType } from 'types/index'
 import Main from 'components/templates/layouts/Main'
 import Tab from 'components/organisms/tab'
 import Card from 'components/molecules/card'
+import firebaseApp from 'assets/utils/firebaseApp'
+import { COLLECTIONS } from 'assets/constant'
 
-type Props = {
-    data: PostType[] | null
-}
-const Home = (props: Props): JSX.Element => {
-    const { data: posts } = props
-    // TODO ちゃんとしたID渡す
-    if (!posts) return <>loading</>
-    const helpPosts = posts.map((post, index) => (
-        <Card
-            key={index}
-            imgUrl={post.imageUrl}
-            description={post.title}
-            link={`/posts/${post.id ?? ''}`}
-            side={'help'}
-        />
-    ))
+const Home = (): JSX.Element => {
+    const db = firebaseApp.firestore()
+    const docRef = db.collection(COLLECTIONS.POSTS)
+    const [posts, setPosts] = React.useState<PostType[]>([])
 
-    const supportPosts = posts.map((post, index) => (
-        <Card
-            key={index}
-            imgUrl={post.imageUrl}
-            description={post.description}
-            link={`/posts/${post.id ?? ''}`}
-            side={'support'}
-        />
-    ))
+    const loadPostsData = React.useCallback(async () => {
+        const data = await docRef
+            .orderBy('timestamp', 'desc')
+            .get()
+            .catch(e => console.error(e))
+        if (!data) return
+        const docs = data.docs
+        const posts = docs.map(doc => doc.data() as PostType)
+        setPosts(posts)
+    }, [docRef])
+
+    React.useEffect(() => {
+        loadPostsData()
+    }, [loadPostsData])
+
+    const helpPosts = React.useMemo(
+        () =>
+            posts.map((post, index) => (
+                <Card
+                    key={index}
+                    imgUrl={post.imageUrl}
+                    description={post.title}
+                    link={`/posts/${post.id ?? ''}`}
+                    side={'help'}
+                />
+            )),
+        [posts],
+    )
+
+    const supportPosts = React.useMemo(
+        () =>
+            posts.map((post, index) => (
+                <Card
+                    key={index}
+                    imgUrl={post.imageUrl}
+                    description={post.title}
+                    link={`/posts/${post.id ?? ''}`}
+                    side={'support'}
+                />
+            )),
+        [posts],
+    )
 
     const helpPostElement = <ItemWrapper>{helpPosts}</ItemWrapper>
     const supportPostElement = <ItemWrapper>{supportPosts}</ItemWrapper>
