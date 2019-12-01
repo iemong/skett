@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport * as React from 'react';\nimport Home from \"../components/templates/home\";\n\nvar PageHome = function PageHome() {\n  return __jsx(Home, null);\n};\n\nexport default PageHome;","map":null,"metadata":{},"sourceType":"module"}
