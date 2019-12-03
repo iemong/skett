@@ -10,6 +10,7 @@ import { PostType } from 'types/index'
 import Tab from 'components/organisms/tab'
 import Confirm from 'components/organisms/register/confirm'
 import Result from 'components/organisms/register/result'
+import RegisterLogin from 'components/organisms/register/login'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
@@ -83,6 +84,7 @@ const Register = (): JSX.Element => {
             <Tab
                 leftContent={
                     <Wrapper>
+                        <RegisterLogin />
                         {!postUrl ? (
                             !(currentFormData && currentImgSrc && time) ? (
                                 <form onSubmit={handleSubmit(onRegister)}>

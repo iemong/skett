@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import Shares from 'components/molecules/shares'
 import { createFacebookIntent, createTwitterIntent } from 'assets/utils/share'
 
 type Props = {
@@ -24,18 +25,14 @@ const Result = (props: Props): JSX.Element => {
             <ShareWrapper>
                 <Title>この声をシェアする</Title>
                 <Lead>SNSであなたの声をシェアしよう。</Lead>
-                <ShareInner>
-                    <TwitterButton
-                        href={createTwitterIntent({
-                            url,
-                            text: '',
-                            hashtags: 'skett',
-                        })}
-                        target="_blank"
-                        rel="noopener"
-                    />
-                    <FacebookButton href={createFacebookIntent(url)} target="_blank" rel="noopener" />
-                </ShareInner>
+                <Shares
+                    twitterLink={createTwitterIntent({
+                        url,
+                        text: '',
+                        hashtags: 'skett',
+                    })}
+                    facebookLink={createFacebookIntent(url)}
+                />
             </ShareWrapper>
             <Link href={'/'}>
                 <BackButton>TOPへ</BackButton>
@@ -102,25 +99,6 @@ const ShareWrapper = styled.div`
     border-radius: 16px;
     background-color: #fff;
     box-sizing: border-box;
-`
-
-const ShareInner = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
-
-const TwitterButton = styled.a`
-    display: block;
-    width: 241px;
-    height: 201px;
-    background-image: url(/img/btn_twitter.png);
-`
-
-const FacebookButton = styled.a`
-    display: block;
-    width: 241px;
-    height: 201px;
-    background-image: url(/img/btn_facebook.png);
 `
 
 const BackButton = styled.button`
