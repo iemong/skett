@@ -1,1 +1,0 @@
-{"ast":null,"code":"import queryString from \"./queryString\";\nexport const createTwitterIntent = opts => `http://twitter.com/intent/tweet?${queryString(opts)}`;\nexport const createFacebookIntent = url => `http://www.facebook.com/share.php?${queryString({\n  u: url\n})}`;","map":null,"metadata":{},"sourceType":"module"}

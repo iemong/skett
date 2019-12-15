@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import Login from 'components/organisms/login'
 
-const RegisterLogin = (): JSX.Element => {
+const ApplyLogin = (): JSX.Element => {
     const handleCheck = (value: boolean): void => {
         console.log('check', value)
     }
@@ -16,7 +16,7 @@ const RegisterLogin = (): JSX.Element => {
     )
 }
 
-export default RegisterLogin
+export default ApplyLogin
 
 const ApplyButton = styled.button`
     display: block;

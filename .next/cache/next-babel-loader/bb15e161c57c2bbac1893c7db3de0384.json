@@ -1,1 +1,0 @@
-{"ast":null,"code":"import _Object$keys from \"@babel/runtime-corejs2/core-js/object/keys\";\n\nconst queryString = params => _Object$keys(params).map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key])).join('&');\n\nexport default queryString;","map":null,"metadata":{},"sourceType":"module"}
