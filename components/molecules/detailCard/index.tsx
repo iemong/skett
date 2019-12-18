@@ -1,19 +1,20 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import { DateTime } from 'luxon'
+import { UserType } from 'types/index'
 
 type Props = {
     imgUrl: string
     title: string
     description: string
     side: 'help' | 'support'
-    userId: number
+    user: UserType
     updateDate: string
     className?: string
 }
 
 const DetailCard = (props: Props): JSX.Element => {
-    const { imgUrl, title, description, side, userId, updateDate, className } = props
+    const { imgUrl, title, description, side, user, updateDate, className } = props
     return (
         <Wrapper data-side={side} className={className}>
             <ThumbnailWrapper>
@@ -24,9 +25,9 @@ const DetailCard = (props: Props): JSX.Element => {
                 <Description>{description}</Description>
                 <Footer>
                     <User>
-                        <Icon src={'/img/icn_default.png'} alt="" />
+                        <Icon src={user.photoURL || '/img/icn_default.png'} alt="" />
                         <UserInfo>
-                            <UserName>{userId}</UserName>
+                            <UserName>{user.displayName}</UserName>
                             <UpdateDate>{DateTime.fromISO(updateDate).toFormat('yyyy/MM/dd HH:mm:ss')}</UpdateDate>
                         </UserInfo>
                     </User>
@@ -106,6 +107,7 @@ const Icon = styled.img`
     width: 67px;
     height: 67px;
     margin-right: 24px;
+    border-radius: 50%;
 `
 const UserInfo = styled.div``
 const UserName = styled.p`

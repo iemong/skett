@@ -1,13 +1,13 @@
 export type UserType = {
-    displayName: string
-    email: string
-    url: string
+    displayName: string | null
+    email: string | null
     uid: string
+    photoURL: string | null
 }
 
 export type PostType = {
     id?: string
-    userId: number
+    user: UserType
     title: string
     description: string
     isOpen: boolean

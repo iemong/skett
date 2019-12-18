@@ -42,7 +42,7 @@ const Login = (): JSX.Element => {
             console.log(user)
             actions.initialize(user)
         }
-    }, [user])
+    }, [actions, user])
 
     return (
         <Main>

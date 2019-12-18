@@ -1,15 +1,10 @@
+import * as firebase from 'firebase/app'
 import { Action } from 'reducers/user/actions'
 import { INITIALIZE } from 'reducers/user/types'
-import { UserType } from 'types/index'
 
-export type State = UserType
+export type State = firebase.User | null
 
-const initialState: State = {
-    displayName: '',
-    email: '',
-    url: '',
-    uid: '',
-}
+const initialState: State = null
 
 export default (state: State = initialState, action: Action) => {
     switch (action.type) {
