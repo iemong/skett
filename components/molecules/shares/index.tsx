@@ -2,17 +2,17 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 
 type Props = {
-    twitterLink: string
-    facebookLink: string
+    onClickTwitter: () => void
+    onClickFacebook: () => void
 }
 
 const Shares = (props: Props): JSX.Element => {
-    const { twitterLink, facebookLink } = props
+    const { onClickTwitter, onClickFacebook } = props
 
     return (
         <ShareInner>
-            <TwitterButton href={twitterLink} target="_blank" rel="noopener" />
-            <FacebookButton href={facebookLink} target="_blank" rel="noopener" />
+            <TwitterButton onClick={onClickTwitter} />
+            <FacebookButton onClick={onClickFacebook} />
         </ShareInner>
     )
 }
@@ -24,14 +24,14 @@ const ShareInner = styled.div`
     justify-content: space-between;
 `
 
-const TwitterButton = styled.a`
+const TwitterButton = styled.button`
     display: block;
     width: 241px;
     height: 201px;
     background-image: url(/img/btn_twitter.png);
 `
 
-const FacebookButton = styled.a`
+const FacebookButton = styled.button`
     display: block;
     width: 241px;
     height: 201px;
