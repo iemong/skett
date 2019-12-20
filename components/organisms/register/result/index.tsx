@@ -26,12 +26,18 @@ const Result = (props: Props): JSX.Element => {
                 <Title>この声をシェアする</Title>
                 <Lead>SNSであなたの声をシェアしよう。</Lead>
                 <Shares
-                    twitterLink={createTwitterIntent({
-                        url,
-                        text: '',
-                        hashtags: 'skett',
-                    })}
-                    facebookLink={createFacebookIntent(url)}
+                    onClickTwitter={() => {
+                        const intent = createTwitterIntent({
+                            url,
+                            text: '',
+                            hashtags: 'skett',
+                        })
+                        window.open(intent)
+                    }}
+                    onClickFacebook={() => {
+                        const intent = createFacebookIntent(url)
+                        window.open(intent)
+                    }}
                 />
             </ShareWrapper>
             <Link href={'/'}>

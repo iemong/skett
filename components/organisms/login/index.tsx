@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import Shares from 'components/molecules/shares'
+import { signInFacebook, signInTwitter } from 'assets/api/auth'
 
 type Props = {
     title: string
@@ -30,7 +31,7 @@ const Login = (props: Props): JSX.Element => {
                     ログインする必要があります。
                 </Lead>
             )}
-            <Shares twitterLink={''} facebookLink={''} />
+            <Shares onClickTwitter={signInTwitter} onClickFacebook={signInFacebook} />
             {hasCheck && (
                 <RegulationWrapper>
                     <CheckBox type={'checkbox'} name={'consent'} value={String(isConsent)} onChange={onChange} />
