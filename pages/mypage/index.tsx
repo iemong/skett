@@ -1,18 +1,8 @@
 import * as React from 'react'
-import styled from '@emotion/styled'
-import Main from 'components/templates/layouts/Main'
+import MyPage from 'components/templates/mypage'
 
-const Home = () => {
-    return (
-        <Main>
-            <Title>my page</Title>
-        </Main>
-    )
+const PageMyPage = (): JSX.Element => {
+    return <MyPage />
 }
 
-export default Home
-
-const Title = styled.h1`
-    font-size: 20px;
-    color: red;
-`
+export default PageMyPage

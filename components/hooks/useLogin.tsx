@@ -10,6 +10,7 @@ const useLogin = (): firebase.User | null => {
     const actions = React.useMemo(() => {
         return bindActionCreators(Actions, dispatch)
     }, [dispatch])
+
     React.useEffect(() => {
         const unregisterAuthObserver = firebase.auth().onAuthStateChanged((user: firebase.User | null) => setUser(user))
         return (): void => {
