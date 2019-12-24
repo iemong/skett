@@ -15823,12 +15823,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./reducers/user/types.ts");
 
 
-var initialState = {
-  displayName: '',
-  email: '',
-  url: '',
-  uid: ''
-};
+var initialState = null;
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
   var action = arguments.length > 1 ? arguments[1] : undefined;

@@ -147,7 +147,7 @@ function _templateObject10() {
 }
 
 function _templateObject9() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 67px;\n    height: 67px;\n    margin-right: 24px;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 67px;\n    height: 67px;\n    margin-right: 24px;\n    border-radius: 50%;\n"]);
 
   _templateObject9 = function _templateObject9() {
     return data;
@@ -245,7 +245,7 @@ var DetailCard = function DetailCard(props) {
       title = props.title,
       description = props.description,
       side = props.side,
-      userId = props.userId,
+      user = props.user,
       updateDate = props.updateDate,
       className = props.className;
   return __jsx(Wrapper, {
@@ -253,13 +253,13 @@ var DetailCard = function DetailCard(props) {
     className: className,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 18
+      lineNumber: 19
     },
     __self: this
   }, __jsx(ThumbnailWrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 20
     },
     __self: this
   }, __jsx(Thumbnail, {
@@ -267,81 +267,81 @@ var DetailCard = function DetailCard(props) {
     alt: "description",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 21
     },
     __self: this
   })), __jsx(TextBox, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 23
     },
     __self: this
   }, __jsx(Title, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 24
     },
     __self: this
   }, title), __jsx(Description, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 25
     },
     __self: this
   }, description), __jsx(Footer, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 26
     },
     __self: this
   }, __jsx(User, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 26
-    },
-    __self: this
-  }, __jsx(Icon, {
-    src: '/img/icn_default.png',
-    alt: "",
-    __source: {
-      fileName: _jsxFileName,
       lineNumber: 27
     },
     __self: this
-  }), __jsx(UserInfo, {
+  }, __jsx(Icon, {
+    src: user.photoURL || '/img/icn_default.png',
+    alt: "",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 28
     },
     __self: this
-  }, __jsx(UserName, {
+  }), __jsx(UserInfo, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 29
     },
     __self: this
-  }, userId), __jsx(UpdateDate, {
+  }, __jsx(UserName, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 30
     },
     __self: this
-  }, luxon__WEBPACK_IMPORTED_MODULE_3__["DateTime"].fromISO(updateDate).toFormat('yyyy/MM/dd HH:mm:ss')))), __jsx(SnsWrapper, {
+  }, user.displayName), __jsx(UpdateDate, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 31
     },
     __self: this
-  }, __jsx(Twitter, {
+  }, luxon__WEBPACK_IMPORTED_MODULE_3__["DateTime"].fromISO(updateDate).toFormat('yyyy/MM/dd HH:mm:ss')))), __jsx(SnsWrapper, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 34
     },
     __self: this
-  }), __jsx(Facebook, {
+  }, __jsx(Twitter, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 35
+    },
+    __self: this
+  }), __jsx(Facebook, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 36
     },
     __self: this
   })))));
@@ -726,7 +726,7 @@ var PostDetail = function PostDetail(props) {
     imgUrl: data.imageUrl,
     title: data.title,
     description: data.description,
-    userId: data.userId,
+    user: data.user,
     side: 'help',
     updateDate: data.updateDate,
     __source: {
@@ -54391,7 +54391,7 @@ function () {
           case 0:
             query = _ref.query, req = _ref.req;
 
-            if (!req) {
+            if (!(req && "development" !== 'development')) {
               _context.next = 5;
               break;
             }
@@ -54434,7 +54434,7 @@ function () {
 
 /***/ }),
 
-/***/ 1:
+/***/ 6:
 /*!**************************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx ***!
   \**************************************************************************************************************************************************************************************/
@@ -54457,5 +54457,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
+},[[6,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[postId].js.map
