@@ -19,7 +19,7 @@ const Main = (props: Props): JSX.Element => {
                 <Link href={'/'}>
                     <Logo src="/img/logo.png" alt="スケット" />
                 </Link>
-                <Link href={'/mypage/'}>
+                <Link href={'/mypage'}>
                     <img src="/img/btn_mypage.png" alt="マイページ" />
                 </Link>
             </Header>

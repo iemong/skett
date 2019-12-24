@@ -26,6 +26,7 @@ const Home = (): JSX.Element => {
 
     React.useEffect(() => {
         loadPostsData()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const helpPosts = React.useMemo(

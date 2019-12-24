@@ -2,10 +2,31 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import css from '@emotion/css'
 import Main from 'components/templates/layouts/Main'
+import { PostType } from 'types/index'
 import useLogin from 'components/hooks/useLogin'
+import firebaseApp from 'assets/utils/firebaseApp'
+import { COLLECTIONS } from 'assets/constant'
+import Card from 'components/molecules/card'
 
 const MyPage = (): JSX.Element => {
     const user = useLogin()
+
+    const db = firebaseApp.firestore()
+    const docRef = db.collection(COLLECTIONS.POSTS)
+    const [posts, setPosts] = React.useState<PostType[]>([])
+
+    const loadPostsData = React.useCallback(async () => {
+        if (!user || posts.length) return
+        const data = await docRef
+            .where('user.uid', '==', user.uid)
+            .orderBy('timestamp', 'desc')
+            .get()
+            .catch(e => console.error(e))
+        if (!data) return
+        const docs = data.docs
+        const myPosts = docs.map(doc => doc.data() as PostType)
+        setPosts(myPosts)
+    }, [docRef, posts.length, user])
 
     const isActiveFacebook = React.useMemo(
         () => user?.providerData.map(data => data?.providerId).includes('facebook.com') || false,
@@ -13,8 +34,31 @@ const MyPage = (): JSX.Element => {
     )
     const isActiveTwitter = React.useMemo(
         () => user?.providerData.map(data => data?.providerId).includes('twitter.com') || false,
-
         [user],
+    )
+
+    React.useEffect(() => {
+        loadPostsData()
+    }, [loadPostsData])
+
+    const myPosts = React.useMemo(
+        () =>
+            posts.map((post, index) => (
+                <CardWrapper>
+                    <Card
+                        key={index}
+                        imgUrl={post.imageUrl}
+                        description={post.title}
+                        link={`/posts/${post.id ?? ''}`}
+                        side={post.side}
+                    />
+                    <ButtonWrapper>
+                        <EditButton>編集</EditButton>
+                        <DeleteButton>削除</DeleteButton>
+                    </ButtonWrapper>
+                </CardWrapper>
+            )),
+        [posts],
     )
 
     return (
@@ -27,6 +71,10 @@ const MyPage = (): JSX.Element => {
                         <FacebookButton onClick={() => {}} isActive={isActiveFacebook} />
                     </ShareInner>
                 </LoginStatus>
+                <Past>
+                    <Title>アカウント状況</Title>
+                </Past>
+                <div>{myPosts}</div>
             </React.Fragment>
         </Main>
     )
@@ -36,7 +84,16 @@ export default MyPage
 
 const LoginStatus = styled.div`
     width: 600px;
-    margin: 80px auto 0;
+    margin: 80px auto 40px;
+    padding: 80px 45px 60px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 16px;
+`
+
+const Past = styled.div`
+    width: 600px;
+    margin: 40px auto 40px;
     padding: 80px 45px 60px;
     box-sizing: border-box;
     background-color: #fff;
@@ -103,4 +160,34 @@ const FacebookButton = styled.div<{ isActive: boolean }>`
     &::after {
         ${props => props.isActive && AlreadyLogin}
     }
+`
+
+const CardWrapper = styled.div`
+    padding-bottom: 60px;
+`
+
+const ButtonWrapper = styled.div`
+    display: flex;
+    width: 690px;
+    margin: 0 auto;
+    justify-content: space-between;
+`
+
+const ButtonStyle = css`
+    width: 325px;
+    height: 80px;
+    background-color: #bdbdbd;
+    color: #fff;
+    font-size: 30px;
+    line-height: 80px;
+    text-align: center;
+    border-radius: 10px;
+`
+
+const EditButton = styled.button`
+    ${ButtonStyle}
+`
+
+const DeleteButton = styled.button`
+    ${ButtonStyle}
 `
