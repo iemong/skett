@@ -29,33 +29,31 @@ const Home = (): JSX.Element => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const helpPosts = React.useMemo(
-        () =>
-            posts.map((post, index) => (
-                <Card
-                    key={index}
-                    imgUrl={post.imageUrl}
-                    description={post.title}
-                    link={`/posts/${post.id ?? ''}`}
-                    side={'help'}
-                />
-            )),
-        [posts],
-    )
+    const helpPosts = React.useMemo(() => {
+        const filteredPosts = posts.filter(post => post.side === 'help')
+        return filteredPosts.map((post, index) => (
+            <Card
+                key={index}
+                imgUrl={post.imageUrl}
+                description={post.title}
+                link={`/posts/${post.id ?? ''}`}
+                side={'help'}
+            />
+        ))
+    }, [posts])
 
-    const supportPosts = React.useMemo(
-        () =>
-            posts.map((post, index) => (
-                <Card
-                    key={index}
-                    imgUrl={post.imageUrl}
-                    description={post.title}
-                    link={`/posts/${post.id ?? ''}`}
-                    side={'support'}
-                />
-            )),
-        [posts],
-    )
+    const supportPosts = React.useMemo(() => {
+        const filteredPosts = posts.filter(post => post.side === 'support')
+        return filteredPosts.map((post, index) => (
+            <Card
+                key={index}
+                imgUrl={post.imageUrl}
+                description={post.title}
+                link={`/posts/${post.id ?? ''}`}
+                side={'support'}
+            />
+        ))
+    }, [posts])
 
     const helpPostElement = <ItemWrapper>{helpPosts}</ItemWrapper>
     const supportPostElement = <ItemWrapper>{supportPosts}</ItemWrapper>
