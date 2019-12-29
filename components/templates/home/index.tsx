@@ -1,17 +1,21 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
 import { PostType } from 'types/index'
 import Main from 'components/templates/layouts/Main'
 import Tab from 'components/organisms/tab'
 import Card from 'components/molecules/card'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
+import { State as rootState } from 'reducers'
 
 const Home = (): JSX.Element => {
     const db = firebaseApp.firestore()
     const docRef = db.collection(COLLECTIONS.POSTS)
     const [posts, setPosts] = React.useState<PostType[]>([])
+
+    const { side } = useSelector((state: rootState) => state.rootReducer.tab)
 
     const loadPostsData = React.useCallback(async () => {
         const data = await docRef
@@ -61,7 +65,11 @@ const Home = (): JSX.Element => {
     return (
         <Main>
             <React.Fragment>
-                <Tab leftContent={helpPostElement} rightContent={supportPostElement} />
+                <Tab
+                    leftContent={helpPostElement}
+                    rightContent={supportPostElement}
+                    tabSide={side === 'help' ? 'left' : 'right'}
+                />
                 <Link href={'/register'}>
                     <AddButton>声の追加</AddButton>
                 </Link>

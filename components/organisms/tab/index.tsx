@@ -12,18 +12,18 @@ type Props = {
     onClickLeft?: () => void
     onClickRight?: () => void
     className?: string
+    tabSide: 'right' | 'left'
 }
 
 const Tab = (props: Props): JSX.Element => {
-    const { leftContent, rightContent, onClickLeft, onClickRight, className } = props
+    const { leftContent, rightContent, onClickLeft, onClickRight, className, tabSide } = props
 
-    const [tabName, setTabName] = React.useState<'left' | 'right'>('left')
+    const [tabName, setTabName] = React.useState<'left' | 'right'>(tabSide)
 
     const dispatch = useDispatch()
     const actions = React.useMemo(() => {
         return bindActionCreators(Actions, dispatch)
     }, [dispatch])
-
     const helpClickHandler = React.useCallback((): void => {
         setTabName('left')
         actions.update('help')

@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import useForm from 'react-hook-form'
 import { DateTime } from 'luxon'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
 import Main from 'components/templates/layouts/Main'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { BASE_OGP_URL, COLLECTIONS, STRAGE_BACKET } from 'assets/constant'
@@ -12,6 +13,7 @@ import Confirm from 'components/organisms/register/confirm'
 import Result from 'components/organisms/register/result'
 import RegisterLogin from 'components/organisms/register/login'
 import useLogin from 'components/hooks/useLogin'
+import { State as rootState } from 'reducers'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
@@ -23,6 +25,8 @@ const Register = (): JSX.Element => {
     const [time, setTime] = React.useState<string | null>(null)
     const [currentImgSrc, setCurrentImgSrc] = React.useState<string | null>(null)
     const [postUrl, setPostUrl] = React.useState('')
+
+    const { side } = useSelector((state: rootState) => state.rootReducer.tab)
 
     const user = useLogin()
 
@@ -77,7 +81,7 @@ const Register = (): JSX.Element => {
             console.error(error)
         })
         setPostUrl(uniqUrl)
-    }, [currentFormData, db, storageRef, time])
+    }, [currentFormData, db, storageRef, time, user])
 
     const onBack = React.useCallback(() => {
         reset()
@@ -86,74 +90,80 @@ const Register = (): JSX.Element => {
         setCurrentImgSrc(null)
     }, [reset])
 
+    const innerElement = React.useMemo(() => {
+        return (
+            <Wrapper>
+                {user ? (
+                    !postUrl ? (
+                        !(currentFormData && currentImgSrc && time) ? (
+                            <form onSubmit={handleSubmit(onRegister)}>
+                                <FormBox>
+                                    <Title>募集を作る</Title>
+                                    <FormTitle>
+                                        <TitleLabel htmlFor="title">題名</TitleLabel>
+                                        <InputText
+                                            type="text"
+                                            id="title"
+                                            name="title"
+                                            placeholder="募集したいことを書いてください"
+                                            ref={register({ required: true })}
+                                        />
+                                        {errors.title && <span>This field is required</span>}
+                                    </FormTitle>
+                                    <FormDescription>
+                                        <TitleLabel htmlFor="description">内容</TitleLabel>
+                                        <TextArea
+                                            id="description"
+                                            name="description"
+                                            placeholder="詳細内容を書いてください"
+                                            ref={register}
+                                        />
+                                    </FormDescription>
+                                    <FormImage>
+                                        <TitleLabel htmlFor="image">写真アップロード</TitleLabel>
+                                        <ImageLabelBox htmlFor="image">ファイルを選択</ImageLabelBox>
+                                        <InputImage
+                                            type="file"
+                                            id="image"
+                                            name="image"
+                                            ref={register({ required: true })}
+                                        />
+                                    </FormImage>
+                                </FormBox>
+                                <Howto>使いかた</Howto>
+                                <ConfirmButton type="submit">送信</ConfirmButton>
+                                <Link href={'/'}>
+                                    <BackButton>戻る</BackButton>
+                                </Link>
+                            </form>
+                        ) : (
+                            <Confirm
+                                title={currentFormData.title}
+                                description={currentFormData.description}
+                                imgUrl={currentImgSrc}
+                                updateDate={time}
+                                onSubmit={onSubmit}
+                                onBack={onBack}
+                                user={user}
+                            />
+                        )
+                    ) : (
+                        <Result url={postUrl} />
+                    )
+                ) : (
+                    <RegisterLogin />
+                )}
+            </Wrapper>
+        )
+    }, [currentFormData, currentImgSrc, errors.title, handleSubmit, onBack, onSubmit, postUrl, register, time, user])
+
     return (
         <Main>
-            <Tab
-                leftContent={
-                    <Wrapper>
-                        {user ? (
-                            !postUrl ? (
-                                !(currentFormData && currentImgSrc && time) ? (
-                                    <form onSubmit={handleSubmit(onRegister)}>
-                                        <FormBox>
-                                            <Title>募集を作る</Title>
-                                            <FormTitle>
-                                                <TitleLabel htmlFor="title">題名</TitleLabel>
-                                                <InputText
-                                                    type="text"
-                                                    id="title"
-                                                    name="title"
-                                                    placeholder="募集したいことを書いてください"
-                                                    ref={register({ required: true })}
-                                                />
-                                                {errors.title && <span>This field is required</span>}
-                                            </FormTitle>
-                                            <FormDescription>
-                                                <TitleLabel htmlFor="description">内容</TitleLabel>
-                                                <TextArea
-                                                    id="description"
-                                                    name="description"
-                                                    placeholder="詳細内容を書いてください"
-                                                    ref={register}
-                                                />
-                                            </FormDescription>
-                                            <FormImage>
-                                                <TitleLabel htmlFor="image">写真アップロード</TitleLabel>
-                                                <ImageLabelBox htmlFor="image">ファイルを選択</ImageLabelBox>
-                                                <InputImage
-                                                    type="file"
-                                                    id="image"
-                                                    name="image"
-                                                    ref={register({ required: true })}
-                                                />
-                                            </FormImage>
-                                        </FormBox>
-                                        <Howto>使いかた</Howto>
-                                        <ConfirmButton type="submit">送信</ConfirmButton>
-                                        <Link href={'/'}>
-                                            <BackButton>戻る</BackButton>
-                                        </Link>
-                                    </form>
-                                ) : (
-                                    <Confirm
-                                        title={currentFormData.title}
-                                        description={currentFormData.description}
-                                        imgUrl={currentImgSrc}
-                                        updateDate={time}
-                                        onSubmit={onSubmit}
-                                        onBack={onBack}
-                                        user={user}
-                                    />
-                                )
-                            ) : (
-                                <Result url={postUrl} />
-                            )
-                        ) : (
-                            <RegisterLogin />
-                        )}
-                    </Wrapper>
-                }
-            />
+            {side === 'help' ? (
+                <Tab leftContent={innerElement} tabSide={'left'} />
+            ) : (
+                <Tab rightContent={innerElement} tabSide={'right'} />
+            )}
         </Main>
     )
 }
