@@ -11,7 +11,7 @@ type Update = {
 
 export type Action = Update
 
-export const initialize = (side: 'help' | 'support'): ThunkAction<Promise<void>, State, undefined, Update> => {
+export const update = (side: 'help' | 'support'): ThunkAction<Promise<void>, State, undefined, Update> => {
     return async (dispatch): Promise<void> => {
         try {
             dispatch({

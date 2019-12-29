@@ -1,7 +1,10 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import Router from 'next/router'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { Z_INDEX_LIST } from 'assets/constant'
+import * as Actions from 'reducers/tab/actions'
 
 type Props = {
     leftContent?: string | JSX.Element
@@ -16,25 +19,30 @@ const Tab = (props: Props): JSX.Element => {
 
     const [tabName, setTabName] = React.useState<'left' | 'right'>('left')
 
+    const dispatch = useDispatch()
+    const actions = React.useMemo(() => {
+        return bindActionCreators(Actions, dispatch)
+    }, [dispatch])
+
+    const helpClickHandler = React.useCallback((): void => {
+        setTabName('left')
+        actions.update('help')
+        if (onClickLeft) onClickLeft()
+        if (!rightContent) Router.push('/')
+    }, [actions, onClickLeft, rightContent])
+
+    const supportClickHandler = React.useCallback((): void => {
+        setTabName('right')
+        actions.update('support')
+        if (onClickRight) onClickRight()
+        if (!leftContent) Router.push('/')
+    }, [actions, leftContent, onClickRight])
+
     return (
         <Tabs className={className}>
             <TabList>
-                <TabHelp
-                    onClick={(): void => {
-                        setTabName('left')
-                        if (onClickLeft) onClickLeft()
-                        if (!rightContent) Router.push('/')
-                    }}
-                    data-selected={tabName === 'left'}
-                />
-                <TabSupport
-                    onClick={(): void => {
-                        setTabName('right')
-                        if (onClickRight) onClickRight()
-                        if (!leftContent) Router.push('/')
-                    }}
-                    data-selected={tabName === 'right'}
-                />
+                <TabHelp onClick={helpClickHandler} data-selected={tabName === 'left'} />
+                <TabSupport onClick={supportClickHandler} data-selected={tabName === 'right'} />
             </TabList>
             {(tabName === 'left' && <TabPanel>{leftContent}</TabPanel>) ||
                 (tabName === 'right' && <TabPanel>{rightContent}</TabPanel>)}
