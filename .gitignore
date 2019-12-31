@@ -3,6 +3,8 @@
 /.pnp
 .pnp.js
 
+.next
+
 # testing
 /coverage
 
@@ -20,5 +22,3 @@ yarn-error.log*
 # other
 .idea
 package-lock.json
-
-.next
