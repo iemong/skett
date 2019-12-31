@@ -1,1 +1,0 @@
-{"ast":null,"code":"export const INITIALIZE = 'user/initialize';","map":{"version":3,"sources":["/Users/irie-shinnosuke/Documents/works/skett/skett/reducers/user/types.ts"],"names":["INITIALIZE"],"mappings":"AAAA,OAAO,MAAMA,UAAU,GAAG,iBAAnB","sourcesContent":["export const INITIALIZE = 'user/initialize'\n"]},"metadata":{},"sourceType":"module"}

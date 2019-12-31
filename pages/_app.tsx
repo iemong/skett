@@ -24,8 +24,22 @@ class MyApp extends App<Props> {
         return (
             <Provider store={store}>
                 <Head>
-                    <title>Skett</title>
+                    <title>スケット | 被災地の助っ人マッチング</title>
                     <meta name="viewport" content="width=750" />
+                    <meta name="keywords" content="スケット, skett, ボランティア, 被災地, 被災, マッチング" />
+                    <meta
+                        name="description"
+                        content="スケットは被災した地域の現地の声と、支援者を直接結びつけるサービスです。支援者として、事前に登録しておくことで、万が一に備えます。"
+                    />
+                    <meta property="og:type" content="website" />
+                    <meta
+                        property="og:description"
+                        content="スケットは被災した地域の現地の声と、支援者を直接結びつけるサービスです。支援者として、事前に登録しておくことで、万が一に備えます。"
+                    />
+                    <meta property="og:url" content="https://fukko-skett.jp/" />
+                    <meta property="og:image" content="" />
+                    <meta property="og:title" content="スケット | 被災地の助っ人マッチング" />
+                    <link rel="canonical" href="https://fukko-skett.jp/" />
                     <link
                         href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese"
                         rel="stylesheet"

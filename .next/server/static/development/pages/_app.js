@@ -4801,7 +4801,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_emotion_core__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var emotion_reset__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! emotion-reset */ "emotion-reset");
 /* harmony import */ var emotion_reset__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(emotion_reset__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _store_createStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../store/createStore */ "./store/createStore.ts");
+/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next-redux-wrapper */ "next-redux-wrapper");
+/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _store_createStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../store/createStore */ "./store/createStore.ts");
 
 var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/pages/_app.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
@@ -4813,81 +4815,73 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
 
 
 
+
+
 class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
+  static async getInitialProps({
+    Component,
+    ctx
+  }) {
+    const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
+    return {
+      pageProps
+    };
+  }
+
   render() {
     const {
       Component,
-      pageProps
+      pageProps,
+      store
     } = this.props;
-    const store = Object(_store_createStore__WEBPACK_IMPORTED_MODULE_7__["default"])();
-    return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
+    return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["jsx"])(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
       store: store,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 14
+        lineNumber: 25
       },
       __self: this
-    }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_4___default.a, {
+    }, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["jsx"])(next_head__WEBPACK_IMPORTED_MODULE_4___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 15
+        lineNumber: 26
       },
       __self: this
-    }, __jsx("title", {
+    }, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["jsx"])("title", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 16
+        lineNumber: 27
       },
       __self: this
-    }, "Skett"), __jsx("meta", {
+    }, "Skett"), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["jsx"])("meta", {
       name: "viewport",
       content: "width=750",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 28
       },
       __self: this
-    })), __jsx(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["Global"], {
-      styles: _emotion_core__WEBPACK_IMPORTED_MODULE_5__["css"]`
-                        ${emotion_reset__WEBPACK_IMPORTED_MODULE_6___default.a};
-                        body {
-                            position: absolute;
-                            width: 100%;
-                            height: 100%;
-                        }
-                        input {
-                            padding: 0;
-                            border: none;
-                            border-radius: 0;
-                            outline: none;
-                            background: none;
-                        }
-                        textarea {
-                            appearance: none;
-                            resize: none;
-                            padding: 0;
-                            border: 0;
-                            outline: none;
-                            background: transparent;
-                        }
-                        button {
-                            background-color: transparent;
-                            border: none;
-                            cursor: pointer;
-                            outline: none;
-                            padding: 0;
-                            appearance: none;
-                        }
-                    `,
+    }), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["jsx"])("link", {
+      href: "https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese",
+      rel: "stylesheet",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 29
       },
       __self: this
-    }), __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+    })), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["jsx"])(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["Global"], {
+      styles:
+      /*#__PURE__*/
+      Object(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["css"])(emotion_reset__WEBPACK_IMPORTED_MODULE_6___default.a, ";body{position:absolute;width:100%;height:100%;font-family:'Noto Sans JP',sans-serif;font-smoothing:antialiased;}input{padding:0;border:none;border-radius:0;outline:none;background:none;}textarea{appearance:none;resize:none;padding:0;border:0;outline:none;background:transparent;}button{background-color:transparent;border:none;cursor:pointer;outline:none;padding:0;appearance:none;};label:MyApp;" + ( false ? undefined : "/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy9pcmllLXNoaW5ub3N1a2UvRG9jdW1lbnRzL3dvcmtzL3NrZXR0L3NrZXR0L3BhZ2VzL19hcHAudHN4Il0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQWtDK0IiLCJmaWxlIjoiL1VzZXJzL2lyaWUtc2hpbm5vc3VrZS9Eb2N1bWVudHMvd29ya3Mvc2tldHQvc2tldHQvcGFnZXMvX2FwcC50c3giLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBSZWFjdCBmcm9tICdyZWFjdCdcbmltcG9ydCBBcHAsIHsgQXBwQ29udGV4dCB9IGZyb20gJ25leHQvYXBwJ1xuaW1wb3J0IHsgUHJvdmlkZXIgfSBmcm9tICdyZWFjdC1yZWR1eCdcbmltcG9ydCBIZWFkIGZyb20gJ25leHQvaGVhZCdcbmltcG9ydCB7IEdsb2JhbCwgY3NzIH0gZnJvbSAnQGVtb3Rpb24vY29yZSdcbmltcG9ydCBlbW90aW9uUmVzZXQgZnJvbSAnZW1vdGlvbi1yZXNldCdcbmltcG9ydCB3aXRoUmVkdXggZnJvbSAnbmV4dC1yZWR1eC13cmFwcGVyJ1xuaW1wb3J0IHsgU3RvcmUgfSBmcm9tICdyZWR1eCdcbmltcG9ydCBjcmVhdGVTdG9yZSBmcm9tICdzdG9yZS9jcmVhdGVTdG9yZSdcblxudHlwZSBQcm9wcyA9IHtcbiAgICBzdG9yZTogU3RvcmVcbn1cblxuY2xhc3MgTXlBcHAgZXh0ZW5kcyBBcHA8UHJvcHM+IHtcbiAgICBzdGF0aWMgYXN5bmMgZ2V0SW5pdGlhbFByb3BzKHsgQ29tcG9uZW50LCBjdHggfTogQXBwQ29udGV4dCkge1xuICAgICAgICBjb25zdCBwYWdlUHJvcHMgPSBDb21wb25lbnQuZ2V0SW5pdGlhbFByb3BzID8gYXdhaXQgQ29tcG9uZW50LmdldEluaXRpYWxQcm9wcyhjdHgpIDoge31cblxuICAgICAgICByZXR1cm4geyBwYWdlUHJvcHMgfVxuICAgIH1cblxuICAgIHJlbmRlcigpIHtcbiAgICAgICAgY29uc3QgeyBDb21wb25lbnQsIHBhZ2VQcm9wcywgc3RvcmUgfSA9IHRoaXMucHJvcHNcbiAgICAgICAgcmV0dXJuIChcbiAgICAgICAgICAgIDxQcm92aWRlciBzdG9yZT17c3RvcmV9PlxuICAgICAgICAgICAgICAgIDxIZWFkPlxuICAgICAgICAgICAgICAgICAgICA8dGl0bGU+U2tldHQ8L3RpdGxlPlxuICAgICAgICAgICAgICAgICAgICA8bWV0YSBuYW1lPVwidmlld3BvcnRcIiBjb250ZW50PVwid2lkdGg9NzUwXCIgLz5cbiAgICAgICAgICAgICAgICAgICAgPGxpbmtcbiAgICAgICAgICAgICAgICAgICAgICAgIGhyZWY9XCJodHRwczovL2ZvbnRzLmdvb2dsZWFwaXMuY29tL2Nzcz9mYW1pbHk9Tm90bytTYW5zK0pQOjQwMCw3MDAmZGlzcGxheT1zd2FwJnN1YnNldD1qYXBhbmVzZVwiXG4gICAgICAgICAgICAgICAgICAgICAgICByZWw9XCJzdHlsZXNoZWV0XCJcbiAgICAgICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgICAgICA8L0hlYWQ+XG4gICAgICAgICAgICAgICAgPEdsb2JhbFxuICAgICAgICAgICAgICAgICAgICBzdHlsZXM9e2Nzc2BcbiAgICAgICAgICAgICAgICAgICAgICAgICR7ZW1vdGlvblJlc2V0fTtcbiAgICAgICAgICAgICAgICAgICAgICAgIGJvZHkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB3aWR0aDogMTAwJTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBoZWlnaHQ6IDEwMCU7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgZm9udC1mYW1pbHk6ICdOb3RvIFNhbnMgSlAnLCBzYW5zLXNlcmlmO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDtcbiAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgIGlucHV0IHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJvcmRlcjogbm9uZTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBib3JkZXItcmFkaXVzOiAwO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIG91dGxpbmU6IG5vbmU7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgYmFja2dyb3VuZDogbm9uZTtcbiAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgIHRleHRhcmVhIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcHBlYXJhbmNlOiBub25lO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJlc2l6ZTogbm9uZTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBwYWRkaW5nOiAwO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJvcmRlcjogMDtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBvdXRsaW5lOiBub25lO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xuICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgYnV0dG9uIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIG91dGxpbmU6IG5vbmU7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgcGFkZGluZzogMDtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBhcHBlYXJhbmNlOiBub25lO1xuICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICBgfVxuICAgICAgICAgICAgICAgIC8+XG4gICAgICAgICAgICAgICAgPENvbXBvbmVudCB7Li4ucGFnZVByb3BzfSAvPlxuICAgICAgICAgICAgPC9Qcm92aWRlcj5cbiAgICAgICAgKVxuICAgIH1cbn1cblxuZXhwb3J0IGRlZmF1bHQgd2l0aFJlZHV4KGNyZWF0ZVN0b3JlKShNeUFwcClcbiJdfQ== */")),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 34
+      },
+      __self: this
+    }), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["jsx"])(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 69
       },
       __self: this
     })));
@@ -4895,7 +4889,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (MyApp);
+/* harmony default export */ __webpack_exports__["default"] = (next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default()(_store_createStore__WEBPACK_IMPORTED_MODULE_8__["default"])(MyApp));
 
 /***/ }),
 
@@ -4911,11 +4905,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user */ "./reducers/user/index.ts");
+/* harmony import */ var _tab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tab */ "./reducers/tab/index.ts");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  user: _user__WEBPACK_IMPORTED_MODULE_1__["default"]
+  user: _user__WEBPACK_IMPORTED_MODULE_1__["default"],
+  tab: _tab__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
+
+/***/ }),
+
+/***/ "./reducers/tab/index.ts":
+/*!*******************************!*\
+  !*** ./reducers/tab/index.ts ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./reducers/tab/types.ts");
+
+
+const initialState = {
+  side: 'help'
+};
+
+const tabReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case _types__WEBPACK_IMPORTED_MODULE_1__["UPDATE"]:
+      {
+        const {
+          side
+        } = action.payload;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          side
+        });
+      }
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (tabReducer);
+
+/***/ }),
+
+/***/ "./reducers/tab/types.ts":
+/*!*******************************!*\
+  !*** ./reducers/tab/types.ts ***!
+  \*******************************/
+/*! exports provided: UPDATE */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE", function() { return UPDATE; });
+const UPDATE = 'tab/update';
 
 /***/ }),
 
@@ -4932,12 +4981,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./reducers/user/types.ts");
 
 
-const initialState = {
-  displayName: '',
-  email: '',
-  url: '',
-  uid: ''
-};
+const initialState = null;
 /* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
   switch (action.type) {
     case _types__WEBPACK_IMPORTED_MODULE_1__["INITIALIZE"]:
@@ -5029,6 +5073,17 @@ module.exports = require("@emotion/core");
 /***/ (function(module, exports) {
 
 module.exports = require("emotion-reset");
+
+/***/ }),
+
+/***/ "next-redux-wrapper":
+/*!*************************************!*\
+  !*** external "next-redux-wrapper" ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next-redux-wrapper");
 
 /***/ }),
 
