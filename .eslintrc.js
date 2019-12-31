@@ -20,6 +20,7 @@ module.exports = {
         'import/order': ['error'],
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
+        '@typescript-eslint/no-use-before-define': 'off'
     },
     settings: {
         'import/resolver': {
