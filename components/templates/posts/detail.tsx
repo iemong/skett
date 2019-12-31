@@ -20,7 +20,7 @@ const PostDetail = (props: Props): JSX.Element => {
                 imgUrl={data.imageUrl}
                 title={data.title}
                 description={data.description}
-                userId={data.userId}
+                user={data.user}
                 side={'help'}
                 updateDate={data.updateDate}
             />

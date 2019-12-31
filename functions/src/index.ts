@@ -62,21 +62,19 @@ const generateHtml = (url: string) => `
 </html>
 `
 
-app.get('/:id', async (req: any, res: any) => {
+app.get('/share/:id', async (req: any, res: any) => {
     const docRef = db.collection('posts')
-    console.log(req.params.id)
     const postData = await docRef
         .doc(req.params.id)
         .get()
         .catch(e => console.error(e))
-    const data = postData && postData.exists ? ({ ...postData.data(), id: postData.id } as PostType) : null
-    console.log(postData)
+    const data = postData && postData.exists ? (postData.data() as PostType) : null
     if (!data) {
-        res.status(404).send('404 Not Exist')
+        res.status(200).send('404 Not Exist')
     } else {
         const html = generateHtml(data.imageUrl)
         res.send(html)
     }
 })
 
-export const ogpPage = functions.https.onRequest(app)
+export const s = functions.region('us-central1').https.onRequest(app)

@@ -4,6 +4,10 @@
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "rewrites": [
             {
+                "source": "/share/*",
+                "function": "s"
+            },
+            {
                 "source": "/login/**",
                 "destination": "/login.html"
             },
@@ -20,8 +24,8 @@
                 "destination": "/posts/[postId].html"
             },
             {
-                "source": "/s/**",
-                "function": "ogpPage"
+                "source": "**",
+                "destination": "/index.html"
             }
         ],
         "cleanUrls": true,

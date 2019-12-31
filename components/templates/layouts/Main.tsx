@@ -19,9 +19,9 @@ const Main = (props: Props): JSX.Element => {
                 <Link href={'/'}>
                     <Logo src="/img/logo.png" alt="スケット" />
                 </Link>
-                <Button>
+                <Link href={'/mypage'}>
                     <img src="/img/btn_mypage.png" alt="マイページ" />
-                </Button>
+                </Link>
             </Header>
             {children}
         </Wrapper>
@@ -49,5 +49,3 @@ const Logo = styled.img`
     width: 211px;
     height: 53px;
 `
-
-const Button = styled.button``

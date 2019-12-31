@@ -1,18 +1,18 @@
 import { ThunkAction } from 'redux-thunk'
+import * as firebase from 'firebase/app'
 import { State } from 'reducers/user/index'
 import { INITIALIZE } from 'reducers/user/types'
-import { UserType } from 'types/index'
 
 type Initialize = {
     type: typeof INITIALIZE
     payload: {
-        user: UserType
+        user: firebase.User
     }
 }
 
 export type Action = Initialize
 
-export const initialize = (user: UserType): ThunkAction<Promise<void>, State, undefined, Initialize> => {
+export const initialize = (user: firebase.User): ThunkAction<Promise<void>, State, undefined, Initialize> => {
     return async (dispatch): Promise<void> => {
         try {
             dispatch({

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import Main from 'components/templates/layouts/Main'
-import Tab from 'components/organisms/tab'
 import Link from 'next/link'
+import Shares from 'components/molecules/shares'
+import { createFacebookIntent, createTwitterIntent } from 'assets/utils/share'
 
 type Props = {
     url: string
@@ -25,10 +25,20 @@ const Result = (props: Props): JSX.Element => {
             <ShareWrapper>
                 <Title>この声をシェアする</Title>
                 <Lead>SNSであなたの声をシェアしよう。</Lead>
-                <ShareInner>
-                    <TwitterButton />
-                    <FacebookButton />
-                </ShareInner>
+                <Shares
+                    onClickTwitter={() => {
+                        const intent = createTwitterIntent({
+                            url,
+                            text: '',
+                            hashtags: 'skett',
+                        })
+                        window.open(intent)
+                    }}
+                    onClickFacebook={() => {
+                        const intent = createFacebookIntent(url)
+                        window.open(intent)
+                    }}
+                />
             </ShareWrapper>
             <Link href={'/'}>
                 <BackButton>TOPへ</BackButton>
@@ -79,11 +89,13 @@ const Lead = styled.p`
 
 const LinkText = styled.p`
     width: 515px;
-    height: 56px;
+    height: auto;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    line-height: 1.5;
+    word-break: break-all;
     border: 2px solid #f39800;
     font-size: 20px;
-    line-height: 56px;
-    text-indent: 1em;
 `
 
 const ShareWrapper = styled.div`
@@ -93,25 +105,6 @@ const ShareWrapper = styled.div`
     border-radius: 16px;
     background-color: #fff;
     box-sizing: border-box;
-`
-
-const ShareInner = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
-
-const TwitterButton = styled.a`
-    display: block;
-    width: 241px;
-    height: 201px;
-    background-image: url(/img/btn_twitter.png);
-`
-
-const FacebookButton = styled.a`
-    display: block;
-    width: 241px;
-    height: 201px;
-    background-image: url(/img/btn_facebook.png);
 `
 
 const BackButton = styled.button`

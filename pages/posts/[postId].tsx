@@ -8,7 +8,7 @@ type Props = {
     data: PostType
 }
 
-const PagePostDetail = (props: Props) => {
+const PagePostDetail = (props: Props): JSX.Element => {
     return <PostDetail data={props.data} />
 }
 
@@ -19,7 +19,7 @@ PagePostDetail.getInitialProps = async ({
     query: { postId: string }
     req: any
 }): Promise<{ data: null | firebase.firestore.DocumentData | '' }> => {
-    if (req) {
+    if (req && process.env.NODE_ENV !== 'development') {
         return { data: null }
     } else {
         const db = firebaseApp.firestore()

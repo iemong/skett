@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import Link from 'next/link'
 
 type Props = {
     imgUrl: string
@@ -70,4 +69,8 @@ const DetailButton = styled.button`
     width: 270px;
     height: 51px;
     background-image: url(/img/btn_detail.png);
+`
+
+const Link = styled.a`
+    display: block;
 `

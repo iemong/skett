@@ -1,6 +1,7 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import DetailCard from 'components/molecules/detailCard'
+import { UserType } from 'types/index'
 
 type Props = {
     imgUrl: string
@@ -8,18 +9,20 @@ type Props = {
     description: string
     updateDate: string
     onSubmit: () => void
+    onBack: () => void
+    user: UserType
 }
 
 const Confirm = (props: Props): JSX.Element => {
-    const { onSubmit, ...cardProps } = props
+    const { onSubmit, onBack, user, ...cardProps } = props
     return (
         <Wrapper>
             <ConfirmTitleWrapper>
                 <ConfirmTitle>内容確認</ConfirmTitle>
             </ConfirmTitleWrapper>
-            <DetailCard {...cardProps} side={'help'} userId={1} />
+            <DetailCard {...cardProps} side={'help'} user={user} />
             <RegisterButton onClick={onSubmit}>声を作る</RegisterButton>
-            <BackButton>戻る</BackButton>
+            <BackButton onClick={onBack}>戻る</BackButton>
         </Wrapper>
     )
 }

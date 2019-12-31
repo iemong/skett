@@ -2,25 +2,33 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import useForm from 'react-hook-form'
 import { DateTime } from 'luxon'
+import Link from 'next/link'
+import { useSelector } from 'react-redux'
 import Main from 'components/templates/layouts/Main'
 import firebaseApp from 'assets/utils/firebaseApp'
-import { COLLECTIONS, STRAGE_BACKET } from 'assets/constant'
+import { BASE_OGP_URL, COLLECTIONS, STRAGE_BACKET } from 'assets/constant'
 import { PostType } from 'types/index'
 import Tab from 'components/organisms/tab'
 import Confirm from 'components/organisms/register/confirm'
 import Result from 'components/organisms/register/result'
+import RegisterLogin from 'components/organisms/register/login'
+import useLogin from 'components/hooks/useLogin'
+import { State as rootState } from 'reducers'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
     const storage = firebaseApp.storage(STRAGE_BACKET)
     const storageRef = storage.ref()
 
-    const { register, handleSubmit, errors } = useForm()
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const { register, handleSubmit, errors, reset } = useForm()
     const [currentFormData, setCurrentFormData] = React.useState<Record<string, any> | null>(null)
     const [time, setTime] = React.useState<string | null>(null)
     const [currentImgSrc, setCurrentImgSrc] = React.useState<string | null>(null)
     const [postUrl, setPostUrl] = React.useState('')
+
+    const { side } = useSelector((state: rootState) => state.rootReducer.tab)
+
+    const user = useLogin()
 
     const onRegister = (data: Record<string, any>): void => {
         console.log('send', data)
@@ -40,98 +48,122 @@ const Register = (): JSX.Element => {
     }, [currentFormData])
 
     const onSubmit = React.useCallback(async () => {
-        if (!(currentFormData && time)) return
+        if (!(currentFormData && time && user)) return
         const fileList: FileList = currentFormData.image
         const file = fileList[0]
         if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
         const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${Date.now()}.jpg`)
         await imageRef.put(file)
         const imageUrl = await imageRef.getDownloadURL()
+
+        const uniqDocRef = db.collection(COLLECTIONS.POSTS).doc()
+        const uniqUrl = `${BASE_OGP_URL}${uniqDocRef.id}`
         const postData: PostType = {
-            userId: 1,
+            id: uniqDocRef.id,
+            user: {
+                uid: user.uid,
+                displayName: user.displayName,
+                email: user.email,
+                photoURL: user.photoURL,
+            },
             title: currentFormData.title,
             description: currentFormData.description ?? '',
             isOpen: true,
             createDate: time,
             updateDate: time,
-            url: 'google.com',
+            url: uniqUrl,
             imageUrl,
             side: 'help',
+            timestamp: Date.now(),
         }
 
-        await db
-            .collection(COLLECTIONS.POSTS)
-            .add(postData)
-            .then(docRef => {
-                console.log('Document written with ID: ', docRef.id)
-            })
-            .catch(error => {
-                console.error(error)
-            })
-        // TODO シェアURL
-        setPostUrl('google.com')
-    }, [currentFormData, db, storageRef, time])
+        await uniqDocRef.set(postData).catch(error => {
+            console.error(error)
+        })
+        setPostUrl(uniqUrl)
+    }, [currentFormData, db, storageRef, time, user])
+
+    const onBack = React.useCallback(() => {
+        reset()
+        setCurrentFormData(null)
+        setTime(null)
+        setCurrentImgSrc(null)
+    }, [reset])
+
+    const innerElement = React.useMemo(() => {
+        return (
+            <Wrapper>
+                {user ? (
+                    !postUrl ? (
+                        !(currentFormData && currentImgSrc && time) ? (
+                            <form onSubmit={handleSubmit(onRegister)}>
+                                <FormBox>
+                                    <Title>募集を作る</Title>
+                                    <FormTitle>
+                                        <TitleLabel htmlFor="title">題名</TitleLabel>
+                                        <InputText
+                                            type="text"
+                                            id="title"
+                                            name="title"
+                                            placeholder="募集したいことを書いてください"
+                                            ref={register({ required: true })}
+                                        />
+                                        {errors.title && <span>This field is required</span>}
+                                    </FormTitle>
+                                    <FormDescription>
+                                        <TitleLabel htmlFor="description">内容</TitleLabel>
+                                        <TextArea
+                                            id="description"
+                                            name="description"
+                                            placeholder="詳細内容を書いてください"
+                                            ref={register}
+                                        />
+                                    </FormDescription>
+                                    <FormImage>
+                                        <TitleLabel htmlFor="image">写真アップロード</TitleLabel>
+                                        <ImageLabelBox htmlFor="image">ファイルを選択</ImageLabelBox>
+                                        <InputImage
+                                            type="file"
+                                            id="image"
+                                            name="image"
+                                            ref={register({ required: true })}
+                                        />
+                                    </FormImage>
+                                </FormBox>
+                                <Howto>使いかた</Howto>
+                                <ConfirmButton type="submit">送信</ConfirmButton>
+                                <Link href={'/'}>
+                                    <BackButton>戻る</BackButton>
+                                </Link>
+                            </form>
+                        ) : (
+                            <Confirm
+                                title={currentFormData.title}
+                                description={currentFormData.description}
+                                imgUrl={currentImgSrc}
+                                updateDate={time}
+                                onSubmit={onSubmit}
+                                onBack={onBack}
+                                user={user}
+                            />
+                        )
+                    ) : (
+                        <Result url={postUrl} />
+                    )
+                ) : (
+                    <RegisterLogin />
+                )}
+            </Wrapper>
+        )
+    }, [currentFormData, currentImgSrc, errors.title, handleSubmit, onBack, onSubmit, postUrl, register, time, user])
 
     return (
         <Main>
-            <Tab
-                leftContent={
-                    <Wrapper>
-                        {!postUrl ? (
-                            !(currentFormData && currentImgSrc && time) ? (
-                                <form onSubmit={handleSubmit(onRegister)}>
-                                    <FormBox>
-                                        <Title>募集を作る</Title>
-                                        <FormTitle>
-                                            <TitleLabel htmlFor="title">題名</TitleLabel>
-                                            <InputText
-                                                type="text"
-                                                id="title"
-                                                name="title"
-                                                placeholder="募集したいことを書いてください"
-                                                ref={register({ required: true })}
-                                            />
-                                            {errors.title && <span>This field is required</span>}
-                                        </FormTitle>
-                                        <FormDescription>
-                                            <TitleLabel htmlFor="description">内容</TitleLabel>
-                                            <TextArea
-                                                id="description"
-                                                name="description"
-                                                placeholder="詳細内容を書いてください"
-                                                ref={register}
-                                            />
-                                        </FormDescription>
-                                        <FormImage>
-                                            <TitleLabel htmlFor="image">写真アップロード</TitleLabel>
-                                            <ImageLabelBox htmlFor="image">ファイルを選択</ImageLabelBox>
-                                            <InputImage
-                                                type="file"
-                                                id="image"
-                                                name="image"
-                                                ref={register({ required: true })}
-                                            />
-                                        </FormImage>
-                                    </FormBox>
-                                    <Howto>使いかた</Howto>
-                                    <ConfirmButton type="submit">送信</ConfirmButton>
-                                    <BackButton>戻る</BackButton>
-                                </form>
-                            ) : (
-                                <Confirm
-                                    title={currentFormData.title}
-                                    description={currentFormData.description}
-                                    imgUrl={currentImgSrc}
-                                    updateDate={time}
-                                    onSubmit={onSubmit}
-                                />
-                            )
-                        ) : (
-                            <Result url={postUrl} />
-                        )}
-                    </Wrapper>
-                }
-            />
+            {side === 'help' ? (
+                <Tab leftContent={innerElement} tabSide={'left'} />
+            ) : (
+                <Tab rightContent={innerElement} tabSide={'right'} />
+            )}
         </Main>
     )
 }

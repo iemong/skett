@@ -1,15 +1,26 @@
 import * as React from 'react'
-import App from 'next/app'
+import App, { AppContext } from 'next/app'
 import { Provider } from 'react-redux'
 import Head from 'next/head'
 import { Global, css } from '@emotion/core'
 import emotionReset from 'emotion-reset'
+import withRedux from 'next-redux-wrapper'
+import { Store } from 'redux'
 import createStore from 'store/createStore'
 
-class MyApp extends App {
+type Props = {
+    store: Store
+}
+
+class MyApp extends App<Props> {
+    static async getInitialProps({ Component, ctx }: AppContext) {
+        const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
+
+        return { pageProps }
+    }
+
     render() {
-        const { Component, pageProps } = this.props
-        const store = createStore()
+        const { Component, pageProps, store } = this.props
         return (
             <Provider store={store}>
                 <Head>
@@ -55,4 +66,4 @@ class MyApp extends App {
     }
 }
 
-export default MyApp
+export default withRedux(createStore)(MyApp)
