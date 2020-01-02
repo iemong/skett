@@ -40,6 +40,10 @@ class MyApp extends App<Props> {
                     <meta property="og:image" content="" />
                     <meta property="og:title" content="スケット | 被災地の助っ人マッチング" />
                     <link rel="canonical" href="https://fukko-skett.jp/" />
+                    <link
+                        href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese"
+                        rel="stylesheet"
+                    />
                 </Head>
                 <Global
                     styles={css`
@@ -48,6 +52,8 @@ class MyApp extends App<Props> {
                             position: absolute;
                             width: 100%;
                             height: 100%;
+                            font-family: 'Noto Sans JP', sans-serif;
+                            font-smoothing: antialiased;
                         }
                         input {
                             padding: 0;
