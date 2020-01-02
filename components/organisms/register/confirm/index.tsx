@@ -2,6 +2,8 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import DetailCard from 'components/molecules/detailCard'
 import { UserType } from 'types/index'
+import Button from 'components/atoms/Button'
+import ThemeButton from 'components/molecules/theme/ThemeButton'
 
 type Props = {
     imgUrl: string
@@ -11,18 +13,23 @@ type Props = {
     onSubmit: () => void
     onBack: () => void
     user: UserType
+    side: 'help' | 'support'
 }
 
 const Confirm = (props: Props): JSX.Element => {
-    const { onSubmit, onBack, user, ...cardProps } = props
+    const { onSubmit, onBack, user, side, ...cardProps } = props
     return (
         <Wrapper>
             <ConfirmTitleWrapper>
                 <ConfirmTitle>内容確認</ConfirmTitle>
             </ConfirmTitleWrapper>
-            <DetailCard {...cardProps} side={'help'} user={user} />
-            <RegisterButton onClick={onSubmit}>声を作る</RegisterButton>
-            <BackButton onClick={onBack}>戻る</BackButton>
+            <DetailCard {...cardProps} side={side} user={user} />
+            <RegisterButton width={'400px'} height={'80px'} onClick={onSubmit}>
+                声を作る
+            </RegisterButton>
+            <BackButton width={'400px'} height={'80px'} styleType="cancel" onClick={onBack}>
+                戻る
+            </BackButton>
         </Wrapper>
     )
 }
@@ -44,38 +51,12 @@ const ConfirmTitleWrapper = styled.div`
     background-color: #fff;
 `
 
-const ConfirmTitle = styled.h1`
-    position: relative;
-    padding-bottom: 33px;
-    font-size: 38px;
-    text-align: center;
-    color: #000;
-    &::before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 100px;
-        height: 5px;
-        background-image: linear-gradient(to left, #00b4ed, #0091db);
-        transform: translateX(-50%);
-    }
-`
+const ConfirmTitle = styled(ThemeButton)``
 
-const RegisterButton = styled.button`
-    display: block;
+const RegisterButton = styled(ThemeButton)`
     margin: 0 auto 50px;
-    width: 400px;
-    height: 80px;
-    background-image: url(/img/btn_register_help.png);
-    color: transparent;
 `
 
-const BackButton = styled.button`
-    display: block;
-    width: 400px;
-    height: 80px;
+const BackButton = styled(Button)`
     margin: 0 auto;
-    background-image: url(/img/btn_back.png);
-    color: transparent;
 `

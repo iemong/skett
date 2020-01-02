@@ -2,6 +2,7 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import Shares from 'components/molecules/shares'
 import { signInFacebook, signInTwitter } from 'assets/api/auth'
+import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 
 type Props = {
     title: string
@@ -61,23 +62,8 @@ const LoginBox = styled.div`
     overflow: hidden;
 `
 
-const Title = styled.h1`
-    position: relative;
+const Title = styled(ThemeTitle)`
     margin-bottom: 45px;
-    padding-bottom: 33px;
-    font-size: 38px;
-    text-align: center;
-    color: #000;
-    &::before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 100px;
-        height: 5px;
-        background-image: linear-gradient(to left, #00b4ed, #0091db);
-        transform: translateX(-50%);
-    }
 `
 
 const Lead = styled.p`

@@ -1,8 +1,8 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import Login from 'components/organisms/login'
 import { DateTime } from 'luxon'
 import Link from 'next/link'
+import Login from 'components/organisms/login'
 
 const ApplyResult = (): JSX.Element => {
     const userId = 1

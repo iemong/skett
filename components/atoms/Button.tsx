@@ -4,6 +4,7 @@ import css from '@emotion/css'
 
 enum StyleType {
     default,
+    invert,
     twitter,
     facebook,
     cancel,
@@ -18,14 +19,15 @@ type StyleProps = {
 
 type Props = StyleProps & {
     children?: JSX.Element | string
+    onClick?: any
 }
 
 const Button = (props: Props) => {
-    const { children, styleType, className, width, height } = props
+    const { children, onClick, styleType, ...styleProps } = props
 
     if (styleType === 'twitter') {
         return (
-            <ButtonStyle role="button" className={className} styleType={styleType} width={width} height={height}>
+            <ButtonStyle role="button" styleType={styleType} {...styleProps}>
                 <React.Fragment>
                     <p>twitter</p>
                     <img src="/img/svg/icn_twitter.svg" width={22} alt="twitter" />
@@ -36,7 +38,7 @@ const Button = (props: Props) => {
 
     if (styleType === 'facebook') {
         return (
-            <ButtonStyle role="button" className={className} styleType={styleType}>
+            <ButtonStyle role="button" {...styleProps} styleType={styleType}>
                 <React.Fragment>
                     <p>facebook</p>
                     <img src="/img/svg/icn_facebook.svg" width={22} alt="icn_facebook" />
@@ -46,7 +48,7 @@ const Button = (props: Props) => {
     }
 
     return (
-        <ButtonStyle role="button" className={className} styleType={styleType}>
+        <ButtonStyle role="button" {...styleProps} styleType={styleType} onClick={onClick}>
             {children}
         </ButtonStyle>
     )
@@ -59,7 +61,15 @@ const AdditionalStyle = (props: StyleProps) => {
         return css({
             width: props.width,
             height: props.height,
-            background: 'linear-gradient(to right, #FFB300, #FF8000)',
+            background: 'linear-gradient(to right, #00B4ED, #0091DB)',
+            borderRadius: `10px`,
+        })
+    } else if (props.styleType === 'invert') {
+        return css({
+            width: props.width,
+            height: props.height,
+            background: 'linear-gradient(to right, #35B597, #00A968)',
+            borderRadius: '10px',
         })
     } else if (props.styleType === 'twitter') {
         return css({
@@ -82,6 +92,7 @@ const AdditionalStyle = (props: StyleProps) => {
             width: props.width,
             height: props.height,
             background: 'linear-gradient(to right, #BFBFBF, #999)',
+            borderRadius: '10px',
         })
     }
 }
@@ -91,11 +102,11 @@ const ButtonStyle = styled.div<StyleProps>`
     justify-content: center;
     align-items: center;
     color: #fff;
-    font-size: ${30 / 2}px;
-    width: ${370 / 2}px;
-    height: ${90 / 2}px;
-    border-radius: ${90 / 2 / 2}px;
+    font-size: 30px;
+    border-radius: ${90 / 2}px;
     box-sizing: border-box;
     cursor: pointer;
     ${AdditionalStyle};
+    font-family: 'Noto Sans JP', sans-serif;
+    font-smoothing: antialiased;
 `

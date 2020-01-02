@@ -14,6 +14,9 @@ import Result from 'components/organisms/register/result'
 import RegisterLogin from 'components/organisms/register/login'
 import useLogin from 'components/hooks/useLogin'
 import { State as rootState } from 'reducers'
+import Button from 'components/atoms/Button'
+import ThemeButton from 'components/molecules/theme/ThemeButton'
+import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
@@ -73,7 +76,7 @@ const Register = (): JSX.Element => {
             updateDate: time,
             url: uniqUrl,
             imageUrl,
-            side: 'help',
+            side,
             timestamp: Date.now(),
         }
 
@@ -131,9 +134,13 @@ const Register = (): JSX.Element => {
                                     </FormImage>
                                 </FormBox>
                                 <Howto>使いかた</Howto>
-                                <ConfirmButton type="submit">送信</ConfirmButton>
+                                <ConfirmButton width={'400px'} height={'80px'} onClick={handleSubmit(onRegister)}>
+                                    内容確認
+                                </ConfirmButton>
                                 <Link href={'/'}>
-                                    <BackButton>戻る</BackButton>
+                                    <BackButton width={'400px'} height={'80px'} styleType="cancel">
+                                        戻る
+                                    </BackButton>
                                 </Link>
                             </form>
                         ) : (
@@ -145,6 +152,7 @@ const Register = (): JSX.Element => {
                                 onSubmit={onSubmit}
                                 onBack={onBack}
                                 user={user}
+                                side={side}
                             />
                         )
                     ) : (
@@ -155,7 +163,19 @@ const Register = (): JSX.Element => {
                 )}
             </Wrapper>
         )
-    }, [currentFormData, currentImgSrc, errors.title, handleSubmit, onBack, onSubmit, postUrl, register, time, user])
+    }, [
+        currentFormData,
+        currentImgSrc,
+        errors.title,
+        handleSubmit,
+        onBack,
+        onSubmit,
+        postUrl,
+        register,
+        side,
+        time,
+        user,
+    ])
 
     return (
         <Main>
@@ -185,23 +205,8 @@ const FormBox = styled.div`
     overflow: hidden;
 `
 
-const Title = styled.h1`
-    position: relative;
+const Title = styled(ThemeTitle)`
     margin-bottom: 45px;
-    padding-bottom: 33px;
-    font-size: 38px;
-    text-align: center;
-    color: #000;
-    &::before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 100px;
-        height: 5px;
-        background-image: linear-gradient(to left, #00b4ed, #0091db);
-        transform: translateX(-50%);
-    }
 `
 
 const FormTitle = styled.div`
@@ -259,20 +264,10 @@ const Howto = styled.p`
     font-size: 24px;
 `
 
-const ConfirmButton = styled.button`
-    display: block;
+const ConfirmButton = styled(ThemeButton)`
     margin: 0 auto 50px;
-    width: 400px;
-    height: 80px;
-    background-image: url(/img/btn_confirm_help.png);
-    color: transparent;
 `
 
-const BackButton = styled.button`
-    display: block;
-    width: 400px;
-    height: 80px;
+const BackButton = styled(Button)`
     margin: 0 auto;
-    background-image: url(/img/btn_back.png);
-    color: transparent;
 `
