@@ -4,6 +4,7 @@ import DetailCard from 'components/molecules/detailCard'
 import { UserType } from 'types/index'
 import Button from 'components/atoms/Button'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
+import ThemeTitle from "components/molecules/theme/ThemeTitle";
 
 type Props = {
     imgUrl: string
@@ -51,7 +52,7 @@ const ConfirmTitleWrapper = styled.div`
     background-color: #fff;
 `
 
-const ConfirmTitle = styled(ThemeButton)``
+const ConfirmTitle = styled(ThemeTitle)``
 
 const RegisterButton = styled(ThemeButton)`
     margin: 0 auto 50px;
