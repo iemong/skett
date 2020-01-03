@@ -6,7 +6,7 @@ import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 
 type Props = {
     title: string
-    onChangeCheck: (value: boolean) => void
+    onChangeCheck?: (value: boolean) => void
     alternativeText?: string
     hasCheck?: boolean
 }
@@ -17,7 +17,7 @@ const Login = (props: Props): JSX.Element => {
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setIsConsent(e.target.value === 'false')
-        onChangeCheck(e.target.value === 'false')
+        if (onChangeCheck) onChangeCheck(e.target.value === 'false')
     }
 
     return (

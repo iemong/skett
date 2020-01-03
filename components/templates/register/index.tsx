@@ -78,6 +78,7 @@ const Register = (): JSX.Element => {
             imageUrl,
             side,
             timestamp: Date.now(),
+            applicants: [],
         }
 
         await uniqDocRef.set(postData).catch(error => {

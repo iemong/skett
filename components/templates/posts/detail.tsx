@@ -32,7 +32,7 @@ const PostDetail = (props: Props): JSX.Element => {
                     side={side}
                     updateDate={data.updateDate}
                 />
-                <Link href={'/apply'}>
+                <Link href={{ pathname: '/apply', query: { postId: data.id } }}>
                     <ApplyButton width={'400px'} height={'80px'}>
                         応募する
                     </ApplyButton>
