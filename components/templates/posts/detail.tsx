@@ -8,6 +8,8 @@ import { PostType } from 'types/index'
 import Tab from 'components/organisms/tab'
 import DetailCard from 'components/molecules/detailCard'
 import { State as rootState } from 'reducers'
+import ThemeButton from 'components/molecules/theme/ThemeButton'
+import Button from 'components/atoms/Button'
 
 type Props = {
     data: PostType | null
@@ -31,9 +33,13 @@ const PostDetail = (props: Props): JSX.Element => {
                     updateDate={data.updateDate}
                 />
                 <Link href={'/apply'}>
-                    <ApplyButton />
+                    <ApplyButton width={'400px'} height={'80px'}>
+                        応募する
+                    </ApplyButton>
                 </Link>
-                <BackButton onClick={(): void => Router.back()} />
+                <BackButton width={'400px'} height={'80px'} styleType="cancel" onClick={(): void => Router.back()}>
+                    戻る
+                </BackButton>
             </Wrapper>
         )
     }, [data, side])
@@ -52,24 +58,17 @@ export default PostDetail
 
 const Wrapper = styled.div`
     margin-top: 60px;
+    padding-bottom: 100px;
 `
 
 const DetailCardWithMargin = styled(DetailCard)`
     margin-bottom: 80px;
 `
 
-const ApplyButton = styled.button`
-    display: block;
-    width: 401px;
-    height: 81px;
-    background-image: url(/img/btn_apply_help.png);
+const ApplyButton = styled(ThemeButton)`
     margin: 0 auto 48px;
 `
 
-const BackButton = styled.button`
-    display: block;
-    width: 401px;
-    height: 81px;
-    background-image: url(/img/btn_back.png);
+const BackButton = styled(Button)`
     margin: 0 auto;
 `
