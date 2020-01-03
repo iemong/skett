@@ -10,6 +10,7 @@ import { State as rootState } from 'reducers'
 import ApplyLogin from 'components/organisms/apply/login'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
+import { PostType } from 'types/index'
 
 type Props = {
     postId: string
@@ -18,32 +19,50 @@ type Props = {
 const Apply = (props: Props): JSX.Element => {
     const { postId } = props
     const { side } = useSelector((state: rootState) => state.rootReducer.tab)
+    const [currentPost, setCurrentPost] = React.useState<PostType | undefined>(undefined)
 
     const user = useLogin()
 
+    const updatePostData = async (user: firebase.User) => {
+        try {
+            const db = firebaseApp.firestore()
+            const docRef = db.collection(COLLECTIONS.POSTS)
+            await docRef
+                .doc(postId)
+                .update({
+                    applicants: firebase.firestore.FieldValue.arrayUnion(user.uid),
+                })
+                .catch(e => {
+                    console.log(e)
+                })
+            const data = await docRef
+                .doc(postId)
+                .get()
+                .catch(e => console.error(e))
+            const postData = data && data.exists ? data.data() : undefined
+            setCurrentPost(postData as PostType)
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
     React.useEffect(() => {
         if (!user) return
-        const db = firebaseApp.firestore()
-        const docRef = db.collection(COLLECTIONS.POSTS)
-        docRef
-            .doc(postId)
-            .update({
-                applicants: firebase.firestore.FieldValue.arrayUnion(user.uid),
-            })
-            .catch(e => console.error(e))
-    }, [postId, user])
+        updatePostData(user)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user])
 
     const innerElement = React.useMemo(() => {
         return user ? (
             <Wrapper>
-                <ApplyResult />
+                <ApplyResult post={currentPost} />
             </Wrapper>
         ) : (
             <Wrapper>
                 <ApplyLogin />
             </Wrapper>
         )
-    }, [user])
+    }, [currentPost, user])
 
     return (
         <Main>

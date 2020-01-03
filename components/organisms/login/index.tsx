@@ -7,12 +7,10 @@ import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 type Props = {
     title: string
     onChangeCheck?: (value: boolean) => void
-    alternativeText?: string
-    hasCheck?: boolean
 }
 
 const Login = (props: Props): JSX.Element => {
-    const { title, onChangeCheck, alternativeText, hasCheck = true } = props
+    const { title, onChangeCheck } = props
     const [isConsent, setIsConsent] = React.useState<boolean>(false)
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -23,29 +21,23 @@ const Login = (props: Props): JSX.Element => {
     return (
         <LoginBox>
             <Title>{title}</Title>
-            {alternativeText ? (
-                <Lead>{alternativeText}</Lead>
-            ) : (
-                <Lead>
-                    {title}にはSNSアカウントで
-                    <br />
-                    ログインする必要があります。
-                </Lead>
-            )}
+            <Lead>
+                {title}にはSNSアカウントで
+                <br />
+                ログインする必要があります。
+            </Lead>
             <Shares onClickTwitter={signInTwitter} onClickFacebook={signInFacebook} />
-            {hasCheck && (
-                <RegulationWrapper>
-                    <CheckBox type={'checkbox'} name={'consent'} value={String(isConsent)} onChange={onChange} />
-                    {/* modalが開く */}
-                    <Regulation
-                        onClick={(): void => {
-                            console.log('clicked')
-                        }}
-                    >
-                        利用規約
-                    </Regulation>
-                </RegulationWrapper>
-            )}
+            <RegulationWrapper>
+                <CheckBox type={'checkbox'} name={'consent'} value={String(isConsent)} onChange={onChange} />
+                {/* modalが開く */}
+                <Regulation
+                    onClick={(): void => {
+                        console.log('clicked')
+                    }}
+                >
+                    利用規約
+                </Regulation>
+            </RegulationWrapper>
         </LoginBox>
     )
 }

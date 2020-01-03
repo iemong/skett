@@ -1,12 +1,17 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
-import Login from 'components/organisms/login'
 import Button from 'components/atoms/Button'
 import ThemeTitle from 'components/molecules/theme/ThemeTitle'
+import { PostType } from 'types/index'
+import Share from 'components/organisms/share'
 
-const ApplyResult = (): JSX.Element => {
-    const userId = 1
+type Props = {
+    post?: PostType
+}
+
+const ApplyResult = (props: Props): JSX.Element => {
+    const { post } = props
 
     return (
         <Wrapper>
@@ -32,18 +37,14 @@ const ApplyResult = (): JSX.Element => {
 
                 <Footer>
                     <User>
-                        <Icon src={'/img/icn_default.png'} alt="" />
+                        <Icon src={post?.user?.photoURL || '/img/icn_default.png'} alt="" />
                         <UserInfo>
-                            <UserName>{userId}</UserName>
+                            <UserName>{post?.user?.displayName}</UserName>
                         </UserInfo>
                     </User>
                 </Footer>
             </TitleWrapper>
-            <Login
-                title={'この応募をシェアする'}
-                alternativeText={'SNSであたなの募集をシェアしよう。'}
-                hasCheck={false}
-            />
+            <Share url={post?.url || ''} />
             <Link href={'/'}>
                 <TopButton styleType="cancel" width={'400px'} height={'80px'}>
                     TOPへ
@@ -113,11 +114,12 @@ const Icon = styled.img`
     width: 67px;
     height: 67px;
     margin-right: 24px;
+    border-radius: 50%;
 `
 const UserInfo = styled.div``
 const UserName = styled.p`
     font-size: 22px;
-    color: #fff;
+    color: #000;
 `
 
 const TopButton = styled(Button)`
