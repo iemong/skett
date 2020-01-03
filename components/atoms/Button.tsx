@@ -4,7 +4,9 @@ import css from '@emotion/css'
 
 enum StyleType {
     default,
+    secondary,
     invert,
+    invertSecondary,
     twitter,
     facebook,
     cancel,
@@ -64,12 +66,30 @@ const AdditionalStyle = (props: StyleProps) => {
             background: 'linear-gradient(to right, #00B4ED, #0091DB)',
             borderRadius: `10px`,
         })
+    } else if (props.styleType === 'secondary') {
+        return css({
+            width: props.width,
+            height: props.height,
+            background: '#fff',
+            color: '#00B4ED',
+            borderRadius: '10px',
+            fontSize: '24px',
+        })
     } else if (props.styleType === 'invert') {
         return css({
             width: props.width,
             height: props.height,
             background: 'linear-gradient(to right, #35B597, #00A968)',
             borderRadius: '10px',
+        })
+    } else if (props.styleType === 'invertSecondary') {
+        return css({
+            width: props.width,
+            height: props.height,
+            background: '#fff',
+            color: '#00A968',
+            borderRadius: '10px',
+            fontSize: '24px',
         })
     } else if (props.styleType === 'twitter') {
         return css({

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Apply from 'components/organisms/apply'
+import Apply from 'components/templates/apply'
 
 const ApplyPage = (): JSX.Element => {
     return <Apply />
