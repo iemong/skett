@@ -2,10 +2,12 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import Router from 'next/router'
+import { useSelector } from 'react-redux'
 import Main from 'components/templates/layouts/Main'
 import { PostType } from 'types/index'
 import Tab from 'components/organisms/tab'
 import DetailCard from 'components/molecules/detailCard'
+import { State as rootState } from 'reducers'
 
 type Props = {
     data: PostType | null
@@ -13,28 +15,37 @@ type Props = {
 
 const PostDetail = (props: Props): JSX.Element => {
     const { data } = props
-    if (!data) return <>Loading</>
-    const helpPostElement = (
-        <Wrapper>
-            <DetailCardWithMargin
-                imgUrl={data.imageUrl}
-                title={data.title}
-                description={data.description}
-                user={data.user}
-                side={'help'}
-                updateDate={data.updateDate}
-            />
-            <Link href={'/apply'}>
-                <ApplyButton />
-            </Link>
-            <BackButton onClick={(): void => Router.back()} />
-        </Wrapper>
-    )
-    return (
-        <Main>
-            <Tab leftContent={helpPostElement} />
-        </Main>
-    )
+
+    const { side } = useSelector((state: rootState) => state.rootReducer.tab)
+
+    const postElement = React.useMemo(() => {
+        if (!data) return <>Loading</>
+        return (
+            <Wrapper>
+                <DetailCardWithMargin
+                    imgUrl={data.imageUrl}
+                    title={data.title}
+                    description={data.description}
+                    user={data.user}
+                    side={side}
+                    updateDate={data.updateDate}
+                />
+                <Link href={'/apply'}>
+                    <ApplyButton />
+                </Link>
+                <BackButton onClick={(): void => Router.back()} />
+            </Wrapper>
+        )
+    }, [data, side])
+
+    const tabElement = React.useMemo(() => {
+        return side === 'help' ? (
+            <Tab leftContent={postElement} tabSide="left" onClickLeft={(): void => Router.back()} />
+        ) : (
+            <Tab rightContent={postElement} tabSide="right" onClickRight={(): void => Router.back()} />
+        )
+    }, [postElement, side])
+    return <Main>{tabElement}</Main>
 }
 
 export default PostDetail
