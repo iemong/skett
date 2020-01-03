@@ -84,7 +84,7 @@ const Register = (): JSX.Element => {
             console.error(error)
         })
         setPostUrl(uniqUrl)
-    }, [currentFormData, db, storageRef, time, user])
+    }, [currentFormData, db, side, storageRef, time, user])
 
     const onBack = React.useCallback(() => {
         reset()
