@@ -1,5 +1,7 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
+import Link from 'next/link'
+import Button from 'components/atoms/Button'
 
 type Props = {
     imgUrl: string
@@ -17,8 +19,14 @@ const Card = (props: Props): JSX.Element => {
             </ThumbnailWrapper>
             <TextBox>
                 <Description>{description}</Description>
-                <Link href={link}>
-                    <DetailButton />
+                <Link href={{ pathname: link, query: { side } }}>
+                    <DetailButton
+                        width={'270px'}
+                        height={'50px'}
+                        styleType={side === 'help' ? 'secondary' : 'invertSecondary'}
+                    >
+                        詳しく見る
+                    </DetailButton>
                 </Link>
             </TextBox>
         </Wrapper>
@@ -64,13 +72,4 @@ const Description = styled.p`
     margin-bottom: 24px;
 `
 
-const DetailButton = styled.button`
-    display: block;
-    width: 270px;
-    height: 51px;
-    background-image: url(/img/btn_detail.png);
-`
-
-const Link = styled.a`
-    display: block;
-`
+const DetailButton = styled(Button)``

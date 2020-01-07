@@ -1,20 +1,22 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import Login from 'components/organisms/login'
-import { DateTime } from 'luxon'
 import Link from 'next/link'
+import Button from 'components/atoms/Button'
+import ThemeTitle from 'components/molecules/theme/ThemeTitle'
+import { PostType } from 'types/index'
+import Share from 'components/organisms/share'
 
-const ApplyResult = (): JSX.Element => {
-    const userId = 1
-    const updateDate = 'hoge'
-    const handleCheck = (value: boolean): void => {
-        console.log('check', value)
-    }
+type Props = {
+    post?: PostType
+}
+
+const ApplyResult = (props: Props): JSX.Element => {
+    const { post } = props
 
     return (
-        <div>
+        <Wrapper>
             <TitleWrapper>
-                <Title>作成完了</Title>
+                <Title>応募完了</Title>
                 <Lead>
                     募集主があなたの応募に興味を持った場合は、
                     <br />
@@ -35,32 +37,28 @@ const ApplyResult = (): JSX.Element => {
 
                 <Footer>
                     <User>
-                        <Icon src={'/img/icn_default.png'} alt="" />
+                        <Icon src={post?.user?.photoURL || '/img/icn_default.png'} alt="" />
                         <UserInfo>
-                            <UserName>{userId}</UserName>
-                            <UpdateDate>{DateTime.fromISO(updateDate).toFormat('yyyy/MM/dd HH:mm:ss')}</UpdateDate>
+                            <UserName>{post?.user?.displayName}</UserName>
                         </UserInfo>
                     </User>
-                    <SnsWrapper>
-                        <Twitter />
-                        <Facebook />
-                    </SnsWrapper>
                 </Footer>
             </TitleWrapper>
-            <Login
-                title={'この応募をシェアする'}
-                onChangeCheck={handleCheck}
-                alternativeText={'SNSであたなの募集をシェアしよう。'}
-                hasCheck={false}
-            />
+            <Share url={post?.url || ''} />
             <Link href={'/'}>
-                <TopButton>TOPへ</TopButton>
+                <TopButton styleType="cancel" width={'400px'} height={'80px'}>
+                    TOPへ
+                </TopButton>
             </Link>
-        </div>
+        </Wrapper>
     )
 }
 
 export default ApplyResult
+
+const Wrapper = styled.div`
+    padding-bottom: 100px;
+`
 
 const TitleWrapper = styled.div`
     width: 600px;
@@ -71,23 +69,8 @@ const TitleWrapper = styled.div`
     box-sizing: border-box;
 `
 
-const Title = styled.h1`
-    position: relative;
+const Title = styled(ThemeTitle)`
     margin-bottom: 55px;
-    padding-bottom: 33px;
-    font-size: 38px;
-    text-align: center;
-    color: #000;
-    &::before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 100px;
-        height: 5px;
-        background-image: linear-gradient(to left, #00b4ed, #0091db);
-        transform: translateX(-50%);
-    }
 `
 
 const Lead = styled.p`
@@ -131,49 +114,14 @@ const Icon = styled.img`
     width: 67px;
     height: 67px;
     margin-right: 24px;
+    border-radius: 50%;
 `
 const UserInfo = styled.div``
 const UserName = styled.p`
     font-size: 22px;
-    color: #fff;
+    color: #000;
 `
 
-const UpdateDate = styled.time`
-    display: block;
-    margin-top: 10px;
-    font-size: 18px;
-    color: #fff;
-`
-const SnsWrapper = styled.div`
-    display: flex;
-    align-items: center;
-`
-const Twitter = styled.div`
-    width: 41px;
-    height: 33px;
-    background-image: url(/img/icn_twitter.png);
-    margin-right: 24px;
-`
-const Facebook = styled.div`
-    width: 41px;
-    height: 41px;
-    background-image: url(/img/icn_facebook.png);
-`
-
-const ApplyButton = styled.button`
-    display: block;
-    margin: 80px auto 50px;
-    width: 400px;
-    height: 80px;
-    background-image: url(/img/btn_apply_help.png);
-    color: transparent;
-`
-
-const TopButton = styled.button`
-    display: block;
-    width: 400px;
-    height: 80px;
-    margin: 0 auto;
-    background-image: url(/img/btn_top.png);
-    color: transparent;
+const TopButton = styled(Button)`
+    margin: 80px auto 0;
 `

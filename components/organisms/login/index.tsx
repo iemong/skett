@@ -2,49 +2,42 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import Shares from 'components/molecules/shares'
 import { signInFacebook, signInTwitter } from 'assets/api/auth'
+import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 
 type Props = {
     title: string
-    onChangeCheck: (value: boolean) => void
-    alternativeText?: string
-    hasCheck?: boolean
+    onChangeCheck?: (value: boolean) => void
 }
 
 const Login = (props: Props): JSX.Element => {
-    const { title, onChangeCheck, alternativeText, hasCheck = true } = props
+    const { title, onChangeCheck } = props
     const [isConsent, setIsConsent] = React.useState<boolean>(false)
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setIsConsent(e.target.value === 'false')
-        onChangeCheck(e.target.value === 'false')
+        if (onChangeCheck) onChangeCheck(e.target.value === 'false')
     }
 
     return (
         <LoginBox>
             <Title>{title}</Title>
-            {alternativeText ? (
-                <Lead>{alternativeText}</Lead>
-            ) : (
-                <Lead>
-                    {title}にはSNSアカウントで
-                    <br />
-                    ログインする必要があります。
-                </Lead>
-            )}
+            <Lead>
+                {title}にはSNSアカウントで
+                <br />
+                ログインする必要があります。
+            </Lead>
             <Shares onClickTwitter={signInTwitter} onClickFacebook={signInFacebook} />
-            {hasCheck && (
-                <RegulationWrapper>
-                    <CheckBox type={'checkbox'} name={'consent'} value={String(isConsent)} onChange={onChange} />
-                    {/* modalが開く */}
-                    <Regulation
-                        onClick={(): void => {
-                            console.log('clicked')
-                        }}
-                    >
-                        利用規約
-                    </Regulation>
-                </RegulationWrapper>
-            )}
+            <RegulationWrapper>
+                <CheckBox type={'checkbox'} name={'consent'} value={String(isConsent)} onChange={onChange} />
+                {/* modalが開く */}
+                <Regulation
+                    onClick={(): void => {
+                        console.log('clicked')
+                    }}
+                >
+                    利用規約
+                </Regulation>
+            </RegulationWrapper>
         </LoginBox>
     )
 }
@@ -61,23 +54,8 @@ const LoginBox = styled.div`
     overflow: hidden;
 `
 
-const Title = styled.h1`
-    position: relative;
+const Title = styled(ThemeTitle)`
     margin-bottom: 45px;
-    padding-bottom: 33px;
-    font-size: 38px;
-    text-align: center;
-    color: #000;
-    &::before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 100px;
-        height: 5px;
-        background-image: linear-gradient(to left, #00b4ed, #0091db);
-        transform: translateX(-50%);
-    }
 `
 
 const Lead = styled.p`

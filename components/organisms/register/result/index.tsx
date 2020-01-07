@@ -3,6 +3,8 @@ import styled from '@emotion/styled'
 import Link from 'next/link'
 import Shares from 'components/molecules/shares'
 import { createFacebookIntent, createTwitterIntent } from 'assets/utils/share'
+import ThemeTitle from 'components/molecules/theme/ThemeTitle'
+import Button from 'components/atoms/Button'
 
 type Props = {
     url: string
@@ -26,7 +28,7 @@ const Result = (props: Props): JSX.Element => {
                 <Title>この声をシェアする</Title>
                 <Lead>SNSであなたの声をシェアしよう。</Lead>
                 <Shares
-                    onClickTwitter={() => {
+                    onClickTwitter={(): void => {
                         const intent = createTwitterIntent({
                             url,
                             text: '',
@@ -34,14 +36,16 @@ const Result = (props: Props): JSX.Element => {
                         })
                         window.open(intent)
                     }}
-                    onClickFacebook={() => {
+                    onClickFacebook={(): void => {
                         const intent = createFacebookIntent(url)
                         window.open(intent)
                     }}
                 />
             </ShareWrapper>
             <Link href={'/'}>
-                <BackButton>TOPへ</BackButton>
+                <BackButton width={'400px'} height={'80px'} styleType="cancel">
+                    TOPへ
+                </BackButton>
             </Link>
         </Wrapper>
     )
@@ -61,23 +65,8 @@ const TitleWrapper = styled.div`
     box-sizing: border-box;
 `
 
-const Title = styled.h1`
-    position: relative;
+const Title = styled(ThemeTitle)`
     margin-bottom: 55px;
-    padding-bottom: 33px;
-    font-size: 38px;
-    text-align: center;
-    color: #000;
-    &::before {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        width: 100px;
-        height: 5px;
-        background-image: linear-gradient(to left, #00b4ed, #0091db);
-        transform: translateX(-50%);
-    }
 `
 
 const Lead = styled.p`
@@ -107,11 +96,6 @@ const ShareWrapper = styled.div`
     box-sizing: border-box;
 `
 
-const BackButton = styled.button`
-    display: block;
-    width: 400px;
-    height: 80px;
+const BackButton = styled(Button)`
     margin: 0 auto;
-    background-image: url(/img/btn_back.png);
-    color: transparent;
 `
