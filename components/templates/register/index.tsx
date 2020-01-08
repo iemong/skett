@@ -17,6 +17,8 @@ import { State as rootState } from 'reducers'
 import Button from 'components/atoms/Button'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
 import ThemeTitle from 'components/molecules/theme/ThemeTitle'
+import useModal from 'components/hooks/useModal'
+import ThemeHowtoModal from 'components/molecules/theme/ThemeHowtoModal'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
@@ -32,6 +34,7 @@ const Register = (): JSX.Element => {
     const { side } = useSelector((state: rootState) => state.rootReducer.tab)
 
     const user = useLogin()
+    const { isShowing, toggle } = useModal()
 
     const onRegister = (data: Record<string, any>): void => {
         console.log('send', data)
@@ -134,7 +137,8 @@ const Register = (): JSX.Element => {
                                         />
                                     </FormImage>
                                 </FormBox>
-                                <Howto>使いかた</Howto>
+                                <Howto onClick={toggle}>使いかた</Howto>
+                                <ThemeHowtoModal isShowing={isShowing} toggle={toggle} />
                                 <ConfirmButton width={'400px'} height={'80px'} onClick={handleSubmit(onRegister)}>
                                     内容確認
                                 </ConfirmButton>
