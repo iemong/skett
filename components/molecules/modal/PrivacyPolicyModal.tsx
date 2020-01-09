@@ -1,4 +1,5 @@
 import * as React from 'react'
+import styled from '@emotion/styled'
 import Modal from 'components/atoms/Modal'
 
 type Props = {
@@ -10,8 +11,8 @@ const PrivacyPolicyModal = (props: Props): JSX.Element => {
     const { isShowing, toggle } = props
     return (
         <Modal styleType="default" isShowing={isShowing} onClose={toggle} width={'600px'} height={'60%'}>
-            <React.Fragment>
-                <p>プライバシーポリシー</p>
+            <Inner>
+                <Title>プライバシーポリシー</Title>
 
                 <p>
                     一般社団法人FUKKO
@@ -119,9 +120,24 @@ const PrivacyPolicyModal = (props: Props): JSX.Element => {
                     E-mail： <br />
                     以上
                 </p>
-            </React.Fragment>
+            </Inner>
         </Modal>
     )
 }
 
 export default PrivacyPolicyModal
+
+const Inner = styled.section`
+    padding: 0 40px;
+    & > p {
+        font-size: 20px;
+        margin-bottom: 32px;
+        line-height: 1.5;
+    }
+`
+
+const Title = styled.h2`
+    margin-bottom: 32px;
+    text-align: center;
+    font-size: 24px;
+`

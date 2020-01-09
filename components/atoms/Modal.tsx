@@ -24,8 +24,8 @@ type Props = StyleProps & {
 
 const Modal = (props: Props): JSX.Element => {
     const { children, styleType, width, height, onClose, isShowing } = props
-    return ReactDOM.createPortal(
-        isShowing ? (
+    return isShowing && document ? (
+        ReactDOM.createPortal(
             <ModalStyle width={width} height={height} styleType={styleType}>
                 <Overlay onClick={onClose} />
                 <Inner className="inner" width={width} height={height}>
@@ -35,10 +35,12 @@ const Modal = (props: Props): JSX.Element => {
                     </Close>
                     <Button onClick={onClose}>閉じる</Button>
                 </Inner>
-            </ModalStyle>
-        ) : null,
-        document.body,
-    ) as JSX.Element
+            </ModalStyle>,
+            document.body,
+        )
+    ) : (
+        <></>
+    )
 }
 
 export default Modal
