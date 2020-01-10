@@ -7,6 +7,9 @@ import useLogin from 'components/hooks/useLogin'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
 import Card from 'components/molecules/card'
+import useModal from 'components/hooks/useModal'
+import TermsModal from 'components/molecules/modal/TermsModal'
+import PrivacyPolicyModal from 'components/molecules/modal/PrivacyPolicyModal'
 
 const MyPage = (): JSX.Element => {
     const user = useLogin()
@@ -14,6 +17,8 @@ const MyPage = (): JSX.Element => {
     const db = firebaseApp.firestore()
     const docRef = db.collection(COLLECTIONS.POSTS)
     const [posts, setPosts] = React.useState<PostType[]>([])
+    const { isShowing: isShowingTerms, toggle: toggleTerms } = useModal()
+    const { isShowing: isShowingPrivacyPolicy, toggle: togglePrivacyPolicy } = useModal()
 
     const loadPostsData = React.useCallback(async () => {
         if (!user || posts.length) return
@@ -70,6 +75,12 @@ const MyPage = (): JSX.Element => {
                         <TwitterButton onClick={() => {}} isActive={isActiveTwitter} />
                         <FacebookButton onClick={() => {}} isActive={isActiveFacebook} />
                     </ShareInner>
+                    <TextWrapper>
+                        <Terms onClick={toggleTerms}>利用規約</Terms>
+                        <PrivacyPolicy onClick={togglePrivacyPolicy}>プライバシーポリシー</PrivacyPolicy>
+                    </TextWrapper>
+                    <TermsModal isShowing={isShowingTerms} toggle={toggleTerms} />
+                    <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
                 </LoginStatus>
                 <Past>
                     <Title>アカウント状況</Title>
@@ -160,6 +171,25 @@ const FacebookButton = styled.div<{ isActive: boolean }>`
     &::after {
         ${props => props.isActive && AlreadyLogin}
     }
+`
+
+const TextWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 60px auto;
+`
+
+const Terms = styled.p`
+    margin-bottom: 50px;
+    font-size: 24px;
+    text-decoration: underline;
+`
+
+const PrivacyPolicy = styled.p`
+    font-size: 24px;
+    text-decoration: underline;
 `
 
 const CardWrapper = styled.div`

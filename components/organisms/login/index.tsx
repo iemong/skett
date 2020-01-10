@@ -3,6 +3,8 @@ import styled from '@emotion/styled'
 import Shares from 'components/molecules/shares'
 import { signInFacebook, signInTwitter } from 'assets/api/auth'
 import ThemeTitle from 'components/molecules/theme/ThemeTitle'
+import TermsModal from 'components/molecules/modal/TermsModal'
+import useModal from 'components/hooks/useModal'
 
 type Props = {
     title: string
@@ -12,6 +14,7 @@ type Props = {
 const Login = (props: Props): JSX.Element => {
     const { title, onChangeCheck } = props
     const [isConsent, setIsConsent] = React.useState<boolean>(false)
+    const { isShowing, toggle } = useModal()
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setIsConsent(e.target.value === 'false')
@@ -29,14 +32,8 @@ const Login = (props: Props): JSX.Element => {
             <Shares onClickTwitter={signInTwitter} onClickFacebook={signInFacebook} />
             <RegulationWrapper>
                 <CheckBox type={'checkbox'} name={'consent'} value={String(isConsent)} onChange={onChange} />
-                {/* modalが開く */}
-                <Regulation
-                    onClick={(): void => {
-                        console.log('clicked')
-                    }}
-                >
-                    利用規約
-                </Regulation>
+                <Regulation onClick={toggle}>利用規約</Regulation>
+                <TermsModal isShowing={isShowing} toggle={toggle} />
             </RegulationWrapper>
         </LoginBox>
     )
