@@ -20,6 +20,7 @@ import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 import useModal from 'components/hooks/useModal'
 import ThemeHowtoModal from 'components/molecules/theme/ThemeHowtoModal'
 import Canvas from 'components/molecules/ogp/Canvas'
+import makeOgp, { exportBlob } from 'assets/utils/makeOgp'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
@@ -59,9 +60,23 @@ const Register = (): JSX.Element => {
         const fileList: FileList = currentFormData.image
         const file = fileList[0]
         if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
-        const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${Date.now()}.jpg`)
+        const now = Date.now()
+
+        const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${now}.jpg`)
         await imageRef.put(file)
         const imageUrl = await imageRef.getDownloadURL()
+
+        const ogpImageRef = storageRef.child(`images/${file.name.split('.')[0]}_${now}_ogp.jpg`)
+        if (!currentImgSrc) return
+        const ogpCanvas = await makeOgp({
+            imageData: currentImgSrc,
+            postType: side,
+            text: currentFormData.title,
+        })
+        const blob = await exportBlob(ogpCanvas)
+        if (!blob) return
+        await ogpImageRef.put(blob)
+        const ogpImageUrl = await ogpImageRef.getDownloadURL()
 
         const uniqDocRef = db.collection(COLLECTIONS.POSTS).doc()
         const uniqUrl = `${BASE_OGP_URL}${uniqDocRef.id}`
@@ -80,6 +95,7 @@ const Register = (): JSX.Element => {
             updateDate: time,
             url: uniqUrl,
             imageUrl,
+            ogpImageUrl,
             side,
             timestamp: Date.now(),
             applicants: [],
@@ -181,12 +197,14 @@ const Register = (): JSX.Element => {
         currentImgSrc,
         errors.title,
         handleSubmit,
+        isShowing,
         onBack,
         onSubmit,
         postUrl,
         register,
         side,
         time,
+        toggle,
         user,
     ])
 

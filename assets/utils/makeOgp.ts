@@ -74,8 +74,16 @@ const drawMore = async (context: CanvasRenderingContext2D): Promise<CanvasRender
     return context
 }
 
-export const exportOgp = (canvas: HTMLCanvasElement): string => {
-    return canvas.toDataURL('image/png')
+export const exportDataURL = (canvas: HTMLCanvasElement): string => {
+    return canvas.toDataURL('image/jpg')
+}
+
+export const exportBlob = (canvas: HTMLCanvasElement): Promise<Blob | null> => {
+    return new Promise(resolve => {
+        canvas.toBlob(blob => {
+            resolve(blob)
+        })
+    })
 }
 
 export default async (options: Options) => {
@@ -85,9 +93,10 @@ export default async (options: Options) => {
         canvas.height = HEIGHT
     }
     const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    if (!ctx) return canvas
     drawBG(ctx, options.postType)
     await drawImage(ctx, options.imageData)
     drawText(ctx, options.text)
     await drawMore(ctx)
+    return canvas
 }
