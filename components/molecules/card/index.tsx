@@ -19,7 +19,7 @@ const Card = (props: Props): JSX.Element => {
             </ThumbnailWrapper>
             <TextBox>
                 <Description>{description}</Description>
-                <Link href={{ pathname: link, query: { side } }}>
+                <a href={`${link}?side=${side}`}>
                     <DetailButton
                         width={'270px'}
                         height={'50px'}
@@ -27,7 +27,7 @@ const Card = (props: Props): JSX.Element => {
                     >
                         詳しく見る
                     </DetailButton>
-                </Link>
+                </a>
             </TextBox>
         </Wrapper>
     )
