@@ -15,6 +15,7 @@ export type PostType = {
     updateDate: string
     url: string
     imageUrl: string
+    ogpImageUrl: string
     side: 'help' | 'support'
     timestamp: number
     applicants?: string[]

@@ -2,9 +2,16 @@ import * as functions from 'firebase-functions'
 import * as admin from 'firebase-admin'
 import * as express from 'express'
 
+export type UserType = {
+    displayName: string | null
+    email: string | null
+    uid: string
+    photoURL: string | null
+}
+
 type PostType = {
-    id?: string
-    userId: number
+    id: string
+    user: UserType
     title: string
     description: string
     isOpen: boolean
@@ -12,7 +19,10 @@ type PostType = {
     updateDate: string
     url: string
     imageUrl: string
+    ogpImageUrl: string
     side: 'help' | 'support'
+    timestamp: number
+    applicants?: string[]
 }
 // initialise
 admin.initializeApp(functions.config().firebase)
@@ -20,18 +30,21 @@ const db = admin.firestore()
 const app = express()
 
 // HTML template
-const uniqUrl = 'https://qiita.com/'
-const siteName = 'Qiita'
-const title = 'Qiita'
-const metaDescription = 'プログラミング情報共有サイトです。'
-const metaKeywords = ['プログラミング']
-const ogDescription = 'プログラミング情報共有サイトです。'
+const uniqUrl = 'https://fukko-skett.jp/'
+const siteName = 'スケット | 被災地の助っ人マッチング'
+const title = 'スケット | 被災地の助っ人マッチング'
+const metaDescription =
+    'スケットは被災した地域の現地の声と、支援者を直接結びつけるサービスです。支援者として、事前に登録しておくことで、万が一に備えます。'
+const metaKeywords = ['スケット', 'skett', 'ボランティア', '被災地', '被災', 'マッチング']
+const ogDescription =
+    'スケットは被災した地域の現地の声と、支援者を直接結びつけるサービスです。支援者として、事前に登録しておくことで、万が一に備えます。'
 const ogImageWidth = 1200
 const ogImageHeight = 630
-const fbAppid = ''
-const twDescription = 'プログラミング情報共有サイトです。'
+const fbAppid = '458835718172364'
+const twDescription =
+    'スケットは被災した地域の現地の声と、支援者を直接結びつけるサービスです。支援者として、事前に登録しておくことで、万が一に備えます。'
 
-const generateHtml = (url: string) => `
+const generateHtml = (url: string, id: string) => `
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -56,7 +69,7 @@ const generateHtml = (url: string) => `
   </head>
   <body>
     <script>
-      location.href = '/share';
+      location.href = '/posts/${id}';
     </script>
   </body>
 </html>
@@ -72,7 +85,7 @@ app.get('/share/:id', async (req: any, res: any) => {
     if (!data) {
         res.status(200).send('404 Not Exist')
     } else {
-        const html = generateHtml(data.imageUrl)
+        const html = generateHtml(data.ogpImageUrl, data.id)
         res.send(html)
     }
 })
