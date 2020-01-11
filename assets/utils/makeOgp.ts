@@ -53,7 +53,7 @@ const drawText = (context: CanvasRenderingContext2D, text: string): CanvasRender
 
     context.save()
     context.beginPath()
-    context.font = `bold ${fontSize}px Arial`
+    context.font = `bold ${fontSize}px Noto Sans JP`
     context.fillStyle = '#fff'
     trimedText
         .split(reg)

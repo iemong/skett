@@ -19,7 +19,6 @@ import ThemeButton from 'components/molecules/theme/ThemeButton'
 import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 import useModal from 'components/hooks/useModal'
 import ThemeHowtoModal from 'components/molecules/theme/ThemeHowtoModal'
-import Canvas from 'components/molecules/ogp/Canvas'
 import makeOgp, { exportBlob } from 'assets/utils/makeOgp'
 
 const Register = (): JSX.Element => {
@@ -105,7 +104,7 @@ const Register = (): JSX.Element => {
             console.error(error)
         })
         setPostUrl(uniqUrl)
-    }, [currentFormData, db, side, storageRef, time, user])
+    }, [currentFormData, currentImgSrc, db, side, storageRef, time, user])
 
     const onBack = React.useCallback(() => {
         reset()
@@ -166,23 +165,16 @@ const Register = (): JSX.Element => {
                                 </Link>
                             </form>
                         ) : (
-                            <div>
-                                <Confirm
-                                    title={currentFormData.title}
-                                    description={currentFormData.description}
-                                    imgUrl={currentImgSrc}
-                                    updateDate={time}
-                                    onSubmit={onSubmit}
-                                    onBack={onBack}
-                                    user={user}
-                                    side={side}
-                                />
-                                <Canvas
-                                    image={currentImgSrc}
-                                    postType={'help'}
-                                    title={'南房総市でお手伝いできます。'}
-                                />
-                            </div>
+                            <Confirm
+                                title={currentFormData.title}
+                                description={currentFormData.description}
+                                imgUrl={currentImgSrc}
+                                updateDate={time}
+                                onSubmit={onSubmit}
+                                onBack={onBack}
+                                user={user}
+                                side={side}
+                            />
                         )
                     ) : (
                         <Result url={postUrl} />
