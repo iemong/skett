@@ -4801,7 +4801,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_emotion_core__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var emotion_reset__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! emotion-reset */ "emotion-reset");
 /* harmony import */ var emotion_reset__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(emotion_reset__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _store_createStore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../store/createStore */ "./store/createStore.ts");
+/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next-redux-wrapper */ "next-redux-wrapper");
+/* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _store_createStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../store/createStore */ "./store/createStore.ts");
 
 var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/pages/_app.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
@@ -4813,38 +4815,121 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
 
 
 
+
 class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
+  static async getInitialProps({
+    Component,
+    ctx
+  }) {
+    const pageProps = Component.getInitialProps ? await Component.getInitialProps(ctx) : {};
+    return {
+      pageProps
+    };
+  }
+
   render() {
     const {
       Component,
-      pageProps
+      pageProps,
+      store
     } = this.props;
-    const store = Object(_store_createStore__WEBPACK_IMPORTED_MODULE_7__["default"])();
     return __jsx(react_redux__WEBPACK_IMPORTED_MODULE_3__["Provider"], {
       store: store,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 14
+        lineNumber: 25
       },
       __self: this
     }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_4___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 15
+        lineNumber: 26
       },
       __self: this
     }, __jsx("title", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 16
+        lineNumber: 27
       },
       __self: this
-    }, "Skett"), __jsx("meta", {
+    }, "\u30B9\u30B1\u30C3\u30C8 | \u88AB\u707D\u5730\u306E\u52A9\u3063\u4EBA\u30DE\u30C3\u30C1\u30F3\u30B0"), __jsx("meta", {
       name: "viewport",
       content: "width=750",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 17
+        lineNumber: 28
+      },
+      __self: this
+    }), __jsx("meta", {
+      name: "keywords",
+      content: "\u30B9\u30B1\u30C3\u30C8, skett, \u30DC\u30E9\u30F3\u30C6\u30A3\u30A2, \u88AB\u707D\u5730, \u88AB\u707D, \u30DE\u30C3\u30C1\u30F3\u30B0",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 29
+      },
+      __self: this
+    }), __jsx("meta", {
+      name: "description",
+      content: "\u30B9\u30B1\u30C3\u30C8\u306F\u88AB\u707D\u3057\u305F\u5730\u57DF\u306E\u73FE\u5730\u306E\u58F0\u3068\u3001\u652F\u63F4\u8005\u3092\u76F4\u63A5\u7D50\u3073\u3064\u3051\u308B\u30B5\u30FC\u30D3\u30B9\u3067\u3059\u3002\u652F\u63F4\u8005\u3068\u3057\u3066\u3001\u4E8B\u524D\u306B\u767B\u9332\u3057\u3066\u304A\u304F\u3053\u3068\u3067\u3001\u4E07\u304C\u4E00\u306B\u5099\u3048\u307E\u3059\u3002",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 30
+      },
+      __self: this
+    }), __jsx("meta", {
+      property: "og:type",
+      content: "website",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 34
+      },
+      __self: this
+    }), __jsx("meta", {
+      property: "og:description",
+      content: "\u30B9\u30B1\u30C3\u30C8\u306F\u88AB\u707D\u3057\u305F\u5730\u57DF\u306E\u73FE\u5730\u306E\u58F0\u3068\u3001\u652F\u63F4\u8005\u3092\u76F4\u63A5\u7D50\u3073\u3064\u3051\u308B\u30B5\u30FC\u30D3\u30B9\u3067\u3059\u3002\u652F\u63F4\u8005\u3068\u3057\u3066\u3001\u4E8B\u524D\u306B\u767B\u9332\u3057\u3066\u304A\u304F\u3053\u3068\u3067\u3001\u4E07\u304C\u4E00\u306B\u5099\u3048\u307E\u3059\u3002",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 35
+      },
+      __self: this
+    }), __jsx("meta", {
+      property: "og:url",
+      content: "https://fukko-skett.jp/",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 39
+      },
+      __self: this
+    }), __jsx("meta", {
+      property: "og:image",
+      content: "",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 40
+      },
+      __self: this
+    }), __jsx("meta", {
+      property: "og:title",
+      content: "\u30B9\u30B1\u30C3\u30C8 | \u88AB\u707D\u5730\u306E\u52A9\u3063\u4EBA\u30DE\u30C3\u30C1\u30F3\u30B0",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 41
+      },
+      __self: this
+    }), __jsx("link", {
+      rel: "canonical",
+      href: "https://fukko-skett.jp/",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 42
+      },
+      __self: this
+    }), __jsx("link", {
+      href: "https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese",
+      rel: "stylesheet",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 43
       },
       __self: this
     })), __jsx(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["Global"], {
@@ -4854,6 +4939,8 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
                             position: absolute;
                             width: 100%;
                             height: 100%;
+                            font-family: 'Noto Sans JP', sans-serif;
+                            font-smoothing: antialiased;
                         }
                         input {
                             padding: 0;
@@ -4881,13 +4968,13 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
                     `,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 19
+        lineNumber: 48
       },
       __self: this
     }), __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 52
+        lineNumber: 83
       },
       __self: this
     })));
@@ -4895,7 +4982,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
 
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (MyApp);
+/* harmony default export */ __webpack_exports__["default"] = (next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default()(_store_createStore__WEBPACK_IMPORTED_MODULE_8__["default"])(MyApp));
 
 /***/ }),
 
@@ -4911,11 +4998,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "redux");
 /* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(redux__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _user__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user */ "./reducers/user/index.ts");
+/* harmony import */ var _tab__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tab */ "./reducers/tab/index.ts");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  user: _user__WEBPACK_IMPORTED_MODULE_1__["default"]
+  user: _user__WEBPACK_IMPORTED_MODULE_1__["default"],
+  tab: _tab__WEBPACK_IMPORTED_MODULE_2__["default"]
 }));
+
+/***/ }),
+
+/***/ "./reducers/tab/index.ts":
+/*!*******************************!*\
+  !*** ./reducers/tab/index.ts ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/objectSpread */ "./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./reducers/tab/types.ts");
+
+
+const initialState = {
+  side: 'help'
+};
+
+const tabReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case _types__WEBPACK_IMPORTED_MODULE_1__["UPDATE"]:
+      {
+        const {
+          side
+        } = action.payload;
+        return Object(_babel_runtime_corejs2_helpers_esm_objectSpread__WEBPACK_IMPORTED_MODULE_0__["default"])({}, state, {
+          side
+        });
+      }
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (tabReducer);
+
+/***/ }),
+
+/***/ "./reducers/tab/types.ts":
+/*!*******************************!*\
+  !*** ./reducers/tab/types.ts ***!
+  \*******************************/
+/*! exports provided: UPDATE */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE", function() { return UPDATE; });
+const UPDATE = 'tab/update';
 
 /***/ }),
 
@@ -4932,12 +5074,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./types */ "./reducers/user/types.ts");
 
 
-const initialState = {
-  displayName: '',
-  email: '',
-  url: '',
-  uid: ''
-};
+const initialState = null;
 /* harmony default export */ __webpack_exports__["default"] = ((state = initialState, action) => {
   switch (action.type) {
     case _types__WEBPACK_IMPORTED_MODULE_1__["INITIALIZE"]:
@@ -4989,11 +5126,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (() => {
+/* harmony default export */ __webpack_exports__["default"] = ((initialState = {}) => {
   const middlewares = [redux_thunk__WEBPACK_IMPORTED_MODULE_2___default.a, redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a];
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
     rootReducer: _reducers__WEBPACK_IMPORTED_MODULE_3__["default"]
-  }), Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(...middlewares));
+  }), initialState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(...middlewares));
 });
 
 /***/ }),
@@ -5029,6 +5166,17 @@ module.exports = require("@emotion/core");
 /***/ (function(module, exports) {
 
 module.exports = require("emotion-reset");
+
+/***/ }),
+
+/***/ "next-redux-wrapper":
+/*!*************************************!*\
+  !*** external "next-redux-wrapper" ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next-redux-wrapper");
 
 /***/ }),
 
