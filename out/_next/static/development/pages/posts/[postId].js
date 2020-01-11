@@ -30,7 +30,7 @@ var Z_INDEX_LIST;
   Z_INDEX_LIST[Z_INDEX_LIST["MODAL"] = 3] = "MODAL";
 })(Z_INDEX_LIST || (Z_INDEX_LIST = {}));
 
-var BASE_OGP_URL = 'https://skett-ffff1.firebaseapp.com/s/';
+var BASE_OGP_URL = 'https://skett-ffff1.firebaseapp.com/share/';
 
 /***/ }),
 
@@ -58654,7 +58654,7 @@ var UPDATE = 'tab/update';
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
 /*!**************************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx ***!
   \**************************************************************************************************************************************************************************************/
@@ -58677,5 +58677,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[2,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[postId].js.map
