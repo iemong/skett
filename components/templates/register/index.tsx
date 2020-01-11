@@ -19,6 +19,7 @@ import ThemeButton from 'components/molecules/theme/ThemeButton'
 import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 import useModal from 'components/hooks/useModal'
 import ThemeHowtoModal from 'components/molecules/theme/ThemeHowtoModal'
+import Canvas from 'components/molecules/ogp/Canvas'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
@@ -149,16 +150,23 @@ const Register = (): JSX.Element => {
                                 </Link>
                             </form>
                         ) : (
-                            <Confirm
-                                title={currentFormData.title}
-                                description={currentFormData.description}
-                                imgUrl={currentImgSrc}
-                                updateDate={time}
-                                onSubmit={onSubmit}
-                                onBack={onBack}
-                                user={user}
-                                side={side}
-                            />
+                            <div>
+                                <Confirm
+                                    title={currentFormData.title}
+                                    description={currentFormData.description}
+                                    imgUrl={currentImgSrc}
+                                    updateDate={time}
+                                    onSubmit={onSubmit}
+                                    onBack={onBack}
+                                    user={user}
+                                    side={side}
+                                />
+                                <Canvas
+                                    image={currentImgSrc}
+                                    postType={'help'}
+                                    title={'南房総市でお手伝いできます。'}
+                                />
+                            </div>
                         )
                     ) : (
                         <Result url={postUrl} />

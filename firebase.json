@@ -1,5 +1,6 @@
 {
     "hosting": {
+        "site": "dev-skett",
         "public": "out",
         "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
         "rewrites": [
