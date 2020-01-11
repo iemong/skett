@@ -1,7 +1,8 @@
 import { preloadImage } from 'assets/utils/preloadImage'
+import drawImageProp from 'assets/utils/drawImageProp'
 
 type Options = {
-    canvas: HTMLCanvasElement
+    canvas?: HTMLCanvasElement
     imageData: string
     text: string
     postType: 'help' | 'support'
@@ -29,27 +30,12 @@ const drawBG = (context: CanvasRenderingContext2D, postType: 'help' | 'support')
 
 const drawImage = async (context: CanvasRenderingContext2D, imageData: string): Promise<CanvasRenderingContext2D> => {
     const image = await preloadImage(imageData)
-    const imageWidth = image.naturalWidth
-    const imageHeight = image.naturalHeight
-    const canvasAspect = WIDTH / HEIGHT
-    const imageAspect = imageWidth / imageHeight
-    let sx, sy, sw, sh
     context.save()
-    if (canvasAspect >= imageAspect) {
-        const ratio = WIDTH / imageWidth
-        sx = WIDTH / 2
-        sy = (imageHeight * ratio - HEIGHT) / ratio / 2
-        sw = imageWidth / 2
-        sh = HEIGHT / ratio
-    } else {
-        const ratio = HEIGHT / imageHeight
-        sx = (imageWidth * ratio - WIDTH) / ratio / 2
-        sy = 0
-        sw = WIDTH / ratio
-        sh = imageHeight
+    const offset = {
+        x: 0.5,
+        y: 0.5,
     }
-    context.drawImage(image, sx, sy, sw, sh, WIDTH / 2, 0, WIDTH / 2, HEIGHT)
-
+    drawImageProp(context, image, WIDTH / 2, 0, WIDTH / 2, HEIGHT, offset.x, offset.y)
     context.restore()
     return context
 }
@@ -79,22 +65,29 @@ const drawText = (context: CanvasRenderingContext2D, text: string): CanvasRender
     return context
 }
 
-const drawMore = (context: CanvasRenderingContext2D): CanvasRenderingContext2D => {
+const drawMore = async (context: CanvasRenderingContext2D): Promise<CanvasRenderingContext2D> => {
     context.save()
     // 文字を入力する
-
+    const image = await preloadImage('/img/svg/ogp_btn_more.svg')
+    context.drawImage(image, 158, 510)
     context.restore()
     return context
 }
 
-const exportOgp = (canvas: HTMLCanvasElement): string => {
+export const exportOgp = (canvas: HTMLCanvasElement): string => {
     return canvas.toDataURL('image/png')
 }
 
 export default async (options: Options) => {
-    const ctx = options.canvas.getContext('2d')
+    const canvas = options.canvas || document.createElement('canvas')
+    if (!options.canvas) {
+        canvas.width = WIDTH
+        canvas.height = HEIGHT
+    }
+    const ctx = canvas.getContext('2d')
     if (!ctx) return
     drawBG(ctx, options.postType)
     await drawImage(ctx, options.imageData)
     drawText(ctx, options.text)
+    await drawMore(ctx)
 }
