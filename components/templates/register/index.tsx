@@ -261,18 +261,20 @@ const TitleLabel = styled.label`
 const InputText = styled.input`
     width: 520px;
     height: 56px;
-    font-size: 18px;
+    font-size: 20px;
     background-color: #efefef;
     text-indent: 1em;
+    font-family: 'Noto Sans JP', sans-serif;
 `
 
 const TextArea = styled.textarea`
     width: 520px;
     min-height: 320px;
-    font-size: 18px;
+    font-size: 20px;
     background-color: #efefef;
     padding: 17px 22px;
     box-sizing: border-box;
+    font-family: 'Noto Sans JP', sans-serif;
 `
 
 const ImageLabelBox = styled.label`
