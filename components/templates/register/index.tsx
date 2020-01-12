@@ -26,11 +26,14 @@ const Register = (): JSX.Element => {
     const storage = firebaseApp.storage(STRAGE_BACKET)
     const storageRef = storage.ref()
 
-    const { register, handleSubmit, errors, reset } = useForm()
+    const { register, handleSubmit, errors, reset, formState } = useForm({
+        mode: 'onChange',
+    })
     const [currentFormData, setCurrentFormData] = React.useState<Record<string, any> | null>(null)
     const [time, setTime] = React.useState<string | null>(null)
     const [currentImgSrc, setCurrentImgSrc] = React.useState<string | null>(null)
     const [postUrl, setPostUrl] = React.useState('')
+    const [isConsent, setIsConsent] = React.useState<boolean | null>()
 
     const { side } = useSelector((state: rootState) => state.rootReducer.tab)
 
@@ -43,6 +46,10 @@ const Register = (): JSX.Element => {
         const now = DateTime.local().toString()
         setTime(now)
     }
+
+    React.useEffect(() => {
+        setIsConsent(localStorage.getItem('isConsent') === 'true')
+    }, [])
 
     React.useEffect(() => {
         if (!currentFormData) return
@@ -116,12 +123,12 @@ const Register = (): JSX.Element => {
     const innerElement = React.useMemo(() => {
         return (
             <Wrapper>
-                {user ? (
+                {user && isConsent ? (
                     !postUrl ? (
                         !(currentFormData && currentImgSrc && time) ? (
                             <form onSubmit={handleSubmit(onRegister)}>
                                 <FormBox>
-                                    <Title>募集を作る</Title>
+                                    <Title>{side === 'help' ? '募集を作る' : '支援者になる'}</Title>
                                     <FormTitle>
                                         <TitleLabel htmlFor="title">題名</TitleLabel>
                                         <InputText
@@ -155,7 +162,12 @@ const Register = (): JSX.Element => {
                                 </FormBox>
                                 <Howto onClick={toggle}>使いかた</Howto>
                                 <ThemeHowtoModal isShowing={isShowing} toggle={toggle} />
-                                <ConfirmButton width={'400px'} height={'80px'} onClick={handleSubmit(onRegister)}>
+                                <ConfirmButton
+                                    width={'400px'}
+                                    height={'80px'}
+                                    onClick={handleSubmit(onRegister)}
+                                    disable={!formState.isValid}
+                                >
                                     内容確認
                                 </ConfirmButton>
                                 <Link href={'/'}>
@@ -180,7 +192,13 @@ const Register = (): JSX.Element => {
                         <Result url={postUrl} />
                     )
                 ) : (
-                    <RegisterLogin />
+                    <RegisterLogin
+                        title={side === 'help' ? '募集を作る' : '支援者になる'}
+                        onConsent={() => {
+                            setIsConsent(true)
+                        }}
+                        hasUser={!!user}
+                    />
                 )}
             </Wrapper>
         )
@@ -188,7 +206,9 @@ const Register = (): JSX.Element => {
         currentFormData,
         currentImgSrc,
         errors.title,
+        formState.isValid,
         handleSubmit,
+        isConsent,
         isShowing,
         onBack,
         onSubmit,
@@ -251,18 +271,20 @@ const TitleLabel = styled.label`
 const InputText = styled.input`
     width: 520px;
     height: 56px;
-    font-size: 18px;
+    font-size: 20px;
     background-color: #efefef;
     text-indent: 1em;
+    font-family: 'Noto Sans JP', sans-serif;
 `
 
 const TextArea = styled.textarea`
     width: 520px;
     min-height: 320px;
-    font-size: 18px;
+    font-size: 20px;
     background-color: #efefef;
     padding: 17px 22px;
     box-sizing: border-box;
+    font-family: 'Noto Sans JP', sans-serif;
 `
 
 const ImageLabelBox = styled.label`

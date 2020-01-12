@@ -10,6 +10,7 @@ enum StyleType {
     twitter,
     facebook,
     cancel,
+    disable,
 }
 
 type StyleProps = {
@@ -113,6 +114,14 @@ const AdditionalStyle = (props: StyleProps) => {
             height: props.height,
             background: 'linear-gradient(to right, #BFBFBF, #999)',
             borderRadius: '10px',
+        })
+    } else if (props.styleType === 'disable') {
+        return css({
+            width: props.width,
+            height: props.height,
+            background: 'linear-gradient(to right, #BFBFBF, #999)',
+            borderRadius: '10px',
+            pointerEvents: 'none'
         })
     }
 }

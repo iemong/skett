@@ -5,15 +5,28 @@ import Login from 'components/organisms/login'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
 import Button from 'components/atoms/Button'
 
-const RegisterLogin = (): JSX.Element => {
+type Props = {
+    title: string
+    onConsent: () => void
+    hasUser: boolean
+}
+
+const RegisterLogin = (props: Props): JSX.Element => {
+    const { title, onConsent, hasUser } = props
+    const [canAdd, setCanAdd] = React.useState(false)
     const handleCheck = (value: boolean): void => {
-        console.log('check', value)
+        setCanAdd(value)
     }
+
+    const handleConsent = React.useCallback(() => {
+        onConsent()
+        localStorage.setItem('isConsent', 'true')
+    }, [onConsent])
 
     return (
         <div>
-            <Login title={'募集を作る'} onChangeCheck={handleCheck} />
-            <AddButton width={'400px'} height={'80px'}>
+            <Login title={title} onChangeCheck={handleCheck} />
+            <AddButton width={'400px'} height={'80px'} disable={!(canAdd && hasUser)} onClick={handleConsent}>
                 声の追加
             </AddButton>
             <Link href={'/'}>

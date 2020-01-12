@@ -1,6 +1,5 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import Link from 'next/link'
 import Button from 'components/atoms/Button'
 
 type Props = {
@@ -19,7 +18,7 @@ const Card = (props: Props): JSX.Element => {
             </ThumbnailWrapper>
             <TextBox>
                 <Description>{description}</Description>
-                <Link href={{ pathname: link, query: { side } }}>
+                <Link href={`${link}?side=${side}`}>
                     <DetailButton
                         width={'270px'}
                         height={'50px'}
@@ -73,3 +72,7 @@ const Description = styled.p`
 `
 
 const DetailButton = styled(Button)``
+
+const Link = styled.a`
+  text-decoration: none;
+`
