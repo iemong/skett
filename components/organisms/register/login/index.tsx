@@ -8,10 +8,11 @@ import Button from 'components/atoms/Button'
 type Props = {
     title: string
     onConsent: () => void
+    hasUser: boolean
 }
 
 const RegisterLogin = (props: Props): JSX.Element => {
-    const { title, onConsent } = props
+    const { title, onConsent, hasUser } = props
     const [canAdd, setCanAdd] = React.useState(false)
     const handleCheck = (value: boolean): void => {
         setCanAdd(value)
@@ -19,13 +20,13 @@ const RegisterLogin = (props: Props): JSX.Element => {
 
     const handleConsent = React.useCallback(() => {
         onConsent()
-        localStorage.setItem('isConsent', 'true');
-    }, [])
+        localStorage.setItem('isConsent', 'true')
+    }, [onConsent])
 
     return (
         <div>
-            <Login title={'募集を作る'} onChangeCheck={handleCheck} />
-            <AddButton width={'400px'} height={'80px'} disable={!canAdd} onClick={handleConsent}>
+            <Login title={title} onChangeCheck={handleCheck} />
+            <AddButton width={'400px'} height={'80px'} disable={!(canAdd && hasUser)} onClick={handleConsent}>
                 声の追加
             </AddButton>
             <Link href={'/'}>
