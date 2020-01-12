@@ -26,7 +26,9 @@ const Register = (): JSX.Element => {
     const storage = firebaseApp.storage(STRAGE_BACKET)
     const storageRef = storage.ref()
 
-    const { register, handleSubmit, errors, reset } = useForm()
+    const { register, handleSubmit, errors, reset, formState } = useForm({
+        mode: 'onChange',
+    })
     const [currentFormData, setCurrentFormData] = React.useState<Record<string, any> | null>(null)
     const [time, setTime] = React.useState<string | null>(null)
     const [currentImgSrc, setCurrentImgSrc] = React.useState<string | null>(null)
@@ -160,7 +162,12 @@ const Register = (): JSX.Element => {
                                 </FormBox>
                                 <Howto onClick={toggle}>使いかた</Howto>
                                 <ThemeHowtoModal isShowing={isShowing} toggle={toggle} />
-                                <ConfirmButton width={'400px'} height={'80px'} onClick={handleSubmit(onRegister)}>
+                                <ConfirmButton
+                                    width={'400px'}
+                                    height={'80px'}
+                                    onClick={handleSubmit(onRegister)}
+                                    disable={!formState.isValid}
+                                >
                                     内容確認
                                 </ConfirmButton>
                                 <Link href={'/'}>
@@ -198,7 +205,9 @@ const Register = (): JSX.Element => {
         currentFormData,
         currentImgSrc,
         errors.title,
+        formState.isValid,
         handleSubmit,
+        isConsent,
         isShowing,
         onBack,
         onSubmit,
