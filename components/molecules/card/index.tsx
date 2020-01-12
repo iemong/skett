@@ -18,7 +18,7 @@ const Card = (props: Props): JSX.Element => {
             </ThumbnailWrapper>
             <TextBox>
                 <Description>{description}</Description>
-                <a href={`${link}?side=${side}`}>
+                <Link href={`${link}?side=${side}`}>
                     <DetailButton
                         width={'270px'}
                         height={'50px'}
@@ -26,7 +26,7 @@ const Card = (props: Props): JSX.Element => {
                     >
                         詳しく見る
                     </DetailButton>
-                </a>
+                </Link>
             </TextBox>
         </Wrapper>
     )
@@ -72,3 +72,7 @@ const Description = styled.p`
 `
 
 const DetailButton = styled(Button)``
+
+const Link = styled.a`
+  text-decoration: none;
+`
