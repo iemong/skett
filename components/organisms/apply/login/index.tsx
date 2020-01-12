@@ -1,37 +1,48 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
+import Link from 'next/link'
 import Login from 'components/organisms/login'
+import Button from 'components/atoms/Button'
+import ThemeButton from 'components/molecules/theme/ThemeButton'
 
-const ApplyLogin = (): JSX.Element => {
+type Props = {
+    onConsent: () => void
+    hasUser: boolean
+}
+
+const ApplyLogin = (props: Props): JSX.Element => {
+    const { onConsent, hasUser } = props
+    const [canAdd, setCanAdd] = React.useState(false)
     const handleCheck = (value: boolean): void => {
-        console.log('check', value)
+        setCanAdd(value)
     }
+
+    const handleConsent = React.useCallback(() => {
+        onConsent()
+        localStorage.setItem('isConsent', 'true')
+    }, [onConsent])
 
     return (
         <div>
-            <Login title={'募集に応募する'} onChangeCheck={handleCheck} />
-            <ApplyButton>応募する</ApplyButton>
-            <BackButton>戻る</BackButton>
+            <Login title={'ログイン'} onChangeCheck={handleCheck} />
+            <ApplyButton width={'400px'} height={'80px'} disable={!(canAdd && hasUser)} onClick={handleConsent}>
+                声の追加
+            </ApplyButton>
+            <Link href={'/'}>
+                <BackButton width={'400px'} height={'80px'} styleType="cancel">
+                    戻る
+                </BackButton>
+            </Link>
         </div>
     )
 }
 
 export default ApplyLogin
 
-const ApplyButton = styled.button`
-    display: block;
+const ApplyButton = styled(ThemeButton)`
     margin: 80px auto 50px;
-    width: 400px;
-    height: 80px;
-    background-image: url(/img/btn_apply_help.png);
-    color: transparent;
 `
 
-const BackButton = styled.button`
-    display: block;
-    width: 400px;
-    height: 80px;
+const BackButton = styled(Button)`
     margin: 0 auto;
-    background-image: url(/img/btn_back.png);
-    color: transparent;
 `

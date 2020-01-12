@@ -20,6 +20,7 @@ const Apply = (props: Props): JSX.Element => {
     const { postId } = props
     const { side } = useSelector((state: rootState) => state.rootReducer.tab)
     const [currentPost, setCurrentPost] = React.useState<PostType | undefined>(undefined)
+    const [isConsent, setIsConsent] = React.useState<boolean | null>()
 
     const user = useLogin()
 
@@ -47,22 +48,31 @@ const Apply = (props: Props): JSX.Element => {
     }
 
     React.useEffect(() => {
+        setIsConsent(localStorage.getItem('isConsent') === 'true')
+    }, [])
+
+    React.useEffect(() => {
         if (!user) return
         updatePostData(user)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
     const innerElement = React.useMemo(() => {
-        return user ? (
+        return user && isConsent ? (
             <Wrapper>
                 <ApplyResult post={currentPost} />
             </Wrapper>
         ) : (
             <Wrapper>
-                <ApplyLogin />
+                <ApplyLogin
+                    onConsent={() => {
+                        setIsConsent(true)
+                    }}
+                    hasUser={!!user}
+                />
             </Wrapper>
         )
-    }, [currentPost, user])
+    }, [currentPost, isConsent, user])
 
     return (
         <Main>
