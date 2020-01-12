@@ -31,6 +31,7 @@ const Register = (): JSX.Element => {
     const [time, setTime] = React.useState<string | null>(null)
     const [currentImgSrc, setCurrentImgSrc] = React.useState<string | null>(null)
     const [postUrl, setPostUrl] = React.useState('')
+    const [isConsent, setIsConsent] = React.useState<boolean | null>()
 
     const { side } = useSelector((state: rootState) => state.rootReducer.tab)
 
@@ -43,6 +44,10 @@ const Register = (): JSX.Element => {
         const now = DateTime.local().toString()
         setTime(now)
     }
+
+    React.useEffect(() => {
+        setIsConsent(localStorage.getItem('isConsent') === 'true')
+    }, [])
 
     React.useEffect(() => {
         if (!currentFormData) return
@@ -116,7 +121,7 @@ const Register = (): JSX.Element => {
     const innerElement = React.useMemo(() => {
         return (
             <Wrapper>
-                {user ? (
+                {user && isConsent ? (
                     !postUrl ? (
                         !(currentFormData && currentImgSrc && time) ? (
                             <form onSubmit={handleSubmit(onRegister)}>
@@ -180,7 +185,11 @@ const Register = (): JSX.Element => {
                         <Result url={postUrl} />
                     )
                 ) : (
-                    <RegisterLogin />
+                    <RegisterLogin
+                        onConsent={() => {
+                            setIsConsent(true)
+                        }}
+                    />
                 )}
             </Wrapper>
         )
