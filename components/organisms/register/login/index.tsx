@@ -6,14 +6,14 @@ import ThemeButton from 'components/molecules/theme/ThemeButton'
 import Button from 'components/atoms/Button'
 
 type Props = {
+    title: string
     onConsent: () => void
 }
 
 const RegisterLogin = (props: Props): JSX.Element => {
-    const { onConsent } = props
+    const { title, onConsent } = props
     const [canAdd, setCanAdd] = React.useState(false)
     const handleCheck = (value: boolean): void => {
-        console.log('check', value)
         setCanAdd(value)
     }
 

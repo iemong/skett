@@ -126,7 +126,7 @@ const Register = (): JSX.Element => {
                         !(currentFormData && currentImgSrc && time) ? (
                             <form onSubmit={handleSubmit(onRegister)}>
                                 <FormBox>
-                                    <Title>募集を作る</Title>
+                                    <Title>{side === 'help' ? '募集を作る' : '支援者になる'}</Title>
                                     <FormTitle>
                                         <TitleLabel htmlFor="title">題名</TitleLabel>
                                         <InputText
@@ -186,6 +186,7 @@ const Register = (): JSX.Element => {
                     )
                 ) : (
                     <RegisterLogin
+                        title={side === 'help' ? '募集を作る' : '支援者になる'}
                         onConsent={() => {
                             setIsConsent(true)
                         }}
