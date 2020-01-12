@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Z_INDEX_LIST } from 'assets/constant'
 import * as Actions from 'reducers/tab/actions'
+import { useRouter } from 'next/router'
 
 type Props = {
     leftContent?: string | JSX.Element
@@ -17,6 +18,7 @@ type Props = {
 
 const Tab = (props: Props): JSX.Element => {
     const { leftContent, rightContent, onClickLeft, onClickRight, className, tabSide } = props
+    const router = useRouter()
 
     const [tabName, setTabName] = React.useState<'left' | 'right'>(tabSide)
 
@@ -25,6 +27,7 @@ const Tab = (props: Props): JSX.Element => {
         return bindActionCreators(Actions, dispatch)
     }, [dispatch])
     const helpClickHandler = React.useCallback((): void => {
+        if(router.pathname !== '/') return
         setTabName('left')
         actions.update('help')
         if (onClickLeft) onClickLeft()
@@ -32,6 +35,7 @@ const Tab = (props: Props): JSX.Element => {
     }, [actions, onClickLeft, rightContent])
 
     const supportClickHandler = React.useCallback((): void => {
+        if(router.pathname !== '/') return
         setTabName('right')
         actions.update('support')
         if (onClickRight) onClickRight()
