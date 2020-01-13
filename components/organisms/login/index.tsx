@@ -34,8 +34,8 @@ const Login = (props: Props): JSX.Element => {
             <Logins onClickTwitter={signInTwitter} onClickFacebook={signInFacebook} />
             <Regulation onClick={toggleTerms}>利用規約</Regulation>
             <PrivacyPolicy onClick={togglePrivacyPolicy}>プライバシーポリシー</PrivacyPolicy>
-            <TermsModal isShowing={isShowingTerms} toggle={toggleTerms} />
-            <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
+            <TermsModal isShowing={isShowingTerms} toggle={toggleTerms} onClickPrivacyPolicy={togglePrivacyPolicy}/>
+            <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy}  />
             <CheckBoxWrapper>
                 <CheckBox type={'checkbox'} name={'consent'} value={String(isConsent)} onChange={onChange} />
                 <ConfirmText>上記の2点を確認しました</ConfirmText>

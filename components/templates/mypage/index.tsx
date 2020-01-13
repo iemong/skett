@@ -6,10 +6,12 @@ import { PostType } from 'types/index'
 import useLogin from 'components/hooks/useLogin'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
-import Card from 'components/molecules/card'
 import useModal from 'components/hooks/useModal'
 import TermsModal from 'components/molecules/modal/TermsModal'
 import PrivacyPolicyModal from 'components/molecules/modal/PrivacyPolicyModal'
+import Button from 'components/atoms/Button'
+import { signOut, signInFacebook, signInTwitter } from 'assets/api/auth'
+import EditableCard from 'components/molecules/editableCard'
 
 const MyPage = (): JSX.Element => {
     const user = useLogin()
@@ -17,11 +19,12 @@ const MyPage = (): JSX.Element => {
     const db = firebaseApp.firestore()
     const docRef = db.collection(COLLECTIONS.POSTS)
     const [posts, setPosts] = React.useState<PostType[]>([])
+    const [isFirst, setIsFirst] = React.useState<boolean>(true)
     const { isShowing: isShowingTerms, toggle: toggleTerms } = useModal()
     const { isShowing: isShowingPrivacyPolicy, toggle: togglePrivacyPolicy } = useModal()
 
     const loadPostsData = React.useCallback(async () => {
-        if (!user || posts.length) return
+        if (!user) return
         const data = await docRef
             .where('user.uid', '==', user.uid)
             .orderBy('timestamp', 'desc')
@@ -31,7 +34,7 @@ const MyPage = (): JSX.Element => {
         const docs = data.docs
         const myPosts = docs.map(doc => doc.data() as PostType)
         setPosts(myPosts)
-    }, [docRef, posts.length, user])
+    }, [docRef, user])
 
     const isActiveFacebook = React.useMemo(
         () => user?.providerData.map(data => data?.providerId).includes('facebook.com') || false,
@@ -43,55 +46,112 @@ const MyPage = (): JSX.Element => {
     )
 
     React.useEffect(() => {
-        loadPostsData()
-    }, [loadPostsData])
+        if (isFirst) {
+            loadPostsData()
+        }
+        if (user) {
+            setIsFirst(false)
+        }
+    }, [isFirst, loadPostsData, user])
+
+    const deletePost = React.useCallback(
+        (id: string) => {
+            docRef
+                .doc(id)
+                .delete()
+                .then(() => {
+                    loadPostsData()
+                })
+        },
+        [docRef, loadPostsData],
+    )
+
+    const endPost = React.useCallback(
+        (id: string) => {
+            docRef
+                .doc(id)
+                .update({
+                    isEnd: true,
+                })
+                .then(() => {
+                    loadPostsData()
+                })
+        },
+        [docRef, loadPostsData],
+    )
 
     const myPosts = React.useMemo(
         () =>
             posts.map((post, index) => (
-                <CardWrapper>
-                    <Card
+                <CardWrapper key={index}>
+                    <EditableCard
                         key={index}
                         imgUrl={post.imageUrl}
                         description={post.title}
                         link={`/posts/${post.id ?? ''}`}
                         side={post.side}
+                        isEnd={post.isEnd}
+                        onDelete={(): void => {
+                            deletePost(post.id)
+                        }}
+                        onEnd={(): void => {
+                            endPost(post.id)
+                        }}
                     />
-                    <ButtonWrapper>
-                        <EditButton>編集</EditButton>
-                        <DeleteButton>削除</DeleteButton>
-                    </ButtonWrapper>
                 </CardWrapper>
             )),
-        [posts],
+        [deletePost, endPost, posts],
     )
 
     return (
         <Main>
-            <React.Fragment>
+            <Wrapper>
                 <LoginStatus>
                     <Title>アカウント状況</Title>
                     <ShareInner>
-                        <TwitterButton onClick={() => {}} isActive={isActiveTwitter} />
-                        <FacebookButton onClick={() => {}} isActive={isActiveFacebook} />
+                        <TwitterButton onClick={signInTwitter} isActive={isActiveTwitter} />
+                        <FacebookButton onClick={signInFacebook} isActive={isActiveFacebook} />
                     </ShareInner>
                     <TextWrapper>
                         <Terms onClick={toggleTerms}>利用規約</Terms>
                         <PrivacyPolicy onClick={togglePrivacyPolicy}>プライバシーポリシー</PrivacyPolicy>
                     </TextWrapper>
-                    <TermsModal isShowing={isShowingTerms} toggle={toggleTerms} />
+                    <LogoutButton
+                        styleType="cancel"
+                        width={'510px'}
+                        height={'100px'}
+                        onClick={() => {
+                            localStorage.setItem('isClient', 'false')
+                            signOut()
+                        }}
+                    >
+                        ログアウトする
+                    </LogoutButton>
+                    <TermsModal
+                        isShowing={isShowingTerms}
+                        toggle={toggleTerms}
+                        onClickPrivacyPolicy={togglePrivacyPolicy}
+                    />
                     <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
                 </LoginStatus>
-                <Past>
-                    <Title>アカウント状況</Title>
-                </Past>
-                <div>{myPosts}</div>
-            </React.Fragment>
+                {user && (
+                    <React.Fragment>
+                        <Past>
+                            <Title>過去に作成した声</Title>
+                        </Past>
+                        <div>{myPosts}</div>
+                    </React.Fragment>
+                )}
+            </Wrapper>
         </Main>
     )
 }
 
 export default MyPage
+
+const Wrapper = styled.div`
+    padding-bottom: 40px;
+`
 
 const LoginStatus = styled.div`
     width: 600px;
@@ -130,10 +190,7 @@ const Title = styled.p`
     }
 `
 
-const ShareInner = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
+const ShareInner = styled.div``
 
 const AlreadyLogin = css`
     content: 'ログイン済';
@@ -154,9 +211,10 @@ const AlreadyLogin = css`
 const TwitterButton = styled.div<{ isActive: boolean }>`
     position: relative;
     display: block;
-    width: 241px;
-    height: 201px;
-    background-image: url(/img/btn_twitter.png);
+    width: 510px;
+    height: 100px;
+    margin-bottom: 24px;
+    background-image: url(/img/svg/btn_twitter_login.svg);
     &::after {
         ${props => props.isActive && AlreadyLogin}
     }
@@ -165,9 +223,9 @@ const TwitterButton = styled.div<{ isActive: boolean }>`
 const FacebookButton = styled.div<{ isActive: boolean }>`
     position: relative;
     display: block;
-    width: 241px;
-    height: 201px;
-    background-image: url(/img/btn_facebook.png);
+    width: 510px;
+    height: 100px;
+    background-image: url(/img/svg/btn_facebook_login.svg);
     &::after {
         ${props => props.isActive && AlreadyLogin}
     }
@@ -196,28 +254,4 @@ const CardWrapper = styled.div`
     padding-bottom: 60px;
 `
 
-const ButtonWrapper = styled.div`
-    display: flex;
-    width: 690px;
-    margin: 0 auto;
-    justify-content: space-between;
-`
-
-const ButtonStyle = css`
-    width: 325px;
-    height: 80px;
-    background-color: #bdbdbd;
-    color: #fff;
-    font-size: 30px;
-    line-height: 80px;
-    text-align: center;
-    border-radius: 10px;
-`
-
-const EditButton = styled.button`
-    ${ButtonStyle}
-`
-
-const DeleteButton = styled.button`
-    ${ButtonStyle}
-`
+const LogoutButton = styled(Button)``

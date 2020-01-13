@@ -19,4 +19,5 @@ export type PostType = {
     side: 'help' | 'support'
     timestamp: number
     applicants?: string[]
+    isEnd: boolean
 }
