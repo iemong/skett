@@ -33,7 +33,7 @@ const Result = (props: Props): JSX.Element => {
                         const intent = createTwitterIntent({
                             url,
                             text: '',
-                            hashtags: 'skett',
+                            hashtags: '被災地のスケット',
                         })
                         window.open(intent)
                     }}
