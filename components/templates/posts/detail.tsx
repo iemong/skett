@@ -10,6 +10,7 @@ import DetailCard from 'components/molecules/detailCard'
 import { State as rootState } from 'reducers'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
 import Button from 'components/atoms/Button'
+import useLogin from 'components/hooks/useLogin'
 
 type Props = {
     data: PostType | null
@@ -19,6 +20,7 @@ const PostDetail = (props: Props): JSX.Element => {
     const { data } = props
 
     const { side } = useSelector((state: rootState) => state.rootReducer.tab)
+    const user = useLogin()
 
     const postElement = React.useMemo(() => {
         if (!data) return <>Loading</>
@@ -32,17 +34,25 @@ const PostDetail = (props: Props): JSX.Element => {
                     side={side}
                     updateDate={data.updateDate}
                 />
-                <Link href={{ pathname: '/apply', query: { postId: data.id } }}>
-                    <ApplyButton width={'400px'} height={'80px'}>
-                        応募する
-                    </ApplyButton>
-                </Link>
+                {user?.uid === data.user?.uid ? (
+                    <Link href={{ pathname: '/edit', query: { postId: data.id, side } }}>
+                        <EditButton width={'400px'} height={'80px'}>
+                            編集する
+                        </EditButton>
+                    </Link>
+                ) : (
+                    <Link href={{ pathname: '/apply', query: { postId: data.id } }}>
+                        <ApplyButton width={'400px'} height={'80px'}>
+                            応募する
+                        </ApplyButton>
+                    </Link>
+                )}
                 <BackButton width={'400px'} height={'80px'} styleType="cancel" onClick={(): void => Router.back()}>
                     戻る
                 </BackButton>
             </Wrapper>
         )
-    }, [data, side])
+    }, [data, side, user])
 
     const tabElement = React.useMemo(() => {
         return side === 'help' ? (
@@ -63,6 +73,10 @@ const Wrapper = styled.div`
 
 const DetailCardWithMargin = styled(DetailCard)`
     margin-bottom: 80px;
+`
+
+const EditButton = styled(ThemeButton)`
+    margin: 0 auto 48px;
 `
 
 const ApplyButton = styled(ThemeButton)`
