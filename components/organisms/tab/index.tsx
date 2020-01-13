@@ -1,11 +1,11 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import Router from 'next/router'
-import { useDispatch } from 'react-redux'
+import Router, { useRouter } from 'next/router'
+import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Z_INDEX_LIST } from 'assets/constant'
 import * as Actions from 'reducers/tab/actions'
-import { useRouter } from 'next/router'
+import { State as rootState } from 'reducers'
 
 type Props = {
     leftContent?: string | JSX.Element
@@ -20,27 +20,34 @@ const Tab = (props: Props): JSX.Element => {
     const { leftContent, rightContent, onClickLeft, onClickRight, className, tabSide } = props
     const router = useRouter()
 
+    const { side } = useSelector((state: rootState) => state.rootReducer.tab)
+
     const [tabName, setTabName] = React.useState<'left' | 'right'>(tabSide)
 
     const dispatch = useDispatch()
     const actions = React.useMemo(() => {
         return bindActionCreators(Actions, dispatch)
     }, [dispatch])
+
+    React.useEffect(() => {
+        setTabName(side === 'help' ? 'left' : 'right')
+    }, [side])
+
     const helpClickHandler = React.useCallback((): void => {
-        if(router.pathname !== '/') return
+        if (router.pathname !== '/') return
         setTabName('left')
         actions.update('help')
         if (onClickLeft) onClickLeft()
         if (!rightContent) Router.push('/')
-    }, [actions, onClickLeft, rightContent])
+    }, [actions, onClickLeft, rightContent, router.pathname])
 
     const supportClickHandler = React.useCallback((): void => {
-        if(router.pathname !== '/') return
+        if (router.pathname !== '/') return
         setTabName('right')
         actions.update('support')
         if (onClickRight) onClickRight()
         if (!leftContent) Router.push('/')
-    }, [actions, leftContent, onClickRight])
+    }, [actions, leftContent, onClickRight, router.pathname])
 
     return (
         <Tabs className={className}>
