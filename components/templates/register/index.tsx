@@ -103,6 +103,7 @@ const Register = (): JSX.Element => {
             side,
             timestamp: Date.now(),
             applicants: [],
+            isEnd: false,
         }
 
         await uniqDocRef.set(postData).catch(error => {

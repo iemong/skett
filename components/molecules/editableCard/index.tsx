@@ -8,10 +8,13 @@ type Props = {
     description: string
     link: string
     side: 'help' | 'support'
+    isEnd: boolean
+    onDelete: () => void
+    onEnd: () => void
 }
 
 const EditableCard = (props: Props): JSX.Element => {
-    const { imgUrl, description, link, side } = props
+    const { imgUrl, description, link, side, onDelete, onEnd, isEnd } = props
     return (
         <Wrapper data-side={side}>
             <ThumbnailWrapper>
@@ -20,13 +23,18 @@ const EditableCard = (props: Props): JSX.Element => {
             <TextBox>
                 <Description>{description}</Description>
                 <ButtonWrapper>
-                    <EditButton>編集</EditButton>
-                    <DeleteButton>削除</DeleteButton>
+                    <EditButton onClick={onEnd}>募集を終了する</EditButton>
+                    <DeleteButton onClick={onDelete}>削除</DeleteButton>
                     <Link href={`${link}?side=${side}`}>
                         <DetailButton>募集内容に変更を加える</DetailButton>
                     </Link>
                 </ButtonWrapper>
             </TextBox>
+            <EndMessage data-end={isEnd}>
+                こちらの募集は
+                <br />
+                終了しました
+            </EndMessage>
         </Wrapper>
     )
 }
@@ -34,6 +42,7 @@ const EditableCard = (props: Props): JSX.Element => {
 export default EditableCard
 
 const Wrapper = styled.div`
+    position: relative;
     width: 690px;
     &[data-side='help'] {
         background-image: linear-gradient(to left, #00b4ed, #0091db);
@@ -117,4 +126,23 @@ const Link = styled.a`
     margin-top: 20px;
     text-decoration: none;
     flex-basis: 100%;
+`
+
+const EndMessage = styled.p`
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    font-size: 38px;
+    line-height: 1.5;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    &[data-end='true'] {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 `

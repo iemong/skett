@@ -19,11 +19,12 @@ const MyPage = (): JSX.Element => {
     const db = firebaseApp.firestore()
     const docRef = db.collection(COLLECTIONS.POSTS)
     const [posts, setPosts] = React.useState<PostType[]>([])
+    const [isFirst, setIsFirst] = React.useState<boolean>(true)
     const { isShowing: isShowingTerms, toggle: toggleTerms } = useModal()
     const { isShowing: isShowingPrivacyPolicy, toggle: togglePrivacyPolicy } = useModal()
 
     const loadPostsData = React.useCallback(async () => {
-        if (!user || posts.length) return
+        if (!user) return
         const data = await docRef
             .where('user.uid', '==', user.uid)
             .orderBy('timestamp', 'desc')
@@ -33,7 +34,7 @@ const MyPage = (): JSX.Element => {
         const docs = data.docs
         const myPosts = docs.map(doc => doc.data() as PostType)
         setPosts(myPosts)
-    }, [docRef, posts.length, user])
+    }, [docRef, user])
 
     const isActiveFacebook = React.useMemo(
         () => user?.providerData.map(data => data?.providerId).includes('facebook.com') || false,
@@ -45,8 +46,39 @@ const MyPage = (): JSX.Element => {
     )
 
     React.useEffect(() => {
-        loadPostsData()
-    }, [loadPostsData])
+        if (isFirst) {
+            loadPostsData()
+        }
+        if (user) {
+            setIsFirst(false)
+        }
+    }, [isFirst, loadPostsData, user])
+
+    const deletePost = React.useCallback(
+        (id: string) => {
+            docRef
+                .doc(id)
+                .delete()
+                .then(() => {
+                    loadPostsData()
+                })
+        },
+        [docRef, loadPostsData],
+    )
+
+    const endPost = React.useCallback(
+        (id: string) => {
+            docRef
+                .doc(id)
+                .update({
+                    isEnd: true,
+                })
+                .then(() => {
+                    loadPostsData()
+                })
+        },
+        [docRef, loadPostsData],
+    )
 
     const myPosts = React.useMemo(
         () =>
@@ -58,10 +90,17 @@ const MyPage = (): JSX.Element => {
                         description={post.title}
                         link={`/posts/${post.id ?? ''}`}
                         side={post.side}
+                        isEnd={post.isEnd}
+                        onDelete={(): void => {
+                            deletePost(post.id)
+                        }}
+                        onEnd={(): void => {
+                            endPost(post.id)
+                        }}
                     />
                 </CardWrapper>
             )),
-        [posts],
+        [deletePost, endPost, posts],
     )
 
     return (
