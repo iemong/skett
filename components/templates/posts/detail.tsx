@@ -35,7 +35,7 @@ const PostDetail = (props: Props): JSX.Element => {
                     updateDate={data.updateDate}
                 />
                 {user?.uid === data.user?.uid ? (
-                    <Link href={{ pathname: '/edit', query: { postId: data.id } }}>
+                    <Link href={{ pathname: '/edit', query: { postId: data.id, side } }}>
                         <EditButton width={'400px'} height={'80px'}>
                             編集する
                         </EditButton>

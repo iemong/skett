@@ -4,7 +4,7 @@ import DetailCard from 'components/molecules/detailCard'
 import { UserType } from 'types/index'
 import Button from 'components/atoms/Button'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
-import ThemeTitle from "components/molecules/theme/ThemeTitle";
+import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 
 type Props = {
     imgUrl: string
@@ -15,10 +15,11 @@ type Props = {
     onBack: () => void
     user: UserType
     side: 'help' | 'support'
+    confirmText?: string
 }
 
 const Confirm = (props: Props): JSX.Element => {
-    const { onSubmit, onBack, user, side, ...cardProps } = props
+    const { onSubmit, onBack, user, side, confirmText = '声をつくる', ...cardProps } = props
     return (
         <Wrapper>
             <ConfirmTitleWrapper>
@@ -26,7 +27,7 @@ const Confirm = (props: Props): JSX.Element => {
             </ConfirmTitleWrapper>
             <DetailCard {...cardProps} side={side} user={user} />
             <RegisterButton width={'400px'} height={'80px'} onClick={onSubmit}>
-                声を作る
+                {confirmText}
             </RegisterButton>
             <BackButton width={'400px'} height={'80px'} styleType="cancel" onClick={onBack}>
                 戻る

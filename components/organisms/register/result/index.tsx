@@ -8,15 +8,16 @@ import Button from 'components/atoms/Button'
 
 type Props = {
     url: string
+    title?: string
 }
 
 const Result = (props: Props): JSX.Element => {
-    const { url } = props
+    const { url, title = '作成完了' } = props
 
     return (
         <Wrapper>
             <TitleWrapper>
-                <Title>作成完了</Title>
+                <Title>{title}</Title>
                 <Lead>
                     あなたの募集の作成が完了しました。
                     <br />
