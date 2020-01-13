@@ -61,6 +61,7 @@ const Edit = (props: Props): JSX.Element => {
     }, [reset])
 
     const innerElement = React.useMemo(() => {
+        if (!data) return <>Loading</>
         return (
             <Wrapper>
                 {user ? (
@@ -107,7 +108,7 @@ const Edit = (props: Props): JSX.Element => {
                             <Confirm
                                 title={currentFormData.title}
                                 description={currentFormData.description}
-                                imgUrl={data.imageUrl}
+                                imgUrl={data ? data.imageUrl : ''}
                                 updateDate={data.updateDate}
                                 onSubmit={onSubmit}
                                 onBack={onBack}
@@ -126,9 +127,7 @@ const Edit = (props: Props): JSX.Element => {
         )
     }, [
         currentFormData,
-        data.imageUrl,
-        data.updateDate,
-        data.url,
+        data,
         errors.title,
         handleSubmit,
         isConfirmed,
