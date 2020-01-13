@@ -10,6 +10,8 @@ import Card from 'components/molecules/card'
 import useModal from 'components/hooks/useModal'
 import TermsModal from 'components/molecules/modal/TermsModal'
 import PrivacyPolicyModal from 'components/molecules/modal/PrivacyPolicyModal'
+import Button from 'components/atoms/Button'
+import { signOut } from 'assets/api/auth'
 
 const MyPage = (): JSX.Element => {
     const user = useLogin()
@@ -49,7 +51,7 @@ const MyPage = (): JSX.Element => {
     const myPosts = React.useMemo(
         () =>
             posts.map((post, index) => (
-                <CardWrapper>
+                <CardWrapper key={index}>
                     <Card
                         key={index}
                         imgUrl={post.imageUrl}
@@ -79,11 +81,22 @@ const MyPage = (): JSX.Element => {
                         <Terms onClick={toggleTerms}>利用規約</Terms>
                         <PrivacyPolicy onClick={togglePrivacyPolicy}>プライバシーポリシー</PrivacyPolicy>
                     </TextWrapper>
+                    <LogoutButton
+                        styleType="cancel"
+                        width={'510px'}
+                        height={'100px'}
+                        onClick={() => {
+                            localStorage.setItem('isClient', 'false')
+                            signOut()
+                        }}
+                    >
+                        ログアウトする
+                    </LogoutButton>
                     <TermsModal isShowing={isShowingTerms} toggle={toggleTerms} />
                     <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
                 </LoginStatus>
                 <Past>
-                    <Title>アカウント状況</Title>
+                    <Title>過去に作成した声</Title>
                 </Past>
                 <div>{myPosts}</div>
             </React.Fragment>
@@ -130,10 +143,7 @@ const Title = styled.p`
     }
 `
 
-const ShareInner = styled.div`
-    display: flex;
-    justify-content: space-between;
-`
+const ShareInner = styled.div``
 
 const AlreadyLogin = css`
     content: 'ログイン済';
@@ -154,9 +164,10 @@ const AlreadyLogin = css`
 const TwitterButton = styled.div<{ isActive: boolean }>`
     position: relative;
     display: block;
-    width: 241px;
-    height: 201px;
-    background-image: url(/img/btn_twitter.png);
+    width: 510px;
+    height: 100px;
+    margin-bottom: 24px;
+    background-image: url(/img/svg/btn_twitter_login.svg);
     &::after {
         ${props => props.isActive && AlreadyLogin}
     }
@@ -165,9 +176,9 @@ const TwitterButton = styled.div<{ isActive: boolean }>`
 const FacebookButton = styled.div<{ isActive: boolean }>`
     position: relative;
     display: block;
-    width: 241px;
-    height: 201px;
-    background-image: url(/img/btn_facebook.png);
+    width: 510px;
+    height: 100px;
+    background-image: url(/img/svg/btn_facebook_login.svg);
     &::after {
         ${props => props.isActive && AlreadyLogin}
     }
@@ -221,3 +232,5 @@ const EditButton = styled.button`
 const DeleteButton = styled.button`
     ${ButtonStyle}
 `
+
+const LogoutButton = styled(Button)``
