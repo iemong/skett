@@ -26,9 +26,7 @@ const Register = (): JSX.Element => {
     const storage = firebaseApp.storage(STRAGE_BACKET)
     const storageRef = storage.ref()
 
-    const { register, handleSubmit, errors, reset, formState } = useForm({
-        mode: 'onChange',
-    })
+    const { register, handleSubmit, errors, reset } = useForm()
     const [currentFormData, setCurrentFormData] = React.useState<Record<string, any> | null>(null)
     const [time, setTime] = React.useState<string | null>(null)
     const [currentImgSrc, setCurrentImgSrc] = React.useState<string | null>(null)
@@ -166,7 +164,6 @@ const Register = (): JSX.Element => {
                                     width={'400px'}
                                     height={'80px'}
                                     onClick={handleSubmit(onRegister)}
-                                    disable={!formState.isValid}
                                 >
                                     内容確認
                                 </ConfirmButton>
@@ -206,7 +203,6 @@ const Register = (): JSX.Element => {
         currentFormData,
         currentImgSrc,
         errors.title,
-        formState.isValid,
         handleSubmit,
         isConsent,
         isShowing,
