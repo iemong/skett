@@ -127,7 +127,11 @@ const MyPage = (): JSX.Element => {
                     >
                         ログアウトする
                     </LogoutButton>
-                    <TermsModal isShowing={isShowingTerms} toggle={toggleTerms} />
+                    <TermsModal
+                        isShowing={isShowingTerms}
+                        toggle={toggleTerms}
+                        onClickPrivacyPolicy={togglePrivacyPolicy}
+                    />
                     <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
                 </LoginStatus>
                 {user && (
