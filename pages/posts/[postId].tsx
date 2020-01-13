@@ -23,7 +23,6 @@ class PagePostDetail extends React.Component<Props> {
         if (req && process.env.NODE_ENV !== 'development') {
             return { data: null }
         } else {
-            store.dispatch({ type: UPDATE, payload: { side: query.side } })
             const db = firebaseApp.firestore()
             const docRef = db.collection(COLLECTIONS.POSTS)
             const postData = await docRef
@@ -31,6 +30,7 @@ class PagePostDetail extends React.Component<Props> {
                 .get()
                 .catch(e => console.error(e))
             const data = postData && postData.exists ? { ...postData.data(), id: postData.id } : null
+            store.dispatch({ type: UPDATE, payload: { side: query.side } })
             return { data: data }
         }
     }
