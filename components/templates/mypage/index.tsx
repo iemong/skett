@@ -6,12 +6,12 @@ import { PostType } from 'types/index'
 import useLogin from 'components/hooks/useLogin'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
-import Card from 'components/molecules/card'
 import useModal from 'components/hooks/useModal'
 import TermsModal from 'components/molecules/modal/TermsModal'
 import PrivacyPolicyModal from 'components/molecules/modal/PrivacyPolicyModal'
 import Button from 'components/atoms/Button'
-import { signOut } from 'assets/api/auth'
+import { signOut, signInFacebook, signInTwitter } from 'assets/api/auth'
+import EditableCard from 'components/molecules/editableCard'
 
 const MyPage = (): JSX.Element => {
     const user = useLogin()
@@ -52,17 +52,13 @@ const MyPage = (): JSX.Element => {
         () =>
             posts.map((post, index) => (
                 <CardWrapper key={index}>
-                    <Card
+                    <EditableCard
                         key={index}
                         imgUrl={post.imageUrl}
                         description={post.title}
                         link={`/posts/${post.id ?? ''}`}
                         side={post.side}
                     />
-                    <ButtonWrapper>
-                        <EditButton>編集</EditButton>
-                        <DeleteButton>削除</DeleteButton>
-                    </ButtonWrapper>
                 </CardWrapper>
             )),
         [posts],
@@ -70,12 +66,12 @@ const MyPage = (): JSX.Element => {
 
     return (
         <Main>
-            <React.Fragment>
+            <Wrapper>
                 <LoginStatus>
                     <Title>アカウント状況</Title>
                     <ShareInner>
-                        <TwitterButton onClick={() => {}} isActive={isActiveTwitter} />
-                        <FacebookButton onClick={() => {}} isActive={isActiveFacebook} />
+                        <TwitterButton onClick={signInTwitter} isActive={isActiveTwitter} />
+                        <FacebookButton onClick={signInFacebook} isActive={isActiveFacebook} />
                     </ShareInner>
                     <TextWrapper>
                         <Terms onClick={toggleTerms}>利用規約</Terms>
@@ -95,16 +91,24 @@ const MyPage = (): JSX.Element => {
                     <TermsModal isShowing={isShowingTerms} toggle={toggleTerms} />
                     <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
                 </LoginStatus>
-                <Past>
-                    <Title>過去に作成した声</Title>
-                </Past>
-                <div>{myPosts}</div>
-            </React.Fragment>
+                {user && (
+                    <React.Fragment>
+                        <Past>
+                            <Title>過去に作成した声</Title>
+                        </Past>
+                        <div>{myPosts}</div>
+                    </React.Fragment>
+                )}
+            </Wrapper>
         </Main>
     )
 }
 
 export default MyPage
+
+const Wrapper = styled.div`
+    padding-bottom: 40px;
+`
 
 const LoginStatus = styled.div`
     width: 600px;
@@ -205,32 +209,6 @@ const PrivacyPolicy = styled.p`
 
 const CardWrapper = styled.div`
     padding-bottom: 60px;
-`
-
-const ButtonWrapper = styled.div`
-    display: flex;
-    width: 690px;
-    margin: 0 auto;
-    justify-content: space-between;
-`
-
-const ButtonStyle = css`
-    width: 325px;
-    height: 80px;
-    background-color: #bdbdbd;
-    color: #fff;
-    font-size: 30px;
-    line-height: 80px;
-    text-align: center;
-    border-radius: 10px;
-`
-
-const EditButton = styled.button`
-    ${ButtonStyle}
-`
-
-const DeleteButton = styled.button`
-    ${ButtonStyle}
 `
 
 const LogoutButton = styled(Button)``

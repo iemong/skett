@@ -160,11 +160,7 @@ const Register = (): JSX.Element => {
                                 </FormBox>
                                 <Howto onClick={toggle}>使いかた</Howto>
                                 <ThemeHowtoModal isShowing={isShowing} toggle={toggle} />
-                                <ConfirmButton
-                                    width={'400px'}
-                                    height={'80px'}
-                                    onClick={handleSubmit(onRegister)}
-                                >
+                                <ConfirmButton width={'400px'} height={'80px'} onClick={handleSubmit(onRegister)}>
                                     内容確認
                                 </ConfirmButton>
                                 <Link href={'/'}>

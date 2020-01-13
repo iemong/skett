@@ -19,8 +19,7 @@ const Logins = (props: Props): JSX.Element => {
 
 export default Logins
 
-const LoginInner = styled.div`
-`
+const LoginInner = styled.div``
 
 const TwitterButton = styled.button`
     display: block;
