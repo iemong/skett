@@ -12,4 +12,4 @@ export enum Z_INDEX_LIST {
     MODAL,
 }
 
-export const BASE_OGP_URL = 'https://skett-ffff1.firebaseapp.com/share/'
+export const BASE_OGP_URL = 'http://fukko-skett.jp/share/'
