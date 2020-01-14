@@ -40,6 +40,14 @@ const drawImage = async (context: CanvasRenderingContext2D, imageData: string): 
     return context
 }
 
+const drawImageDefault = async (context: CanvasRenderingContext2D): Promise<CanvasRenderingContext2D> => {
+    const image = await preloadImage('/img/svg/ogp_pic_default.svg')
+    context.save()
+    context.drawImage(image, 674, 160)
+    context.restore()
+    return context
+}
+
 const drawText = (context: CanvasRenderingContext2D, text: string): CanvasRenderingContext2D => {
     const fontSize = 84
     const lineHeight = 1.25
@@ -95,7 +103,11 @@ export default async (options: Options) => {
     const ctx = canvas.getContext('2d')
     if (!ctx) return canvas
     drawBG(ctx, options.postType)
-    await drawImage(ctx, options.imageData)
+    if (options.imageData) {
+        await drawImage(ctx, options.imageData)
+    } else {
+        await drawImageDefault(ctx)
+    }
     drawText(ctx, options.text)
     await drawMore(ctx)
     return canvas
