@@ -10,7 +10,7 @@ import { State as rootState } from 'reducers'
 import ApplyLogin from 'components/organisms/apply/login'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
-import { PostType } from 'types/index'
+import { PostType, UserType } from 'types/index'
 
 type Props = {
     postId: string
@@ -28,10 +28,16 @@ const Apply = (props: Props): JSX.Element => {
         try {
             const db = firebaseApp.firestore()
             const docRef = db.collection(COLLECTIONS.POSTS)
+            const userInfo: UserType = {
+                displayName: user.displayName,
+                email: user.email,
+                uid: user.uid,
+                photoURL: user.photoURL,
+            }
             await docRef
                 .doc(postId)
                 .update({
-                    applicants: firebase.firestore.FieldValue.arrayUnion(user.uid),
+                    applicants: firebase.firestore.FieldValue.arrayUnion(userInfo),
                 })
                 .catch(e => {
                     console.log(e)
