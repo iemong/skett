@@ -18,6 +18,6 @@ export type PostType = {
     ogpImageUrl: string
     side: 'help' | 'support'
     timestamp: number
-    applicants?: string[]
+    applicants?: UserType[]
     isEnd: boolean
 }

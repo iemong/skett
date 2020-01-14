@@ -19,6 +19,7 @@ const Home = (): JSX.Element => {
 
     const loadPostsData = React.useCallback(async () => {
         const data = await docRef
+            .where('isEnd', '==', false)
             .orderBy('timestamp', 'desc')
             .get()
             .catch(e => console.error(e))
