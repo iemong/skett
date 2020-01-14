@@ -37,7 +37,7 @@ class MyApp extends App<Props> {
                         content="スケットは被災した地域の現地の声と、支援者を直接結びつけるサービスです。支援者として、事前に登録しておくことで、万が一に備えます。"
                     />
                     <meta property="og:url" content="https://fukko-skett.jp/" />
-                    <meta property="og:image" content="" />
+                    <meta property="og:image" content="https://fukko-skett.jp/img/ogp.jpg" />
                     <meta property="og:title" content="スケット | 被災地の助っ人マッチング" />
                     <link rel="canonical" href="https://fukko-skett.jp/" />
                     <link
