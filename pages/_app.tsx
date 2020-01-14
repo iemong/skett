@@ -39,6 +39,7 @@ class MyApp extends App<Props> {
                     <meta property="og:url" content="https://fukko-skett.jp/" />
                     <meta property="og:image" content="https://fukko-skett.jp/img/ogp.jpg" />
                     <meta property="og:title" content="スケット | 被災地の助っ人マッチング" />
+                    <meta name="twitter:card" content="summary_large_image" />
                     <link rel="canonical" href="https://fukko-skett.jp/" />
                     <link
                         href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap&subset=japanese"
