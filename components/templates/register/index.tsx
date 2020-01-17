@@ -192,6 +192,7 @@ const Register = (): JSX.Element => {
                             setIsConsent(true)
                         }}
                         hasUser={!!user}
+                        user={user}
                     />
                 )}
             </Wrapper>
