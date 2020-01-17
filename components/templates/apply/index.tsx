@@ -75,6 +75,7 @@ const Apply = (props: Props): JSX.Element => {
                         setIsConsent(true)
                     }}
                     hasUser={!!user}
+                    user={user}
                 />
             </Wrapper>
         )

@@ -10,13 +10,23 @@ import PrivacyPolicyModal from 'components/molecules/modal/PrivacyPolicyModal'
 type Props = {
     title: string
     onChangeCheck?: (value: boolean) => void
+    user: firebase.User | null
 }
 
 const Login = (props: Props): JSX.Element => {
-    const { title, onChangeCheck } = props
+    const { title, onChangeCheck, user } = props
     const [isConsent, setIsConsent] = React.useState<boolean>(false)
     const { isShowing: isShowingTerms, toggle: toggleTerms } = useModal()
     const { isShowing: isShowingPrivacyPolicy, toggle: togglePrivacyPolicy } = useModal()
+
+    const isActiveFacebook = React.useMemo(
+        () => user?.providerData.map(data => data?.providerId).includes('facebook.com') || false,
+        [user],
+    )
+    const isActiveTwitter = React.useMemo(
+        () => user?.providerData.map(data => data?.providerId).includes('twitter.com') || false,
+        [user],
+    )
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setIsConsent(e.target.value === 'false')
@@ -31,11 +41,16 @@ const Login = (props: Props): JSX.Element => {
                 <br />
                 ログインする必要があります。
             </Lead>
-            <Logins onClickTwitter={signInTwitter} onClickFacebook={signInFacebook} />
+            <Logins
+                onClickTwitter={signInTwitter}
+                onClickFacebook={signInFacebook}
+                isLoginTwitter={isActiveTwitter}
+                isLoginFacebook={isActiveFacebook}
+            />
             <Regulation onClick={toggleTerms}>利用規約</Regulation>
             <PrivacyPolicy onClick={togglePrivacyPolicy}>プライバシーポリシー</PrivacyPolicy>
-            <TermsModal isShowing={isShowingTerms} toggle={toggleTerms} onClickPrivacyPolicy={togglePrivacyPolicy}/>
-            <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy}  />
+            <TermsModal isShowing={isShowingTerms} toggle={toggleTerms} onClickPrivacyPolicy={togglePrivacyPolicy} />
+            <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
             <CheckBoxWrapper>
                 <CheckBox type={'checkbox'} name={'consent'} value={String(isConsent)} onChange={onChange} />
                 <ConfirmText>上記の2点を確認しました</ConfirmText>
