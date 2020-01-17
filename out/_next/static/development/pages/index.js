@@ -30,7 +30,7 @@ var Z_INDEX_LIST;
   Z_INDEX_LIST[Z_INDEX_LIST["MODAL"] = 3] = "MODAL";
 })(Z_INDEX_LIST || (Z_INDEX_LIST = {}));
 
-var BASE_OGP_URL = 'https://skett-ffff1.firebaseapp.com/share/';
+var BASE_OGP_URL = 'https://fukko-skett.jp/share/';
 
 /***/ }),
 
@@ -519,7 +519,6 @@ function _templateObject() {
 
 
 
-
 var Tab = function Tab(props) {
   var leftContent = props.leftContent,
       rightContent = props.rightContent,
@@ -528,6 +527,11 @@ var Tab = function Tab(props) {
       className = props.className,
       tabSide = props.tabSide;
   var router = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["useRouter"])();
+
+  var _useSelector = Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["useSelector"])(function (state) {
+    return state.rootReducer.tab;
+  }),
+      side = _useSelector.side;
 
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_2__["useState"](tabSide),
       _React$useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_React$useState, 2),
@@ -538,31 +542,34 @@ var Tab = function Tab(props) {
   var actions = react__WEBPACK_IMPORTED_MODULE_2__["useMemo"](function () {
     return Object(redux__WEBPACK_IMPORTED_MODULE_6__["bindActionCreators"])(_reducers_tab_actions__WEBPACK_IMPORTED_MODULE_8__, dispatch);
   }, [dispatch]);
+  react__WEBPACK_IMPORTED_MODULE_2__["useEffect"](function () {
+    setTabName(side === 'help' ? 'left' : 'right');
+  }, [side]);
   var helpClickHandler = react__WEBPACK_IMPORTED_MODULE_2__["useCallback"](function () {
     if (router.pathname !== '/') return;
     setTabName('left');
     actions.update('help');
     if (onClickLeft) onClickLeft();
     if (!rightContent) next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push('/');
-  }, [actions, onClickLeft, rightContent]);
+  }, [actions, onClickLeft, rightContent, router.pathname]);
   var supportClickHandler = react__WEBPACK_IMPORTED_MODULE_2__["useCallback"](function () {
     if (router.pathname !== '/') return;
     setTabName('right');
     actions.update('support');
     if (onClickRight) onClickRight();
     if (!leftContent) next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push('/');
-  }, [actions, leftContent, onClickRight]);
+  }, [actions, leftContent, onClickRight, router.pathname]);
   return __jsx(Tabs, {
     className: className,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 53
     },
     __self: this
   }, __jsx(TabList, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 47
+      lineNumber: 54
     },
     __self: this
   }, __jsx(TabHelp, {
@@ -570,7 +577,7 @@ var Tab = function Tab(props) {
     "data-selected": tabName === 'left',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 55
     },
     __self: this
   }), __jsx(TabSupport, {
@@ -578,19 +585,19 @@ var Tab = function Tab(props) {
     "data-selected": tabName === 'right',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 49
+      lineNumber: 56
     },
     __self: this
   })), tabName === 'left' && __jsx(TabPanel, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 51
+      lineNumber: 58
     },
     __self: this
   }, leftContent) || tabName === 'right' && __jsx(TabPanel, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 59
     },
     __self: this
   }, rightContent));

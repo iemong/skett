@@ -4902,7 +4902,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
       __self: this
     }), __jsx("meta", {
       property: "og:image",
-      content: "",
+      content: "https://fukko-skett.jp/img/ogp.jpg",
       __source: {
         fileName: _jsxFileName,
         lineNumber: 40
@@ -4916,12 +4916,20 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
         lineNumber: 41
       },
       __self: this
+    }), __jsx("meta", {
+      name: "twitter:card",
+      content: "summary_large_image",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 42
+      },
+      __self: this
     }), __jsx("link", {
       rel: "canonical",
       href: "https://fukko-skett.jp/",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 42
+        lineNumber: 43
       },
       __self: this
     }), __jsx("link", {
@@ -4929,7 +4937,7 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
       rel: "stylesheet",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 43
+        lineNumber: 44
       },
       __self: this
     })), __jsx(_emotion_core__WEBPACK_IMPORTED_MODULE_5__["Global"], {
@@ -4968,13 +4976,13 @@ class MyApp extends next_app__WEBPACK_IMPORTED_MODULE_2___default.a {
                     `,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 48
+        lineNumber: 49
       },
       __self: this
     }), __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, pageProps, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 83
+        lineNumber: 84
       },
       __self: this
     })));
