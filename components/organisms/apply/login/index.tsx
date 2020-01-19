@@ -10,10 +10,11 @@ type Props = {
     onConsent: () => void
     hasUser: boolean
     user: firebase.User | null
+    side: 'support' | 'help'
 }
 
 const ApplyLogin = (props: Props): JSX.Element => {
-    const { onConsent, hasUser, user } = props
+    const { onConsent, hasUser, user, side } = props
     const [canAdd, setCanAdd] = React.useState(false)
     const handleCheck = (value: boolean): void => {
         setCanAdd(value)
@@ -28,7 +29,7 @@ const ApplyLogin = (props: Props): JSX.Element => {
         <div>
             <Login title={'ログイン'} onChangeCheck={handleCheck} user={user} />
             <ApplyButton width={'400px'} height={'80px'} disable={!(canAdd && hasUser)} onClick={handleConsent}>
-                声の追加
+                {side ? '応募する' : '頼む'}
             </ApplyButton>
             <Link href={'/'}>
                 <BackButton width={'400px'} height={'80px'} styleType="cancel">

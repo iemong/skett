@@ -76,6 +76,7 @@ const Apply = (props: Props): JSX.Element => {
                     }}
                     hasUser={!!user}
                     user={user}
+                    side={side}
                 />
             </Wrapper>
         )
