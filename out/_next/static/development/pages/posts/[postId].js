@@ -682,6 +682,336 @@ var ThemeButton = function ThemeButton(props) {
 
 /***/ }),
 
+/***/ "./components/molecules/theme/ThemeTitle.tsx":
+/*!***************************************************!*\
+  !*** ./components/molecules/theme/ThemeTitle.tsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
+
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/molecules/theme/ThemeTitle.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
+
+function _templateObject() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    padding-bottom: 33px;\n    font-size: 38px;\n    text-align: center;\n    color: #000;\n    &::before {\n        content: '';\n        position: absolute;\n        left: 50%;\n        bottom: 0;\n        width: 100px;\n        height: 5px;\n        background-image: ", ";\n        transform: translateX(-50%);\n    }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+
+
+
+
+var ThemeTitle = function ThemeTitle(props) {
+  var children = props.children,
+      className = props.className;
+
+  var _useSelector = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["useSelector"])(function (state) {
+    return state.rootReducer.tab;
+  }),
+      side = _useSelector.side;
+
+  return __jsx(Title, {
+    side: side,
+    className: className,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: this
+  }, children);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ThemeTitle);
+var Title = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].h1(_templateObject(), function (props) {
+  return props.side === 'help' ? 'linear-gradient(to left, #00b4ed, #0091db)' : 'linear-gradient(to left, #00AEBB, #00A968)';
+});
+
+/***/ }),
+
+/***/ "./components/organisms/post/Applicant.tsx":
+/*!*************************************************!*\
+  !*** ./components/organisms/post/Applicant.tsx ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
+/* harmony import */ var _molecules_theme_ThemeTitle__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../molecules/theme/ThemeTitle */ "./components/molecules/theme/ThemeTitle.tsx");
+
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/organisms/post/Applicant.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
+
+function _templateObject13() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 41px;\n    height: 41px;\n    background-image: url(/img/svg/icn_facebook_off.svg);\n"]);
+
+  _templateObject13 = function _templateObject13() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject12() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 41px;\n    height: 33px;\n    background-image: url(/img/svg/icn_twitter_off.svg);\n    margin-right: 24px;\n"]);
+
+  _templateObject12 = function _templateObject12() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject11() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    align-items: center;\n"]);
+
+  _templateObject11 = function _templateObject11() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject10() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    font-size: 22px;\n"]);
+
+  _templateObject10 = function _templateObject10() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject9() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: block;\n    width: 67px;\n    height: 67px;\n    margin-right: 24px;\n    border-radius: 50%;\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    align-items: center;\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    justify-content: space-between;\n    width: 690px;\n    margin: 0 auto 40px;\n    padding: 36px;\n    box-sizing: border-box;\n    background-color: #fff;\n    border: 3px solid ", ";\n    border-radius: 14px;\n    &:last-of-type {\n        margin-bottom: 0;\n    }\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-bottom: 120px;\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    font-size: 22px;\n    line-height: 1.75;\n    text-align: center;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-bottom: 45px;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 600px;\n    margin: 60px auto 70px;\n    padding: 75px 40px 75px;\n    background-color: #fff;\n    border-radius: 16px;\n    box-sizing: border-box;\n    overflow: hidden;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+
+
+
+
+var Applicant = function Applicant(props) {
+  var users = props.users,
+      side = props.side;
+  var usersElm = react__WEBPACK_IMPORTED_MODULE_1__["useMemo"](function () {
+    if (!users) return;
+    return users.reverse().map(function (user) {
+      return __jsx(UserWrapper, {
+        key: user.uid,
+        side: side,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17
+        },
+        __self: this
+      }, __jsx(User, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18
+        },
+        __self: this
+      }, __jsx(Icon, {
+        src: user.photoURL || '/img/icn_default.png',
+        alt: "",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 19
+        },
+        __self: this
+      }), __jsx(UserInfo, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20
+        },
+        __self: this
+      }, __jsx(UserName, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 21
+        },
+        __self: this
+      }, user.displayName))), __jsx(SnsWrapper, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 24
+        },
+        __self: this
+      }, __jsx(Twitter, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 25
+        },
+        __self: this
+      }), __jsx(Facebook, {
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 26
+        },
+        __self: this
+      })));
+    });
+  }, [side, users]);
+  return __jsx(Wrapper, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: this
+  }, __jsx(TitleBox, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: this
+  }, __jsx(Title, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
+    },
+    __self: this
+  }, "\u3053\u306E\u52DF\u96C6\u306B\u5FDC\u52DF\u3057\u305F\u4EBA"), __jsx(Lead, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 36
+    },
+    __self: this
+  }, "\u983C\u307F\u305F\u3044\u4EBA\u306B\u3001SNS\u3067", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 38
+    },
+    __self: this
+  }), "\u76F4\u63A5\u9023\u7D61\u3092\u3068\u3063\u3066\u307F\u307E\u3057\u3087\u3046\u3002")), __jsx(Users, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: this
+  }, users && usersElm));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Applicant);
+var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject());
+var TitleBox = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject2());
+var Title = Object(_emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"])(_molecules_theme_ThemeTitle__WEBPACK_IMPORTED_MODULE_3__["default"])(_templateObject3());
+var Lead = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].p(_templateObject4());
+var Users = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject5());
+var UserWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject6(), function (props) {
+  return props.side === 'help' ? '#0091DB' : '#00A968';
+});
+var User = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject7());
+var Icon = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].img(_templateObject8());
+var UserInfo = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject9());
+var UserName = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].p(_templateObject10());
+var SnsWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject11());
+var Twitter = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject12());
+var Facebook = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject13());
+
+/***/ }),
+
 /***/ "./components/organisms/tab/index.tsx":
 /*!********************************************!*\
   !*** ./components/organisms/tab/index.tsx ***!
@@ -1036,6 +1366,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _molecules_theme_ThemeButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../molecules/theme/ThemeButton */ "./components/molecules/theme/ThemeButton.tsx");
 /* harmony import */ var _atoms_Button__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../atoms/Button */ "./components/atoms/Button.tsx");
 /* harmony import */ var _hooks_useLogin__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../hooks/useLogin */ "./components/hooks/useLogin.tsx");
+/* harmony import */ var _organisms_post_Applicant__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../organisms/post/Applicant */ "./components/organisms/post/Applicant.tsx");
 
 var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/templates/posts/detail.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
@@ -1102,6 +1433,7 @@ function _templateObject() {
 
 
 
+
 var PostDetail = function PostDetail(props) {
   var data = props.data;
 
@@ -1111,6 +1443,9 @@ var PostDetail = function PostDetail(props) {
       side = _useSelector.side;
 
   var user = Object(_hooks_useLogin__WEBPACK_IMPORTED_MODULE_11__["default"])();
+  var isMyPost = react__WEBPACK_IMPORTED_MODULE_1__["useMemo"](function () {
+    return (user === null || user === void 0 ? void 0 : user.uid) === (data === null || data === void 0 ? void 0 : data.user.uid);
+  }, [data, user]);
   var postElement = react__WEBPACK_IMPORTED_MODULE_1__["useMemo"](function () {
     var _data$user;
 
@@ -1118,7 +1453,7 @@ var PostDetail = function PostDetail(props) {
     return __jsx(Wrapper, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 28
+        lineNumber: 33
       },
       __self: this
     }, __jsx(DetailCardWithMargin, {
@@ -1130,7 +1465,15 @@ var PostDetail = function PostDetail(props) {
       updateDate: data.updateDate,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 29
+        lineNumber: 34
+      },
+      __self: this
+    }), isMyPost && __jsx(_organisms_post_Applicant__WEBPACK_IMPORTED_MODULE_12__["default"], {
+      users: data === null || data === void 0 ? void 0 : data.applicants,
+      side: side,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 42
       },
       __self: this
     }), (user === null || user === void 0 ? void 0 : user.uid) === ((_data$user = data.user) === null || _data$user === void 0 ? void 0 : _data$user.uid) ? __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
@@ -1143,7 +1486,7 @@ var PostDetail = function PostDetail(props) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 38
+        lineNumber: 44
       },
       __self: this
     }, __jsx(EditButton, {
@@ -1151,7 +1494,7 @@ var PostDetail = function PostDetail(props) {
       height: '80px',
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 39
+        lineNumber: 45
       },
       __self: this
     }, "\u7DE8\u96C6\u3059\u308B")) : __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
@@ -1163,7 +1506,7 @@ var PostDetail = function PostDetail(props) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 44
+        lineNumber: 50
       },
       __self: this
     }, __jsx(ApplyButton, {
@@ -1171,7 +1514,7 @@ var PostDetail = function PostDetail(props) {
       height: '80px',
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 45
+        lineNumber: 51
       },
       __self: this
     }, "\u5FDC\u52DF\u3059\u308B")), __jsx(BackButton, {
@@ -1183,11 +1526,11 @@ var PostDetail = function PostDetail(props) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50
+        lineNumber: 56
       },
       __self: this
     }, "\u623B\u308B"));
-  }, [data, side, user]);
+  }, [data, isMyPost, side, user]);
   var tabElement = react__WEBPACK_IMPORTED_MODULE_1__["useMemo"](function () {
     return side === 'help' ? __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
       leftContent: postElement,
@@ -1197,7 +1540,7 @@ var PostDetail = function PostDetail(props) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 59
+        lineNumber: 65
       },
       __self: this
     }) : __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -1208,7 +1551,7 @@ var PostDetail = function PostDetail(props) {
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 61
+        lineNumber: 67
       },
       __self: this
     });
@@ -1216,7 +1559,7 @@ var PostDetail = function PostDetail(props) {
   return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 70
     },
     __self: this
   }, tabElement);
@@ -58881,7 +59224,7 @@ var INITIALIZE = 'user/initialize';
 
 /***/ }),
 
-/***/ 1:
+/***/ 4:
 /*!**************************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx ***!
   \**************************************************************************************************************************************************************************************/
@@ -58904,5 +59247,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
+},[[4,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[postId].js.map
