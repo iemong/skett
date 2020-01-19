@@ -11,6 +11,7 @@ import { State as rootState } from 'reducers'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
 import Button from 'components/atoms/Button'
 import useLogin from 'components/hooks/useLogin'
+import Applicant from 'components/organisms/post/Applicant'
 
 type Props = {
     data: PostType | null
@@ -21,6 +22,10 @@ const PostDetail = (props: Props): JSX.Element => {
 
     const { side } = useSelector((state: rootState) => state.rootReducer.tab)
     const user = useLogin()
+
+    const isMyPost = React.useMemo(() => {
+        return user?.uid === data?.user.uid
+    }, [data, user])
 
     const postElement = React.useMemo(() => {
         if (!data) return <>Loading</>
@@ -34,6 +39,7 @@ const PostDetail = (props: Props): JSX.Element => {
                     side={side}
                     updateDate={data.updateDate}
                 />
+                {isMyPost && <Applicant users={data?.applicants} side={side} />}
                 {user?.uid === data.user?.uid ? (
                     <Link href={{ pathname: '/edit', query: { postId: data.id, side } }}>
                         <EditButton width={'400px'} height={'80px'}>
@@ -52,7 +58,7 @@ const PostDetail = (props: Props): JSX.Element => {
                 </BackButton>
             </Wrapper>
         )
-    }, [data, side, user])
+    }, [data, isMyPost, side, user])
 
     const tabElement = React.useMemo(() => {
         return side === 'help' ? (
