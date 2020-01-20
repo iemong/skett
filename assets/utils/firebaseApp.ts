@@ -6,7 +6,7 @@ import 'firebase/storage'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyBr0FCyYPvxlzYpIE-hdGyqd6eo2firVFU',
-    authDomain: 'skett-ffff1.firebaseapp.com',
+    authDomain: 'fukko-skett.jp',
     databaseURL: 'https://skett-ffff1.firebaseio.com',
     projectId: 'skett-ffff1',
     storageBucket: 'skett-ffff1.appspot.com',
