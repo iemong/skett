@@ -1,6 +1,7 @@
 import * as firebase from 'firebase/app'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
+import OAuthCredential = firebase.auth.OAuthCredential
 
 export const createUser = async (email: string, password: string): Promise<firebase.auth.UserCredential> =>
     await firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -11,7 +12,11 @@ export const signInUser = async (email: string, password: string): Promise<fireb
 export const signInFacebook = async (): Promise<firebase.auth.UserCredential> => {
     const provider = new firebase.auth.FacebookAuthProvider()
     const result = await firebase.auth().signInWithPopup(provider)
+    console.log(result)
+    const token = (result?.credential as OAuthCredential).accessToken
     const db = firebaseApp.firestore()
+    const hoge = await fetch(`https://graph.facebook.com/me?&access_token=${token}`)
+    console.log(hoge)
     const userDocRef = db.collection(COLLECTIONS.USERS).doc(result.user?.uid)
     const userInfo = {
         uid: result.user?.uid,
