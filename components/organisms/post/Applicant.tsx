@@ -22,8 +22,18 @@ const Applicant = (props: Props): JSX.Element => {
                     </UserInfo>
                 </User>
                 <SnsWrapper>
-                    <Twitter />
-                    <Facebook />
+                    <Twitter
+                        data-active={user.providerId === 'twitter.com'}
+                        onClick={(): void => {
+                            window.open(`https://twitter.com/${user.userName}`)
+                        }}
+                    />
+                    <Facebook
+                        data-active={user.providerId === 'facebook.com'}
+                        onClick={(): void => {
+                            window.open(`https://www.facebook.com/${user.userName}`)
+                        }}
+                    />
                 </SnsWrapper>
             </UserWrapper>
         ))
@@ -115,9 +125,17 @@ const Twitter = styled.div`
     height: 33px;
     background-image: url(/img/svg/icn_twitter_off.svg);
     margin-right: 24px;
+    &[data-active='true'] {
+        background-image: url(/img/svg/icn_twitter_on.svg);
+    }
+    cursor: pointer;
 `
 const Facebook = styled.div`
     width: 41px;
     height: 41px;
     background-image: url(/img/svg/icn_facebook_off.svg);
+    &[data-active='true'] {
+        background-image: url(/img/svg/icn_facebook_off.svg);
+    }
+    cursor: pointer;
 `

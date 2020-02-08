@@ -28,16 +28,13 @@ const Apply = (props: Props): JSX.Element => {
         try {
             const db = firebaseApp.firestore()
             const docRef = db.collection(COLLECTIONS.POSTS)
-            const userInfo: UserType = {
-                displayName: user.displayName,
-                email: user.email,
-                uid: user.uid,
-                photoURL: user.photoURL,
-            }
+            const userDocRef = db.collection(COLLECTIONS.USERS)
+            const userData = await userDocRef.doc(user.uid).get()
+            if (!userData.exists) return
             await docRef
                 .doc(postId)
                 .update({
-                    applicants: firebase.firestore.FieldValue.arrayUnion(userInfo),
+                    applicants: firebase.firestore.FieldValue.arrayUnion(userData.data()),
                 })
                 .catch(e => {
                     console.log(e)
