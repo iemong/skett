@@ -3,6 +3,8 @@ export type UserType = {
     email: string | null
     uid: string
     photoURL: string | null
+    providerId: string
+    userName: string
 }
 
 export type PostType = {
