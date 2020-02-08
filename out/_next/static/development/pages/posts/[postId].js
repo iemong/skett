@@ -56,7 +56,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var firebaseConfig = {
   apiKey: 'AIzaSyBr0FCyYPvxlzYpIE-hdGyqd6eo2firVFU',
-  authDomain: 'skett-ffff1.firebaseapp.com',
+  authDomain: 'fukko-skett.jp',
   databaseURL: 'https://skett-ffff1.firebaseio.com',
   projectId: 'skett-ffff1',
   storageBucket: 'skett-ffff1.appspot.com',
@@ -760,7 +760,7 @@ var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/component
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
 
 function _templateObject13() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 41px;\n    height: 41px;\n    background-image: url(/img/svg/icn_facebook_off.svg);\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 41px;\n    height: 41px;\n    background-image: url(/img/svg/icn_facebook_off.svg);\n    &[data-active='true'] {\n        background-image: url(/img/svg/icn_facebook_off.svg);\n    }\n    cursor: pointer;\n"]);
 
   _templateObject13 = function _templateObject13() {
     return data;
@@ -770,7 +770,7 @@ function _templateObject13() {
 }
 
 function _templateObject12() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 41px;\n    height: 33px;\n    background-image: url(/img/svg/icn_twitter_off.svg);\n    margin-right: 24px;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 41px;\n    height: 33px;\n    background-image: url(/img/svg/icn_twitter_off.svg);\n    margin-right: 24px;\n    &[data-active='true'] {\n        background-image: url(/img/svg/icn_twitter_on.svg);\n    }\n    cursor: pointer;\n"]);
 
   _templateObject12 = function _templateObject12() {
     return data;
@@ -940,15 +940,23 @@ var Applicant = function Applicant(props) {
         },
         __self: this
       }, __jsx(Twitter, {
+        "data-active": user.providerId === 'twitter.com',
+        onClick: function onClick() {
+          window.open("https://twitter.com/".concat(user.userName));
+        },
         __source: {
           fileName: _jsxFileName,
           lineNumber: 25
         },
         __self: this
       }), __jsx(Facebook, {
+        "data-active": user.providerId === 'facebook.com',
+        onClick: function onClick() {
+          window.open("https://www.facebook.com/".concat(user.userName));
+        },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 26
+          lineNumber: 31
         },
         __self: this
       })));
@@ -957,37 +965,37 @@ var Applicant = function Applicant(props) {
   return __jsx(Wrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 33
+      lineNumber: 43
     },
     __self: this
   }, __jsx(TitleBox, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 34
+      lineNumber: 44
     },
     __self: this
   }, __jsx(Title, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 35
+      lineNumber: 45
     },
     __self: this
   }, "\u3053\u306E\u52DF\u96C6\u306B\u5FDC\u52DF\u3057\u305F\u4EBA"), __jsx(Lead, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 46
     },
     __self: this
   }, "\u983C\u307F\u305F\u3044\u4EBA\u306B\u3001SNS\u3067", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 38
+      lineNumber: 48
     },
     __self: this
   }), "\u76F4\u63A5\u9023\u7D61\u3092\u3068\u3063\u3066\u307F\u307E\u3057\u3087\u3046\u3002")), __jsx(Users, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 42
+      lineNumber: 52
     },
     __self: this
   }, users && usersElm));
@@ -59224,7 +59232,7 @@ var INITIALIZE = 'user/initialize';
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!**************************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx ***!
   \**************************************************************************************************************************************************************************************/
@@ -59247,5 +59255,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
+},[[3,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[postId].js.map
