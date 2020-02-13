@@ -66,6 +66,7 @@ const generateHtml = (url: string, id: string) => `
     <meta name="twitter:title" content=${title}>
     <meta name="twitter:description" content=${twDescription}>
     <meta name="twitter:image" content=${url}>
+    <link rel="canonical" href=${uniqUrl} />
   </head>
   <body>
     <script>
