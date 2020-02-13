@@ -118,7 +118,7 @@ const Edit = (props: Props): JSX.Element => {
                             />
                         )
                     ) : (
-                        <Result url={data.url} title="編集完了" />
+                        <Result url={`${data.url}?side=${side}`} title="編集完了" />
                     )
                 ) : (
                     <></>
