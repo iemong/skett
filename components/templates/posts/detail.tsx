@@ -2,16 +2,17 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 import Router from 'next/router'
-import { useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import Main from 'components/templates/layouts/Main'
 import { PostType } from 'types/index'
 import Tab from 'components/organisms/tab'
 import DetailCard from 'components/molecules/detailCard'
-import { State as rootState } from 'reducers'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
 import Button from 'components/atoms/Button'
 import useLogin from 'components/hooks/useLogin'
 import Applicant from 'components/organisms/post/Applicant'
+import * as Actions from 'reducers/tab/actions'
 
 type Props = {
     data: PostType | null
@@ -20,15 +21,24 @@ type Props = {
 const PostDetail = (props: Props): JSX.Element => {
     const { data } = props
 
-    const { side } = useSelector((state: rootState) => state.rootReducer.tab)
+    const side = React.useMemo(() => data?.side, [data])
     const user = useLogin()
+
+    const dispatch = useDispatch()
+    const actions = React.useMemo(() => {
+        return bindActionCreators(Actions, dispatch)
+    }, [dispatch])
+
+    React.useEffect(() => {
+        if (side) actions.update(side)
+    }, [actions, side])
 
     const isMyPost = React.useMemo(() => {
         return user?.uid === data?.user.uid
     }, [data, user])
 
     const postElement = React.useMemo(() => {
-        if (!data) return <>Loading</>
+        if (!data || !side) return <>Loading</>
         return (
             <Wrapper>
                 <DetailCardWithMargin
