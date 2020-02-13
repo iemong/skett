@@ -11,7 +11,11 @@ export const signInUser = async (email: string, password: string): Promise<fireb
 export const signInFacebook = async (): Promise<firebase.auth.UserCredential> => {
     const provider = new firebase.auth.FacebookAuthProvider()
     const result = await firebase.auth().signInWithPopup(provider)
+    console.log(result)
+    // const token = (result?.credential as firebase.auth.OAuthCredential).accessToken
     const db = firebaseApp.firestore()
+    // const hoge = await fetch(`https://graph.facebook.com/me?fields=id,name,link&access_token=${token}`)
+    // console.log(hoge.json())
     const userDocRef = db.collection(COLLECTIONS.USERS).doc(result.user?.uid)
     const userInfo = {
         uid: result.user?.uid,
@@ -19,7 +23,6 @@ export const signInFacebook = async (): Promise<firebase.auth.UserCredential> =>
         email: result.user?.email,
         photoURL: result.user?.photoURL,
         providerId: result.additionalUserInfo?.providerId,
-        userName: result.additionalUserInfo?.username,
     }
     await userDocRef.set(userInfo).catch(error => {
         console.error(error)

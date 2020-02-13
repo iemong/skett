@@ -25,7 +25,9 @@ const Applicant = (props: Props): JSX.Element => {
                     <Twitter
                         data-active={user.providerId === 'twitter.com'}
                         onClick={(): void => {
-                            window.open(`https://twitter.com/${user.userName}`)
+                            if (user.userName) {
+                                window.open(`https://twitter.com/${user.userName}`)
+                            }
                         }}
                     />
                     <Facebook
