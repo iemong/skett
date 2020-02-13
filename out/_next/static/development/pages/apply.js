@@ -88,7 +88,7 @@ function () {
   var _ref3 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
   /*#__PURE__*/
   _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-    var _result$user, _result$user2, _result$user3, _result$user4, _result$user5, _result$additionalUse, _result$additionalUse2;
+    var _result$user, _result$user2, _result$user3, _result$user4, _result$user5, _result$additionalUse;
 
     var provider, result, db, userDocRef, userInfo;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
@@ -101,25 +101,28 @@ function () {
 
           case 3:
             result = _context3.sent;
-            db = _utils_firebaseApp__WEBPACK_IMPORTED_MODULE_3__["default"].firestore();
+            console.log(result); // const token = (result?.credential as firebase.auth.OAuthCredential).accessToken
+
+            db = _utils_firebaseApp__WEBPACK_IMPORTED_MODULE_3__["default"].firestore(); // const hoge = await fetch(`https://graph.facebook.com/me?fields=id,name,link&access_token=${token}`)
+            // console.log(hoge.json())
+
             userDocRef = db.collection(_constant__WEBPACK_IMPORTED_MODULE_4__["COLLECTIONS"].USERS).doc((_result$user = result.user) === null || _result$user === void 0 ? void 0 : _result$user.uid);
             userInfo = {
               uid: (_result$user2 = result.user) === null || _result$user2 === void 0 ? void 0 : _result$user2.uid,
               displayName: (_result$user3 = result.user) === null || _result$user3 === void 0 ? void 0 : _result$user3.displayName,
               email: (_result$user4 = result.user) === null || _result$user4 === void 0 ? void 0 : _result$user4.email,
               photoURL: (_result$user5 = result.user) === null || _result$user5 === void 0 ? void 0 : _result$user5.photoURL,
-              providerId: (_result$additionalUse = result.additionalUserInfo) === null || _result$additionalUse === void 0 ? void 0 : _result$additionalUse.providerId,
-              userName: (_result$additionalUse2 = result.additionalUserInfo) === null || _result$additionalUse2 === void 0 ? void 0 : _result$additionalUse2.username
+              providerId: (_result$additionalUse = result.additionalUserInfo) === null || _result$additionalUse === void 0 ? void 0 : _result$additionalUse.providerId
             };
-            _context3.next = 9;
+            _context3.next = 10;
             return userDocRef.set(userInfo)["catch"](function (error) {
               console.error(error);
             });
 
-          case 9:
+          case 10:
             return _context3.abrupt("return", result);
 
-          case 10:
+          case 11:
           case "end":
             return _context3.stop();
         }
@@ -137,7 +140,7 @@ function () {
   var _ref4 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
   /*#__PURE__*/
   _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-    var _result$user6, _result$user7, _result$user8, _result$user9, _result$user10, _result$additionalUse3, _result$additionalUse4;
+    var _result$user6, _result$user7, _result$user8, _result$user9, _result$user10, _result$additionalUse2, _result$additionalUse3;
 
     var provider, result, db, userDocRef, userInfo;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
@@ -157,8 +160,8 @@ function () {
               displayName: (_result$user8 = result.user) === null || _result$user8 === void 0 ? void 0 : _result$user8.displayName,
               email: (_result$user9 = result.user) === null || _result$user9 === void 0 ? void 0 : _result$user9.email,
               photoURL: (_result$user10 = result.user) === null || _result$user10 === void 0 ? void 0 : _result$user10.photoURL,
-              providerId: (_result$additionalUse3 = result.additionalUserInfo) === null || _result$additionalUse3 === void 0 ? void 0 : _result$additionalUse3.providerId,
-              userName: (_result$additionalUse4 = result.additionalUserInfo) === null || _result$additionalUse4 === void 0 ? void 0 : _result$additionalUse4.username
+              providerId: (_result$additionalUse2 = result.additionalUserInfo) === null || _result$additionalUse2 === void 0 ? void 0 : _result$additionalUse2.providerId,
+              userName: (_result$additionalUse3 = result.additionalUserInfo) === null || _result$additionalUse3 === void 0 ? void 0 : _result$additionalUse3.username
             };
             _context4.next = 9;
             return userDocRef.set(userInfo)["catch"](function (error) {
@@ -2625,7 +2628,7 @@ var ApplyResult = function ApplyResult(props) {
     },
     __self: this
   }, post === null || post === void 0 ? void 0 : (_post$user2 = post.user) === null || _post$user2 === void 0 ? void 0 : _post$user2.displayName))))), __jsx(_share__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    url: (post === null || post === void 0 ? void 0 : post.url) || '',
+    url: "".concat(post === null || post === void 0 ? void 0 : post.url, "?side=").concat(post === null || post === void 0 ? void 0 : post.side) || '',
     __source: {
       fileName: _jsxFileName,
       lineNumber: 47
@@ -73068,7 +73071,7 @@ var INITIALIZE = 'user/initialize';
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!****************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fapply&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fapply%2Findex.tsx ***!
   \****************************************************************************************************************************************************************/
@@ -73091,5 +73094,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
+},[[3,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=apply.js.map

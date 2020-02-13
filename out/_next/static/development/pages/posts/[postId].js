@@ -942,7 +942,9 @@ var Applicant = function Applicant(props) {
       }, __jsx(Twitter, {
         "data-active": user.providerId === 'twitter.com',
         onClick: function onClick() {
-          window.open("https://twitter.com/".concat(user.userName));
+          if (user.userName) {
+            window.open("https://twitter.com/".concat(user.userName));
+          }
         },
         __source: {
           fileName: _jsxFileName,
@@ -956,7 +958,7 @@ var Applicant = function Applicant(props) {
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 31
+          lineNumber: 33
         },
         __self: this
       })));
@@ -965,37 +967,37 @@ var Applicant = function Applicant(props) {
   return __jsx(Wrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 45
     },
     __self: this
   }, __jsx(TitleBox, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 44
+      lineNumber: 46
     },
     __self: this
   }, __jsx(Title, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 45
+      lineNumber: 47
     },
     __self: this
   }, "\u3053\u306E\u52DF\u96C6\u306B\u5FDC\u52DF\u3057\u305F\u4EBA"), __jsx(Lead, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 46
+      lineNumber: 48
     },
     __self: this
   }, "\u983C\u307F\u305F\u3044\u4EBA\u306B\u3001SNS\u3067", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 48
+      lineNumber: 50
     },
     __self: this
   }), "\u76F4\u63A5\u9023\u7D61\u3092\u3068\u3063\u3066\u307F\u307E\u3057\u3087\u3046\u3002")), __jsx(Users, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 52
+      lineNumber: 54
     },
     __self: this
   }, users && usersElm));
@@ -59232,7 +59234,7 @@ var INITIALIZE = 'user/initialize';
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
 /*!**************************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fposts%2F%5BpostId%5D&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fposts%2F%5BpostId%5D.tsx ***!
   \**************************************************************************************************************************************************************************************/
@@ -59255,5 +59257,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[3,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=[postId].js.map
