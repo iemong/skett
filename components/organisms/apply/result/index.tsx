@@ -44,7 +44,7 @@ const ApplyResult = (props: Props): JSX.Element => {
                     </User>
                 </Footer>
             </TitleWrapper>
-            <Share url={`${post?.url}?side=${post?.side}` || ''} />
+            <Share url={post?.url || ''} />
             <Link href={'/'}>
                 <TopButton styleType="cancel" width={'400px'} height={'80px'}>
                     TOPへ
