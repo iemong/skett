@@ -87,6 +87,7 @@ const Description = styled.p`
     font-size: 25px;
     line-height: 1.5;
     margin-bottom: 48px;
+    white-space: pre-wrap;
 `
 
 const Footer = styled.div`
