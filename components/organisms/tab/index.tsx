@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import Router, { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import css from 'emotion/css'
 import { Z_INDEX_LIST } from 'assets/constant'
 import * as Actions from 'reducers/tab/actions'
 import { State as rootState } from 'reducers'
@@ -69,30 +70,33 @@ const TabList = styled.div`
     height: 91px;
 `
 
-const TabHelp = styled.div`
+const TabStyle = css`
     position: absolute;
     width: 750px;
     height: 100%;
+    left: 50%;
     box-sizing: border-box;
-    background-image: url(/img/tab_help_off.png);
     z-index: ${Z_INDEX_LIST.TAB_FRONT};
+    transform: translateX(-50%);
     &[data-selected='true'] {
-        background-image: url(/img/tab_help_on.png);
         z-index: ${Z_INDEX_LIST.TAB_FRONT};
         pointer-events: none;
     }
 `
+
+const TabHelp = styled.div`
+    ${TabStyle};
+    background-image: url(/img/tab_help_off.png);
+    &[data-selected='true'] {
+        background-image: url(/img/tab_help_on.png);
+    }
+`
+
 const TabSupport = styled.div`
-    position: absolute;
-    width: 750px;
-    height: 100%;
-    box-sizing: border-box;
+    ${TabStyle};
     background-image: url(/img/tab_support_off.png);
-    z-index: ${Z_INDEX_LIST.TAB_BACK};
     &[data-selected='true'] {
         background-image: url(/img/tab_support_on.png);
-        z-index: ${Z_INDEX_LIST.TAB_FRONT};
-        pointer-events: none;
     }
 `
 
