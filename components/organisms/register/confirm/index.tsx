@@ -5,6 +5,7 @@ import { UserType } from 'types/index'
 import Button from 'components/atoms/Button'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
 import ThemeTitle from 'components/molecules/theme/ThemeTitle'
+import makeOgp, { exportDataURL } from 'assets/utils/makeOgp'
 
 type Props = {
     imgUrl: string
@@ -19,13 +20,30 @@ type Props = {
 }
 
 const Confirm = (props: Props): JSX.Element => {
-    const { onSubmit, onBack, user, side, confirmText = '声をつくる', ...cardProps } = props
+    const { onSubmit, onBack, user, side, confirmText = '声をつくる', imgUrl, title, ...cardProps } = props
+    const [imgSrc, setImgSrc] = React.useState('')
+
+    React.useEffect(() => {
+        makeOgp({
+            text: title,
+            imageData: imgUrl,
+            postType: side,
+        }).then(canvas => {
+            setImgSrc(exportDataURL(canvas))
+        })
+    }, [imgUrl, side, title])
     return (
         <Wrapper>
             <ConfirmTitleWrapper>
                 <ConfirmTitle>内容確認</ConfirmTitle>
             </ConfirmTitleWrapper>
-            <DetailCard {...cardProps} side={side} user={user} />
+            <DetailCard {...cardProps} title={title} imgUrl={imgUrl} side={side} user={user} />
+            <ConfirmTitleWrapper>
+                <ConfirmTitle>シェアした時の見え方</ConfirmTitle>
+            </ConfirmTitleWrapper>
+            <Preview>
+                <PreviewImage src={imgSrc} alt="" />
+            </Preview>
             <RegisterButton width={'400px'} height={'80px'} onClick={onSubmit}>
                 {confirmText}
             </RegisterButton>
@@ -54,6 +72,15 @@ const ConfirmTitleWrapper = styled.div`
 `
 
 const ConfirmTitle = styled(ThemeTitle)``
+
+const Preview = styled.div`
+    width: 690px;
+    margin: 0 auto 120px;
+`
+
+const PreviewImage = styled.img`
+    width: 100%;
+`
 
 const RegisterButton = styled(ThemeButton)`
     margin: 0 auto 50px;
