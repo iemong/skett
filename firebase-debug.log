@@ -1,0 +1,20 @@
+[debug] [2020-03-04T04:27:21.418Z] ----------------------------------------------------------------------
+[debug] [2020-03-04T04:27:21.421Z] Command:       /Users/irie-shinnosuke/.anyenv/envs/nodenv/versions/10.16.0/bin/node /Users/irie-shinnosuke/.anyenv/envs/nodenv/versions/10.16.0/bin/firebase deploy
+[debug] [2020-03-04T04:27:21.421Z] CLI Version:   7.7.0
+[debug] [2020-03-04T04:27:21.421Z] Platform:      darwin
+[debug] [2020-03-04T04:27:21.421Z] Node Version:  v10.16.0
+[debug] [2020-03-04T04:27:21.434Z] Time:          Wed Mar 04 2020 13:27:21 GMT+0900 (Japan Standard Time)
+[debug] [2020-03-04T04:27:21.434Z] ----------------------------------------------------------------------
+[debug] [2020-03-04T04:27:21.434Z] 
+[debug] [2020-03-04T04:27:21.454Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-04T04:27:21.455Z] > authorizing via signed-in user
+[debug] [2020-03-04T04:27:21.455Z] [iam] checking project skett-ffff1 for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-03-04T04:27:21.457Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-04T04:27:21.458Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-04T04:27:21.752Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-04T04:27:21.771Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/skett-ffff1:testIamPermissions  
+
+[debug] [2020-03-04T04:27:22.637Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-04T04:27:22.639Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/skett-ffff1  
+ 

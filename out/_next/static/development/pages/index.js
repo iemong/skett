@@ -449,7 +449,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
+/* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @emotion/core */ "./node_modules/@emotion/core/dist/core.browser.esm.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
@@ -461,28 +461,8 @@ __webpack_require__.r(__webpack_exports__);
 var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/organisms/tab/index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2__["createElement"];
 
-function _templateObject5() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: absolute;\n    width: 750px;\n    height: 100%;\n    box-sizing: border-box;\n    background-image: url(/img/tab_support_off.png);\n    z-index: ", ";\n    &[data-selected='true'] {\n        background-image: url(/img/tab_support_on.png);\n        z-index: ", ";\n        pointer-events: none;\n    }\n"]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
 function _templateObject3() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: absolute;\n    width: 750px;\n    height: 100%;\n    box-sizing: border-box;\n    background-image: url(/img/tab_help_off.png);\n    z-index: ", ";\n    &[data-selected='true'] {\n        background-image: url(/img/tab_help_on.png);\n        z-index: ", ";\n        pointer-events: none;\n    }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n                        position: absolute;\n                        width: 750px;\n                        height: 100%;\n                        left: 50%;\n                        box-sizing: border-box;\n                        z-index: ", ";\n                        transform: translateX(-50%);\n                        background-repeat: no-repeat;\n                        background-image: url(/img/tab_support_off.png);\n                        &[data-selected='true'] {\n                            background-image: url(/img/tab_support_on.png);\n                            z-index: ", ";\n                            pointer-events: none;\n                        }\n                        @media (min-width: 751px) {\n                            width: 815px;\n                            height: 100%;\n                            background-image: url(/img/tab_support_off_pc.png);\n                            &[data-selected='true'] {\n                                background-image: url(/img/tab_support_on_pc.png);\n                            }\n                        }\n                    "]);
 
   _templateObject3 = function _templateObject3() {
     return data;
@@ -492,7 +472,7 @@ function _templateObject3() {
 }
 
 function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    height: 91px;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n                        position: absolute;\n                        width: 750px;\n                        height: 100%;\n                        left: 50%;\n                        box-sizing: border-box;\n                        z-index: ", ";\n                        transform: translateX(-50%);\n                        background-repeat: no-repeat;\n                        background-image: url(/img/tab_help_off.png);\n                        &[data-selected='true'] {\n                            background-image: url(/img/tab_help_on.png);\n                            z-index: ", ";\n                            pointer-events: none;\n                        }\n                        @media (min-width: 751px) {\n                            width: 815px;\n                            height: 100%;\n                            background-image: url(/img/tab_help_off_pc.png);\n                            &[data-selected='true'] {\n                                background-image: url(/img/tab_help_on_pc.png);\n                            }\n                        }\n                    "]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -502,7 +482,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n                    position: relative;\n                    height: 91px;\n                    background-color: #dbdcdc;\n                    @media (min-width: 751px) {\n                        height: 46px;\n                    }\n                "]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -511,6 +491,8 @@ function _templateObject() {
   return data;
 }
 
+
+/** @jsx jsx */
 
 
 
@@ -559,56 +541,54 @@ var Tab = function Tab(props) {
     if (onClickRight) onClickRight();
     if (!leftContent) next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push('/');
   }, [actions, leftContent, onClickRight, router.pathname]);
-  return __jsx(Tabs, {
+  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
     className: className,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 53
-    },
-    __self: this
-  }, __jsx(TabList, {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 54
     },
     __self: this
-  }, __jsx(TabHelp, {
-    onClick: helpClickHandler,
-    "data-selected": tabName === 'left',
+  }, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
+    css: Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["css"])(_templateObject()),
     __source: {
       fileName: _jsxFileName,
       lineNumber: 55
     },
     __self: this
-  }), __jsx(TabSupport, {
+  }, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
+    css: Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["css"])(_templateObject2(), _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_BACK, _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_FRONT),
+    onClick: helpClickHandler,
+    "data-selected": tabName === 'left',
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65
+    },
+    __self: this
+  }), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
+    css: Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["css"])(_templateObject3(), _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_BACK, _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_FRONT),
     onClick: supportClickHandler,
     "data-selected": tabName === 'right',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 56
+      lineNumber: 93
     },
     __self: this
-  })), tabName === 'left' && __jsx(TabPanel, {
+  })), tabName === 'left' && Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 122
     },
     __self: this
-  }, leftContent) || tabName === 'right' && __jsx(TabPanel, {
+  }, leftContent) || tabName === 'right' && Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 122
     },
     __self: this
   }, rightContent));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Tab);
-var Tabs = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject());
-var TabList = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject2());
-var TabHelp = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject3(), _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_FRONT, _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_FRONT);
-var TabSupport = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject4(), _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_BACK, _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_FRONT);
-var TabPanel = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject5());
 
 /***/ }),
 
@@ -848,9 +828,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../assets/utils/firebaseApp */ "./assets/utils/firebaseApp.ts");
+/* harmony import */ var _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../assets/utils/firebaseApp */ "./assets/utils/firebaseApp.ts");
 
 var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/templates/layouts/Main.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
@@ -891,66 +869,28 @@ function _templateObject() {
 
 
 
-
 var Main = function Main(props) {
   var children = props.children;
-  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_5__["useRouter"])();
   react__WEBPACK_IMPORTED_MODULE_1__["useEffect"](function () {
-    _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_6__["default"].analytics();
-
-    var getUA = function getUA() {
-      var ua = window.navigator.userAgent.toLowerCase();
-      var ver = window.navigator.appVersion.toLowerCase();
-      var isMSIE = ua.indexOf('msie') !== -1 && ua.indexOf('opera') === -1;
-      var isIE11 = ua.indexOf('trident/7') !== -1;
-      var data = {
-        Tablet: ua.indexOf('windows') !== -1 && ua.indexOf('touch') !== -1 && ua.indexOf('tablet pc') === -1 || ua.indexOf('ipad') !== -1 || ua.indexOf('android') !== -1 && ua.indexOf('mobile') === -1 || ua.indexOf('firefox') !== -1 && ua.indexOf('tablet') !== -1 || ua.indexOf('kindle') !== -1 || ua.indexOf('silk') !== -1 || ua.indexOf('playbook') !== -1,
-        Mobile: ua.indexOf('windows') !== -1 && ua.indexOf('phone') !== -1 || ua.indexOf('iphone') !== -1 || ua.indexOf('ipod') !== -1 || ua.indexOf('android') !== -1 && ua.indexOf('mobile') !== -1 || ua.indexOf('firefox') !== -1 && ua.indexOf('mobile') !== -1 || ua.indexOf('blackberry') !== -1,
-        iOS: ua.indexOf('iphone') !== -1 || ua.indexOf('ipod') !== -1 || ua.indexOf('ipad') !== -1,
-        iPad: ua.indexOf('ipad') !== -1,
-        iPhone: ua.indexOf('iphone') !== -1,
-        Android: ua.indexOf('android') !== -1,
-        MSIE: isMSIE,
-        // IE11以外
-        IE6: isMSIE && ver.indexOf('msie 6.') !== -1,
-        IE7: isMSIE && ver.indexOf('msie 7.') !== -1,
-        IE8: isMSIE && ver.indexOf('msie 8.') !== -1,
-        IE9: isMSIE && ver.indexOf('msie 9.') !== -1,
-        IE10: isMSIE && ver.indexOf('msie 10.') !== -1,
-        IE11: isIE11,
-        IE: isMSIE || isIE11,
-        Edge: ua.indexOf('edge') !== -1,
-        Chrome: ua.indexOf('chrome') !== -1 && ua.indexOf('edge') === -1,
-        Firefox: ua.indexOf('firefox') !== -1,
-        Safari: ua.indexOf('safari') !== -1 && ua.indexOf('chrome') === -1,
-        Opera: ua.indexOf('opera') !== -1
-      };
-      data.isSP = data.Mobile || data.Tablet;
-      data.isPC = !data.isSP;
-      return data;
-    };
-
-    if (getUA().isPC) {
-      router.push('/');
-    }
-  }, [router]);
+    _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_5__["default"].analytics();
+  }, []);
   return __jsx(Wrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 92
+      lineNumber: 17
     },
     __self: this
   }, __jsx(Header, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 93
+      lineNumber: 18
     },
     __self: this
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
     href: '/',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 94
+      lineNumber: 19
     },
     __self: this
   }, __jsx(Logo, {
@@ -958,14 +898,14 @@ var Main = function Main(props) {
     alt: "\u30B9\u30B1\u30C3\u30C8",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 20
     },
     __self: this
   })), __jsx(next_link__WEBPACK_IMPORTED_MODULE_4___default.a, {
     href: '/mypage',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 97
+      lineNumber: 22
     },
     __self: this
   }, __jsx("img", {
@@ -973,7 +913,7 @@ var Main = function Main(props) {
     alt: "\u30DE\u30A4\u30DA\u30FC\u30B8",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 98
+      lineNumber: 23
     },
     __self: this
   }))), children);
@@ -983,210 +923,6 @@ var Main = function Main(props) {
 var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject());
 var Header = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].header(_templateObject2());
 var Logo = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].img(_templateObject3());
-
-/***/ }),
-
-/***/ "./components/templates/pc/index.tsx":
-/*!*******************************************!*\
-  !*** ./components/templates/pc/index.tsx ***!
-  \*******************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
-
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/templates/pc/index.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
-
-function _templateObject10() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    color: #fff;\n    font-size: 24px;\n"]);
-
-  _templateObject10 = function _templateObject10() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject9() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 504px;\n    margin: 0 auto 65px;\n    line-height: 1.5;\n    color: #fff;\n    font-size: 28px;\n"]);
-
-  _templateObject9 = function _templateObject9() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject8() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
-
-  _templateObject8 = function _templateObject8() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject7() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 303px;\n"]);
-
-  _templateObject7 = function _templateObject7() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject6() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-top: auto;\n    color: #fff;\n    font-size: 12px;\n"]);
-
-  _templateObject6 = function _templateObject6() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject5() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
-
-  _templateObject5 = function _templateObject5() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject4() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    height: 100%;\n    flex-direction: column;\n    align-items: center;\n    margin-right: 20px;\n"]);
-
-  _templateObject4 = function _templateObject4() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject3() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    margin-bottom: 32px;\n"]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    height: 100%;\n"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-image: linear-gradient(to right, #00b4ed, #0091db);\n"]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-
-
-
-var PCLayout = function PCLayout() {
-  return __jsx(Wrapper, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 6
-    },
-    __self: this
-  }, __jsx(Inner, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 7
-    },
-    __self: this
-  }, __jsx(Top, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 8
-    },
-    __self: this
-  }, __jsx(Left, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 9
-    },
-    __self: this
-  }, __jsx(Logo, {
-    src: "/img/svg/ttl_pc.svg",
-    alt: "",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 10
-    },
-    __self: this
-  }), __jsx(Text, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 11
-    },
-    __self: this
-  }, "\u30B9\u30DE\u30FC\u30C8\u30D5\u30A9\u30F3\u304B\u3089\u30A2\u30AF\u30BB\u30B9\u3057\u3066\u3054\u5229\u7528\u304F\u3060\u3055\u3044"), __jsx(Arrow, {
-    src: "/img/svg/icn_arrow.svg",
-    alt: "",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12
-    },
-    __self: this
-  })), __jsx(QRCode, {
-    src: '/img/pic_qr.png',
-    alt: "",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 14
-    },
-    __self: this
-  })), __jsx(Lead, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 16
-    },
-    __self: this
-  }, "\u88AB\u707D\u5730\u3067\u56F0\u3063\u3066\u3044\u308B\u4EBA\u3068\u30DC\u30E9\u30F3\u30C6\u30A3\u30A2\u3092\u76F4\u63A5\u7D50\u3073\u3064\u3051\u308BWEB\u30B5\u30FC\u30D3\u30B9"), __jsx(Hashtag, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
-    },
-    __self: this
-  }, "#\u88AB\u707D\u5730\u306E\u30B9\u30B1\u30C3\u30C8")));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (PCLayout);
-var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject());
-var Inner = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject2());
-var Top = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject3());
-var Left = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject4());
-var Logo = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].img(_templateObject5());
-var Text = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].p(_templateObject6());
-var Arrow = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].img(_templateObject7());
-var QRCode = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].img(_templateObject8());
-var Lead = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].p(_templateObject9());
-var Hashtag = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].p(_templateObject10());
 
 /***/ }),
 
@@ -49974,69 +49710,19 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_templates_home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/templates/home */ "./components/templates/home/index.tsx");
-/* harmony import */ var _components_templates_pc__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/templates/pc */ "./components/templates/pc/index.tsx");
-
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_templates_home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/templates/home */ "./components/templates/home/index.tsx");
 var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/pages/index.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
-
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0__["createElement"];
 
 
 
 var PageHome = function PageHome() {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__["useState"](false),
-      _React$useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
-      isPC = _React$useState2[0],
-      setIsPC = _React$useState2[1];
-
-  react__WEBPACK_IMPORTED_MODULE_1__["useEffect"](function () {
-    var getUA = function getUA() {
-      var ua = window.navigator.userAgent.toLowerCase();
-      var ver = window.navigator.appVersion.toLowerCase();
-      var isMSIE = ua.indexOf('msie') !== -1 && ua.indexOf('opera') === -1;
-      var isIE11 = ua.indexOf('trident/7') !== -1;
-      var data = {
-        Tablet: ua.indexOf('windows') !== -1 && ua.indexOf('touch') !== -1 && ua.indexOf('tablet pc') === -1 || ua.indexOf('ipad') !== -1 || ua.indexOf('android') !== -1 && ua.indexOf('mobile') === -1 || ua.indexOf('firefox') !== -1 && ua.indexOf('tablet') !== -1 || ua.indexOf('kindle') !== -1 || ua.indexOf('silk') !== -1 || ua.indexOf('playbook') !== -1,
-        Mobile: ua.indexOf('windows') !== -1 && ua.indexOf('phone') !== -1 || ua.indexOf('iphone') !== -1 || ua.indexOf('ipod') !== -1 || ua.indexOf('android') !== -1 && ua.indexOf('mobile') !== -1 || ua.indexOf('firefox') !== -1 && ua.indexOf('mobile') !== -1 || ua.indexOf('blackberry') !== -1,
-        iOS: ua.indexOf('iphone') !== -1 || ua.indexOf('ipod') !== -1 || ua.indexOf('ipad') !== -1,
-        iPad: ua.indexOf('ipad') !== -1,
-        iPhone: ua.indexOf('iphone') !== -1,
-        Android: ua.indexOf('android') !== -1,
-        MSIE: isMSIE,
-        // IE11以外
-        IE6: isMSIE && ver.indexOf('msie 6.') !== -1,
-        IE7: isMSIE && ver.indexOf('msie 7.') !== -1,
-        IE8: isMSIE && ver.indexOf('msie 8.') !== -1,
-        IE9: isMSIE && ver.indexOf('msie 9.') !== -1,
-        IE10: isMSIE && ver.indexOf('msie 10.') !== -1,
-        IE11: isIE11,
-        IE: isMSIE || isIE11,
-        Edge: ua.indexOf('edge') !== -1,
-        Chrome: ua.indexOf('chrome') !== -1 && ua.indexOf('edge') === -1,
-        Firefox: ua.indexOf('firefox') !== -1,
-        Safari: ua.indexOf('safari') !== -1 && ua.indexOf('chrome') === -1,
-        Opera: ua.indexOf('opera') !== -1
-      };
-      data.isSP = data.Mobile || data.Tablet;
-      data.isPC = !data.isSP;
-      return data;
-    };
-
-    setIsPC(getUA().isPC);
-  }, []);
-  return isPC ? __jsx(_components_templates_pc__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  return __jsx(_components_templates_home__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 82
-    },
-    __self: this
-  }) : __jsx(_components_templates_home__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 82
+      lineNumber: 5
     },
     __self: this
   });
