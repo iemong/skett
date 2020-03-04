@@ -13,6 +13,9 @@ import Button from 'components/atoms/Button'
 import useLogin from 'components/hooks/useLogin'
 import Applicant from 'components/organisms/post/Applicant'
 import * as Actions from 'reducers/tab/actions'
+import Shares from 'components/molecules/shares'
+import { createFacebookIntent, createTwitterIntent } from 'assets/utils/share'
+import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 
 type Props = {
     data: PostType | null
@@ -49,6 +52,23 @@ const PostDetail = (props: Props): JSX.Element => {
                     side={side}
                     updateDate={data.updateDate}
                 />
+                <ShareWrapper>
+                    <Title>この声をシェアする</Title>
+                    <Shares
+                        onClickTwitter={(): void => {
+                            const intent = createTwitterIntent({
+                                url: data.url,
+                                text: '',
+                                hashtags: '被災地のスケット',
+                            })
+                            window.open(intent)
+                        }}
+                        onClickFacebook={(): void => {
+                            const intent = createFacebookIntent(data.url)
+                            window.open(intent)
+                        }}
+                    />
+                </ShareWrapper>
                 {isMyPost && <Applicant users={data?.applicants} side={side} />}
                 {user?.uid === data.user?.uid ? (
                     <Link href={{ pathname: '/edit', query: { postId: data.id, side } }}>
@@ -102,3 +122,16 @@ const ApplyButton = styled(ThemeButton)`
 const BackButton = styled(Button)`
     margin: 0 auto;
 `
+
+const ShareWrapper = styled.div`
+    width: 600px;
+    margin: 0 auto 80px;
+    padding: 70px 45px 70px;
+    border-radius: 16px;
+    background-color: #fff;
+    box-sizing: border-box;
+`
+const Title = styled(ThemeTitle)`
+    margin-bottom: 55px;
+`
+
