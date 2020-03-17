@@ -52,9 +52,10 @@ const generateHtml = (url: string, id: string) => `
     <title>${title}</title>
     <meta name="description" content=${metaDescription}>
     <meta name="keywords" content=${metaKeywords.join(',')}>
+    <meta property="fb:app_id" content="458835718172364" />
     <meta property="og:locale" content="ja_JP">
     <meta property="og:type" content="website">
-    <meta property="og:url" content=${uniqUrl}posts/${id}>
+    <meta property="og:url" content=${uniqUrl}share/${id}>
     <meta property="og:title" content=${title}>
     <meta property="og:site_name" content=${siteName}>
     <meta property="og:description" content=${ogDescription}>
@@ -66,7 +67,7 @@ const generateHtml = (url: string, id: string) => `
     <meta name="twitter:title" content=${title}>
     <meta name="twitter:description" content=${twDescription}>
     <meta name="twitter:image" content=${url}>
-    <link rel="canonical" href=${uniqUrl}posts/${id} />
+    <link rel="canonical" href=${uniqUrl}share/${id} />
   </head>
   <body>
     <script>
