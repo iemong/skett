@@ -10,6 +10,7 @@ export const signInUser = async (email: string, password: string): Promise<fireb
 
 export const signInFacebook = async (): Promise<firebase.auth.UserCredential> => {
     const provider = new firebase.auth.FacebookAuthProvider()
+    provider.addScope('user_link')
     const result = await firebase.auth().signInWithPopup(provider)
     console.log(result)
     // const token = (result?.credential as firebase.auth.OAuthCredential).accessToken
