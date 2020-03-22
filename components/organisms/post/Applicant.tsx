@@ -33,7 +33,7 @@ const Applicant = (props: Props): JSX.Element => {
                     <Facebook
                         data-active={user.providerId === 'facebook.com'}
                         onClick={(): void => {
-                            window.open(`https://www.facebook.com/${user.userName}`)
+                            window.open(user.link)
                         }}
                     />
                 </SnsWrapper>
@@ -137,7 +137,7 @@ const Facebook = styled.div`
     height: 41px;
     background-image: url(/img/svg/icn_facebook_off.svg);
     &[data-active='true'] {
-        background-image: url(/img/svg/icn_facebook_off.svg);
+        background-image: url(/img/svg/icn_facebook_on.svg);
     }
     cursor: pointer;
 `

@@ -13,7 +13,7 @@ const Share = (props: Props): JSX.Element => {
     return (
         <ShareBox>
             <Title>この応募をシェアする</Title>
-            <Lead>SNSであたなの募集をシェアしよう。</Lead>
+            <Lead>SNSであなたの募集をシェアしよう。</Lead>
             <Shares
                 onClickTwitter={(): void => {
                     const intent = createTwitterIntent({

@@ -1,4 +1,223 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/index.js"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static/development/pages/mypage.js"],{
+
+/***/ "./assets/api/auth.ts":
+/*!****************************!*\
+  !*** ./assets/api/auth.ts ***!
+  \****************************/
+/*! exports provided: createUser, signInUser, signInFacebook, signInTwitter, signOut */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createUser", function() { return createUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signInUser", function() { return signInUser; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signInFacebook", function() { return signInFacebook; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signInTwitter", function() { return signInTwitter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signOut", function() { return signOut; });
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils_firebaseApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils/firebaseApp */ "./assets/utils/firebaseApp.ts");
+/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../constant */ "./assets/constant.ts");
+
+
+
+
+
+var createUser =
+/*#__PURE__*/
+function () {
+  var _ref = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(email, password) {
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().createUserWithEmailAndPassword(email, password);
+
+          case 2:
+            return _context.abrupt("return", _context.sent);
+
+          case 3:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function createUser(_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var signInUser =
+/*#__PURE__*/
+function () {
+  var _ref2 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(email, password) {
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            _context2.next = 2;
+            return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().signInWithEmailAndPassword(email, password);
+
+          case 2:
+            return _context2.abrupt("return", _context2.sent);
+
+          case 3:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2);
+  }));
+
+  return function signInUser(_x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var signInFacebook =
+/*#__PURE__*/
+function () {
+  var _ref3 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+    var _result$user, _result$user2, _result$user3, _result$user4, _result$user5, _result$additionalUse;
+
+    var provider, result, token, db, userDocRef, userInfo;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            provider = new firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"].FacebookAuthProvider();
+            provider.addScope('user_link');
+            _context3.next = 4;
+            return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().signInWithPopup(provider);
+
+          case 4:
+            result = _context3.sent;
+            console.log(result);
+            token = (result === null || result === void 0 ? void 0 : result.credential).accessToken;
+            db = _utils_firebaseApp__WEBPACK_IMPORTED_MODULE_3__["default"].firestore();
+            _context3.next = 10;
+            return fetch("https://graph.facebook.com/me?fields=id,name,link&access_token=".concat(token)).then(function (res) {
+              console.log(res.json());
+            });
+
+          case 10:
+            userDocRef = db.collection(_constant__WEBPACK_IMPORTED_MODULE_4__["COLLECTIONS"].USERS).doc((_result$user = result.user) === null || _result$user === void 0 ? void 0 : _result$user.uid);
+            userInfo = {
+              uid: (_result$user2 = result.user) === null || _result$user2 === void 0 ? void 0 : _result$user2.uid,
+              displayName: (_result$user3 = result.user) === null || _result$user3 === void 0 ? void 0 : _result$user3.displayName,
+              email: (_result$user4 = result.user) === null || _result$user4 === void 0 ? void 0 : _result$user4.email,
+              photoURL: (_result$user5 = result.user) === null || _result$user5 === void 0 ? void 0 : _result$user5.photoURL,
+              providerId: (_result$additionalUse = result.additionalUserInfo) === null || _result$additionalUse === void 0 ? void 0 : _result$additionalUse.providerId
+            };
+            _context3.next = 14;
+            return userDocRef.set(userInfo)["catch"](function (error) {
+              console.error(error);
+            });
+
+          case 14:
+            return _context3.abrupt("return", result);
+
+          case 15:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3);
+  }));
+
+  return function signInFacebook() {
+    return _ref3.apply(this, arguments);
+  };
+}();
+var signInTwitter =
+/*#__PURE__*/
+function () {
+  var _ref4 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+    var _result$user6, _result$user7, _result$user8, _result$user9, _result$user10, _result$additionalUse2, _result$additionalUse3;
+
+    var provider, result, db, userDocRef, userInfo;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            provider = new firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"].TwitterAuthProvider();
+            _context4.next = 3;
+            return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().signInWithPopup(provider);
+
+          case 3:
+            result = _context4.sent;
+            db = _utils_firebaseApp__WEBPACK_IMPORTED_MODULE_3__["default"].firestore();
+            userDocRef = db.collection(_constant__WEBPACK_IMPORTED_MODULE_4__["COLLECTIONS"].USERS).doc((_result$user6 = result.user) === null || _result$user6 === void 0 ? void 0 : _result$user6.uid);
+            userInfo = {
+              uid: (_result$user7 = result.user) === null || _result$user7 === void 0 ? void 0 : _result$user7.uid,
+              displayName: (_result$user8 = result.user) === null || _result$user8 === void 0 ? void 0 : _result$user8.displayName,
+              email: (_result$user9 = result.user) === null || _result$user9 === void 0 ? void 0 : _result$user9.email,
+              photoURL: (_result$user10 = result.user) === null || _result$user10 === void 0 ? void 0 : _result$user10.photoURL,
+              providerId: (_result$additionalUse2 = result.additionalUserInfo) === null || _result$additionalUse2 === void 0 ? void 0 : _result$additionalUse2.providerId,
+              userName: (_result$additionalUse3 = result.additionalUserInfo) === null || _result$additionalUse3 === void 0 ? void 0 : _result$additionalUse3.username
+            };
+            _context4.next = 9;
+            return userDocRef.set(userInfo)["catch"](function (error) {
+              console.error(error);
+            });
+
+          case 9:
+            return _context4.abrupt("return", result);
+
+          case 10:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+
+  return function signInTwitter() {
+    return _ref4.apply(this, arguments);
+  };
+}();
+var signOut =
+/*#__PURE__*/
+function () {
+  var _ref5 = Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+      while (1) {
+        switch (_context5.prev = _context5.next) {
+          case 0:
+            _context5.next = 2;
+            return firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().signOut();
+
+          case 2:
+            return _context5.abrupt("return", _context5.sent);
+
+          case 3:
+          case "end":
+            return _context5.stop();
+        }
+      }
+    }, _callee5);
+  }));
+
+  return function signOut() {
+    return _ref5.apply(this, arguments);
+  };
+}();
+
+/***/ }),
 
 /***/ "./assets/constant.ts":
 /*!****************************!*\
@@ -276,10 +495,303 @@ var ButtonStyle = _emotion_styled__WEBPACK_IMPORTED_MODULE_4__["default"].div(_t
 
 /***/ }),
 
-/***/ "./components/molecules/card/index.tsx":
-/*!*********************************************!*\
-  !*** ./components/molecules/card/index.tsx ***!
-  \*********************************************/
+/***/ "./components/atoms/Modal.tsx":
+/*!************************************!*\
+  !*** ./components/atoms/Modal.tsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
+/* harmony import */ var _emotion_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @emotion/css */ "./node_modules/@emotion/css/dist/css.browser.esm.js");
+/* harmony import */ var _assets_constant__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../assets/constant */ "./assets/constant.ts");
+
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/atoms/Modal.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
+
+function _templateObject6() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: absolute;\n    top: -25px;\n    right: -25px;\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: absolute;\n    left: 50%;\n    bottom: -155px;\n    width: 400px;\n    height: 80px;\n    background-color: #fff;\n    border-radius: 10px;\n    color: #000;\n    font-size: 28px;\n    transform: translateX(-50%);\n"]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 100%;\n    height: 100%;\n    overflow: auto;\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    margin-top: 24%;\n    width: ", ";\n    height: ", ";\n    padding: 40px 0;\n    box-sizing: border-box;\n    border-radius: 14px;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: fixed;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-color: rgba(0, 0, 0, 0.5);\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: fixed;\n    top: 0;\n    left: 0;\n    display: flex;\n    justify-content: center;\n    align-items: flex-start;\n    width: 100%;\n    height: 100%;\n    ", ";\n    z-index: ", ";\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+
+
+
+
+
+var StyleType;
+
+(function (StyleType) {
+  StyleType[StyleType["default"] = 0] = "default";
+  StyleType[StyleType["help"] = 1] = "help";
+  StyleType[StyleType["support"] = 2] = "support";
+})(StyleType || (StyleType = {}));
+
+var Modal = function Modal(props) {
+  var children = props.children,
+      styleType = props.styleType,
+      width = props.width,
+      height = props.height,
+      onClose = props.onClose,
+      isShowing = props.isShowing;
+  return isShowing && document ? react_dom__WEBPACK_IMPORTED_MODULE_2___default.a.createPortal(__jsx(ModalStyle, {
+    width: width,
+    height: height,
+    styleType: styleType,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 29
+    },
+    __self: this
+  }, __jsx(Overlay, {
+    onClick: onClose,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 30
+    },
+    __self: this
+  }), __jsx(Inner, {
+    className: "inner",
+    width: width,
+    height: height,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 31
+    },
+    __self: this
+  }, __jsx(Content, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: this
+  }, children), __jsx(Close, {
+    onClick: onClose,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: this
+  }, __jsx("img", {
+    src: "/img/svg/icn_close.svg",
+    width: "50",
+    alt: "\xD7",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: this
+  })), __jsx(Button, {
+    onClick: onClose,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 36
+    },
+    __self: this
+  }, "\u9589\u3058\u308B"))), document.body) : __jsx(react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Modal);
+
+var AdditionalStyle = function AdditionalStyle(props) {
+  if (props.styleType === 'default') {
+    return Object(_emotion_css__WEBPACK_IMPORTED_MODULE_4__["default"])({
+      '& > .inner': {
+        background: '#fff'
+      }
+    });
+  } else if (props.styleType === 'help') {
+    return Object(_emotion_css__WEBPACK_IMPORTED_MODULE_4__["default"])({
+      '& > .inner': {
+        background: 'linear-gradient(to right, #00B4ED, #0091DB)'
+      }
+    });
+  } else if (props.styleType === 'support') {
+    return Object(_emotion_css__WEBPACK_IMPORTED_MODULE_4__["default"])({
+      '& > .inner': {
+        background: 'linear-gradient(to right, #35B597, #00A968)'
+      }
+    });
+  }
+};
+
+var ModalStyle = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject(), AdditionalStyle, _assets_constant__WEBPACK_IMPORTED_MODULE_5__["Z_INDEX_LIST"].MODAL);
+var Overlay = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject2());
+var Inner = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject3(), function (props) {
+  return props.width;
+}, function (props) {
+  return props.height;
+});
+var Content = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject4());
+var Button = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].button(_templateObject5());
+var Close = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].button(_templateObject6());
+
+/***/ }),
+
+/***/ "./components/hooks/useLogin.tsx":
+/*!***************************************!*\
+  !*** ./components/hooks/useLogin.tsx ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! firebase/app */ "./node_modules/firebase/app/dist/index.cjs.js");
+/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(firebase_app__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _reducers_user_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../reducers/user/actions */ "./reducers/user/actions.ts");
+
+
+
+
+
+
+
+var useLogin = function useLogin() {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__["useState"](null),
+      _React$useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
+      user = _React$useState2[0],
+      setUser = _React$useState2[1];
+
+  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_4__["useDispatch"])();
+  var actions = react__WEBPACK_IMPORTED_MODULE_1__["useMemo"](function () {
+    return Object(redux__WEBPACK_IMPORTED_MODULE_3__["bindActionCreators"])(_reducers_user_actions__WEBPACK_IMPORTED_MODULE_5__, dispatch);
+  }, [dispatch]);
+  react__WEBPACK_IMPORTED_MODULE_1__["useEffect"](function () {
+    var unregisterAuthObserver = firebase_app__WEBPACK_IMPORTED_MODULE_2__["auth"]().onAuthStateChanged(function (user) {
+      return setUser(user);
+    });
+    return function () {
+      unregisterAuthObserver();
+    };
+  }, []);
+  react__WEBPACK_IMPORTED_MODULE_1__["useEffect"](function () {
+    if (user) {
+      console.log(user);
+      actions.initialize(user);
+    }
+  }, [actions, user]);
+  return user;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (useLogin);
+
+/***/ }),
+
+/***/ "./components/hooks/useModal.ts":
+/*!**************************************!*\
+  !*** ./components/hooks/useModal.ts ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+var useModal = function useModal() {
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_1__["useState"](false),
+      _React$useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
+      isShowing = _React$useState2[0],
+      setIsShowing = _React$useState2[1];
+
+  var toggle = function toggle() {
+    setIsShowing(!isShowing);
+  };
+
+  react__WEBPACK_IMPORTED_MODULE_1__["useLayoutEffect"](function () {
+    if (!isShowing) return;
+    var originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = 'hidden';
+    return function () {
+      document.body.style.overflow = originalStyle;
+    };
+  }, [isShowing]);
+  return {
+    isShowing: isShowing,
+    toggle: toggle
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (useModal);
+
+/***/ }),
+
+/***/ "./components/molecules/editableCard/index.tsx":
+/*!*****************************************************!*\
+  !*** ./components/molecules/editableCard/index.tsx ***!
+  \*****************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -289,13 +801,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
-/* harmony import */ var _atoms_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../atoms/Button */ "./components/atoms/Button.tsx");
 
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/molecules/card/index.tsx";
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/molecules/editableCard/index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
 
+function _templateObject11() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: absolute;\n    top: 0;\n    left: 0;\n    display: none;\n    width: 100%;\n    height: 100%;\n    color: #fff;\n    font-size: 38px;\n    line-height: 1.5;\n    text-align: center;\n    background-color: rgba(0, 0, 0, 0.6);\n    &[data-end='true'] {\n        display: flex;\n        justify-content: center;\n        align-items: center;\n    }\n"]);
+
+  _templateObject11 = function _templateObject11() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject10() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-top: 20px;\n    text-decoration: none;\n    flex-basis: 100%;\n"]);
+
+  _templateObject10 = function _templateObject10() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject9() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 100%;\n    height: 64px;\n    color: #fff;\n    box-sizing: border-box;\n    border: 2px solid #fff;\n    font-size: 24px;\n    line-height: 64px;\n    text-align: center;\n    border-radius: 10px;\n"]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 290px;\n    height: 64px;\n    color: #fff;\n    box-sizing: border-box;\n    border: 2px solid #fff;\n    font-size: 24px;\n    line-height: 64px;\n    text-align: center;\n    border-radius: 10px;\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
 function _templateObject7() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n  text-decoration: none;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 290px;\n    height: 64px;\n    color: #fff;\n    box-sizing: border-box;\n    border: 2px solid #fff;\n    font-size: 24px;\n    line-height: 64px;\n    text-align: center;\n    border-radius: 10px;\n"]);
 
   _templateObject7 = function _templateObject7() {
     return data;
@@ -305,7 +856,7 @@ function _templateObject7() {
 }
 
 function _templateObject6() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    justify-content: space-between;\n    align-content: center;\n    flex-wrap: wrap;\n"]);
 
   _templateObject6 = function _templateObject6() {
     return data;
@@ -355,7 +906,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 690px;\n    &[data-side='help'] {\n        background-image: linear-gradient(to left, #00b4ed, #0091db);\n    }\n    &[data-side='support'] {\n        background-image: linear-gradient(to left, #35b597, #00a968);\n    }\n    margin: 0 auto 40px;\n    border-radius: 16px;\n    overflow: hidden;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    width: 690px;\n    &[data-side='help'] {\n        background-image: linear-gradient(to left, #00b4ed, #0091db);\n    }\n    &[data-side='support'] {\n        background-image: linear-gradient(to left, #35b597, #00a968);\n    }\n    margin: 0 auto 40px;\n    border-radius: 16px;\n    overflow: hidden;\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -367,23 +918,25 @@ function _templateObject() {
 
 
 
-
-var Card = function Card(props) {
+var EditableCard = function EditableCard(props) {
   var imgUrl = props.imgUrl,
       description = props.description,
       link = props.link,
-      side = props.side;
+      side = props.side,
+      onDelete = props.onDelete,
+      onEnd = props.onEnd,
+      isEnd = props.isEnd;
   return __jsx(Wrapper, {
     "data-side": side,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 19
     },
     __self: this
   }, __jsx(ThumbnailWrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
+      lineNumber: 20
     },
     __self: this
   }, __jsx(Thumbnail, {
@@ -391,88 +944,105 @@ var Card = function Card(props) {
     alt: "description",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 21
     },
     __self: this
   })), __jsx(TextBox, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 23
     },
     __self: this
   }, __jsx(Description, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 24
     },
     __self: this
-  }, description), __jsx(Link, {
+  }, description), __jsx(ButtonWrapper, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: this
+  }, __jsx(EditButton, {
+    onClick: onEnd,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 26
+    },
+    __self: this
+  }, "\u52DF\u96C6\u3092\u7D42\u4E86\u3059\u308B"), __jsx(DeleteButton, {
+    onClick: onDelete,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: this
+  }, "\u524A\u9664"), __jsx(Link, {
     href: "".concat(link, "?side=").concat(side),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 21
+      lineNumber: 28
     },
     __self: this
   }, __jsx(DetailButton, {
-    width: '270px',
-    height: '50px',
-    styleType: side === 'help' ? 'secondary' : 'invertSecondary',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 22
+      lineNumber: 29
     },
     __self: this
-  }, "\u8A73\u3057\u304F\u898B\u308B"))));
+  }, "\u52DF\u96C6\u5185\u5BB9\u306B\u5909\u66F4\u3092\u52A0\u3048\u308B")))), __jsx(EndMessage, {
+    "data-end": isEnd,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: this
+  }, "\u3053\u3061\u3089\u306E\u52DF\u96C6\u306F", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
+    },
+    __self: this
+  }), "\u7D42\u4E86\u3057\u307E\u3057\u305F"));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Card);
+/* harmony default export */ __webpack_exports__["default"] = (EditableCard);
 var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject());
 var ThumbnailWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject2());
 var Thumbnail = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].img(_templateObject3());
 var TextBox = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject4());
 var Description = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].p(_templateObject5());
-var DetailButton = Object(_emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"])(_atoms_Button__WEBPACK_IMPORTED_MODULE_3__["default"])(_templateObject6());
-var Link = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].a(_templateObject7());
+var ButtonWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].div(_templateObject6());
+var EditButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].button(_templateObject7());
+var DeleteButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].button(_templateObject8());
+var DetailButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].button(_templateObject9());
+var Link = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].a(_templateObject10());
+var EndMessage = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].p(_templateObject11());
 
 /***/ }),
 
-/***/ "./components/organisms/tab/index.tsx":
-/*!********************************************!*\
-  !*** ./components/organisms/tab/index.tsx ***!
-  \********************************************/
+/***/ "./components/molecules/modal/PrivacyPolicyModal.tsx":
+/*!***********************************************************!*\
+  !*** ./components/molecules/modal/PrivacyPolicyModal.tsx ***!
+  \***********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _emotion_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @emotion/core */ "./node_modules/@emotion/core/dist/core.browser.esm.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
-/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! redux */ "./node_modules/redux/es/redux.js");
-/* harmony import */ var _assets_constant__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../assets/constant */ "./assets/constant.ts");
-/* harmony import */ var _reducers_tab_actions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../reducers/tab/actions */ "./reducers/tab/actions.ts");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
+/* harmony import */ var _atoms_Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../atoms/Modal */ "./components/atoms/Modal.tsx");
 
-
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/organisms/tab/index.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_2__["createElement"];
-
-function _templateObject3() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n                        position: absolute;\n                        width: 750px;\n                        height: 100%;\n                        left: 50%;\n                        box-sizing: border-box;\n                        z-index: ", ";\n                        transform: translateX(-50%);\n                        background-repeat: no-repeat;\n                        background-image: url(/img/tab_support_off.png);\n                        &[data-selected='true'] {\n                            background-image: url(/img/tab_support_on.png);\n                            z-index: ", ";\n                            pointer-events: none;\n                        }\n                        @media (min-width: 751px) {\n                            width: 815px;\n                            height: 100%;\n                            background-image: url(/img/tab_support_off_pc.png);\n                            &[data-selected='true'] {\n                                background-image: url(/img/tab_support_on_pc.png);\n                            }\n                        }\n                    "]);
-
-  _templateObject3 = function _templateObject3() {
-    return data;
-  };
-
-  return data;
-}
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/molecules/modal/PrivacyPolicyModal.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
 
 function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n                        position: absolute;\n                        width: 750px;\n                        height: 100%;\n                        left: 50%;\n                        box-sizing: border-box;\n                        z-index: ", ";\n                        transform: translateX(-50%);\n                        background-repeat: no-repeat;\n                        background-image: url(/img/tab_help_off.png);\n                        &[data-selected='true'] {\n                            background-image: url(/img/tab_help_on.png);\n                            z-index: ", ";\n                            pointer-events: none;\n                        }\n                        @media (min-width: 751px) {\n                            width: 815px;\n                            height: 100%;\n                            background-image: url(/img/tab_help_off_pc.png);\n                            &[data-selected='true'] {\n                                background-image: url(/img/tab_help_on_pc.png);\n                            }\n                        }\n                    "]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-bottom: 32px;\n    text-align: center;\n    font-size: 24px;\n"]);
 
   _templateObject2 = function _templateObject2() {
     return data;
@@ -482,160 +1052,7 @@ function _templateObject2() {
 }
 
 function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n                    position: relative;\n                    height: 91px;\n                    background-color: #dbdcdc;\n                    @media (min-width: 751px) {\n                        height: 46px;\n                    }\n                "]);
-
-  _templateObject = function _templateObject() {
-    return data;
-  };
-
-  return data;
-}
-
-
-/** @jsx jsx */
-
-
-
-
-
-
-
-
-var Tab = function Tab(props) {
-  var leftContent = props.leftContent,
-      rightContent = props.rightContent,
-      onClickLeft = props.onClickLeft,
-      onClickRight = props.onClickRight,
-      className = props.className,
-      tabSide = props.tabSide;
-  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["useRouter"])();
-
-  var _useSelector = Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["useSelector"])(function (state) {
-    return state.rootReducer.tab;
-  }),
-      side = _useSelector.side;
-
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_2__["useState"](tabSide),
-      _React$useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_React$useState, 2),
-      tabName = _React$useState2[0],
-      setTabName = _React$useState2[1];
-
-  var dispatch = Object(react_redux__WEBPACK_IMPORTED_MODULE_5__["useDispatch"])();
-  var actions = react__WEBPACK_IMPORTED_MODULE_2__["useMemo"](function () {
-    return Object(redux__WEBPACK_IMPORTED_MODULE_6__["bindActionCreators"])(_reducers_tab_actions__WEBPACK_IMPORTED_MODULE_8__, dispatch);
-  }, [dispatch]);
-  react__WEBPACK_IMPORTED_MODULE_2__["useEffect"](function () {
-    setTabName(side === 'help' ? 'left' : 'right');
-  }, [side]);
-  var helpClickHandler = react__WEBPACK_IMPORTED_MODULE_2__["useCallback"](function () {
-    if (router.pathname !== '/') return;
-    setTabName('left');
-    actions.update('help');
-    if (onClickLeft) onClickLeft();
-    if (!rightContent) next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push('/');
-  }, [actions, onClickLeft, rightContent, router.pathname]);
-  var supportClickHandler = react__WEBPACK_IMPORTED_MODULE_2__["useCallback"](function () {
-    if (router.pathname !== '/') return;
-    setTabName('right');
-    actions.update('support');
-    if (onClickRight) onClickRight();
-    if (!leftContent) next_router__WEBPACK_IMPORTED_MODULE_4___default.a.push('/');
-  }, [actions, leftContent, onClickRight, router.pathname]);
-  return Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
-    className: className,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 54
-    },
-    __self: this
-  }, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
-    css: Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["css"])(_templateObject()),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 55
-    },
-    __self: this
-  }, Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
-    css: Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["css"])(_templateObject2(), _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_BACK, _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_FRONT),
-    onClick: helpClickHandler,
-    "data-selected": tabName === 'left',
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 65
-    },
-    __self: this
-  }), Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
-    css: Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["css"])(_templateObject3(), _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_BACK, _assets_constant__WEBPACK_IMPORTED_MODULE_7__["Z_INDEX_LIST"].TAB_FRONT),
-    onClick: supportClickHandler,
-    "data-selected": tabName === 'right',
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 93
-    },
-    __self: this
-  })), tabName === 'left' && Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 122
-    },
-    __self: this
-  }, leftContent) || tabName === 'right' && Object(_emotion_core__WEBPACK_IMPORTED_MODULE_3__["jsx"])("div", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 122
-    },
-    __self: this
-  }, rightContent));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Tab);
-
-/***/ }),
-
-/***/ "./components/templates/home/index.tsx":
-/*!*********************************************!*\
-  !*** ./components/templates/home/index.tsx ***!
-  \*********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
-/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _layouts_Main__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../layouts/Main */ "./components/templates/layouts/Main.tsx");
-/* harmony import */ var _organisms_tab__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../organisms/tab */ "./components/organisms/tab/index.tsx");
-/* harmony import */ var _molecules_card__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../molecules/card */ "./components/molecules/card/index.tsx");
-/* harmony import */ var _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../assets/utils/firebaseApp */ "./assets/utils/firebaseApp.ts");
-/* harmony import */ var _assets_constant__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../assets/constant */ "./assets/constant.ts");
-
-
-
-
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/templates/home/index.tsx";
-var __jsx = react__WEBPACK_IMPORTED_MODULE_4__["createElement"];
-
-function _templateObject2() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: fixed;\n    right: 0;\n    bottom: 100px;\n    display: block;\n    width: 251px;\n    height: 81px;\n    background-image: url(/img/btn_add.png);\n    color: transparent;\n"]);
-
-  _templateObject2 = function _templateObject2() {
-    return data;
-  };
-
-  return data;
-}
-
-function _templateObject() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-top: 60px;\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    padding: 0 40px;\n    & > p {\n        font-size: 20px;\n        margin-bottom: 32px;\n        line-height: 1.5;\n    }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -648,167 +1065,1089 @@ function _templateObject() {
 
 
 
-
-
-
-
-
-
-var Home = function Home() {
-  var db = _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_11__["default"].firestore();
-  var docRef = db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_12__["COLLECTIONS"].POSTS);
-
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_4__["useState"]([]),
-      _React$useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__["default"])(_React$useState, 2),
-      posts = _React$useState2[0],
-      setPosts = _React$useState2[1];
-
-  var _useSelector = Object(react_redux__WEBPACK_IMPORTED_MODULE_7__["useSelector"])(function (state) {
-    return state.rootReducer.tab;
-  }),
-      side = _useSelector.side;
-
-  var loadPostsData = react__WEBPACK_IMPORTED_MODULE_4__["useCallback"](
-  /*#__PURE__*/
-  Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  /*#__PURE__*/
-  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee() {
-    var data, docs, posts;
-    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return docRef.where('isEnd', '==', false).orderBy('timestamp', 'desc').get()["catch"](function (e) {
-              return console.error(e);
-            });
-
-          case 2:
-            data = _context.sent;
-
-            if (data) {
-              _context.next = 5;
-              break;
-            }
-
-            return _context.abrupt("return");
-
-          case 5:
-            docs = data.docs;
-            posts = docs.map(function (doc) {
-              return doc.data();
-            });
-            setPosts(posts);
-
-          case 8:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  })), [docRef]);
-  react__WEBPACK_IMPORTED_MODULE_4__["useEffect"](function () {
-    loadPostsData(); // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  var helpPosts = react__WEBPACK_IMPORTED_MODULE_4__["useMemo"](function () {
-    var filteredPosts = posts.filter(function (post) {
-      return post.side === 'help';
-    });
-    return filteredPosts.map(function (post, index) {
-      var _post$id;
-
-      return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        key: index,
-        imgUrl: post.imageUrl,
-        description: post.title,
-        link: "/posts/".concat((_post$id = post.id) !== null && _post$id !== void 0 ? _post$id : ''),
-        side: 'help',
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 40
-        },
-        __self: this
-      });
-    });
-  }, [posts]);
-  var supportPosts = react__WEBPACK_IMPORTED_MODULE_4__["useMemo"](function () {
-    var filteredPosts = posts.filter(function (post) {
-      return post.side === 'support';
-    });
-    return filteredPosts.map(function (post, index) {
-      var _post$id2;
-
-      return __jsx(_molecules_card__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        key: index,
-        imgUrl: post.imageUrl,
-        description: post.title,
-        link: "/posts/".concat((_post$id2 = post.id) !== null && _post$id2 !== void 0 ? _post$id2 : ''),
-        side: 'support',
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 53
-        },
-        __self: this
-      });
-    });
-  }, [posts]);
-
-  var helpPostElement = __jsx(ItemWrapper, {
+var PrivacyPolicyModal = function PrivacyPolicyModal(props) {
+  var isShowing = props.isShowing,
+      toggle = props.toggle;
+  return __jsx(_atoms_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    styleType: "default",
+    isShowing: isShowing,
+    onClose: toggle,
+    width: '600px',
+    height: '60%',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 63
+      lineNumber: 13
     },
     __self: this
-  }, helpPosts);
-
-  var supportPostElement = __jsx(ItemWrapper, {
+  }, __jsx(Inner, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: this
+  }, __jsx(Title, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: this
+  }, "\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u30DD\u30EA\u30B7\u30FC"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17
+    },
+    __self: this
+  }, "\u4E00\u822C\u793E\u56E3\u6CD5\u4EBAFUKKO DESIGN\uFF08\u4EE5\u4E0B\u300C\u5F53\u56E3\u4F53\u300D\u3068\u3044\u3044\u307E\u3059\u3002\uFF09\u306F\u3001\u5F53\u56E3\u4F53\u304C\u904B\u55B6\u3059\u308B\u300C\u30B9\u30B1\u30C3\u30C8\u300D\uFF08\u4EE5\u4E0B\u300C\u672C\u30B5\u30FC\u30D3\u30B9\u300D\u3068\u3044\u3044\u307E\u3059\u3002\uFF09\u306B\u304A\u3051\u308B\u500B\u4EBA\u60C5\u5831\u306E\u53D6\u6271\u3044\u306B\u95A2\u3057\u3001\u4EE5\u4E0B\u306E\u3068\u304A\u308A\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u30DD\u30EA\u30B7\u30FC\uFF08\u4EE5\u4E0B\u300C\u672C\u30DD\u30EA\u30B7\u30FC\u300D\u3068\u3044\u3044\u307E\u3059\u3002\uFF09\u3092\u5B9A\u3081\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 20
+    },
+    __self: this
+  }), "\u306A\u304A\u3001\u672C\u30DD\u30EA\u30B7\u30FC\u306B\u304A\u3051\u308B\u7528\u8A9E\u306F\u3001\u5225\u9014\u5B9A\u3081\u308B\u5834\u5408\u3092\u9664\u304D\u3001\u300C \u30B9\u30B1\u30C3\u30C8\u5229\u7528\u898F\u7D04 \u300D\u53CA\u3073\u500B\u4EBA\u60C5\u5831\u306E\u4FDD\u8B77\u306B\u95A2\u3059\u308B\u6CD5\u5F8B\uFF08\u5E73\u621015\u5E74\u6CD5\u5F8B\u7B2C57\u53F7\uFF09\u306B\u304A\u3044\u3066\u5B9A\u7FA9\u3055\u308C\u308B\u610F\u5473\u306B\u3088\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: this
+  }, "\uFF11\uFF0E\u57FA\u672C\u65B9\u91DD", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: this
+  }), "\u5F53\u56E3\u4F53\u306F\u3001\u500B\u4EBA\u60C5\u5831\u306E\u4FDD\u8B77\u304C\u793E\u4F1A\u7684\u8CAC\u52D9\u3067\u3042\u308B\u3053\u3068\u3092\u8A8D\u8B58\u3057\u3001\u500B\u4EBA\u60C5\u5831\u306B\u95A2\u3059\u308B\u6CD5\u4EE4\u53CA\u3073\u793E\u5185\u898F\u7A0B\u7B49\u3092\u9075\u5B88\u3057\u3001\u5F53\u56E3\u4F53\u3067\u53D6\u308A\u6271\u3046\u500B\u4EBA\u60C5\u5831\u306E\u53D6\u5F97\u3001\u5229\u7528\u3001\u7BA1\u7406\u3092\u9069\u6B63\u306B\u884C\u3044\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 31
+    },
+    __self: this
+  }, "\uFF12\uFF0E\u5F53\u56E3\u4F53\u304C\u53D6\u5F97\u3059\u308B\u500B\u4EBA\u60C5\u5831\u306B\u3064\u3044\u3066", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 33
+    },
+    __self: this
+  }), "\u30E6\u30FC\u30B6\u30FC\u304C\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u30ED\u30B0\u30A4\u30F3\u3059\u308B\u5834\u5408\u3001Facebook\u30A2\u30AB\u30A6\u30F3\u30C8\u53C8\u306FTwitter\u30A2\u30AB\u30A6\u30F3\u30C8\u306B\u4FC2\u308B\u8A8D\u8A3C\u60C5\u5831\u3092\u5F53\u56E3\u4F53\u6240\u5B9A\u306E\u65B9\u6CD5\u3067\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u9023\u643A\u3059\u308B\u5FC5\u8981\u304C\u3042\u308A\u307E\u3059\u3002\u5F53\u56E3\u4F53\u306F\u3001\u30E6\u30FC\u30B6\u30FC\u304C\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u30ED\u30B0\u30A4\u30F3\u3057\u305F\u5834\u5408\u3001\u30E6\u30FC\u30B6\u30FC\u304CFacebook\u53C8\u306FTwitter\u306B\u767B\u9332\u3057\u305F\u6C0F\u540D\u30FB\u540D\u79F0\u3001\u30D7\u30ED\u30D5\u30A3\u30FC\u30EB\u753B\u50CF\u3092\u53D6\u5F97\u3059\u308B\u5834\u5408\u304C\u3042\u308A\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 35
+    },
+    __self: this
+  }), "\u307E\u305F\u3001\u5F53\u56E3\u4F53\u306F\u3001\u30E6\u30FC\u30B6\u30FC\u304C\u672C\u30B5\u30FC\u30D3\u30B9\u4E0A\u3067\u300C\u58F0\u300D\u3092\u6295\u7A3F\u3057\u305F\u5834\u5408\u3001\u5F53\u8A72\u300C\u58F0\u300D\u306B\u542B\u307E\u308C\u308B\u500B\u4EBA\u60C5\u5831\u3092\u53D6\u5F97\u3059\u308B\u307B\u304B\u3001\u5F53\u8A72\u6295\u7A3F\u306B\u4FC2\u308B\u7AEF\u672B\u60C5\u5831\u3001\u4F4D\u7F6E\u60C5\u5831\u7B49\u3092\u53CE\u96C6\u3059\u308B\u5834\u5408\u304C\u3042\u308A\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 37
+    },
+    __self: this
+  }), "\u305D\u306E\u4ED6\u3001\u5F53\u56E3\u4F53\u306F\u3001\u4E0A\u8A18\u306E\u307B\u304B\u3001\u30E6\u30FC\u30B6\u30FC\u304B\u3089\u500B\u4EBA\u60C5\u5831\u3092\u542B\u3080\u901A\u77E5\u3092\u53D7\u9818\u3059\u308B\u3053\u3068\u305D\u306E\u4ED6\u9069\u6B63\u306A\u624B\u6BB5\u306B\u3088\u308A\u500B\u4EBA\u60C5\u5831\u3092\u53D6\u5F97\u3059\u308B\u5834\u5408\u304C\u3042\u308A\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 41
+    },
+    __self: this
+  }, "\uFF13\uFF0E\u5229\u7528\u76EE\u7684", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 43
+    },
+    __self: this
+  }), "\u5F53\u56E3\u4F53\u306F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u304A\u3044\u3066\u53D6\u5F97\u3057\u305F\u500B\u4EBA\u60C5\u5831\u3092\u4EE5\u4E0B\u306B\u5B9A\u3081\u308B\u76EE\u7684\u3067\u5229\u7528\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 45
+    },
+    __self: this
+  }), "\u30FB \u672C\u30B5\u30FC\u30D3\u30B9\u306E\u63D0\u4F9B\u3001\u5B9F\u65BD", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 47
+    },
+    __self: this
+  }), "\u30FB \u672C\u30B5\u30FC\u30D3\u30B9\u306E\u6539\u5584\u3001\u6A5F\u80FD\u62E1\u5F35\u305D\u306E\u4ED6\u306E\u5909\u66F4\u306B\u5411\u3051\u305F\u5206\u6790\u30FB\u691C\u8A0E", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: this
+  }), "\u30FB \u7D71\u8A08\u30C7\u30FC\u30BF\u306E\u4F5C\u6210\u3001\u5206\u6790", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51
+    },
+    __self: this
+  }), "\u30FB \u65B0\u898F\u30B5\u30FC\u30D3\u30B9\u306E\u691C\u8A0E\u30FB\u958B\u767A", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
+    },
+    __self: this
+  }), "\u30FB \u5F53\u56E3\u4F53\u53C8\u306F\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5BA3\u4F1D\u3001\u5E83\u544A\u3001\u30DE\u30FC\u30B1\u30C6\u30A3\u30F3\u30B0"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: this
+  }, "\uFF14\uFF0E\u500B\u4EBA\u30C7\u30FC\u30BF\u306E\u53D6\u6271\u3044\u306E\u59D4\u8A17", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 58
+    },
+    __self: this
+  }), "\u5F53\u56E3\u4F53\u304C\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u95A2\u3057\u3066\u500B\u4EBA\u30C7\u30FC\u30BF\u306E\u53D6\u6271\u3044\u3092\u7B2C\u4E09\u8005\u306B\u59D4\u8A17\u3057\u305F\u5834\u5408\u3001\u5F53\u8A72\u500B\u4EBA\u30C7\u30FC\u30BF\u306E\u5B89\u5168\u7BA1\u7406\u304C\u56F3\u3089\u308C\u308B\u3088\u3046\u3001\u5F53\u8A72\u7B2C\u4E09\u8005\u306B\u5BFE\u3057\u3066\u5FC5\u8981\u304B\u3064\u9069\u5207\u306A\u76E3\u7763\u3092\u884C\u3044\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 62
+    },
+    __self: this
+  }, "\uFF15\uFF0E\u500B\u4EBA\u30C7\u30FC\u30BF\u306E\u7B2C\u4E09\u8005\u63D0\u4F9B", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 64
     },
     __self: this
-  }, supportPosts);
-
-  return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }), "\u5F53\u56E3\u4F53\u306F\u3001\u516C\u7684\u6A5F\u95A2\u3068\u9023\u643A\u3057\u3066\u767A\u707D\u5F8C\u306E\u5FDC\u6025\u5BFE\u5FDC\u3001\u5FA9\u65E7\u3001\u5FA9\u8208\u3092\u63A8\u9032\u3059\u308B\u305F\u3081\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u72B6\u6CC1\u3092\u56FD\u306E\u6A5F\u95A2\u3001\u5730\u65B9\u516C\u5171\u56E3\u4F53\u3001\u793E\u4F1A\u798F\u7949\u5354\u8B70\u4F1A\u305D\u306E\u4ED6\u306E\u516C\u7684\u6A5F\u95A2\u306B\u63D0\u4F9B\u3059\u308B\u5834\u5408\u304C\u3042\u308A\u307E\u3059\u3002", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 67
+      lineNumber: 66
     },
     __self: this
-  }, __jsx(react__WEBPACK_IMPORTED_MODULE_4__["Fragment"], {
+  }), "\u305D\u306E\u4ED6\u3001\u5F53\u56E3\u4F53\u306F\u3001\u3042\u3089\u304B\u3058\u3081\u672C\u4EBA\u306E\u540C\u610F\u3092\u5F97\u306A\u3044\u9650\u308A\u3001\u7B2C\u4E09\u8005\u306B\u5BFE\u3057\u3066\u500B\u4EBA\u30C7\u30FC\u30BF\u3092\u63D0\u4F9B\u3057\u307E\u305B\u3093\u3002\u305F\u3060\u3057\u3001\u500B\u4EBA\u60C5\u5831\u306E\u4FDD\u8B77\u306B\u95A2\u3059\u308B\u6CD5\u5F8B\u304C\u5B9A\u3081\u308B\u5834\u5408\uFF08\u4EE5\u4E0B\u306B\u5B9A\u3081\u308B\u5834\u5408\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u306F\u3001\u3053\u306E\u9650\u308A\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u3002", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 68
     },
     __self: this
-  }, __jsx(_organisms_tab__WEBPACK_IMPORTED_MODULE_9__["default"], {
-    leftContent: helpPostElement,
-    rightContent: supportPostElement,
-    tabSide: side === 'help' ? 'left' : 'right',
+  }), "\u30FB \u6CD5\u4EE4\u306B\u57FA\u3065\u304F\u5834\u5408", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 69
+      lineNumber: 70
     },
     __self: this
-  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_6___default.a, {
-    href: '/register',
+  }), "\u30FB \u4EBA\u306E\u751F\u547D\u3001\u8EAB\u4F53\u53C8\u306F\u8CA1\u7523\u306E\u4FDD\u8B77\u306E\u305F\u3081\u306B\u5FC5\u8981\u304C\u3042\u308B\u5834\u5408\u3067\u3042\u3063\u3066\u3001\u672C\u4EBA\u306E\u540C\u610F\u3092\u5F97\u308B\u3053\u3068\u304C\u56F0\u96E3\u3067\u3042\u308B\u5834\u5408", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 74
+      lineNumber: 72
     },
     __self: this
-  }, __jsx(AddButton, {
+  }), "\u30FB \u516C\u8846\u885B\u751F\u306E\u5411\u4E0A\u53C8\u306F\u5150\u7AE5\u306E\u5065\u5168\u306A\u80B2\u6210\u306E\u63A8\u9032\u306E\u305F\u3081\u306B\u7279\u306B\u5FC5\u8981\u304C\u3042\u308B\u5834\u5408\u3067\u3042\u3063\u3066\u3001\u672C\u4EBA\u306E\u540C\u610F\u3092\u5F97\u308B\u3053\u3068\u304C\u56F0\u96E3\u3067\u3042\u308B\u5834\u5408", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 75
     },
     __self: this
-  }, "\u58F0\u306E\u8FFD\u52A0"))));
+  }), "\u30FB \u56FD\u306E\u6A5F\u95A2\u82E5\u3057\u304F\u306F\u5730\u65B9\u516C\u5171\u56E3\u4F53\u53C8\u306F\u305D\u306E\u59D4\u8A17\u3092\u53D7\u3051\u305F\u8005\u304C\u6CD5\u4EE4\u306E\u5B9A\u3081\u308B\u4E8B\u52D9\u3092\u9042\u884C\u3059\u308B\u3053\u3068\u306B\u5BFE\u3057\u3066\u5354\u529B\u3059\u308B\u5FC5\u8981\u304C\u3042\u308B\u5834\u5408\u3067\u3042\u3063\u3066\u3001\u672C\u4EBA\u306E\u540C\u610F\u3092\u5F97\u308B\u3053\u3068\u306B\u3088\u308A\u5F53\u8A72\u4E8B\u52D9\u306E\u9042\u884C\u306B\u652F\u969C\u3092\u53CA\u307C\u3059\u304A\u305D\u308C\u304C\u3042\u308B\u5834\u5408", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 78
+    },
+    __self: this
+  }), "\u30FB \u5229\u7528\u76EE\u7684\u306E\u9054\u6210\u306B\u5FC5\u8981\u306A\u7BC4\u56F2\u5185\u306B\u304A\u3044\u3066\u500B\u4EBA\u30C7\u30FC\u30BF\u306E\u53D6\u6271\u3044\u306E\u5168\u90E8\u53C8\u306F\u4E00\u90E8\u3092\u59D4\u8A17\u3059\u308B\u3053\u3068\u306B\u4F34\u3044\u5F53\u8A72\u500B\u4EBA\u30C7\u30FC\u30BF\u3092\u63D0\u4F9B\u3059\u308B\u5834\u5408", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 81
+    },
+    __self: this
+  }), "\u30FB \u5408\u4F75\u305D\u306E\u4ED6\u306E\u4E8B\u7531\u306B\u3088\u308B\u4E8B\u696D\u306E\u627F\u7D99\u306B\u4F34\u3063\u3066\u500B\u4EBA\u30C7\u30FC\u30BF\u304C\u63D0\u4F9B\u3055\u308C\u308B\u5834\u5408"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 84
+    },
+    __self: this
+  }, "\uFF16\uFF0E\u500B\u4EBA\u30C7\u30FC\u30BF\u306E\u5171\u540C\u5229\u7528", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 86
+    },
+    __self: this
+  }), "\u5F53\u56E3\u4F53\u306F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u304A\u3044\u3066\u53D6\u5F97\u3057\u305F\u500B\u4EBA\u30C7\u30FC\u30BF\u306E\u5171\u540C\u5229\u7528\u3092\u884C\u3044\u307E\u305B\u3093\u3002\u4ECA\u5F8C\u3001\u5171\u540C\u5229\u7528\u3092\u884C\u3046\u3053\u3068\u3068\u3057\u305F\u5834\u5408\u3001\u672C\u30DD\u30EA\u30B7\u30FC\u306E\u4E2D\u3067\u516C\u8868\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 90
+    },
+    __self: this
+  }, "\uFF17\uFF0E\u500B\u4EBA\u30C7\u30FC\u30BF\u306E\u5B89\u5168\u7BA1\u7406\u7B49", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 92
+    },
+    __self: this
+  }), "\u5F53\u56E3\u4F53\u306F\u3001\u7B2C3\u9805\u306B\u304A\u3044\u3066\u5B9A\u3081\u308B\u5229\u7528\u76EE\u7684\u306E\u9054\u6210\u306B\u5FC5\u8981\u306A\u7BC4\u56F2\u5185\u306B\u304A\u3044\u3066\u3001\u500B\u4EBA\u30C7\u30FC\u30BF\u3092\u6B63\u78BA\u304B\u3064\u6700\u65B0\u306E\u5185\u5BB9\u306B\u4FDD\u3064\u3068\u3068\u3082\u306B\u3001\u5229\u7528\u3059\u308B\u5FC5\u8981\u304C\u306A\u304F\u306A\u3063\u305F\u3068\u304D\u306F\u3001\u5F53\u8A72\u500B\u4EBA\u30C7\u30FC\u30BF\u3092\u9045\u6EDE\u306A\u304F\u6D88\u53BB\u3059\u308B\u3088\u3046\u52AA\u3081\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 94
+    },
+    __self: this
+  }), "\u307E\u305F\u3001\u5F53\u56E3\u4F53\u306F\u3001\u500B\u4EBA\u30C7\u30FC\u30BF\u3078\u306E\u4E0D\u6B63\u30A2\u30AF\u30BB\u30B9\u3001\u500B\u4EBA\u60C5\u5831\u306E\u7D1B\u5931\u3001\u6EC5\u5931\u3001\u6BC0\u640D\u3001\u6539\u3056\u3093\u3001\u6F0F\u3048\u3044\u306A\u3069\u3092\u9632\u6B62\u3059\u308B\u305F\u3081\u3001\u30BB\u30AD\u30E5\u30EA\u30C6\u30A3\u30B7\u30B9\u30C6\u30E0\u306E\u7DAD\u6301\u30FB\u7BA1\u7406\u4F53\u5236\u306E\u6574\u5099\u30FB\u5F93\u696D\u54E1\u6559\u80B2\u306E\u5FB9\u5E95\u7B49\u306E\u5FC5\u8981\u306A\u63AA\u7F6E\u3092\u8B1B\u3058\u3001\u5B89\u5168\u5BFE\u7B56\u3092\u5B9F\u65BD\u3057\u500B\u4EBA\u60C5\u5831\u306E\u53B3\u91CD\u306A\u7BA1\u7406\u3092\u884C\u3044\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 98
+    },
+    __self: this
+  }, "\uFF18\uFF0E\u4FDD\u6709\u500B\u4EBA\u30C7\u30FC\u30BF\u306E\u958B\u793A\u30FB\u8A02\u6B63\u7B49", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 100
+    },
+    __self: this
+  }), "\u5F53\u56E3\u4F53\u306F\u3001\u4FDD\u6709\u500B\u4EBA\u30C7\u30FC\u30BF\u306B\u3064\u3044\u3066\u3001\u6CD5\u4EE4\u306B\u5F93\u3044\u3001\u672C\u4EBA\u53C8\u306F\u305D\u306E\u4EE3\u7406\u4EBA\u304B\u3089\u306E\u5229\u7528\u76EE\u7684\u306E\u901A\u77E5\u3001\u958B\u793A\u3001\u5909\u66F4\u7B49\uFF08\u5185\u5BB9\u306E\u8A02\u6B63\u3001\u8FFD\u52A0\u53C8\u306F\u524A\u9664\uFF09\u3001\u5229\u7528\u505C\u6B62\u7B49\uFF08\u5229\u7528\u306E\u505C\u6B62\u53C8\u306F\u6D88\u53BB\uFF09\u3001\u7B2C\u4E09\u8005\u3078\u306E\u63D0\u4F9B\u306E\u505C\u6B62\u306E\u6C42\u3081\u306B\u5BFE\u5FDC\u3044\u305F\u3057\u307E\u3059\u3002\u3053\u308C\u3089\u3092\u5E0C\u671B\u3055\u308C\u308B\u5834\u5408\u3001\u672B\u5C3E\u306E\u304A\u554F\u5408\u305B\u5148\u307E\u3067\u3054\u9023\u7D61\u4E0B\u3055\u3044\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 104
+    },
+    __self: this
+  }, "\uFF19\uFF0E\u7D71\u8A08\u7684\u306A\u89E3\u6790\u7B49", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 106
+    },
+    __self: this
+  }), "\u5F53\u56E3\u4F53\u306F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u6539\u5584\u3001\u767A\u707D\u5F8C\u306E\u5FDC\u6025\u5BFE\u5FDC\u3001\u5FA9\u65E7\u3001\u5FA9\u8208\u306E\u63A8\u9032\u7B49\u3092\u76EE\u7684\u3068\u3057\u3066\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u304A\u3044\u3066\u53D6\u5F97\u3057\u305F\u500B\u4EBA\u60C5\u5831\u306B\u3064\u3044\u3066\u7D71\u8A08\u7684\u306A\u89E3\u6790\u3092\u884C\u3044\u3001\u304B\u304B\u308B\u89E3\u6790\u7D50\u679C\u3092\u500B\u4EBA\u304C\u5224\u5225\u3067\u304D\u306A\u3044\u614B\u69D8\u3067\u7D71\u8A08\u60C5\u5831\u3068\u3057\u3066\u5229\u7528\u3057\u3001\u307E\u305F\u306F\u7B2C\u4E09\u8005\u306B\u63D0\u4F9B\u3059\u308B\u5834\u5408\u304C\u3042\u308A\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 110
+    },
+    __self: this
+  }, "10\uFF0E\u672C\u30DD\u30EA\u30B7\u30FC\u306E\u5909\u66F4", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 112
+    },
+    __self: this
+  }), "\u5F53\u56E3\u4F53\u306F\u3001\u500B\u4EBA\u60C5\u5831\u306E\u53D6\u6271\u3044\u306B\u95A2\u3059\u308B\u904B\u7528\u3092\u9069\u5B9C\u898B\u76F4\u3057\u3001\u7D99\u7D9A\u7684\u306A\u6539\u5584\u306B\u52AA\u3081\u3001\u5FC5\u8981\u306B\u5FDC\u3058\u3066\u672C\u30DD\u30EA\u30B7\u30FC\u3092\u5909\u66F4\u3044\u305F\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 114
+    },
+    __self: this
+  }), "\u5F53\u56E3\u4F53\u304C\u672C\u30DD\u30EA\u30B7\u30FC\u3092\u5909\u66F4\u3057\u305F\u5834\u5408\u3001\u5909\u66F4\u5F8C\u306E\u5185\u5BB9\u3092\u516C\u8868\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 118
+    },
+    __self: this
+  }, "11\uFF0E\u304A\u554F\u3044\u5408\u308F\u305B\u7A93\u53E3", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 120
+    },
+    __self: this
+  }), "\u500B\u4EBA\u60C5\u5831\u306E\u53D6\u6271\u3044\u306B\u95A2\u3059\u308B\u3054\u610F\u898B\u3001\u3054\u8CEA\u554F\u3001\u82E6\u60C5\u306E\u304A\u7533\u51FA\u305D\u306E\u4ED6\u304A\u554F\u5408\u305B\u306F\u3001\u4E0B\u8A18\u306E\u7A93\u53E3\u307E\u3067\u304A\u9858\u3044\u3044\u305F\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 122
+    },
+    __self: this
+  }), "\u4E00\u822C\u793E\u56E3\u6CD5\u4EBAFUKKO DESIGN", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 124
+    },
+    __self: this
+  }), "\u4F4F\u6240\uFF1A\u3012150-0042\u3000\u6771\u4EAC\u90FD\u6E0B\u8C37\u533A\u5B87\u7530\u5DDD\u753A16-8\u3000\u6E0B\u8C37\u30BB\u30F3\u30BF\u30FC\u30D3\u30EB\uFF13F", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 126
+    },
+    __self: this
+  }), "E-mail\uFF1A fukko-skett@fukko-design.jp"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 130
+    },
+    __self: this
+  }, "\u4EE5\u4E0A")));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Home);
-var ItemWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject());
-var AddButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].button(_templateObject2());
+/* harmony default export */ __webpack_exports__["default"] = (PrivacyPolicyModal);
+var Inner = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].section(_templateObject());
+var Title = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].h2(_templateObject2());
+
+/***/ }),
+
+/***/ "./components/molecules/modal/TermsModal.tsx":
+/*!***************************************************!*\
+  !*** ./components/molecules/modal/TermsModal.tsx ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
+/* harmony import */ var _atoms_Modal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../atoms/Modal */ "./components/atoms/Modal.tsx");
+
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/molecules/modal/TermsModal.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
+
+function _templateObject2() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-bottom: 32px;\n    text-align: center;\n    font-size: 24px;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    padding: 0 40px;\n    & > p {\n        font-size: 20px;\n        margin-bottom: 32px;\n        line-height: 1.5;\n        span {\n            text-decoration: underline;\n        }\n    }\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+
+
+
+
+var TermsModal = function TermsModal(props) {
+  var isShowing = props.isShowing,
+      toggle = props.toggle,
+      onClickPrivacyPolicy = props.onClickPrivacyPolicy;
+  return __jsx(_atoms_Modal__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    styleType: "default",
+    isShowing: isShowing,
+    onClose: toggle,
+    width: '600px',
+    height: '60%',
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14
+    },
+    __self: this
+  }, __jsx(Inner, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 15
+    },
+    __self: this
+  }, __jsx(Title, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16
+    },
+    __self: this
+  }, "\u30B9\u30B1\u30C3\u30C8\u5229\u7528\u898F\u7D04"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 18
+    },
+    __self: this
+  }, "\u4E00\u822C\u793E\u56E3\u6CD5\u4EBAFUKKO DESIGN\uFF08\u4EE5\u4E0B\u300CFD\u300D\u3068\u3044\u3046\u3002\uFF09\u306F\u3001FD\u304C\u904B\u55B6\u3059\u308B\u300C\u30B9\u30B1\u30C3\u30C8\u300D\uFF08\u4EE5\u4E0B\u300C\u672C\u30B5\u30FC\u30D3\u30B9\u300D\u3068\u3044\u3044\u307E\u3059\u3002\uFF09\u306B\u95A2\u3057\u3001\u4EE5\u4E0B\u306E\u3068\u304A\u308A\u300C\u30B9\u30B1\u30C3\u30C8\u5229\u7528\u898F\u7D04\u300D\uFF08\u4EE5\u4E0B\u300C\u672C\u898F\u7D04\u300D\u3068\u3044\u307E\u3059\u3002\uFF09\u3092\u5B9A\u3081\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 23
+    },
+    __self: this
+  }, "\u7B2C1\u6761 \uFF08\u5B9A\u7FA9\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 25
+    },
+    __self: this
+  }), "\u672C\u898F\u7D04\u3067\u306F\u3001\u4EE5\u4E0B\u306E\u5404\u53F7\u306B\u5B9A\u3081\u308B\u5404\u7528\u8A9E\u3092\u3001\u305D\u308C\u305E\u308C\u4EE5\u4E0B\u306B\u5B9A\u3081\u308B\u610F\u5473\u3067\u7528\u3044\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 27
+    },
+    __self: this
+  }), "(1) \u300C\u300E\u58F0\u300F\u300D\u3068\u306F\u3001\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\uFF08\u7B2C8\u53F7\u306B\u304A\u3044\u3066\u5B9A\u7FA9\u3057\u307E\u3059\u3002\u4EE5\u4E0B\u540C\u3058\u3002\uFF09\u304C\u672C\u30B5\u30FC\u30D3\u30B9\u3092\u5229\u7528\u3057\u3066\u6295\u7A3F\u3057\u305F\u30B3\u30F3\u30C6\u30F3\u30C4\uFF08\u6587\u7AE0\u3001\u753B\u50CF\u3001\u52D5\u753B\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u3092\u3044\u3044\u307E\u3059\u3002\u300C\u58F0\u300D\u306F\u3001\u73FE\u5730\u30E6\u30FC\u30B6\u30FC\uFF08\u7B2C4\u53F7\u306B\u304A\u3044\u3066\u5B9A\u7FA9\u3057\u307E\u3059\u3002\uFF09\u304C\u6295\u7A3F\u3059\u308B\u300C\u300E\u73FE\u5730\u306E\u58F0\u300F\u300D\u3068\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\uFF08\u7B2C6\u53F7\u306B\u304A\u3044\u3066\u5B9A\u7FA9\u3057\u307E\u3059\u3002\u4EE5\u4E0B\u540C\u3058\u3002\uFF09\u304C\u6295\u7A3F\u3059\u308B\u300C\u300E\u652F\u63F4\u306E\u58F0\u300F\u300D\u306B\u533A\u5225\u3055\u308C\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 30
+    },
+    __self: this
+  }), "(2) \u300C\u73FE\u5730\u300D\u3068\u306F\u3001\u88AB\u707D\u5730\u3001\u88AB\u707D\u8005\u306E\u73FE\u4F4F\u5730\u3001\u73FE\u5728\u5730\u305D\u306E\u4ED6\u306E\u707D\u5BB3\u306B\u95A2\u4FC2\u3059\u308B\u5834\u6240\u3092\u7DCF\u79F0\u3057\u3066\u3044\u3044\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 32
+    },
+    __self: this
+  }), "(3) \u300C\u73FE\u5730\u30CB\u30FC\u30BA\u300D\u3068\u306F\u3001\u73FE\u5730\u3067\u5B58\u5728\u3059\u308B\u652F\u63F4\u6D3B\u52D5\uFF08\u7B2C5\u53F7\u306B\u304A\u3044\u3066\u5B9A\u7FA9\u3057\u307E\u3059\u3002\uFF09\u306E\u9700\u8981\u3092\u3044\u3044\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 34
+    },
+    __self: this
+  }), "(4) \u300C\u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u300D\u3068\u306F\u3001\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\u306E\u3046\u3061\u3001\u73FE\u5730\u30CB\u30FC\u30BA\u306E\u89E3\u6C7A\u3092\u76EE\u7684\u3068\u3057\u3066\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u3092\u5229\u7528\u3057\u3066\u300C\u73FE\u5730\u306E\u58F0\u300D\u3092\u6295\u7A3F\u3057\u3001\u53C8\u306F\u300C\u652F\u63F4\u306E\u58F0\u300D\u306B\u5BFE\u3059\u308B\u5FDC\u52DF\u3092\u884C\u3046\u8005\u3092\u3044\u3044\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 37
+    },
+    __self: this
+  }), "(5) \u300C\u652F\u63F4\u6D3B\u52D5\u300D\u3068\u306F\u3001\u767A\u707D\u5F8C\u306E\u5FDC\u6025\u5BFE\u5FDC\u3001\u5FA9\u65E7\u3001\u5FA9\u8208\u306B\u4FC2\u308B\u6D3B\u52D5\u3092\u3044\u3044\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: this
+  }), "(6) \u300C\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u300D\u3068\u306F\u3001\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\u306E\u3046\u3061\u3001\u73FE\u5730\u3067\u652F\u63F4\u6D3B\u52D5\u3092\u884C\u3046\u3053\u3068\u3092\u76EE\u7684\u3068\u3057\u3066\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u3092\u5229\u7528\u3057\u3066\u300C\u652F\u63F4\u306E\u58F0\u300D\u3092\u6295\u7A3F\u3057\u3001\u53C8\u306F\u300C\u73FE\u5730\u306E\u58F0\u300D\u306B\u5BFE\u3059\u308B\u5FDC\u52DF\u3092\u884C\u3046\u8005\u3092\u3044\u3044\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: this
+  }), "(7) \u300C\u30E6\u30FC\u30B6\u30FC\u300D\u3068\u306F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u3092\u5229\u7528\u3059\u308B\u8005\u3092\u3044\u3044\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 44
+    },
+    __self: this
+  }), "(8) \u300C\u30ED\u30B0\u30A4\u30F3\u30E6\u30FC\u30B6\u30FC\u300D\u3068\u306F\u3001\u30E6\u30FC\u30B6\u30FC\u306E\u3046\u3061\u3001\u672C\u898F\u7D04\u306E\u5B9A\u3081\u306B\u5F93\u3044\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u30ED\u30B0\u30A4\u30F3\u3057\u305F\u8005\u3092\u3044\u3044\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: this
+  }, "\u7B2C2\u6761 \uFF08\u9069\u7528\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 51
+    },
+    __self: this
+  }), "1. \u672C\u898F\u7D04\u306F\u3001FD\u3068\u30E6\u30FC\u30B6\u30FC\u3068\u306E\u9593\u306E\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u306B\u95A2\u3059\u308B\u6A29\u5229\u7FA9\u52D9\u95A2\u4FC2\u3092\u5B9A\u3081\u308B\u3053\u3068\u3092\u76EE\u7684\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 53
+    },
+    __self: this
+  }), "2. FD\u304CFD\u306E\u30A6\u30A7\u30D6\u30B5\u30A4\u30C8\u53C8\u306F\u672C\u30B5\u30FC\u30D3\u30B9\u4E0A\u3067\u8A18\u8F09\u3059\u308B\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u306B\u95A2\u3059\u308B\u30EB\u30FC\u30EB\u3001\u30AC\u30A4\u30C9\u30E9\u30A4\u30F3\u305D\u306E\u4ED6\u306E\u4E8B\u9805\u306F\u3001\u672C\u898F\u7D04\u306E\u4E00\u90E8\u3092\u69CB\u6210\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 56
+    },
+    __self: this
+  }), "3. \u672C\u898F\u7D04\u306E\u5185\u5BB9\u3068\u524D\u9805\u306B\u5B9A\u3081\u308B\u30EB\u30FC\u30EB\u7B49\u304C\u77DB\u76FE\u53C8\u306F\u62B5\u89E6\u3059\u308B\u5834\u5408\u3001\u672C\u898F\u7D04\u306E\u5185\u5BB9\u304C\u512A\u5148\u3057\u3066\u9069\u7528\u3055\u308C\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: this
+  }), "4. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u672C\u898F\u7D04\u306E\u5185\u5BB9\u306B\u540C\u610F\u3057\u305F\u4E0A\u3067\u672C\u30B5\u30FC\u30D3\u30B9\u3092\u5229\u7528\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002\u672C\u898F\u7D04\u306E\u5185\u5BB9\u306F\u3001FD\u3068\u30E6\u30FC\u30B6\u30FC\u3068\u306E\u9593\u306E\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u306B\u95A2\u3059\u308B\u5951\u7D04\uFF08\u4EE5\u4E0B\u300C\u672C\u5951\u7D04\u300D\u3068\u3044\u3044\u307E\u3059\u3002\uFF09\u306E\u5185\u5BB9\u3092\u69CB\u6210\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 62
+    },
+    __self: this
+  }), "5. FD\u306F\u3001\u3044\u3064\u3067\u3082\u3001\u4EFB\u610F\u306E\u7406\u7531\u3067\u3001\u672C\u898F\u7D04\u3092\u5909\u66F4\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002FD\u304C\u672C\u898F\u7D04\u3092\u5909\u66F4\u3059\u308B\u5834\u5408\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u4E0A\u306B\u8A18\u8F09\u3059\u308B\u65B9\u6CD5\u305D\u306E\u4ED6\u306E\u5408\u7406\u7684\u306A\u65B9\u6CD5\u3067\u5909\u66F4\u5F8C\u306E\u5185\u5BB9\u3092\u516C\u8868\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65
+    },
+    __self: this
+  }), "6. \u524D\u9805\u306E\u5B9A\u3081\u306B\u5F93\u3044\u672C\u898F\u7D04\u304C\u5909\u66F4\u3055\u308C\u305F\u5F8C\u306B\u30E6\u30FC\u30B6\u30FC\u304C\u672C\u30B5\u30FC\u30D3\u30B9\u3092\u5229\u7528\u3057\u305F\u5834\u5408\u3001\u30E6\u30FC\u30B6\u30FC\u306F\u5909\u66F4\u5F8C\u306E\u672C\u898F\u7D04\u306E\u5185\u5BB9\u306B\u5408\u610F\u3057\u305F\u3082\u306E\u3068\u307F\u306A\u3055\u308C\u3001\u672C\u5951\u7D04\u306E\u5185\u5BB9\u3082\u3001\u672C\u898F\u7D04\u306E\u5909\u66F4\u306B\u5F93\u3044\u5909\u66F4\u3055\u308C\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 70
+    },
+    __self: this
+  }, "\u7B2C3\u6761 \uFF08\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u76EE\u7684\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 72
+    },
+    __self: this
+  }), "\u672C\u30B5\u30FC\u30D3\u30B9\u306F\u3001\u73FE\u5730\u30CB\u30FC\u30BA\u306B\u9069\u5408\u3057\u305F\u652F\u63F4\u6D3B\u52D5\u3092\u4FC3\u9032\u3057\u3001\u3082\u3063\u3066\u3001\u767A\u707D\u5F8C\u306E\u5FDC\u6025\u5BFE\u5FDC\u3001\u5FA9\u65E7\u3001\u5FA9\u8208\u3092\u63A8\u9032\u3059\u308B\u305F\u3081\u3001\u652F\u63F4\u6D3B\u52D5\u306E\u5951\u6A5F\u3068\u306A\u308A\u3046\u308B\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u3068\u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u306E\u30DE\u30C3\u30C1\u30F3\u30B0\u3092\u5B9F\u73FE\u3059\u308B\u3053\u3068\u3092\u76EE\u7684\u3068\u3057\u305F\u30B5\u30FC\u30D3\u30B9\u3067\u3059\u3002\u306A\u304A\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u4E0A\u3067\u3001\u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u306F\u300C\u652F\u63F4\u306E\u58F0\u300D\u306B\u5BFE\u3057\u3001\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u300C\u73FE\u5730\u306E\u58F0\u300D\u306B\u5BFE\u3057\u3066\u5FDC\u52DF\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u304C\u3001\u5FDC\u52DF\u5F8C\u306E\u30E6\u30FC\u30B6\u30FC\u9593\u306E\u30B3\u30DF\u30E5\u30CB\u30B1\u30FC\u30B7\u30E7\u30F3\u7B49\u306B\u3064\u3044\u3066\u306F\u3001SNS\u306E\u30E1\u30C3\u30BB\u30FC\u30B8\u6A5F\u80FD\u7B49\u3092\u5229\u7528\u3057\u3066\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u5916\u3067\u884C\u3046\u3053\u3068\u306B\u306A\u308A\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 76
+    },
+    __self: this
+  }, "\u7B2C4\u6761 \uFF08\u30ED\u30B0\u30A4\u30F3\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 78
+    },
+    __self: this
+  }), "1. \u30E6\u30FC\u30B6\u30FC\u306F\u3001Facebook\u30A2\u30AB\u30A6\u30F3\u30C8\u53C8\u306FTwitter\u30A2\u30AB\u30A6\u30F3\u30C8\u306B\u4FC2\u308B\u8A8D\u8A3C\u60C5\u5831\u3092FD\u6240\u5B9A\u306E\u65B9\u6CD5\u3067\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u9023\u643A\u3059\u308B\u65B9\u6CD5\u306B\u3088\u308A\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u30ED\u30B0\u30A4\u30F3\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 81
+    },
+    __self: this
+  }), "2. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u524D\u9805\u306B\u5B9A\u3081\u308B\u65B9\u6CD5\u4EE5\u5916\u306E\u65B9\u6CD5\u3067\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u30ED\u30B0\u30A4\u30F3\u3059\u308B\u3053\u3068\u306F\u3067\u304D\u307E\u305B\u3093\u3002\u306A\u304A\u3001\u30E6\u30FC\u30B6\u30FC\u306B\u3088\u308BFacebook\u53C8\u306FTwitter\u4E0A\u306E\u30A2\u30AB\u30A6\u30F3\u30C8\u767B\u9332\u306F\u3001\u305D\u306E\u8CAC\u4EFB\u53CA\u3073\u8CBB\u7528\u8CA0\u62C5\u306E\u4E0B\u3067\u884C\u308F\u308C\u308B\u3082\u306E\u3068\u3057\u3001FD\u306F\u304B\u304B\u308B\u30A2\u30AB\u30A6\u30F3\u30C8\u767B\u9332\u306B\u4E00\u5207\u95A2\u77E5\u305B\u305A\u3001\u4F55\u3089\u306E\u8CAC\u4EFB\u3092\u8CA0\u3046\u3082\u306E\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 86
+    },
+    __self: this
+  }, "\u7B2C5\u6761 \uFF08\u300C\u58F0\u300D\u306E\u6295\u7A3F\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 88
+    },
+    __self: this
+  }), "1. \u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u53C8\u306F\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u3001FD\u6240\u5B9A\u306E\u65B9\u6CD5\u306B\u3088\u308A\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u4E0A\u3067\u300C\u58F0\u300D\u3092\u6295\u7A3F\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002\u306A\u304A\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u4E0A\u3001\u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u306E\u300C\u58F0\u300D\u306F\u300C\u73FE\u5730\u306E\u58F0\u300D\u3068\u3057\u3066\u3001\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306E\u300C\u58F0\u300D\u306F\u300C\u652F\u63F4\u306E\u58F0\u300D\u3068\u3057\u3066\u53D6\u308A\u6271\u308F\u308C\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 91
+    },
+    __self: this
+  }), "2. \u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u53C8\u306F\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u3001\u300C\u58F0\u300D\u3092\u6295\u7A3F\u3057\u305F\u5F8C\u3067\u3042\u3063\u3066\u3082\u3001FD\u6240\u5B9A\u306E\u65B9\u6CD5\u306B\u3088\u308A\u3001\u5F53\u8A72\u300C\u58F0\u300D\u3092\u524A\u9664\u3057\u3001\u307E\u305F\u306F\u5F53\u8A72\u300C\u58F0\u300D\u306E\u5185\u5BB9\u3092\u7DE8\u96C6\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 94
+    },
+    __self: this
+  }), "3. \u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u53C8\u306F\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u3001\u305D\u306E\u6295\u7A3F\u3059\u308B\u300C\u58F0\u300D\u306E\u5185\u5BB9\u306B\u3064\u3044\u3066\u3001(i)\u865A\u507D\u53C8\u306F\u8A87\u5927\u3067\u3042\u308B\u3053\u3068\u3001(ii)\u4E0D\u660E\u78BA\u3067\u3042\u308B\u306A\u3069\u8AA4\u89E3\u3092\u62DB\u304F\u5185\u5BB9\u3067\u3042\u308B\u3053\u3068\u3001(iii)\u73FE\u5730\u30CB\u30FC\u30BA\u53C8\u306F\u652F\u63F4\u6D3B\u52D5\u306E\u91CD\u8981\u306A\u4E8B\u5B9F\u53C8\u306F\u524D\u63D0\u6761\u4EF6\u306A\u3069\u304C\u8A18\u8F09\u3055\u308C\u3066\u3044\u306A\u3044\u3053\u3068\u306A\u3069\u4E0D\u9069\u5207\u306A\u70B9\u304C\u5B58\u5728\u3059\u308B\u5834\u5408\u3001\u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u3068\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u3068\u306E\u9593\u306E\u8A8D\u8B58\u9F5F\u9F6C\u3084\u30C8\u30E9\u30D6\u30EB\u7B49\u3092\u62DB\u304F\u53EF\u80FD\u6027\u304C\u3042\u308B\u3053\u3068\u3092\u7406\u89E3\u3057\u3001\u4E0D\u9069\u5207\u306A\u5185\u5BB9\u306E\u300C\u58F0\u300D\u3092\u6295\u7A3F\u3057\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 97
+    },
+    __self: this
+  }), "4. \u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u306F\u3001\u300C\u73FE\u5730\u306E\u58F0\u300D\u306E\u5185\u5BB9\u3068\u3057\u3066\u3001\u652F\u63F4\u6D3B\u52D5\u306B\u4FC2\u308B\u5BFE\u4FA1\u53C8\u306F\u8CBB\u7528\u8CA0\u62C5\u306E\u6709\u7121\uFF08\u91D1\u984D\u306E\u4E0A\u9650\u3092\u8A2D\u5B9A\u3059\u308B\u5834\u5408\u306F\u305D\u306E\u4E0A\u9650\uFF09\u3092\u660E\u793A\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 100
+    },
+    __self: this
+  }), "5. \u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u3001\u300C\u652F\u63F4\u306E\u58F0\u300D\u306E\u5185\u5BB9\u3068\u3057\u3066\u3001\u652F\u63F4\u6D3B\u52D5\u306B\u4FC2\u308B\u5BFE\u4FA1\u53C8\u306F\u8CBB\u7528\u8CA0\u62C5\u306E\u8981\u5426\uFF08\u91D1\u984D\u306E\u4E0B\u9650\u3092\u8A2D\u5B9A\u3059\u308B\u5834\u5408\u306F\u305D\u306E\u4E0B\u9650\uFF09\u3092\u660E\u793A\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 103
+    },
+    __self: this
+  }), "6. \u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u53C8\u306F\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u3001\u81EA\u3089\u304C\u6295\u7A3F\u3057\u305F\u300C\u58F0\u300D\u306B\u3064\u3044\u3066\u3001\u4EE5\u4E0B\u306E\u4E8B\u9805\u3092\u8868\u660E\u3057\u3001\u4FDD\u8A3C\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 106
+    },
+    __self: this
+  }), "(1) \u300C\u58F0\u300D\u306E\u5185\u5BB9\u304C\u865A\u507D\u53C8\u306F\u8A87\u5927\u306B\u308F\u305F\u308B\u3082\u306E\u3067\u306A\u3044\u3053\u3068\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 108
+    },
+    __self: this
+  }), "(2) \u300C\u58F0\u300D\u306E\u5185\u5BB9\u304C\u7B2C\u4E09\u8005\u306E\u6A29\u5229\u53C8\u306F\u5229\u76CA\uFF08\u8096\u50CF\u6A29\u3001\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u6A29\u3001\u540D\u8A89\u3001\u4FE1\u7528\u305D\u306E\u4ED6\u306E\u4EBA\u683C\u6A29\u3001\u8457\u4F5C\u6A29\u305D\u306E\u4ED6\u306E\u77E5\u7684\u8CA1\u7523\u6A29\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u3092\u4FB5\u5BB3\u3059\u308B\u3082\u306E\u3067\u306A\u3044\u3053\u3068\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 111
+    },
+    __self: this
+  }), "7. \u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u53C8\u306F\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u3001(i)\u73FE\u5730\u30CB\u30FC\u30BA\u304C\u89E3\u6C7A\u3057\u305F\u5834\u5408\u3001(ii)\u652F\u63F4\u6D3B\u52D5\u3092\u884C\u3046\u3053\u3068\u304C\u56F0\u96E3\u306B\u306A\u3063\u305F\u5834\u5408\uFF08\u73FE\u5730\u30CB\u30FC\u30BA\u3078\u306E\u652F\u63F4\u6D3B\u52D5\u3092\u884C\u3046\u3053\u3068\u304C\u6C7A\u5B9A\u3057\u3001\u4ED6\u306E\u73FE\u5730\u30CB\u30FC\u30BA\u306E\u652F\u63F4\u6D3B\u52D5\u3092\u884C\u3046\u3053\u3068\u304C\u56F0\u96E3\u306B\u306A\u3063\u305F\u5834\u5408\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u3001(iii)\u305D\u306E\u4ED6\u306E\u81EA\u3089\u304C\u6295\u7A3F\u3057\u305F\u300C\u58F0\u300D\u306E\u5185\u5BB9\u306B\u4FC2\u308B\u91CD\u8981\u306A\u4E8B\u5B9F\u53C8\u306F\u524D\u63D0\u6761\u4EF6\u304C\u5909\u66F4\u3068\u306A\u3063\u305F\u5834\u5408\u3001FD\u6240\u5B9A\u306E\u65B9\u6CD5\u306B\u3088\u308A\u3001\u9045\u6EDE\u306A\u304F\u5F53\u8A72\u300C\u58F0\u300D\u306B\u3064\u3044\u3066\u7D42\u4E86\u30DE\u30FC\u30AF\u3092\u8868\u793A\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 116
+    },
+    __self: this
+  }, "8. FD\u306F\u3001\u300C\u58F0\u300D\u304C\u672C\u898F\u7D04\u306E\u5B9A\u3081\u306B\u9055\u53CD\u3057\u3001\u307E\u305F\u306F\u9055\u53CD\u3059\u308B\u304A\u305D\u308C\u304C\u3042\u308B\u3068\u5224\u65AD\u3057\u305F\u5834\u5408\u3001\u3044\u3064\u3067\u3082\u3001\u300C\u58F0\u300D\u306E\u63B2\u8F09\u3092\u4E2D\u65AD\u53C8\u306F\u4E2D\u6B62\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3082\u306E\u3068\u3057\u307E\u3059\uFF08\u305F\u3060\u3057\u3001FD\u306F\u304B\u304B\u308B\u7FA9\u52D9\u3092\u8CA0\u3046\u3082\u306E\u3067\u306F\u3042\u308A\u307E\u305B\u3093\uFF09\u3002\u306A\u304A\u3001FD\u306F\u3001\u300C\u58F0\u300D\u306E\u63B2\u8F09\u3092\u4E2D\u65AD\u53C8\u306F\u4E2D\u6B62\u3057\u305F\u7406\u7531\u306E\u958B\u793A\u3092\u6C42\u3081\u3089\u308C\u305F\u5834\u5408\u3067\u3042\u3063\u3066\u3082\u3001\u3053\u308C\u3092\u958B\u793A\u3059\u308B\u3053\u3068\u3092\u8981\u3057\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 121
+    },
+    __self: this
+  }, "\u7B2C6\u6761 \uFF08\u5FDC\u52DF\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 123
+    },
+    __self: this
+  }), "1. \u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u306F\u300C\u652F\u63F4\u306E\u58F0\u300D\u306B\u5BFE\u3057\u3001\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u300C\u73FE\u5730\u306E\u58F0\u300D\u306B\u5BFE\u3057\u3001FD\u6240\u5B9A\u306E\u65B9\u6CD5\u306B\u3088\u308A\u5FDC\u52DF\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002\u306A\u304A\u3001\u672C\u9805\u306E\u5B9A\u3081\u306B\u5F93\u3063\u3066\u5FDC\u52DF\u304C\u884C\u308F\u308C\u305F\u5834\u5408\u3067\u3082\u3001\u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u53CA\u3073\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u3068\u306E\u9593\u3067\u5951\u7D04\u306E\u6210\u7ACB\u305D\u306E\u4ED6\u306E\u6A29\u5229\u7FA9\u52D9\u304C\u767A\u751F\u3059\u308B\u3082\u306E\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 126
+    },
+    __self: this
+  }), "2. \u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u53CA\u3073\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u3001\u524D\u9805\u306E\u5B9A\u3081\u306B\u5F93\u3044\u300C\u652F\u63F4\u306E\u58F0\u300D\u53C8\u306F\u300C\u73FE\u5730\u306E\u58F0\u300D\u306B\u5BFE\u3059\u308B\u5FDC\u52DF\u3092\u884C\u3063\u305F\u5834\u5408\u3001\u4E8B\u5F8C\u7684\u306B\u5FDC\u52DF\u3092\u53D6\u308A\u6D88\u3059\u3053\u3068\u306F\u3067\u304D\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 129
+    },
+    __self: this
+  }), "3. \u73FE\u5730\u30E6\u30FC\u30B6\u30FC\u53CA\u3073\u652F\u63F4\u30E6\u30FC\u30B6\u30FC\u306F\u3001\u7B2C1\u9805\u306E\u5B9A\u3081\u306B\u5F93\u3044\u300C\u652F\u63F4\u306E\u58F0\u300D\u53C8\u306F\u300C\u73FE\u5730\u306E\u58F0\u300D\u306B\u5BFE\u3059\u308B\u5FDC\u52DF\u3092\u884C\u3063\u305F\u5F8C\u3067\u3042\u3063\u3066\u3082\u3001(i)\u300C\u58F0\u300D\u304C\u524A\u9664\u53C8\u306F\u7DE8\u96C6\u3055\u308C\u308B\u5834\u5408\u304C\u3042\u308B\u3053\u3068\u3001\u304A\u3088\u3073\u3001(ii)\u300C\u58F0\u300D\u306B\u7D42\u4E86\u30DE\u30FC\u30AF\u304C\u8868\u793A\u3055\u308C\u308B\u5834\u5408\u304C\u3042\u308B\u3053\u3068\u3092\u78BA\u8A8D\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 134
+    },
+    __self: this
+  }, "\u7B2C7\u6761 \uFF08\u81EA\u5DF1\u8CAC\u4EFB\u306E\u539F\u5247\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 136
+    },
+    __self: this
+  }), "1. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u81EA\u3089\u306E\u5224\u65AD\u53CA\u3073\u8CAC\u4EFB\u306E\u4E0B\u3067\u3001SNS\u306E\u30E1\u30C3\u30BB\u30FC\u30B8\u6A5F\u80FD\u7B49\u3092\u7528\u3044\u305F\u4ED6\u306E\u30E6\u30FC\u30B6\u30FC\u3068\u306E\u9023\u7D61\u3001\u73FE\u5730\u306B\u304A\u3051\u308B\u652F\u63F4\u6D3B\u52D5\u53C8\u306F\u305D\u306E\u53D7\u5165\u308C\u3001\u53D6\u5F15\u7B49\u3092\u884C\u3046\u3082\u306E\u3068\u3057\u3001FD\u306F\u3053\u308C\u3089\u306E\u4E8B\u9805\u306B\u3064\u3044\u3066\u4E00\u5207\u95A2\u77E5\u3059\u308B\u3082\u306E\u3067\u306F\u306A\u304F\u3001\u4F55\u3089\u306E\u8CAC\u4EFB\u3092\u8CA0\u3046\u3082\u306E\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 139
+    },
+    __self: this
+  }), "2. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u300C\u58F0\u300D\u306E\u63B2\u8F09\u53C8\u306F\u300C\u58F0\u300D\u306B\u5BFE\u3059\u308B\u5FDC\u52DF\u305D\u306E\u4ED6\u306E\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u306B\u8D77\u56E0\u53C8\u306F\u95A2\u9023\u3057\u3001\u30E6\u30FC\u30B6\u30FC\u9593\u3067\u30AF\u30EC\u30FC\u30E0\u3001\u7D1B\u4E89\u7B49\u304C\u767A\u751F\u3057\u305F\u5834\u5408\u3067\u3042\u3063\u3066\u3082\u3001\u5F53\u4E8B\u8005\u9593\u3067\u3001\u304B\u3064\u3001\u81EA\u3089\u306E\u8CAC\u4EFB\u53CA\u3073\u8CBB\u7528\u8CA0\u62C5\u306E\u4E0B\u3067\u3053\u308C\u3092\u89E3\u6C7A\u3059\u308B\u3082\u306E\u3068\u3057\u3001FD\u306B\u4E00\u5207\u306E\u8FF7\u60D1\u53C8\u306F\u640D\u5BB3\u7B49\u3092\u53CA\u307C\u3055\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 144
+    },
+    __self: this
+  }, "\u7B2C8\u6761 \uFF08\u7981\u6B62\u884C\u70BA\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 146
+    },
+    __self: this
+  }), "1. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u7B2C3\u6761\u306B\u5B9A\u3081\u308B\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u76EE\u7684\u4EE5\u5916\u306E\u76EE\u7684\u3067\u672C\u30B5\u30FC\u30D3\u30B9\u3092\u5229\u7528\u3057\u3066\u306F\u306A\u3089\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 148
+    },
+    __self: this
+  }), "2. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u306B\u3042\u305F\u308A\u3001\u4EE5\u4E0B\u306E\u5404\u53F7\u306E\u3044\u305A\u308C\u304B\u306B\u8A72\u5F53\u3059\u308B\u884C\u70BA\u3092\u3057\u3066\u306F\u306A\u3089\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 151
+    },
+    __self: this
+  }), "(1) \u767A\u707D\u5F8C\u306E\u5FDC\u6025\u5BFE\u5FDC\u3001\u5FA9\u65E7\u3001\u5FA9\u8208\u306B\u7121\u95A2\u4FC2\u306A\u884C\u70BA\uFF08\u4EE5\u4E0B\u306B\u5B9A\u3081\u308B\u884C\u70BA\u3092\u542B\u307F\u307E\u3059\u3002\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 153
+    },
+    __self: this
+  }), "\u2460 \u9762\u8B58\u306E\u306A\u3044\u7570\u6027\u3068\u306E\u51FA\u4F1A\u3044\u3084\u4EA4\u969B\u3092\u76EE\u7684\u3068\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 155
+    },
+    __self: this
+  }), "\u2461 \u6027\u884C\u70BA\u3084\u308F\u3044\u305B\u3064\u306A\u884C\u70BA\u3092\u76EE\u7684\u3068\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 157
+    },
+    __self: this
+  }), "\u2462 \u5B97\u6559\u6D3B\u52D5\u53C8\u306F\u5B97\u6559\u56E3\u4F53\u3078\u306E\u52E7\u8A98\u3092\u76EE\u7684\u3068\u3057\u305F\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 159
+    },
+    __self: this
+  }), "\u2463 \u653F\u6CBB\u6D3B\u52D5\u3001\u9078\u6319\u6D3B\u52D5\u53C8\u306F\u653F\u6CBB\u56E3\u4F53\u3078\u306E\u52E7\u8A98\u3092\u76EE\u7684\u3068\u3057\u305F\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 161
+    },
+    __self: this
+  }), "\u2464 \u60C5\u5831\u5546\u6750\u3001\u91D1\u878D\u5546\u54C1\u7B49\u306E\u55B6\u696D\u3001\u5BA3\u4F1D\u3001\u5E83\u544A\u3001\u52E7\u8A98\u305D\u306E\u4ED6\u306E\u55B6\u5229\u884C\u70BA\uFF08\u652F\u63F4\u6D3B\u52D5\u306B\u8A72\u5F53\u3059\u308B\u884C\u70BA\u3092\u9664\u304D\u307E\u3059\u3002\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 163
+    },
+    __self: this
+  }), "\u2465 \u7B2C\u4E09\u8005\u306B\u5BFE\u3059\u308B\u5ACC\u304C\u3089\u305B\u3084\u8AB9\u8B17\u4E2D\u50B7\u3092\u76EE\u7684\u3068\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 165
+    },
+    __self: this
+  }), "(2) \u4E0D\u9069\u5207\u306A\u8868\u73FE\uFF08\u4EE5\u4E0B\u306B\u5B9A\u3081\u308B\u884C\u70BA\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u3092\u7528\u3044\u305F\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 167
+    },
+    __self: this
+  }), "\u2460 \u308F\u3044\u305B\u3064\u306A\u8868\u73FE\u53C8\u306F\u9752\u5C11\u5E74\u306B\u6709\u5BB3\u306A\u8868\u73FE", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 169
+    },
+    __self: this
+  }), "\u2461 \u6B8B\u8650\u306A\u8868\u73FE\u53C8\u306F\u66B4\u529B\u7684\u306A\u8868\u73FE", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 171
+    },
+    __self: this
+  }), "\u2462 \u6C11\u65CF\u3001\u56FD\u7C4D\u3001\u5B97\u6559\u3001\u4EBA\u7A2E\u3001\u6027\u5225\u3001\u5E74\u9F62\u7B49\u306B\u95A2\u3059\u308B\u5DEE\u5225\u3092\u8A98\u767A\u3001\u52A9\u9577\u3059\u308B\u8868\u73FE", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 173
+    },
+    __self: this
+  }), "\u2463 \u72AF\u7F6A\u3001\u81EA\u6BBA\u3001\u85AC\u7269\u4F7F\u7528\u7B49\u306E\u52E7\u8A98\u3001\u8A98\u767A\u3001\u52A9\u9577\u306B\u3042\u305F\u308B\u8868\u73FE", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 175
+    },
+    __self: this
+  }), "\u2464 \u305D\u306E\u4ED6\u7B2C\u4E09\u8005\u306B\u4E0D\u5FEB\u611F\u3092\u53CA\u307C\u3059\u304A\u305D\u308C\u304C\u3042\u308B\u3068FD\u304C\u5224\u65AD\u3059\u308B\u8868\u73FE", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 177
+    },
+    __self: this
+  }), "(3) \u4ED6\u306E\u30E6\u30FC\u30B6\u30FC\u306B\u95A2\u3059\u308B\u500B\u4EBA\u60C5\u5831\u7B49\u3092\u53CE\u96C6\u3057\u3001\u53C8\u306F\u84C4\u7A4D\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 179
+    },
+    __self: this
+  }), "(4) \u4ED6\u8005\u306B\u306A\u308A\u3059\u307E\u3059\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 181
+    },
+    __self: this
+  }), "(5) \u672C\u30B5\u30FC\u30D3\u30B9\u306E\u904B\u55B6\u3092\u59A8\u5BB3\u3059\u308B\u304A\u305D\u308C\u306E\u3042\u308B\u884C\u70BA\uFF08\u4EE5\u4E0B\u306B\u5B9A\u3081\u308B\u884C\u70BA\u3092\u542B\u307F\u307E\u3059\u3002\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 183
+    },
+    __self: this
+  }), "\u2460 \u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u30FB\u30A6\u30A3\u30EB\u30B9\u305D\u306E\u4ED6\u306E\u6709\u5BB3\u306A\u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u30FB\u30D7\u30ED\u30B0\u30E9\u30E0\u3092\u542B\u3080\u60C5\u5831\u3092\u9001\u4FE1\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 185
+    },
+    __self: this
+  }), "\u2461 \u672C\u30B5\u30FC\u30D3\u30B9\u306B\u95A2\u3059\u308B\u30B5\u30FC\u30D0\u30FC\u53C8\u306F\u30CD\u30C3\u30C8\u30EF\u30FC\u30AF\u3092\u7834\u58CA\u3057\u3001\u53C8\u306F\u59A8\u5BB3\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 187
+    },
+    __self: this
+  }), "\u2462 \u672C\u30B5\u30FC\u30D3\u30B9\u306B\u95A2\u3059\u308B\u60C5\u5831\u3092\u7834\u58CA\u3057\u3001\u53C8\u306F\u6539\u3056\u3093\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 189
+    },
+    __self: this
+  }), "\u2463 FD\u304C\u5B9A\u3081\u308B\u4E00\u5B9A\u306E\u30C7\u30FC\u30BF\u5BB9\u91CF\u4EE5\u4E0A\u306E\u30C7\u30FC\u30BF\u3092\u9001\u4FE1\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 191
+    },
+    __self: this
+  }), "(6) FD\u53C8\u306FFD\u306B\u30E9\u30A4\u30BB\u30F3\u30B9\u3092\u8A31\u8AFE\u3057\u3066\u3044\u308B\u8005\u306E\u77E5\u7684\u8CA1\u7523\u6A29\u3092\u4FB5\u5BB3\u3059\u308B\u304A\u305D\u308C\u306E\u3042\u308B\u884C\u70BA\uFF08\u9006\u30A2\u30BB\u30F3\u30D6\u30EB\u3001\u9006\u30B3\u30F3\u30D1\u30A4\u30EB\u3001\u30EA\u30D0\u30FC\u30B9\u30A8\u30F3\u30B8\u30CB\u30A2\u30EA\u30F3\u30B0\u3092\u542B\u307F\u307E\u3059\u3002\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 194
+    },
+    __self: this
+  }), "(7) \u672C\u5951\u7D04\uFF08\u672C\u898F\u7D04\u306E\u5185\u5BB9\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u306B\u9055\u53CD\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 196
+    },
+    __self: this
+  }), "(8) \u6CD5\u4EE4\u306B\u9055\u53CD\u3057\u3001\u72AF\u7F6A\u884C\u70BA\u306B\u95A2\u9023\u3057\u3001\u53C8\u306F\u516C\u5E8F\u826F\u4FD7\u306B\u53CD\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 198
+    },
+    __self: this
+  }), "(9) \u7B2C\u4E09\u8005\u306E\u6A29\u5229\u53C8\u306F\u5229\u76CA\uFF08\u8096\u50CF\u6A29\u3001\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u6A29\u3001\u540D\u8A89\u3001\u4FE1\u7528\u305D\u306E\u4ED6\u306E\u4EBA\u683C\u6A29\u3001\u8457\u4F5C\u6A29\u305D\u306E\u4ED6\u306E\u77E5\u7684\u8CA1\u7523\u6A29\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u3092\u4FB5\u5BB3\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 201
+    },
+    __self: this
+  }), "(10) \u305D\u306E\u4ED6FD\u304C\u4E0D\u9069\u5207\u3068\u5224\u65AD\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 203
+    },
+    __self: this
+  }), "3. FD\u306F\u3001\u524D\u4E8C\u6761\u306B\u5B9A\u3081\u308B\u884C\u70BA\u306B\u8A72\u5F53\u3057\u3001\u53C8\u306F\u8A72\u5F53\u3059\u308B\u304A\u305D\u308C\u304C\u3042\u308B\u3068\u5224\u65AD\u3057\u305F\u5834\u5408\u3001\u30E6\u30FC\u30B6\u30FC\u306B\u4E8B\u524D\u306B\u901A\u77E5\u3059\u308B\u3053\u3068\u306A\u304F\u3001(i)\u5F53\u8A72\u30E6\u30FC\u30B6\u30FC\u306B\u3088\u308B\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u505C\u6B62\u3001(ii)\u672C\u30B5\u30FC\u30D3\u30B9\u4E0A\u306B\u9001\u4FE1\u53C8\u306F\u6295\u7A3F\u3055\u308C\u305F\u60C5\u5831\u306E\u5168\u90E8\u53C8\u306F\u4E00\u90E8\u306E\u524A\u9664\u3001(iii)\u305D\u306E\u4ED6\u306E\u63AA\u7F6E\u3092\u8B1B\u3058\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002\u672C\u9805\u306B\u57FA\u3065\u304DFD\u304C\u884C\u3063\u305F\u63AA\u7F6E\u306B\u3088\u308A\u30E6\u30FC\u30B6\u30FC\u306B\u640D\u5BB3\u304C\u751F\u3058\u305F\u5834\u5408\u3067\u3082\u3001FD\u306F\u3053\u308C\u3092\u8CE0\u511F\u3059\u308B\u8CAC\u4EFB\u3092\u4E00\u5207\u8CA0\u308F\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 208
+    },
+    __self: this
+  }, "\u7B2C9\u6761 \uFF08\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u505C\u6B62\u7B49\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 210
+    },
+    __self: this
+  }), "1. FD\u306F\u3001\u4EE5\u4E0B\u306E\u3044\u305A\u308C\u304B\u306B\u8A72\u5F53\u3059\u308B\u5834\u5408\u306B\u306F\u3001\u30E6\u30FC\u30B6\u30FC\u306B\u4E8B\u524D\u306B\u901A\u77E5\u3059\u308B\u3053\u3068\u306A\u304F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u306E\u5168\u90E8\u53C8\u306F\u4E00\u90E8\u3092\u505C\u6B62\u53C8\u306F\u4E2D\u65AD\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 213
+    },
+    __self: this
+  }), "(1) \u672C\u30B5\u30FC\u30D3\u30B9\u306B\u304B\u304B\u308B\u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u30FB\u30B7\u30B9\u30C6\u30E0\u306E\u70B9\u691C\u53C8\u306F\u4FDD\u5B88\u4F5C\u696D\u3092\u884C\u3046\u5834\u5408", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 215
+    },
+    __self: this
+  }), "(2) \u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u3001\u901A\u4FE1\u56DE\u7DDA\u7B49\u304C\u4E8B\u6545\u306B\u3088\u308A\u505C\u6B62\u3057\u305F\u5834\u5408", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 217
+    },
+    __self: this
+  }), "(3) \u706B\u707D\u3001\u505C\u96FB\u3001\u5929\u707D\u5730\u5909\u306A\u3069\u306E\u4E0D\u53EF\u6297\u529B\u306B\u3088\u308A\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u904B\u55B6\u304C\u3067\u304D\u306A\u304F\u306A\u3063\u305F\u5834\u5408", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 219
+    },
+    __self: this
+  }), "(4) \u672C\u30B5\u30FC\u30D3\u30B9\u3068\u9023\u643A\u3057\u3066\u3044\u308B\u5916\u90E8\u30B5\u30FC\u30D3\u30B9\u306B\u95A2\u3057\u3001\u30C8\u30E9\u30D6\u30EB\u3001\u30B5\u30FC\u30D3\u30B9\u63D0\u4F9B\u306E\u4E2D\u65AD\u82E5\u3057\u304F\u306F\u505C\u6B62\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u3068\u306E\u9023\u643A\u306E\u505C\u6B62\u53C8\u306F\u4ED5\u69D8\u5909\u66F4\u7B49\u304C\u751F\u3058\u305F\u5834\u5408", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 222
+    },
+    __self: this
+  }), "(5) \u305D\u306E\u4ED6FD\u304C\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u306E\u505C\u6B62\u53C8\u306F\u4E2D\u65AD\u3092\u5FC5\u8981\u3068\u5224\u65AD\u3057\u305F\u5834\u5408", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 224
+    },
+    __self: this
+  }), "2. FD\u306F\u3001\u3044\u3064\u3067\u3082\u3001FD\u306E\u90FD\u5408\u306B\u3088\u308A\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u63D0\u4F9B\u3092\u7D42\u4E86\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002\u3053\u306E\u5834\u5408\u3001FD\u306F\u672C\u30B5\u30FC\u30D3\u30B9\u4E0A\u3067\u516C\u8868\u3059\u308B\u65B9\u6CD5\u305D\u306E\u4ED6\u306E\u65B9\u6CD5\u306B\u3088\u308A\u3001\u30E6\u30FC\u30B6\u30FC\u306B\u4E8B\u524D\u306B\u901A\u77E5\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 227
+    },
+    __self: this
+  }), "3. \u672C\u6761\u306B\u57FA\u3065\u304DFD\u304C\u884C\u3063\u305F\u63AA\u7F6E\u306B\u3088\u308A\u30E6\u30FC\u30B6\u30FC\u306B\u640D\u5BB3\u304C\u751F\u3058\u305F\u5834\u5408\u3067\u3082\u3001FD\u306F\u3053\u308C\u3092\u8CE0\u511F\u3059\u308B\u8CAC\u4EFB\u3092\u4E00\u5207\u8CA0\u308F\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 232
+    },
+    __self: this
+  }, "\u7B2C10\u6761 \uFF08\u8A2D\u5099\u306E\u8CA0\u62C5\u7B49\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 234
+    },
+    __self: this
+  }), "1. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u305D\u306E\u8CAC\u4EFB\u53CA\u3073\u8CBB\u7528\u8CA0\u62C5\u306E\u4E0B\u3067\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u3092\u5229\u7528\u3059\u308B\u305F\u3081\u306B\u5FC5\u8981\u306A\u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u3001\u30BD\u30D5\u30C8\u30A6\u30A7\u30A2\u3001\u901A\u4FE1\u6A5F\u5668\u3001\u901A\u4FE1\u56DE\u7DDA\u305D\u306E\u4ED6\u306E\u901A\u4FE1\u74B0\u5883\u7B49\u306E\u6E96\u5099\u53CA\u3073\u7DAD\u6301\u3092\u884C\u3046\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 237
+    },
+    __self: this
+  }), "2. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u305D\u306E\u8CAC\u4EFB\u53CA\u3073\u8CBB\u7528\u8CA0\u62C5\u306E\u4E0B\u3067\u3001\u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u30FB\u30A6\u30A3\u30EB\u30B9\u306E\u611F\u67D3\u3001\u4E0D\u6B63\u30A2\u30AF\u30BB\u30B9\u3001\u60C5\u5831\u6F0F\u6D29\u306E\u9632\u6B62\u7B49\u306E\u30BB\u30AD\u30E5\u30EA\u30C6\u30A3\u5BFE\u7B56\u3092\u81EA\u3089\u306E\u8B1B\u3058\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 242
+    },
+    __self: this
+  }, "\u7B2C11\u6761 \uFF08\u6A29\u5229\u5E30\u5C5E\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 244
+    },
+    __self: this
+  }), "1. \u30E6\u30FC\u30B6\u30FC\u306F\u3001(i)\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u95A2\u3059\u308B\u6240\u6709\u6A29\u53CA\u3073\u77E5\u7684\u8CA1\u7523\u6A29\u306F\u3059\u3079\u3066FD\u53C8\u306FFD\u306B\u30E9\u30A4\u30BB\u30F3\u30B9\u3092\u8A31\u8AFE\u3057\u3066\u3044\u308B\u8005\u306B\u5E30\u5C5E\u3057\u3066\u3044\u308B\u3053\u3068\u3001\u53CA\u3073 (ii)\u672C\u5951\u7D04\u306B\u304A\u3044\u3066\u660E\u793A\u3055\u308C\u3066\u3044\u308B\u3082\u306E\u3092\u9664\u304D\u3001FD\u304C\u30E6\u30FC\u30B6\u30FC\u306B\u5BFE\u3057\u3066\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u95A2\u3059\u308B\u77E5\u7684\u8CA1\u7523\u6A29\u3092\u8B72\u6E21\u3057\u3001\u53C8\u306F\u305D\u306E\u4F7F\u7528\u3092\u8A31\u8AFE\u3059\u308B\u3082\u306E\u3067\u306F\u306A\u3044\u3053\u3068\u306B\u540C\u610F\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 248
+    },
+    __self: this
+  }), "2. \u524D\u9805\u306E\u5B9A\u3081\u306B\u304B\u304B\u308F\u3089\u305A\u3001\u30E6\u30FC\u30B6\u30FC\u304C\u6295\u7A3F\u53C8\u306F\u9001\u4FE1\u3092\u884C\u3063\u305F\u6587\u7AE0\u3001\u753B\u50CF\u3001\u52D5\u753B\u305D\u306E\u4ED6\u306E\u30C7\u30FC\u30BF\uFF08\u300C\u58F0\u300D\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u306E\u77E5\u7684\u8CA1\u7523\u6A29\u306F\u30E6\u30FC\u30B6\u30FC\u306B\u5E30\u5C5E\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002\u305F\u3060\u3057\u3001\u30E6\u30FC\u30B6\u30FC\u306F\u3001FD\u306B\u5BFE\u3057\u3001(i)\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u63D0\u4F9B\u3001(ii)FD\u53C8\u306F\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5E83\u544A\u53C8\u306F\u5BA3\u4F1D\u3092\u76EE\u7684\u3068\u3057\u3066\u5F53\u8A72\u30C7\u30FC\u30BF\u3092\u7121\u511F\u3067\u5229\u7528\u3059\u308B\u3053\u3068\u3092\u8A31\u8AFE\u3059\u308B\u3082\u306E\u3068\u3057\u3001\u4ED6\u306E\u30E6\u30FC\u30B6\u30FC\u306B\u5BFE\u3057\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u3092\u5229\u7528\u3057\u3066\u5F53\u8A72\u30C7\u30FC\u30BF\u3092SNS\u7B49\u3067\u5468\u77E5\u3059\u308B\u3053\u3068\u3092\u8A31\u8AFE\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002\u307E\u305F\u3001\u30E6\u30FC\u30B6\u30FC\u306FFD\u53CA\u3073\u4ED6\u306E\u30E6\u30FC\u30B6\u30FC\u306B\u5BFE\u3057\u3066\u5F53\u8A72\u30C7\u30FC\u30BF\u306B\u95A2\u3059\u308B\u8457\u4F5C\u4EBA\u683C\u6A29\u3092\u884C\u4F7F\u3057\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 253
+    },
+    __self: this
+  }, "\u7B2C12\u6761 \uFF08\u500B\u4EBA\u60C5\u5831\u7B49\u306E\u53D6\u6271\u3044\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 255
+    },
+    __self: this
+  }), "1. FD\u306F\u3001\u500B\u4EBA\u60C5\u5831\u306E\u4FDD\u8B77\u306B\u95A2\u3059\u308B\u6CD5\u5F8B\u305D\u306E\u4ED6\u306E\u6CD5\u4EE4\u53CA\u3073FD\u306E\u5225\u9014\u5B9A\u3081\u308B", __jsx("span", {
+    onClick: onClickPrivacyPolicy,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 257
+    },
+    __self: this
+  }, "\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u30DD\u30EA\u30B7\u30FC"), "\uFF08\u4EE5\u4E0B\u300C\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u30DD\u30EA\u30B7\u30FC\u300D\u3068\u3044\u3044\u307E\u3059\u3002\uFF09\u306E\u5B9A\u3081\u306B\u5F93\u3063\u3066\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u95A2\u9023\u3057\u3066\u53D6\u5F97\u3057\u305F\u500B\u4EBA\u60C5\u5831\u3092\u53D6\u308A\u6271\u3046\u3082\u306E\u3068\u3057\u3001\u30E6\u30FC\u30B6\u30FC\u306F\u3053\u308C\u306B\u540C\u610F\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 259
+    },
+    __self: this
+  }), "2. FD\u306F\u3001\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u30DD\u30EA\u30B7\u30FC\u306E\u5B9A\u3081\u306B\u5F93\u3044\u3001\u516C\u7684\u6A5F\u95A2\u3068\u9023\u643A\u3057\u3066\u767A\u707D\u5F8C\u306E\u5FDC\u6025\u5BFE\u5FDC\u3001\u5FA9\u65E7\u3001\u5FA9\u8208\u3092\u63A8\u9032\u3059\u308B\u305F\u3081\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306E\u5229\u7528\u72B6\u6CC1\u3092\u56FD\u306E\u6A5F\u95A2\u3001\u5730\u65B9\u516C\u5171\u56E3\u4F53\u3001\u793E\u4F1A\u798F\u7949\u5354\u8B70\u4F1A\u305D\u306E\u4ED6\u306E\u516C\u7684\u6A5F\u95A2\u306B\u63D0\u4F9B\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 264
+    },
+    __self: this
+  }, "\u7B2C13\u6761 \uFF08\u4FDD\u8A3C\u306E\u5426\u8A8D\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 266
+    },
+    __self: this
+  }), "1. FD\u306F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u3064\u3044\u3066\u3001\u7279\u5B9A\u306E\u76EE\u7684\u3078\u306E\u9069\u5408\u6027\u3001\u6709\u7528\u6027\u3001\u5B8C\u5168\u6027\u3001\u7D99\u7D9A\u6027\u7B49\u3092\u542B\u3081\u3001\u4E00\u5207\u4FDD\u8A3C\u3057\u306A\u3044\u3082\u306E\u3068\u3059\u308B\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 269
+    },
+    __self: this
+  }), "2. FD\u306F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u4E0A\u306E\u30B3\u30F3\u30C6\u30F3\u30C4\uFF08\u300C\u58F0\u300D\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u306B\u3064\u3044\u3066\u3001\u6B63\u78BA\u6027\u3001\u5B8C\u5168\u6027\u53CA\u3073\u30B3\u30F3\u30D4\u30E5\u30FC\u30BF\u30FC\u30FB\u30A6\u30A3\u30EB\u30B9\u7B49\u6709\u5BB3\u306A\u3082\u306E\u3092\u542B\u307E\u306A\u3044\u3053\u3068\u7B49\u3092\u542B\u3081\u3001\u4E00\u5207\u4FDD\u8A3C\u3057\u306A\u3044\u3082\u306E\u3068\u3059\u308B\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 272
+    },
+    __self: this
+  }), "3. FD\u306F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u5BFE\u3059\u308B\u4E0D\u6B63\u30A2\u30AF\u30BB\u30B9\u30FB\u30CF\u30C3\u30AD\u30F3\u30B0\u7B49\u306E\u30B5\u30A4\u30D0\u30FC\u653B\u6483\u304C\u884C\u308F\u308C\u305A\u3001\u307E\u305F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u95A2\u3059\u308B\u30BD\u30D5\u30C8\u30A6\u30A7\u30A2\u53C8\u306F\u30CF\u30FC\u30C9\u30A6\u30A7\u30A2\u306B\u30D0\u30B0\u3092\u542B\u3080\u969C\u5BB3\u7B49\u304C\u751F\u3058\u306A\u3044\u3053\u3068\u306B\u3064\u3044\u3066\u3001\u4E00\u5207\u4FDD\u8A3C\u3057\u306A\u3044\u3082\u306E\u3068\u3059\u308B\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 275
+    },
+    __self: this
+  }), "4. \u672C\u30B5\u30FC\u30D3\u30B9\u306F\u3001\u5916\u90E8\u30B5\u30FC\u30D3\u30B9\u3068\u306E\u9023\u643A\u306E\u5B8C\u5168\u6027\u3001\u7D99\u7D9A\u6027\u7B49\u306B\u3064\u3044\u3066\u4F55\u3089\u4FDD\u8A3C\u3059\u308B\u3082\u306E\u3067\u306F\u306A\u304F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u304C\u5916\u90E8\u30B5\u30FC\u30D3\u30B9\u3068\u306E\u9023\u643A\u3092\u4E2D\u6B62\u53C8\u306F\u4E2D\u65AD\u3057\u305F\u5834\u5408\u3067\u3082\u3001FD\u306F\u4E00\u5207\u306E\u8CAC\u4EFB\u3092\u8CA0\u308F\u306A\u3044\u3082\u306E\u3068\u3059\u308B\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 280
+    },
+    __self: this
+  }, "\u7B2C14\u6761 \uFF08\u514D\u8CAC\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 282
+    },
+    __self: this
+  }), "1. FD\u306F\u3001\u672C\u30B5\u30FC\u30D3\u30B9\u306B\u8D77\u56E0\u53C8\u306F\u95A2\u9023\u3057\u3066\u30E6\u30FC\u30B6\u30FC\u304C\u88AB\u3063\u305F\u640D\u5BB3\u306B\u3064\u3044\u3066\u3001\u4E00\u5207\u306E\u8CAC\u4EFB\u3092\u8CA0\u308F\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002\u305F\u3060\u3057\u3001FD\u306E\u6545\u610F\u53C8\u306F\u91CD\u904E\u5931\u306B\u57FA\u3065\u304F\u5834\u5408\u53C8\u306F\u672C\u5951\u7D04\u304C\u6D88\u8CBB\u8005\u5951\u7D04\u6CD5\u306B\u5B9A\u3081\u308B\u6D88\u8CBB\u8005\u5951\u7D04\u306B\u3042\u305F\u308B\u5834\u5408\u306F\u3053\u306E\u9650\u308A\u3067\u306F\u3042\u308A\u307E\u305B\u3093\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 285
+    },
+    __self: this
+  }), "2. \u524D\u9805\u305F\u3060\u3057\u66F8\u306B\u5B9A\u3081\u308B\u5834\u5408\u3067\u3042\u3063\u3066\u3082\u3001FD\u306F\u3001FD\u306E\u6545\u610F\u53C8\u306F\u904E\u5931\u306B\u3088\u308A\u76F4\u63A5\u304B\u3064\u901A\u5E38\u751F\u3058\u305F\u30E6\u30FC\u30B6\u30FC\u306E\u640D\u5BB3\u306B\u9650\u3063\u3066\u8CAC\u4EFB\u3092\u8CA0\u3046\u3082\u306E\u3068\u3057\u3001\u7279\u5225\u640D\u5BB3\u3001\u9593\u63A5\u640D\u5BB3\u3001\u9038\u5931\u5229\u76CA\u7B49\u306B\u3064\u3044\u3066\u306F\u8CAC\u4EFB\u3092\u8CA0\u308F\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002\u307E\u305F\u3001FD\u304C\u30E6\u30FC\u30B6\u30FC\u306B\u5BFE\u3057\u3066\u8CA0\u3046\u8CE0\u511F\u8CAC\u4EFB\u306F\u300110,000\u5186\u3092\u4E0A\u9650\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 290
+    },
+    __self: this
+  }, "\u7B2C15\u6761 \uFF08\u672C\u5951\u7D04\u4E0A\u306E\u5730\u4F4D\u306E\u8B72\u6E21\u7B49\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 292
+    },
+    __self: this
+  }), "\u30E6\u30FC\u30B6\u30FC\u306F\u3001FD\u306E\u66F8\u9762\u306B\u3088\u308B\u4E8B\u524D\u306E\u627F\u8AFE\u306A\u304F\u3001\u672C\u5951\u7D04\u4E0A\u306E\u5730\u4F4D\u53C8\u306F\u672C\u898F\u7D04\u306B\u57FA\u3065\u304F\u6A29\u5229\u82E5\u3057\u304F\u306F\u7FA9\u52D9\u3092\u7B2C\u4E09\u8005\u306B\u8B72\u6E21\u3057\u3001\u53C8\u306F\u62C5\u4FDD\u306B\u4F9B\u3059\u308B\u3053\u3068\u306F\u3067\u304D\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 296
+    },
+    __self: this
+  }, "\u7B2C16\u6761 \uFF08\u53CD\u793E\u4F1A\u7684\u52E2\u529B\u306E\u6392\u9664\u306B\u3064\u3044\u3066\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 298
+    },
+    __self: this
+  }), "1. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u73FE\u5728\u3001\u66B4\u529B\u56E3\u3001\u66B4\u529B\u56E3\u54E1\u3001\u66B4\u529B\u56E3\u54E1\u3067\u306A\u304F\u306A\u3063\u305F\u6642\u304B\u30895\u5E74\u3092\u7D4C\u904E\u3057\u306A\u3044\u8005\u3001\u66B4\u529B\u56E3\u6E96\u69CB\u6210\u54E1\u3001\u66B4\u529B\u56E3\u95A2\u4FC2\u4F01\u696D\u3001\u7DCF\u4F1A\u5C4B\u7B49\u3001\u793E\u4F1A\u904B\u52D5\u7B49\u6A19\u307C\u3046\u30B4\u30ED\u53C8\u306F\u7279\u6B8A\u77E5\u80FD\u66B4\u529B\u96C6\u56E3\u7B49\u3001\u305D\u306E\u4ED6\u3053\u308C\u3089\u306B\u6E96\u305A\u308B\u8005\uFF08\u4EE5\u4E0B\u3001\u3053\u308C\u3089\u3092\u300C\u66B4\u529B\u56E3\u54E1\u7B49\u300D\u3068\u3044\u3044\u307E\u3059\u3002\uFF09\u306B\u8A72\u5F53\u3057\u306A\u3044\u3053\u3068\u3001\u53CA\u3073\u3001\u6B21\u306E\u5404\u53F7\u306E\u3044\u305A\u308C\u306B\u3082\u8A72\u5F53\u3057\u306A\u3044\u3053\u3068\u3092\u8868\u660E\u3057\u3001\u304B\u3064\u5C06\u6765\u306B\u308F\u305F\u3063\u3066\u3082\u8A72\u5F53\u3057\u306A\u3044\u3053\u3068\u3092\u78BA\u7D04\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 301
+    },
+    __self: this
+  }), "(1) \u66B4\u529B\u56E3\u54E1\u7B49\u304C\u7D4C\u55B6\u3092\u652F\u914D\u3057\u3066\u3044\u308B\u3068\u8A8D\u3081\u3089\u308C\u308B\u95A2\u4FC2\u3092\u6709\u3059\u308B\u3053\u3068\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 303
+    },
+    __self: this
+  }), "(2) \u66B4\u529B\u56E3\u54E1\u7B49\u304C\u7D4C\u55B6\u306B\u5B9F\u8CEA\u7684\u306B\u95A2\u4E0E\u3057\u3066\u3044\u308B\u3068\u8A8D\u3081\u3089\u308C\u308B\u95A2\u4FC2\u3092\u6709\u3059\u308B\u3053\u3068\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 305
+    },
+    __self: this
+  }), "(3) \u81EA\u5DF1\u3001\u81EA\u793E\u82E5\u3057\u304F\u306F\u7B2C\u4E09\u8005\u306E\u4E0D\u6B63\u306E\u5229\u76CA\u3092\u56F3\u308B\u76EE\u7684\u53C8\u306F\u7B2C\u4E09\u8005\u306B\u640D\u5BB3\u3092\u52A0\u3048\u308B\u76EE\u7684\u3092\u3082\u3063\u3066\u3059\u308B\u306A\u3069\u3001\u4E0D\u5F53\u306B\u66B4\u529B\u56E3\u54E1\u7B49\u3092\u5229\u7528\u3057\u3066\u3044\u308B\u3068\u8A8D\u3081\u3089\u308C\u308B\u95A2\u4FC2\u3092\u6709\u3059\u308B\u3053\u3068\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 308
+    },
+    __self: this
+  }), "(4) \u66B4\u529B\u56E3\u54E1\u7B49\u306B\u5BFE\u3057\u3066\u8CC7\u91D1\u7B49\u3092\u63D0\u4F9B\u3057\u3001\u53C8\u306F\u4FBF\u5B9C\u3092\u4F9B\u4E0E\u3059\u308B\u306A\u3069\u306E\u95A2\u4E0E\u3092\u3057\u3066\u3044\u308B\u3068\u8A8D\u3081\u3089\u308C\u308B\u95A2\u4FC2\u3092\u6709\u3059\u308B\u3053\u3068\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 311
+    },
+    __self: this
+  }), "(5) \u5F79\u54E1\u53C8\u306F\u7D4C\u55B6\u306B\u5B9F\u8CEA\u7684\u306B\u95A2\u4E0E\u3057\u3066\u3044\u308B\u8005\u304C\u66B4\u529B\u56E3\u54E1\u7B49\u3068\u793E\u4F1A\u7684\u306B\u975E\u96E3\u3055\u308C\u308B\u3079\u304D\u95A2\u4FC2\u3092\u6709\u3059\u308B\u3053\u3068\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 313
+    },
+    __self: this
+  }), "2. \u30E6\u30FC\u30B6\u30FC\u306F\u3001\u81EA\u3089\u53C8\u306F\u7B2C\u4E09\u8005\u3092\u5229\u7528\u3057\u3066\u6B21\u306E\u5404\u53F7\u306E\u3044\u305A\u308C\u306B\u3082\u8A72\u5F53\u3059\u308B\u884C\u70BA\u3092\u884C\u308F\u306A\u3044\u3053\u3068\u3092\u78BA\u7D04\u3059\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 316
+    },
+    __self: this
+  }), "(1) \u66B4\u529B\u7684\u306A\u8981\u6C42\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 318
+    },
+    __self: this
+  }), "(2) \u6CD5\u7684\u306A\u8CAC\u4EFB\u3092\u8D85\u3048\u305F\u4E0D\u5F53\u306A\u8981\u6C42\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 320
+    },
+    __self: this
+  }), "(3) \u53D6\u5F15\u306B\u95A2\u3057\u3066\u3001\u8105\u8FEB\u7684\u306A\u8A00\u52D5\u3092\u3057\u3001\u53C8\u306F\u66B4\u529B\u3092\u7528\u3044\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 322
+    },
+    __self: this
+  }), "(4) \u98A8\u8AAC\u3092\u6D41\u5E03\u3057\u3001\u507D\u8A08\u3092\u7528\u3044\u53C8\u306F\u5A01\u529B\u3092\u7528\u3044\u3066FD\u306E\u4FE1\u7528\u3092\u6BC0\u640D\u3057\u3001\u53C8\u306FFD\u306E\u696D\u52D9\u3092\u59A8\u5BB3\u3059\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 324
+    },
+    __self: this
+  }), "(5) \u305D\u306E\u4ED6\u524D\u5404\u53F7\u306B\u6E96\u305A\u308B\u884C\u70BA", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 326
+    },
+    __self: this
+  }), "3. \u30E6\u30FC\u30B6\u30FC\u304C\u3001\u66B4\u529B\u56E3\u54E1\u7B49\u82E5\u3057\u304F\u306F\u7B2C\uFF11\u9805\u5404\u53F7\u306E\u3044\u305A\u308C\u304B\u306B\u8A72\u5F53\u3059\u308B\u3068FD\u304C\u5224\u65AD\u3057\u3001\u82E5\u3057\u304F\u306F\u524D\u9805\u5404\u53F7\u306E\u3044\u305A\u308C\u304B\u306B\u8A72\u5F53\u3059\u308B\u884C\u70BA\u3092\u3057\u3001\u53C8\u306F\u7B2C\uFF11\u9805\u306E\u898F\u5B9A\u306B\u57FA\u3065\u304F\u8868\u660E\u30FB\u78BA\u7D04\u306B\u95A2\u3057\u3066\u865A\u507D\u306E\u7533\u544A\u3092\u3057\u305F\u3053\u3068\u304C\u5224\u660E\u3057\u305F\u5834\u5408\u3001FD\u306F\u3001\u30E6\u30FC\u30B6\u30FC\u306B\u5BFE\u3057\u3066\u4F55\u3089\u306E\u50AC\u544A\u3092\u3059\u308B\u3053\u3068\u306A\u304F\u672C\u5951\u7D04\u3092\u89E3\u9664\u3059\u308B\u3053\u3068\u304C\u3067\u304D\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 329
+    },
+    __self: this
+  }), "4. FD\u304C\u524D\u9805\u306E\u5B9A\u3081\u306B\u5F93\u3044\u672C\u5951\u7D04\u3092\u89E3\u9664\u3057\u305F\u3053\u3068\u3067\u30E6\u30FC\u30B6\u30FC\u306B\u640D\u5BB3\u304C\u751F\u3058\u305F\u3068\u3057\u3066\u3082\u3001FD\u306F\u3053\u308C\u3092\u8CE0\u511F\u3059\u308B\u8CAC\u4EFB\u3092\u4E00\u5207\u8CA0\u308F\u306A\u3044\u3082\u306E\u3068\u3057\u307E\u3059\u3002"), __jsx("p", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 334
+    },
+    __self: this
+  }, "\u7B2C17\u6761 \uFF08\u6E96\u62E0\u6CD5\u53CA\u3073\u7BA1\u8F44\u88C1\u5224\u6240\uFF09", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 336
+    },
+    __self: this
+  }), "1. \u672C\u5951\u7D04\uFF08\u672C\u898F\u7D04\u306E\u5B9A\u3081\u3092\u542B\u307F\u307E\u3059\u3002\uFF09\u306E\u6E96\u62E0\u6CD5\u306F\u65E5\u672C\u6CD5\u3068\u3057\u3001\u672C\u5951\u7D04\u306E\u5185\u5BB9\u306F\u65E5\u672C\u6CD5\u306B\u5F93\u3044\u89E3\u91C8\u3055\u308C\u308B\u3082\u306E\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 339
+    },
+    __self: this
+  }), "2. \u672C\u5951\u7D04\u306B\u8D77\u56E0\u53C8\u306F\u95A2\u9023\u3059\u308B\u4E00\u5207\u306E\u7D1B\u4E89\u306B\u3064\u3044\u3066\u306F\u3001\u6771\u4EAC\u5730\u65B9\u88C1\u5224\u6240\u3092\u7B2C\u4E00\u5BE9\u306E\u5C02\u5C5E\u7684\u5408\u610F\u7BA1\u8F44\u88C1\u5224\u6240\u3068\u3057\u307E\u3059\u3002", __jsx("br", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 342
+    },
+    __self: this
+  }), "\u4EE5\u4E0A")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (TermsModal);
+var Inner = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].section(_templateObject());
+var Title = _emotion_styled__WEBPACK_IMPORTED_MODULE_2__["default"].h2(_templateObject2());
 
 /***/ }),
 
@@ -923,6 +2262,462 @@ var Main = function Main(props) {
 var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].div(_templateObject());
 var Header = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].header(_templateObject2());
 var Logo = _emotion_styled__WEBPACK_IMPORTED_MODULE_3__["default"].img(_templateObject3());
+
+/***/ }),
+
+/***/ "./components/templates/mypage/index.tsx":
+/*!***********************************************!*\
+  !*** ./components/templates/mypage/index.tsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral */ "./node_modules/@babel/runtime-corejs2/helpers/esm/taggedTemplateLiteral.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime-corejs2/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _emotion_styled__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @emotion/styled */ "./node_modules/@emotion/styled/dist/styled.browser.esm.js");
+/* harmony import */ var _emotion_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @emotion/css */ "./node_modules/@emotion/css/dist/css.browser.esm.js");
+/* harmony import */ var _layouts_Main__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../layouts/Main */ "./components/templates/layouts/Main.tsx");
+/* harmony import */ var _hooks_useLogin__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../hooks/useLogin */ "./components/hooks/useLogin.tsx");
+/* harmony import */ var _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../assets/utils/firebaseApp */ "./assets/utils/firebaseApp.ts");
+/* harmony import */ var _assets_constant__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../assets/constant */ "./assets/constant.ts");
+/* harmony import */ var _hooks_useModal__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../hooks/useModal */ "./components/hooks/useModal.ts");
+/* harmony import */ var _molecules_modal_TermsModal__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../molecules/modal/TermsModal */ "./components/molecules/modal/TermsModal.tsx");
+/* harmony import */ var _molecules_modal_PrivacyPolicyModal__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../molecules/modal/PrivacyPolicyModal */ "./components/molecules/modal/PrivacyPolicyModal.tsx");
+/* harmony import */ var _atoms_Button__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../atoms/Button */ "./components/atoms/Button.tsx");
+/* harmony import */ var _assets_api_auth__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../../assets/api/auth */ "./assets/api/auth.ts");
+/* harmony import */ var _molecules_editableCard__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../molecules/editableCard */ "./components/molecules/editableCard/index.tsx");
+
+
+
+
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/components/templates/mypage/index.tsx";
+var __jsx = react__WEBPACK_IMPORTED_MODULE_4__["createElement"];
+
+function _templateObject13() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
+
+  _templateObject13 = function _templateObject13() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject12() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    padding-bottom: 60px;\n"]);
+
+  _templateObject12 = function _templateObject12() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject11() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    font-size: 24px;\n    text-decoration: underline;\n"]);
+
+  _templateObject11 = function _templateObject11() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject10() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    margin-bottom: 50px;\n    font-size: 24px;\n    text-decoration: underline;\n"]);
+
+  _templateObject10 = function _templateObject10() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject9() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n    align-items: center;\n    margin: 60px auto;\n"]);
+
+  _templateObject9 = function _templateObject9() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject8() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    display: block;\n    width: 510px;\n    height: 100px;\n    background-image: url(/img/svg/btn_facebook_login.svg);\n    &::after {\n        ", "\n    }\n"]);
+
+  _templateObject8 = function _templateObject8() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject7() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    display: block;\n    width: 510px;\n    height: 100px;\n    margin-bottom: 24px;\n    background-image: url(/img/svg/btn_twitter_login.svg);\n    &::after {\n        ", "\n    }\n"]);
+
+  _templateObject7 = function _templateObject7() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject6() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    content: '\u30ED\u30B0\u30A4\u30F3\u6E08';\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    position: absolute;\n    width: 100%;\n    height: 100%;\n    border-radius: 16px;\n    top: 0;\n    left: 0;\n    background-color: rgba(0, 0, 0, 0.4);\n    font-size: 30px;\n    color: #fff;\n"]);
+
+  _templateObject6 = function _templateObject6() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject5() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])([""]);
+
+  _templateObject5 = function _templateObject5() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject4() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    position: relative;\n    margin-bottom: 55px;\n    padding-bottom: 33px;\n    font-size: 38px;\n    text-align: center;\n    color: #000;\n    &::before {\n        content: '';\n        position: absolute;\n        left: 50%;\n        bottom: 0;\n        width: 100px;\n        height: 5px;\n        background-image: linear-gradient(to left, #00b4ed, #0091db);\n        transform: translateX(-50%);\n    }\n"]);
+
+  _templateObject4 = function _templateObject4() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject3() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 600px;\n    margin: 40px auto 40px;\n    padding: 80px 45px 60px;\n    box-sizing: border-box;\n    background-color: #fff;\n    border-radius: 16px;\n"]);
+
+  _templateObject3 = function _templateObject3() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject2() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 600px;\n    margin: 80px auto 40px;\n    padding: 80px 45px 60px;\n    box-sizing: border-box;\n    background-color: #fff;\n    border-radius: 16px;\n"]);
+
+  _templateObject2 = function _templateObject2() {
+    return data;
+  };
+
+  return data;
+}
+
+function _templateObject() {
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    padding-bottom: 40px;\n"]);
+
+  _templateObject = function _templateObject() {
+    return data;
+  };
+
+  return data;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var MyPage = function MyPage() {
+  var user = Object(_hooks_useLogin__WEBPACK_IMPORTED_MODULE_8__["default"])();
+  var db = _assets_utils_firebaseApp__WEBPACK_IMPORTED_MODULE_9__["default"].firestore();
+  var docRef = db.collection(_assets_constant__WEBPACK_IMPORTED_MODULE_10__["COLLECTIONS"].POSTS);
+
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_4__["useState"]([]),
+      _React$useState2 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__["default"])(_React$useState, 2),
+      posts = _React$useState2[0],
+      setPosts = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_4__["useState"](true),
+      _React$useState4 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_3__["default"])(_React$useState3, 2),
+      isFirst = _React$useState4[0],
+      setIsFirst = _React$useState4[1];
+
+  var _useModal = Object(_hooks_useModal__WEBPACK_IMPORTED_MODULE_11__["default"])(),
+      isShowingTerms = _useModal.isShowing,
+      toggleTerms = _useModal.toggle;
+
+  var _useModal2 = Object(_hooks_useModal__WEBPACK_IMPORTED_MODULE_11__["default"])(),
+      isShowingPrivacyPolicy = _useModal2.isShowing,
+      togglePrivacyPolicy = _useModal2.toggle;
+
+  var loadPostsData = react__WEBPACK_IMPORTED_MODULE_4__["useCallback"](
+  /*#__PURE__*/
+  Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  /*#__PURE__*/
+  _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee() {
+    var data, docs, myPosts;
+    return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            if (user) {
+              _context.next = 2;
+              break;
+            }
+
+            return _context.abrupt("return");
+
+          case 2:
+            _context.next = 4;
+            return docRef.where('user.uid', '==', user.uid).orderBy('timestamp', 'desc').get()["catch"](function (e) {
+              return console.error(e);
+            });
+
+          case 4:
+            data = _context.sent;
+
+            if (data) {
+              _context.next = 7;
+              break;
+            }
+
+            return _context.abrupt("return");
+
+          case 7:
+            docs = data.docs;
+            myPosts = docs.map(function (doc) {
+              return doc.data();
+            });
+            setPosts(myPosts);
+
+          case 10:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  })), [docRef, user]);
+  var isActiveFacebook = react__WEBPACK_IMPORTED_MODULE_4__["useMemo"](function () {
+    return (user === null || user === void 0 ? void 0 : user.providerData.map(function (data) {
+      return data === null || data === void 0 ? void 0 : data.providerId;
+    }).includes('facebook.com')) || false;
+  }, [user]);
+  var isActiveTwitter = react__WEBPACK_IMPORTED_MODULE_4__["useMemo"](function () {
+    return (user === null || user === void 0 ? void 0 : user.providerData.map(function (data) {
+      return data === null || data === void 0 ? void 0 : data.providerId;
+    }).includes('twitter.com')) || false;
+  }, [user]);
+  react__WEBPACK_IMPORTED_MODULE_4__["useEffect"](function () {
+    if (isFirst) {
+      loadPostsData();
+    }
+
+    if (user) {
+      setIsFirst(false);
+    }
+  }, [isFirst, loadPostsData, user]);
+  var deletePost = react__WEBPACK_IMPORTED_MODULE_4__["useCallback"](function (id) {
+    docRef.doc(id)["delete"]().then(function () {
+      loadPostsData();
+    });
+  }, [docRef, loadPostsData]);
+  var endPost = react__WEBPACK_IMPORTED_MODULE_4__["useCallback"](function (id) {
+    docRef.doc(id).update({
+      isEnd: true
+    }).then(function () {
+      loadPostsData();
+    });
+  }, [docRef, loadPostsData]);
+  var myPosts = react__WEBPACK_IMPORTED_MODULE_4__["useMemo"](function () {
+    return posts.map(function (post, index) {
+      var _post$id;
+
+      return __jsx(CardWrapper, {
+        key: index,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 86
+        },
+        __self: this
+      }, __jsx(_molecules_editableCard__WEBPACK_IMPORTED_MODULE_16__["default"], {
+        key: index,
+        imgUrl: post.imageUrl,
+        description: post.title,
+        link: "/posts/".concat((_post$id = post.id) !== null && _post$id !== void 0 ? _post$id : ''),
+        side: post.side,
+        isEnd: post.isEnd,
+        onDelete: function onDelete() {
+          deletePost(post.id);
+        },
+        onEnd: function onEnd() {
+          endPost(post.id);
+        },
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 87
+        },
+        __self: this
+      }));
+    });
+  }, [deletePost, endPost, posts]);
+  return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_7__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 107
+    },
+    __self: this
+  }, __jsx(Wrapper, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 108
+    },
+    __self: this
+  }, __jsx(LoginStatus, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 109
+    },
+    __self: this
+  }, __jsx(Title, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 110
+    },
+    __self: this
+  }, "\u30A2\u30AB\u30A6\u30F3\u30C8\u72B6\u6CC1"), __jsx(ShareInner, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 111
+    },
+    __self: this
+  }, __jsx(TwitterButton, {
+    onClick: _assets_api_auth__WEBPACK_IMPORTED_MODULE_15__["signInTwitter"],
+    isActive: isActiveTwitter,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 112
+    },
+    __self: this
+  }), __jsx(FacebookButton, {
+    onClick: _assets_api_auth__WEBPACK_IMPORTED_MODULE_15__["signInFacebook"],
+    isActive: isActiveFacebook,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 113
+    },
+    __self: this
+  })), __jsx(TextWrapper, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 115
+    },
+    __self: this
+  }, __jsx(Terms, {
+    onClick: toggleTerms,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 116
+    },
+    __self: this
+  }, "\u5229\u7528\u898F\u7D04"), __jsx(PrivacyPolicy, {
+    onClick: togglePrivacyPolicy,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 117
+    },
+    __self: this
+  }, "\u30D7\u30E9\u30A4\u30D0\u30B7\u30FC\u30DD\u30EA\u30B7\u30FC")), __jsx(LogoutButton, {
+    styleType: "cancel",
+    width: '510px',
+    height: '100px',
+    onClick: function onClick() {
+      localStorage.setItem('isClient', 'false');
+      Object(_assets_api_auth__WEBPACK_IMPORTED_MODULE_15__["signOut"])();
+    },
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 119
+    },
+    __self: this
+  }, "\u30ED\u30B0\u30A2\u30A6\u30C8\u3059\u308B"), __jsx(_molecules_modal_TermsModal__WEBPACK_IMPORTED_MODULE_12__["default"], {
+    isShowing: isShowingTerms,
+    toggle: toggleTerms,
+    onClickPrivacyPolicy: togglePrivacyPolicy,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 130
+    },
+    __self: this
+  }), __jsx(_molecules_modal_PrivacyPolicyModal__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    isShowing: isShowingPrivacyPolicy,
+    toggle: togglePrivacyPolicy,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 135
+    },
+    __self: this
+  })), user && __jsx(react__WEBPACK_IMPORTED_MODULE_4__["Fragment"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 138
+    },
+    __self: this
+  }, __jsx(Past, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 139
+    },
+    __self: this
+  }, __jsx(Title, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 140
+    },
+    __self: this
+  }, "\u904E\u53BB\u306B\u4F5C\u6210\u3057\u305F\u58F0")), __jsx("div", {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 142
+    },
+    __self: this
+  }, myPosts))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (MyPage);
+var Wrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject());
+var LoginStatus = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject2());
+var Past = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject3());
+var Title = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].p(_templateObject4());
+var ShareInner = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject5());
+var AlreadyLogin = Object(_emotion_css__WEBPACK_IMPORTED_MODULE_6__["default"])(_templateObject6());
+var TwitterButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject7(), function (props) {
+  return props.isActive && AlreadyLogin;
+});
+var FacebookButton = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject8(), function (props) {
+  return props.isActive && AlreadyLogin;
+});
+var TextWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject9());
+var Terms = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].p(_templateObject10());
+var PrivacyPolicy = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].p(_templateObject11());
+var CardWrapper = _emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"].div(_templateObject12());
+var LogoutButton = Object(_emotion_styled__WEBPACK_IMPORTED_MODULE_5__["default"])(_atoms_Button__WEBPACK_IMPORTED_MODULE_14__["default"])(_templateObject13());
 
 /***/ }),
 
@@ -40566,21 +42361,21 @@ module.exports = invariant;
 
 /***/ }),
 
-/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Findex.tsx!./":
-/*!***********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Findex.tsx ***!
-  \***********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fmypage&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fmypage%2Findex.tsx!./":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fmypage&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fmypage%2Findex.tsx ***!
+  \**************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-    (window.__NEXT_P=window.__NEXT_P||[]).push(["/", function() {
-      var mod = __webpack_require__(/*! ./pages/index.tsx */ "./pages/index.tsx")
+    (window.__NEXT_P=window.__NEXT_P||[]).push(["/mypage", function() {
+      var mod = __webpack_require__(/*! ./pages/mypage/index.tsx */ "./pages/mypage/index.tsx")
       if(true) {
-        module.hot.accept(/*! ./pages/index.tsx */ "./pages/index.tsx", function() {
-          if(!next.router.components["/"]) return
-          var updatedPage = __webpack_require__(/*! ./pages/index.tsx */ "./pages/index.tsx")
-          next.router.update("/", updatedPage)
+        module.hot.accept(/*! ./pages/mypage/index.tsx */ "./pages/mypage/index.tsx", function() {
+          if(!next.router.components["/mypage"]) return
+          var updatedPage = __webpack_require__(/*! ./pages/mypage/index.tsx */ "./pages/mypage/index.tsx")
+          next.router.update("/mypage", updatedPage)
         })
       }
       return mod
@@ -49701,10 +51496,10 @@ module.exports = {
 
 /***/ }),
 
-/***/ "./pages/index.tsx":
-/*!*************************!*\
-  !*** ./pages/index.tsx ***!
-  \*************************/
+/***/ "./pages/mypage/index.tsx":
+/*!********************************!*\
+  !*** ./pages/mypage/index.tsx ***!
+  \********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -49712,14 +51507,14 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_templates_home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/templates/home */ "./components/templates/home/index.tsx");
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/pages/index.tsx";
+/* harmony import */ var _components_templates_mypage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../components/templates/mypage */ "./components/templates/mypage/index.tsx");
+var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/pages/mypage/index.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0__["createElement"];
 
 
 
-var PageHome = function PageHome() {
-  return __jsx(_components_templates_home__WEBPACK_IMPORTED_MODULE_1__["default"], {
+var PageMyPage = function PageMyPage() {
+  return __jsx(_components_templates_mypage__WEBPACK_IMPORTED_MODULE_1__["default"], {
     __source: {
       fileName: _jsxFileName,
       lineNumber: 5
@@ -49728,28 +51523,28 @@ var PageHome = function PageHome() {
   });
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (PageHome);
+/* harmony default export */ __webpack_exports__["default"] = (PageMyPage);
 
 /***/ }),
 
-/***/ "./reducers/tab/actions.ts":
-/*!*********************************!*\
-  !*** ./reducers/tab/actions.ts ***!
-  \*********************************/
-/*! exports provided: update */
+/***/ "./reducers/user/actions.ts":
+/*!**********************************!*\
+  !*** ./reducers/user/actions.ts ***!
+  \**********************************/
+/*! exports provided: initialize */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "update", function() { return update; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialize", function() { return initialize; });
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
 /* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime-corejs2/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types */ "./reducers/tab/types.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./types */ "./reducers/user/types.ts");
 
 
 
-var update = function update(side) {
+var initialize = function initialize(user) {
   return (
     /*#__PURE__*/
     function () {
@@ -49762,9 +51557,9 @@ var update = function update(side) {
               case 0:
                 try {
                   dispatch({
-                    type: _types__WEBPACK_IMPORTED_MODULE_2__["UPDATE"],
+                    type: _types__WEBPACK_IMPORTED_MODULE_2__["INITIALIZE"],
                     payload: {
-                      side: side
+                      user: user
                     }
                   });
                 } catch (e) {
@@ -49788,28 +51583,28 @@ var update = function update(side) {
 
 /***/ }),
 
-/***/ "./reducers/tab/types.ts":
-/*!*******************************!*\
-  !*** ./reducers/tab/types.ts ***!
-  \*******************************/
-/*! exports provided: UPDATE */
+/***/ "./reducers/user/types.ts":
+/*!********************************!*\
+  !*** ./reducers/user/types.ts ***!
+  \********************************/
+/*! exports provided: INITIALIZE */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UPDATE", function() { return UPDATE; });
-var UPDATE = 'tab/update';
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "INITIALIZE", function() { return INITIALIZE; });
+var INITIALIZE = 'user/initialize';
 
 /***/ }),
 
-/***/ 1:
-/*!***************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Findex.tsx ***!
-  \***************************************************************************************************************************************************/
+/***/ 2:
+/*!******************************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2Fmypage&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fmypage%2Findex.tsx ***!
+  \******************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Findex.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Findex.tsx!./");
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fmypage&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fmypage%2Findex.tsx! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2Fmypage&absolutePagePath=%2FUsers%2Firie-shinnosuke%2FDocuments%2Fworks%2Fskett%2Fskett%2Fpages%2Fmypage%2Findex.tsx!./");
 
 
 /***/ }),
@@ -49825,5 +51620,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[1,"static/runtime/webpack.js"]]]);
-//# sourceMappingURL=index.js.map
+},[[2,"static/runtime/webpack.js"]]]);
+//# sourceMappingURL=mypage.js.map

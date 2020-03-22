@@ -5,6 +5,7 @@ export type UserType = {
     photoURL: string | null
     providerId?: string
     userName?: string
+    link?: string
 }
 
 export type PostType = {
