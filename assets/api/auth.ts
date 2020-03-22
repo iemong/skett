@@ -1,4 +1,5 @@
 import * as firebase from 'firebase/app'
+import 'firebase/auth'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
 
@@ -12,11 +13,7 @@ export const signInFacebook = async (): Promise<firebase.auth.UserCredential> =>
     const provider = new firebase.auth.FacebookAuthProvider()
     provider.addScope('user_link')
     const result = await firebase.auth().signInWithPopup(provider)
-    console.log(result)
-    // const token = (result?.credential as firebase.auth.OAuthCredential).accessToken
     const db = firebaseApp.firestore()
-    // const hoge = await fetch(`https://graph.facebook.com/me?fields=id,name,link&access_token=${token}`)
-    // console.log(hoge.json())
     const userDocRef = db.collection(COLLECTIONS.USERS).doc(result.user?.uid)
     const userInfo = {
         uid: result.user?.uid,
@@ -24,6 +21,9 @@ export const signInFacebook = async (): Promise<firebase.auth.UserCredential> =>
         email: result.user?.email,
         photoURL: result.user?.photoURL,
         providerId: result.additionalUserInfo?.providerId,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+        // @ts-ignore
+        link: result.additionalUserInfo?.profile?.link,
     }
     await userDocRef.set(userInfo).catch(error => {
         console.error(error)
