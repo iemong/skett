@@ -14,6 +14,21 @@ type Props = {
 const Result = (props: Props): JSX.Element => {
     const { url, title = '作成完了' } = props
 
+    const handleClick = () => {
+        document.execCommand('copy')
+    }
+
+    React.useEffect(() => {
+        const listener = (e: ClipboardEvent): void => {
+            e.preventDefault()
+            if (e.clipboardData) e.clipboardData.setData('text/plain', url)
+        }
+        document.addEventListener('copy', listener)
+        return (): void => {
+            document.removeEventListener('copy', listener)
+        }
+    }, [url])
+
     return (
         <Wrapper>
             <TitleWrapper>
@@ -25,7 +40,7 @@ const Result = (props: Props): JSX.Element => {
                 </Lead>
                 <Flex>
                     <LinkText>{url}</LinkText>
-                    <Copy>
+                    <Copy onClick={handleClick}>
                         <CopyImg src="/img/svg/icn_clipboard.svg" alt="copy" />
                     </Copy>
                 </Flex>
@@ -119,6 +134,10 @@ const Copy = styled.div`
     margin-left: 9px;
     border: 4px solid #f39800;
     box-sizing: border-box;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.7;
+    }
 `
 
 const CopyImg = styled.img`
