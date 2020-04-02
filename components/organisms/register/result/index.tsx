@@ -23,7 +23,12 @@ const Result = (props: Props): JSX.Element => {
                     <br />
                     下記のURL先で公開されます。
                 </Lead>
-                <LinkText>{url}</LinkText>
+                <Flex>
+                    <LinkText>{url}</LinkText>
+                    <Copy>
+                        <CopyImg src="/img/svg/icn_clipboard.svg" alt="copy" />
+                    </Copy>
+                </Flex>
             </TitleWrapper>
             <ShareWrapper>
                 <Title>この声をシェアする</Title>
@@ -84,7 +89,7 @@ const LinkText = styled.p`
     box-sizing: border-box;
     line-height: 1.5;
     word-break: break-all;
-    border: 2px solid #f39800;
+    border: 4px solid #f39800;
     font-size: 20px;
 `
 
@@ -99,4 +104,24 @@ const ShareWrapper = styled.div`
 
 const BackButton = styled(Button)`
     margin: 0 auto;
+`
+
+const Flex = styled.div`
+    display: flex;
+`
+
+const Copy = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin-left: 9px;
+    border: 4px solid #f39800;
+    box-sizing: border-box;
+`
+
+const CopyImg = styled.img`
+    width: 44px;
+    height: 57px;
 `
