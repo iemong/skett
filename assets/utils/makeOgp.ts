@@ -83,7 +83,7 @@ const drawMore = async (context: CanvasRenderingContext2D): Promise<CanvasRender
 }
 
 export const exportDataURL = (canvas: HTMLCanvasElement): string => {
-    return canvas.toDataURL('image/jpg')
+    return canvas.toDataURL('image/jpeg')
 }
 
 export const exportBlob = (canvas: HTMLCanvasElement): Promise<Blob | null> => {

@@ -14,6 +14,21 @@ type Props = {
 const Result = (props: Props): JSX.Element => {
     const { url, title = '作成完了' } = props
 
+    const handleClick = () => {
+        document.execCommand('copy')
+    }
+
+    React.useEffect(() => {
+        const listener = (e: ClipboardEvent): void => {
+            e.preventDefault()
+            if (e.clipboardData) e.clipboardData.setData('text/plain', url)
+        }
+        document.addEventListener('copy', listener)
+        return (): void => {
+            document.removeEventListener('copy', listener)
+        }
+    }, [url])
+
     return (
         <Wrapper>
             <TitleWrapper>
@@ -23,7 +38,12 @@ const Result = (props: Props): JSX.Element => {
                     <br />
                     下記のURL先で公開されます。
                 </Lead>
-                <LinkText>{url}</LinkText>
+                <Flex>
+                    <LinkText>{url}</LinkText>
+                    <Copy onClick={handleClick}>
+                        <CopyImg src="/img/svg/icn_clipboard.svg" alt="copy" />
+                    </Copy>
+                </Flex>
             </TitleWrapper>
             <ShareWrapper>
                 <Title>この声をシェアする</Title>
@@ -84,7 +104,7 @@ const LinkText = styled.p`
     box-sizing: border-box;
     line-height: 1.5;
     word-break: break-all;
-    border: 2px solid #f39800;
+    border: 4px solid #f39800;
     font-size: 20px;
 `
 
@@ -99,4 +119,28 @@ const ShareWrapper = styled.div`
 
 const BackButton = styled(Button)`
     margin: 0 auto;
+`
+
+const Flex = styled.div`
+    display: flex;
+`
+
+const Copy = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin-left: 9px;
+    border: 4px solid #f39800;
+    box-sizing: border-box;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.7;
+    }
+`
+
+const CopyImg = styled.img`
+    width: 44px;
+    height: 57px;
 `
