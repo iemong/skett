@@ -12,6 +12,20 @@ type Props = {
 
 const Card = (props: Props): JSX.Element => {
     const { imgUrl, description, link, side } = props
+
+    const styleType = (() => {
+        if (side === 'help') {
+            return 'secondary'
+        }
+        if (side === 'support') {
+            return 'invertSecondary'
+        }
+        if (side === 'organization') {
+            return 'organizationSecondary'
+        }
+        return 'secondary'
+    })()
+
     return (
         <Wrapper data-side={side}>
             <ThumbnailWrapper>
@@ -23,7 +37,7 @@ const Card = (props: Props): JSX.Element => {
                     <DetailButton
                         width={'270px'}
                         height={'50px'}
-                        styleType={side === 'help' ? 'secondary' : 'invertSecondary'}
+                        styleType={styleType}
                     >
                         詳しく見る
                     </DetailButton>
@@ -42,6 +56,9 @@ const Wrapper = styled.div`
     }
     &[data-side='support'] {
         background-image: linear-gradient(to left, #35b597, #00a968);
+    }
+    &[data-side='organization'] {
+        background-image: linear-gradient(to left, #e85625, #fd7823);
     }
     margin: 0 auto 40px;
     border-radius: 16px;

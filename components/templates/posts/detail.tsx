@@ -91,12 +91,18 @@ const PostDetail = (props: Props): JSX.Element => {
     }, [data, isMyPost, side, user])
 
     const tabElement = React.useMemo(() => {
-        return side === 'help' ? (
-            <Tab helpContents={postElement} tabSide="help" onClickHelp={(): void => Router.back()} />
-        ) : (
-            <Tab supportContents={postElement} tabSide="support" onClickSupport={(): void => Router.back()} />
-        )
+        if (side === 'help') {
+            return <Tab helpContents={postElement} tabSide="help" onClickHelp={(): void => Router.back()} />
+        }
+        if (side === 'support') {
+            return <Tab supportContents={postElement} tabSide="support" onClickSupport={(): void => Router.back()} />
+        }
+        if (side === 'organization') {
+            return <Tab supportContents={postElement} tabSide="organization" onClickOrganization={(): void => Router.back()} />
+        }
+        return <></>
     }, [postElement, side])
+
     return <Main>{tabElement}</Main>
 }
 

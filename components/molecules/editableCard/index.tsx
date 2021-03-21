@@ -49,6 +49,9 @@ const Wrapper = styled.div`
     &[data-side='support'] {
         background-image: linear-gradient(to left, #35b597, #00a968);
     }
+    &[data-side='organization'] {
+        background-image: linear-gradient(to left, #e85625, #fd7823);
+    }
     margin: 0 auto 40px;
     border-radius: 16px;
     overflow: hidden;

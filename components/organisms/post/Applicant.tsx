@@ -93,7 +93,7 @@ const UserWrapper = styled.div<{ side: Side }>`
     padding: 36px;
     box-sizing: border-box;
     background-color: #fff;
-    border: 3px solid ${props => (props.side === 'help' ? '#0091DB' : '#00A968')};
+    border: 3px solid ${props => (props.side === 'help' ? '#0091DB' : props.side === 'support' ? '#00A968' : '#e85625')};
     border-radius: 14px;
     &:last-of-type {
         margin-bottom: 0;

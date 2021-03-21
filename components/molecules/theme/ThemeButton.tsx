@@ -18,7 +18,16 @@ const ThemeButton = (props: Props): JSX.Element => {
 
     const buttonType = React.useMemo(() => {
         if (disable) return 'disable'
-        return side === 'help' ? 'default' : 'invert'
+        if (side === 'help') {
+            return 'default'
+        }
+        if (side === 'support') {
+            return 'invert'
+        }
+        if (side === 'organization') {
+            return 'organization'
+        }
+        return 'default'
     }, [disable, side])
 
     return (

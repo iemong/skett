@@ -7,6 +7,8 @@ enum StyleType {
     secondary,
     invert,
     invertSecondary,
+    organization,
+    organizationSecondary,
     twitter,
     facebook,
     cancel,
@@ -89,6 +91,22 @@ const AdditionalStyle = (props: StyleProps) => {
             height: props.height,
             background: '#fff',
             color: '#00A968',
+            borderRadius: '10px',
+            fontSize: '24px',
+        })
+    } else if (props.styleType === 'organization') {
+        return css({
+            width: props.width,
+            height: props.height,
+            background: 'linear-gradient(to right, #e8563a 0%, #e53a2b 100%)',
+            borderRadius: '10px',
+        })
+    } else if (props.styleType === 'organizationSecondary') {
+        return css({
+            width: props.width,
+            height: props.height,
+            background: '#fff',
+            color: '#e85625',
             borderRadius: '10px',
             fontSize: '24px',
         })
