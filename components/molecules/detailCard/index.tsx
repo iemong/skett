@@ -2,12 +2,13 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import { DateTime } from 'luxon'
 import { UserType } from 'types/index'
+import { Side } from 'reducers/tab'
 
 type Props = {
     imgUrl: string
     title: string
     description: string
-    side: 'help' | 'support'
+    side: Side
     user: UserType
     updateDate: string
     className?: string

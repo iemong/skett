@@ -217,9 +217,9 @@ const Register = (): JSX.Element => {
     return (
         <Main>
             {side === 'help' ? (
-                <Tab leftContent={innerElement} tabSide={'left'} />
+                <Tab helpContents={innerElement} tabSide={'help'} />
             ) : (
-                <Tab rightContent={innerElement} tabSide={'right'} />
+                <Tab supportContents={innerElement} tabSide={'support'} />
             )}
         </Main>
     )

@@ -60,16 +60,31 @@ const Home = (): JSX.Element => {
         ))
     }, [posts])
 
+    const organizationPosts = React.useMemo(() => {
+        const filteredPosts = posts.filter(post => post.side === 'organization')
+        return filteredPosts.map((post, index) => (
+            <Card
+                key={index}
+                imgUrl={post.imageUrl}
+                description={post.title}
+                link={`/posts/${post.id ?? ''}`}
+                side={'organization'}
+            />
+        ))
+    }, [posts])
+
     const helpPostElement = <ItemWrapper>{helpPosts}</ItemWrapper>
     const supportPostElement = <ItemWrapper>{supportPosts}</ItemWrapper>
+    const organizationPostElement = <ItemWrapper>{organizationPosts}</ItemWrapper>
 
     return (
         <Main>
             <React.Fragment>
                 <Tab
-                    leftContent={helpPostElement}
-                    rightContent={supportPostElement}
-                    tabSide={side === 'help' ? 'left' : 'right'}
+                    helpContents={helpPostElement}
+                    supportContents={supportPostElement}
+                    organizationContents={organizationPostElement}
+                    tabSide={side}
                 />
                 <Link href={'/register'}>
                     <AddButton>声の追加</AddButton>

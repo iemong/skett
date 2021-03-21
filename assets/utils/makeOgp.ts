@@ -1,17 +1,18 @@
 import { preloadImage } from 'assets/utils/preloadImage'
 import drawImageProp from 'assets/utils/drawImageProp'
+import { Side } from 'reducers/tab'
 
 type Options = {
     canvas?: HTMLCanvasElement
     imageData: string
     text: string
-    postType: 'help' | 'support'
+    postType: Side
 }
 
 const WIDTH = 1200
 const HEIGHT = 630
 
-const drawBG = (context: CanvasRenderingContext2D, postType: 'help' | 'support'): CanvasRenderingContext2D => {
+const drawBG = (context: CanvasRenderingContext2D, postType: Side): CanvasRenderingContext2D => {
     context.save()
     const gradient = context.createLinearGradient(0, 0, WIDTH / 2, 0)
     if (postType === 'help') {

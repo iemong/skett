@@ -92,9 +92,9 @@ const PostDetail = (props: Props): JSX.Element => {
 
     const tabElement = React.useMemo(() => {
         return side === 'help' ? (
-            <Tab leftContent={postElement} tabSide="left" onClickLeft={(): void => Router.back()} />
+            <Tab helpContents={postElement} tabSide="help" onClickHelp={(): void => Router.back()} />
         ) : (
-            <Tab rightContent={postElement} tabSide="right" onClickRight={(): void => Router.back()} />
+            <Tab supportContents={postElement} tabSide="support" onClickSupport={(): void => Router.back()} />
         )
     }, [postElement, side])
     return <Main>{tabElement}</Main>

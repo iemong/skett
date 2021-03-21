@@ -6,6 +6,7 @@ import Button from 'components/atoms/Button'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
 import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 import makeOgp, { exportDataURL } from 'assets/utils/makeOgp'
+import { Side } from 'reducers/tab'
 
 type Props = {
     imgUrl: string
@@ -15,7 +16,7 @@ type Props = {
     onSubmit: () => void
     onBack: () => void
     user: UserType
-    side: 'help' | 'support'
+    side: Side
     confirmText?: string
 }
 

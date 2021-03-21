@@ -5,12 +5,13 @@ import * as firebase from 'firebase'
 import Login from 'components/organisms/login'
 import Button from 'components/atoms/Button'
 import ThemeButton from 'components/molecules/theme/ThemeButton'
+import { Side } from 'reducers/tab'
 
 type Props = {
     onConsent: () => void
     hasUser: boolean
     user: firebase.User | null
-    side: 'support' | 'help'
+    side: Side
 }
 
 const ApplyLogin = (props: Props): JSX.Element => {

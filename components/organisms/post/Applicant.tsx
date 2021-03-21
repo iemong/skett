@@ -2,10 +2,11 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import ThemeTitle from 'components/molecules/theme/ThemeTitle'
 import { UserType } from 'types/index'
+import { Side } from 'reducers/tab'
 
 type Props = {
     users?: UserType[]
-    side: 'support' | 'help'
+    side: Side
 }
 
 const Applicant = (props: Props): JSX.Element => {
@@ -84,7 +85,7 @@ const Users = styled.div`
     margin-bottom: 120px;
 `
 
-const UserWrapper = styled.div<{ side: 'support' | 'help' }>`
+const UserWrapper = styled.div<{ side: Side }>`
     display: flex;
     justify-content: space-between;
     width: 690px;
