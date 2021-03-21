@@ -77,6 +77,10 @@ const Home = (): JSX.Element => {
     const supportPostElement = <ItemWrapper>{supportPosts}</ItemWrapper>
     const organizationPostElement = <ItemWrapper>{organizationPosts}</ItemWrapper>
 
+    // TODO: Google Form URL
+    const href = React.useMemo(() => side === 'organization' ? '' : '/register', [side])
+    const target = React.useMemo(() => side === 'organization' ? '_blank' : '_self', [side])
+
     return (
         <Main>
             <React.Fragment>
@@ -86,8 +90,13 @@ const Home = (): JSX.Element => {
                     organizationContents={organizationPostElement}
                     tabSide={side}
                 />
-                <Link href={'/register'}>
-                    <AddButton>声の追加</AddButton>
+                <Link href={href}>
+                    <AddButton
+                        href={href}
+                        target={target}
+                    >
+                        声をつくる
+                    </AddButton>
                 </Link>
             </React.Fragment>
         </Main>
@@ -100,13 +109,25 @@ const ItemWrapper = styled.div`
     margin-top: 60px;
 `
 
-const AddButton = styled.button`
+const AddButton = styled.a`
     position: fixed;
     right: 0;
-    bottom: 100px;
-    display: block;
-    width: 251px;
-    height: 81px;
-    background-image: url(/img/btn_add.png);
-    color: transparent;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 120px;
+    background-image: linear-gradient(to right, #e8563a 0%, #e53a2b 100%);
+    color: #fff;
+    font-size: 28px;
+    font-weight: bold;
+    text-decoration: none;
+
+    &::before {
+        content: '+';
+        font-size: 48px;
+        font-weight: normal;
+        margin-right: 8px;
+    }
 `
