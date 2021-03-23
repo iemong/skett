@@ -20,13 +20,14 @@ const Home = (): JSX.Element => {
     const loadPostsData = React.useCallback(async () => {
         const data = await docRef
             .where('isEnd', '==', false)
+            .where('isDeleted', '==', false)
             .orderBy('timestamp', 'desc')
             .get()
             .catch(e => console.error(e))
         if (!data) return
         const docs = data.docs
         const posts = docs.map(doc => doc.data() as PostType)
-        setPosts(posts.filter((post) => post.isDeleted === false || post.isDeleted === undefined))
+        setPosts(posts)
     }, [docRef])
 
     React.useEffect(() => {
