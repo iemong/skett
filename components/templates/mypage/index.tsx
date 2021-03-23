@@ -54,27 +54,11 @@ const MyPage = (): JSX.Element => {
         }
     }, [isFirst, loadPostsData, user])
 
-    const deletePost = React.useCallback(
-        (id: string) => {
+    const updatePost = React.useCallback(
+        (id: string, data: Partial<PostType>) => {
             docRef
                 .doc(id)
-                .update({
-                    isDeleted: true
-                })
-                .then(() => {
-                    loadPostsData()
-                })
-        },
-        [docRef, loadPostsData],
-    )
-
-    const endPost = React.useCallback(
-        (id: string) => {
-            docRef
-                .doc(id)
-                .update({
-                    isEnd: true,
-                })
+                .update(data)
                 .then(() => {
                     loadPostsData()
                 })
@@ -94,15 +78,15 @@ const MyPage = (): JSX.Element => {
                         side={post.side}
                         isEnd={post.isEnd}
                         onDelete={(): void => {
-                            deletePost(post.id)
+                            updatePost(post.id, { isDeleted: true })
                         }}
                         onEnd={(): void => {
-                            endPost(post.id)
+                            updatePost(post.id, { isEnd: true })
                         }}
                     />
                 </CardWrapper>
             )),
-        [deletePost, endPost, posts],
+        [updatePost, posts],
     )
 
     return (
