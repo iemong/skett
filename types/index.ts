@@ -25,4 +25,5 @@ export type PostType = {
     timestamp: number
     applicants?: UserType[]
     isEnd: boolean
+    isDeleted: boolean
 }
