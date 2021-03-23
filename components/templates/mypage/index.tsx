@@ -26,14 +26,18 @@ const MyPage = (): JSX.Element => {
     const loadPostsData = React.useCallback(async () => {
         if (!user) return
         const data = await docRef
-            .where('user.uid', '==', user.uid)
             .orderBy('timestamp', 'desc')
             .get()
             .catch(e => console.error(e))
         if (!data) return
         const docs = data.docs
-        const myPosts = docs.map(doc => doc.data() as PostType)
-        setPosts(myPosts)
+        const allPosts = docs.map(doc => doc.data() as PostType)
+
+        const myPosts = allPosts.filter((post) => post.user.uid === user.uid)
+        const appliedPosts = allPosts.filter((post) => post.applicants?.some((applicant) => applicant.uid === user.uid))
+        const participatedPosts = [...myPosts, ...appliedPosts].sort((a, b) => a.timestamp > b.timestamp ? -1 : 1)
+
+        setPosts(participatedPosts)
     }, [docRef, user])
 
     const isActiveFacebook = React.useMemo(
