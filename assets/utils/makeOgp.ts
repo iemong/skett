@@ -18,11 +18,14 @@ const drawBG = (context: CanvasRenderingContext2D, postType: Side): CanvasRender
     if (postType === 'help') {
         gradient.addColorStop(0, '#00B4ED')
         gradient.addColorStop(1, '#0091DB')
-    } else {
+    } else if (postType === 'support') {
         gradient.addColorStop(0, '#35B597')
         gradient.addColorStop(1, '#00A968')
+    } else {
+        gradient.addColorStop(0, '#e8563a')
+        gradient.addColorStop(1, '#e53a2b')
     }
-    context.fillStyle = gradient
+    context.fillStyle = gradient 
     context.rect(0, 0, WIDTH / 2, HEIGHT)
     context.fill()
     context.restore()
