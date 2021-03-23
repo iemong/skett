@@ -58,7 +58,9 @@ const MyPage = (): JSX.Element => {
         (id: string) => {
             docRef
                 .doc(id)
-                .delete()
+                .update({
+                    isDeleted: true
+                })
                 .then(() => {
                     loadPostsData()
                 })

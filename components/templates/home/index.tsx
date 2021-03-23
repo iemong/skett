@@ -26,7 +26,7 @@ const Home = (): JSX.Element => {
         if (!data) return
         const docs = data.docs
         const posts = docs.map(doc => doc.data() as PostType)
-        setPosts(posts)
+        setPosts(posts.filter((post) => post.isDeleted === false || post.isDeleted === undefined))
     }, [docRef])
 
     React.useEffect(() => {
