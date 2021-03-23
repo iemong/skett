@@ -21,6 +21,8 @@ import useModal from 'components/hooks/useModal'
 import ThemeHowtoModal from 'components/molecules/theme/ThemeHowtoModal'
 import makeOgp, { exportBlob } from 'assets/utils/makeOgp'
 
+const FUKKO_DESIGN_UID = '' // TODO: fill out
+
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
     const storage = firebaseApp.storage(STRAGE_BACKET)
@@ -65,6 +67,7 @@ const Register = (): JSX.Element => {
         const file = fileList[0]
         if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
         const now = Date.now()
+        const postType = user.uid === FUKKO_DESIGN_UID ? 'organization' : side
 
         const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${now}.jpg`)
         await imageRef.put(file)
@@ -74,7 +77,7 @@ const Register = (): JSX.Element => {
         if (!currentImgSrc) return
         const ogpCanvas = await makeOgp({
             imageData: currentImgSrc,
-            postType: side,
+            postType: postType,
             text: currentFormData.title,
         })
         const blob = await exportBlob(ogpCanvas)
@@ -100,7 +103,7 @@ const Register = (): JSX.Element => {
             url: uniqUrl,
             imageUrl,
             ogpImageUrl,
-            side,
+            side: postType,
             timestamp: Date.now(),
             applicants: [],
             isEnd: false,

@@ -123,7 +123,7 @@ const PostDetail = (props: Props): JSX.Element => {
             return <Tab supportContents={postElement} tabSide="support" onClickSupport={(): void => Router.back()} />
         }
         if (side === 'organization') {
-            return <Tab supportContents={postElement} tabSide="organization" onClickOrganization={(): void => Router.back()} />
+            return <Tab organizationContents={postElement} tabSide="organization" onClickOrganization={(): void => Router.back()} />
         }
         return <></>
     }, [postElement, side])
