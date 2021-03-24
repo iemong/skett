@@ -2,26 +2,36 @@ import * as React from 'react'
 import 'firebase/analytics'
 import styled from '@emotion/styled'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import firebase from '../../../assets/utils/firebaseApp'
+import useLogin from 'components/hooks/useLogin'
+
 type Props = {
     children: JSX.Element | string
 }
 
 const Main = (props: Props): JSX.Element => {
     const { children } = props
+
+    const user = useLogin()
+
     React.useEffect(() => {
         firebase.analytics()
     }, [])
+
     return (
         <Wrapper>
             <Header>
                 <Link href={'/'}>
                     <Logo src="/img/logo.png" alt="スケット" />
                 </Link>
-                <Link href={'/mypage'}>
-                    <img src="/img/btn_mypage.png" alt="マイページ" />
-                </Link>
+                <RightSide>
+                    {user && <Link href={'/mypage'}>
+                        <a>
+                            <UserIcon src={user.photoURL ?? ''} alt="アイコン" />
+                        </a>
+                    </Link>}
+                    <Menu src='/img/menu.png' alt="メニュー" />
+                </RightSide>
             </Header>
             {children}
         </Wrapper>
@@ -48,4 +58,22 @@ const Header = styled.header`
 const Logo = styled.img`
     width: 211px;
     height: 53px;
+`
+
+const RightSide = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+
+const UserIcon = styled.img`
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+`
+
+const Menu = styled.img`
+    width: 40px;
+    height: 30px;
+    margin-left: 20px;
 `
