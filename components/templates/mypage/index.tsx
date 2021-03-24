@@ -90,8 +90,12 @@ const MyPage = (): JSX.Element => {
                         <UserName>{user?.displayName}さん</UserName>
                     </User>}
                     <ShareInner>
-                        <TwitterButton onClick={signInTwitter} isActive={isActiveTwitter} />
-                        <FacebookButton onClick={signInFacebook} isActive={isActiveFacebook} />
+                        <TwitterButton onClick={signInTwitter} isActive={isActiveTwitter}>
+                            {isActiveTwitter ? 'ログイン済' : 'ログインする'}
+                        </TwitterButton>
+                        <FacebookButton onClick={signInFacebook} isActive={isActiveFacebook}>
+                            {isActiveFacebook ? 'ログイン済' : 'ログインする'}
+                        </FacebookButton>
                     </ShareInner>
                     <InsuranceText>
                         保険の加入がまだの方は<br/>
@@ -190,43 +194,44 @@ const UserName = styled.div`
 
 const ShareInner = styled.div``
 
-const AlreadyLogin = css`
-    content: 'ログイン済';
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    font-size: 30px;
-    color: #fff;
-`
-
 const TwitterButton = styled.div<{ isActive: boolean }>`
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
     width: 510px;
     height: 100px;
     margin-bottom: 24px;
-    background-image: url(/img/svg/btn_twitter_login.svg);
-    &::after {
-        ${props => props.isActive && AlreadyLogin}
-    }
+    padding: 0 40px;
+    box-sizing: border-box;
+    border: ${props => props.isActive ? 'none' : '3px solid #1ba3dd;'};
+    border-radius: 16px;
+    background-size: 51px 42px;
+    background-position: 92% center;
+    background-repeat: no-repeat;
+    background-color: ${props => props.isActive ? '#1ba3dd' : 'transparent'};
+    background-image: ${props => props.isActive ? 'url(/img/svg/icn_twitter.svg)' : 'url(/img/svg/icn_twitter_on.svg)'};
+    font-size: 22px;
+    color: ${props => props.isActive ? '#fff' : '#1ba3dd'};
 `
 
 const FacebookButton = styled.div<{ isActive: boolean }>`
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
     width: 510px;
     height: 100px;
-    background-image: url(/img/svg/btn_facebook_login.svg);
-    &::after {
-        ${props => props.isActive && AlreadyLogin}
-    }
+    margin-bottom: 24px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    border: ${props => props.isActive ? 'none' : '3px solid #5173a8;'};
+    border-radius: 16px;
+    background-size: 51px 51px;
+    background-position: 92% center;
+    background-repeat: no-repeat;
+    background-color: ${props => props.isActive ? '#5173a8' : 'transparent'};
+    background-image: ${props => props.isActive ? 'url(/img/svg/icn_facebook.svg)' : 'url(/img/svg/icn_facebook_on.svg)'};
+    font-size: 22px;
+    color: ${props => props.isActive ? '#fff' : '#5173a8'};
 `
 
 const TextWrapper = styled.div`
