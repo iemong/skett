@@ -6,19 +6,24 @@ import { signOut } from 'assets/api/auth'
 import useModal from 'components/hooks/useModal'
 import PrivacyPolicyModal from './modal/PrivacyPolicyModal'
 import ThemeHowtoModal from './theme/ThemeHowtoModal'
+import useLogin from 'components/hooks/useLogin'
 
 type Props = {
-    onClose: () => void
+    onClose?: () => void
 }
 
 export const Menu = (props: Props): JSX.Element => {
     const { onClose } = props
 
     React.useEffect(() => {
-        Router.events.on('routeChangeStart', onClose)
+        if (onClose) {
+            Router.events.on('routeChangeStart', onClose)
+        }
 
         return () => {
-            Router.events.off('routeChangeStart', onClose)
+            if (onClose) {
+                Router.events.off('routeChangeStart', onClose)
+            }
         }
     })
 
@@ -44,6 +49,8 @@ export const Menu = (props: Props): JSX.Element => {
 export const MenuContents = (props: Props) => {
     const { onClose } = props
 
+    const user = useLogin()
+
     const { isShowing: isShowingHowto, toggle: toggleHowto } = useModal()
     const { isShowing: isShowingPrivacyPolicy, toggle: togglePrivacyPolicy } = useModal()
 
@@ -52,7 +59,7 @@ export const MenuContents = (props: Props) => {
         <List>
             <Item onClick={() => {
                 Router.push('/mypage')
-                onClose()
+                onClose?.()
             }}>
                 マイページ
             </Item>
@@ -66,7 +73,7 @@ export const MenuContents = (props: Props) => {
             </Item>
             <Item onClick={() => {
                 Router.push('/closed')
-                onClose()
+                onClose?.()
             }}>
                 過去に終了した声
             </Item>
@@ -75,13 +82,13 @@ export const MenuContents = (props: Props) => {
             }}>
                 プライバシーポリシー
             </Item>
-            <Item onClick={() => {
+            {user && <Item onClick={() => {
                 localStorage.setItem('isClient', 'false')
                 signOut()
-                onClose()
+                onClose?.()
             }}>
                 ログアウト
-            </Item>
+            </Item>}
         </List>
         <ThemeHowtoModal isShowing={isShowingHowto} toggle={toggleHowto} />
         <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
@@ -100,14 +107,14 @@ const Conttainer = styled.div`
     z-index: ${Z_INDEX_LIST.MODAL};
 `
 
-const Logo = styled.img`
+export const Logo = styled.img`
     display: block;
     width: 211px;
     height: 53px;
     margin: 0 auto 40px;
 `
 
-const Copyright = styled.small`
+export const Copyright = styled.small`
     font-size: 10px;
     color: #ccc;
 `

@@ -5,6 +5,7 @@ import Link from 'next/link'
 import firebase from '../../../assets/utils/firebaseApp'
 import useLogin from 'components/hooks/useLogin'
 import { Menu } from 'components/molecules/Menu'
+import { Footer } from 'components/molecules/Footer'
 
 type Props = {
     children: JSX.Element | string
@@ -38,6 +39,7 @@ const Main = (props: Props): JSX.Element => {
             </Header>
             {children}
             {isMenuOpen && <Menu onClose={() => setIsMenuOpen(false)} />}
+            <Footer />
         </Wrapper>
     )
 }
