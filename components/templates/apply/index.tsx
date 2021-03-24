@@ -77,7 +77,7 @@ const Apply = (props: Props): JSX.Element => {
                 />
             </Wrapper>
         )
-    }, [currentPost, isConsent, user])
+    }, [currentPost, isConsent, side, user])
 
     return (
         <Main>
@@ -85,7 +85,9 @@ const Apply = (props: Props): JSX.Element => {
                 <Tab helpContents={innerElement} tabSide={'help'} />
             ) : side === 'support' ? (
                 <Tab supportContents={innerElement} tabSide={'support'} />
-            ) : <Tab organizationContents={innerElement} tabSide={'organization'} />}
+            ) : (
+                <Tab organizationContents={innerElement} tabSide={'organization'} />
+            )}
         </Main>
     )
 }

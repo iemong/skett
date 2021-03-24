@@ -43,15 +43,15 @@ export const Closed = (): JSX.Element => {
     const currentPosts = React.useMemo(
         () =>
             posts
-              .filter((post) => post.side === side)
-              .map((post) => (
-                <ParticipatedItem
-                    key={post.id}
-                    link={`/posts/${post.id ?? ''}`}
-                    title={post.title}
-                    createdAt={post.createDate}
-                />
-            )),
+                .filter(post => post.side === side)
+                .map(post => (
+                    <ParticipatedItem
+                        key={post.id}
+                        link={`/posts/${post.id ?? ''}`}
+                        title={post.title}
+                        createdAt={post.createDate}
+                    />
+                )),
         [posts, side],
     )
 
@@ -61,9 +61,23 @@ export const Closed = (): JSX.Element => {
                 <Past>
                     <Title>過去に終了した声</Title>
                     <TabContainer>
-                      <Tab data-selected={side === 'help'} data-side={'help'} onClick={() => setSide('help')}>現地の声</Tab>
-                      <Tab data-selected={side === 'support'} data-side={'support'} onClick={() => setSide('support')}>支援の声</Tab>
-                      <Tab data-selected={side === 'organization'} data-side={'organization'} onClick={() => setSide('organization')}>団体の声</Tab>
+                        <Tab data-selected={side === 'help'} data-side={'help'} onClick={() => setSide('help')}>
+                            現地の声
+                        </Tab>
+                        <Tab
+                            data-selected={side === 'support'}
+                            data-side={'support'}
+                            onClick={() => setSide('support')}
+                        >
+                            支援の声
+                        </Tab>
+                        <Tab
+                            data-selected={side === 'organization'}
+                            data-side={'organization'}
+                            onClick={() => setSide('organization')}
+                        >
+                            団体の声
+                        </Tab>
                     </TabContainer>
                     {currentPosts}
                 </Past>
@@ -105,53 +119,53 @@ const Title = styled.p`
 `
 
 const TabContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const Tab = styled.div`
-  position: relative;
-  margin-bottom: 55px;
-  padding-bottom: 16px;
-  font-size: 24px;
-  text-align: center;
-  color: #000;
-  cursor: pointer;
+    position: relative;
+    margin-bottom: 55px;
+    padding-bottom: 16px;
+    font-size: 24px;
+    text-align: center;
+    color: #000;
+    cursor: pointer;
 
-  &:nth-child(2) {
-    margin: 0 100px 55px;
-  }
-
-  &[data-selected="true"] {
-    &::before {
-      content: '';
-      position: absolute;
-      left: 50%;
-      bottom: 0;
-      width: 100px;
-      height: 5px;
-      background-image: linear-gradient(to left, #00b4ed, #0091db);
-      transform: translateX(-50%);
+    &:nth-child(2) {
+        margin: 0 100px 55px;
     }
 
-    &[data-side="help"] {
-      color: #00b4ed;
-      &::before {
-        background-image: linear-gradient(to left, #00b4ed, #0091db);
-      }
+    &[data-selected='true'] {
+        &::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            width: 100px;
+            height: 5px;
+            background-image: linear-gradient(to left, #00b4ed, #0091db);
+            transform: translateX(-50%);
+        }
+
+        &[data-side='help'] {
+            color: #00b4ed;
+            &::before {
+                background-image: linear-gradient(to left, #00b4ed, #0091db);
+            }
+        }
+        &[data-side='support'] {
+            color: #00a968;
+            &::before {
+                background: linear-gradient(to right, #35b597, #00a968);
+            }
+        }
+        &[data-side='organization'] {
+            color: #e85625;
+            &::before {
+                background: linear-gradient(to right, #e8563a 0%, #e53a2b 100%);
+            }
+        }
     }
-    &[data-side="support"] {
-      color: #00A968;
-      &::before {
-        background: linear-gradient(to right, #35B597, #00A968);
-      }
-    }
-    &[data-side="organization"] {
-      color: #e85625;
-      &::before {
-        background: linear-gradient(to right, #e8563a 0%, #e53a2b 100%);
-      }
-    }
-  }
 `

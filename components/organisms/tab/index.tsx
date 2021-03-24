@@ -2,11 +2,11 @@ import * as React from 'react'
 import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import styled from '@emotion/styled'
 import { Z_INDEX_LIST } from 'assets/constant'
 import * as Actions from 'reducers/tab/actions'
 import { State as rootState } from 'reducers'
 import { Side } from 'reducers/tab'
-import styled from '@emotion/styled'
 
 type Props = {
     helpContents?: React.ReactNode
@@ -20,7 +20,16 @@ type Props = {
 }
 
 const Tab = (props: Props): JSX.Element => {
-    const { helpContents, supportContents, organizationContents, onClickHelp, onClickSupport, onClickOrganization, className, tabSide } = props
+    const {
+        helpContents,
+        supportContents,
+        organizationContents,
+        onClickHelp,
+        onClickSupport,
+        onClickOrganization,
+        className,
+        tabSide,
+    } = props
     const router = useRouter()
 
     const { side } = useSelector((state: rootState) => state.rootReducer.tab)
@@ -61,7 +70,7 @@ const Tab = (props: Props): JSX.Element => {
                 <Tabs
                     style={{
                         left: 0,
-                        backgroundImage: 'url(/img/tab_help_sp.png)'
+                        backgroundImage: 'url(/img/tab_help_sp.png)',
                     }}
                     onClick={() => changeTab('help')}
                     data-selected={tabName === 'help'}
@@ -72,7 +81,7 @@ const Tab = (props: Props): JSX.Element => {
                         right: 0,
                         width: '270px',
                         margin: '0 auto',
-                        backgroundImage: 'url(/img/tab_support_sp.png)'
+                        backgroundImage: 'url(/img/tab_support_sp.png)',
                     }}
                     onClick={() => changeTab('support')}
                     data-selected={tabName === 'support'}
@@ -80,7 +89,7 @@ const Tab = (props: Props): JSX.Element => {
                 <Tabs
                     style={{
                         right: 0,
-                        backgroundImage: 'url(/img/tab_organization_sp.png)'
+                        backgroundImage: 'url(/img/tab_organization_sp.png)',
                     }}
                     onClick={() => changeTab('organization')}
                     data-selected={tabName === 'organization'}

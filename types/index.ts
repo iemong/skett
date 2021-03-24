@@ -1,4 +1,4 @@
-import { Side } from "reducers/tab"
+import { Side } from 'reducers/tab'
 
 export type UserType = {
     displayName: string | null

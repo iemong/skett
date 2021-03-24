@@ -79,8 +79,8 @@ const Home = (): JSX.Element => {
     const organizationPostElement = <ItemWrapper>{organizationPosts}</ItemWrapper>
 
     // TODO: Google Form URL
-    const href = React.useMemo(() => side === 'organization' ? '' : '/register', [side])
-    const target = React.useMemo(() => side === 'organization' ? '_blank' : '_self', [side])
+    const href = React.useMemo(() => (side === 'organization' ? '' : '/register'), [side])
+    const target = React.useMemo(() => (side === 'organization' ? '_blank' : '_self'), [side])
 
     return (
         <Main>
@@ -92,10 +92,7 @@ const Home = (): JSX.Element => {
                     tabSide={side}
                 />
                 <Link href={href}>
-                    <AddButton
-                        href={href}
-                        target={target}
-                    >
+                    <AddButton href={href} target={target}>
                         声をつくる
                     </AddButton>
                 </Link>

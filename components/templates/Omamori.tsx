@@ -1,10 +1,10 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import Main from 'components/templates/layouts/Main'
-import Button from 'components/atoms/Button'
 import Router from 'next/router'
 import { useDispatch } from 'react-redux'
 import { bindActionCreators } from 'redux'
+import Button from 'components/atoms/Button'
+import Main from 'components/templates/layouts/Main'
 import * as Actions from 'reducers/tab/actions'
 import { Side } from 'reducers/tab'
 
@@ -24,26 +24,36 @@ export const Omamori = (): JSX.Element => {
             <>
                 <Container>
                     <MainImg src="/img/omamori_hero.png" alt="しえんのおまもり" />
-                    <Title>
-                        活動するときの保険
-                    </Title>
+                    <Title>活動するときの保険</Title>
                     <Description>
-                        被災地でボランティア活動をするときは<br/>
-                        保険が必要です。<br/>
-                        もし、あなたが大きな怪我をした時に<br/>
-                        多額の費用がかかるかもしれません。<br/>
-                        <br/>
-                        何より、被災者を怪我させてしまったり、<br/>
-                        被災者のものなどを壊してしまった場合、<br/>
-                        あなたはもちろん、被災者が困ってしまいます。<br/>
-                        <br/>
-                        なので、保険には必ず入りましょう。<br/>
-                        <br/>
-                        今回、スケットで募集している個人のボランティアや、<br/>
-                        スケットに登録している団体のボランティアを<br/>
-                        対象にした保険を作りました。<br/>
-                        <br/>
-                        ぜひこちらを利用ください。<br/>
+                        被災地でボランティア活動をするときは
+                        <br />
+                        保険が必要です。
+                        <br />
+                        もし、あなたが大きな怪我をした時に
+                        <br />
+                        多額の費用がかかるかもしれません。
+                        <br />
+                        <br />
+                        何より、被災者を怪我させてしまったり、
+                        <br />
+                        被災者のものなどを壊してしまった場合、
+                        <br />
+                        あなたはもちろん、被災者が困ってしまいます。
+                        <br />
+                        <br />
+                        なので、保険には必ず入りましょう。
+                        <br />
+                        <br />
+                        今回、スケットで募集している個人のボランティアや、
+                        <br />
+                        スケットに登録している団体のボランティアを
+                        <br />
+                        対象にした保険を作りました。
+                        <br />
+                        <br />
+                        ぜひこちらを利用ください。
+                        <br />
                     </Description>
                     <Logo src="/img/omamori_logo.png" alt="しえんのおまもり" />
                     <ApplyButton>
@@ -51,20 +61,23 @@ export const Omamori = (): JSX.Element => {
                         <Arrow />
                     </ApplyButton>
                     <Annotation>
-                    ※社会福祉協議会で入る保険はこちらのページの活動に対応していないので、「しえんのおまもり」に加入してください。
+                        ※社会福祉協議会で入る保険はこちらのページの活動に対応していないので、「しえんのおまもり」に加入してください。
                     </Annotation>
                     <HorizontalLine />
-                    <Paragraph>
-                        活動を知りたい人は以下をご覧ください
-                    </Paragraph>
+                    <Paragraph>活動を知りたい人は以下をご覧ください</Paragraph>
                     <ButtonContainer>
-                        <Button styleType='default' width="100%" height="120px" onClick={() => moveToHome('help')}>
+                        <Button styleType="default" width="100%" height="120px" onClick={() => moveToHome('help')}>
                             現地の声
                         </Button>
-                        <Button styleType='invert' width="100%" height="120px" onClick={() => moveToHome('support')}>
+                        <Button styleType="invert" width="100%" height="120px" onClick={() => moveToHome('support')}>
                             支援の声
                         </Button>
-                        <Button styleType='organization' width="100%" height="120px" onClick={() => moveToHome('organization')}>
+                        <Button
+                            styleType="organization"
+                            width="100%"
+                            height="120px"
+                            onClick={() => moveToHome('organization')}
+                        >
                             団体の声
                         </Button>
                     </ButtonContainer>
@@ -145,31 +158,31 @@ const ApplyButton = styled.a`
 `
 
 const Arrow = styled.div`
-  position: relative;
-  width: 20px;
-  height: 20px;
-  transform: translateX(120px) rotate(45deg);
+    position: relative;
+    width: 20px;
+    height: 20px;
+    transform: translateX(120px) rotate(45deg);
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: #fff;
-  }
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: block;
-    width: 2px;
-    height: 100%;
-    background-color: #fff;
-  }
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: block;
+        width: 2px;
+        height: 100%;
+        background-color: #fff;
+    }
 `
 
 const Annotation = styled.div`

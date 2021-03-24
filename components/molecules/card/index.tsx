@@ -34,11 +34,7 @@ const Card = (props: Props): JSX.Element => {
             <TextBox>
                 <Description>{description}</Description>
                 <Link href={`${link}?side=${side}`}>
-                    <DetailButton
-                        width={'270px'}
-                        height={'50px'}
-                        styleType={styleType}
-                    >
+                    <DetailButton width={'270px'} height={'50px'} styleType={styleType}>
                         詳しく見る
                     </DetailButton>
                 </Link>
@@ -92,5 +88,5 @@ const Description = styled.p`
 const DetailButton = styled(Button)``
 
 const Link = styled.a`
-  text-decoration: none;
+    text-decoration: none;
 `

@@ -139,7 +139,7 @@ const AdditionalStyle = (props: StyleProps) => {
             height: props.height,
             background: 'linear-gradient(to right, #BFBFBF, #999)',
             borderRadius: '10px',
-            pointerEvents: 'none'
+            pointerEvents: 'none',
         })
     }
 }

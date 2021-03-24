@@ -1,11 +1,11 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import { Z_INDEX_LIST } from 'assets/constant'
 import Router from 'next/router'
-import { signOut } from 'assets/api/auth'
-import useModal from 'components/hooks/useModal'
 import PrivacyPolicyModal from './modal/PrivacyPolicyModal'
 import ThemeHowtoModal from './theme/ThemeHowtoModal'
+import { Z_INDEX_LIST } from 'assets/constant'
+import { signOut } from 'assets/api/auth'
+import useModal from 'components/hooks/useModal'
 import useLogin from 'components/hooks/useLogin'
 
 type Props = {
@@ -39,9 +39,7 @@ export const Menu = (props: Props): JSX.Element => {
         <Conttainer>
             <MenuContents onClose={onClose} />
             <Logo src="/img/logo_gray.png" alt="ロゴ" />
-            <Copyright>
-                &copy; FUKKO DESIGN All Rights Reserved.
-            </Copyright>
+            <Copyright>&copy; FUKKO DESIGN All Rights Reserved.</Copyright>
         </Conttainer>
     )
 }
@@ -56,45 +54,59 @@ export const MenuContents = (props: Props) => {
 
     return (
         <>
-        <List>
-            <Item onClick={() => {
-                Router.push('/mypage')
-                onClose?.()
-            }}>
-                マイページ
-            </Item>
-            <Item onClick={() => {
-                toggleHowto()
-            }}>
-                使い方
-            </Item>
-            <Item onClick={() => {
-                Router.push('/omamori')
-                onClose?.()
-            }}>
-                しえんのおまもりについて
-            </Item>
-            <Item onClick={() => {
-                Router.push('/closed')
-                onClose?.()
-            }}>
-                過去に終了した声
-            </Item>
-            <Item onClick={() => {
-                togglePrivacyPolicy()
-            }}>
-                プライバシーポリシー
-            </Item>
-            {user && <Item onClick={() => {
-                localStorage.setItem('isClient', 'false')
-                signOut()
-                onClose?.()
-            }}>
-                ログアウト
-            </Item>}
-        </List>
-        <ThemeHowtoModal isShowing={isShowingHowto} toggle={toggleHowto} />
-        <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
+            <List>
+                <Item
+                    onClick={() => {
+                        Router.push('/mypage')
+                        onClose?.()
+                    }}
+                >
+                    マイページ
+                </Item>
+                <Item
+                    onClick={() => {
+                        toggleHowto()
+                    }}
+                >
+                    使い方
+                </Item>
+                <Item
+                    onClick={() => {
+                        Router.push('/omamori')
+                        onClose?.()
+                    }}
+                >
+                    しえんのおまもりについて
+                </Item>
+                <Item
+                    onClick={() => {
+                        Router.push('/closed')
+                        onClose?.()
+                    }}
+                >
+                    過去に終了した声
+                </Item>
+                <Item
+                    onClick={() => {
+                        togglePrivacyPolicy()
+                    }}
+                >
+                    プライバシーポリシー
+                </Item>
+                {user && (
+                    <Item
+                        onClick={() => {
+                            localStorage.setItem('isClient', 'false')
+                            signOut()
+                            onClose?.()
+                        }}
+                    >
+                        ログアウト
+                    </Item>
+                )}
+            </List>
+            <ThemeHowtoModal isShowing={isShowingHowto} toggle={toggleHowto} />
+            <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
         </>
     )
 }

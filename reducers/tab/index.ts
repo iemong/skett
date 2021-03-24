@@ -1,7 +1,7 @@
 import { Action } from 'reducers/tab/actions'
 import { UPDATE } from 'reducers/tab/types'
 
-export　type Side = 'help' | 'support' | 'organization'
+export type Side = 'help' | 'support' | 'organization'
 
 export type State = {
     side: Side

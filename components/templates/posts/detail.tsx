@@ -89,17 +89,26 @@ const PostDetail = (props: Props): JSX.Element => {
                 {isMyPost && <Applicant users={data?.applicants} side={side} />}
                 {user?.uid === data.user?.uid ? (
                     <>
-                    <EditButton width={'400px'} height={'80px'} onClick={() => updatePost(data.id, { isEnd: true })}>
-                        募集終了する
-                    </EditButton>
-                    <Link href={{ pathname: '/edit', query: { postId: data.id, side } }}>
-                        <EditButton width={'400px'} height={'80px'}>
-                            編集する
+                        <EditButton
+                            width={'400px'}
+                            height={'80px'}
+                            onClick={() => updatePost(data.id, { isEnd: true })}
+                        >
+                            募集終了する
                         </EditButton>
-                    </Link>
-                    <DeleteButton styleType={'organization'} width={'400px'} height={'80px'} onClick={() => updatePost(data.id, { isDeleted: true })}>
-                        この募集を削除する
-                    </DeleteButton>
+                        <Link href={{ pathname: '/edit', query: { postId: data.id, side } }}>
+                            <EditButton width={'400px'} height={'80px'}>
+                                編集する
+                            </EditButton>
+                        </Link>
+                        <DeleteButton
+                            styleType={'organization'}
+                            width={'400px'}
+                            height={'80px'}
+                            onClick={() => updatePost(data.id, { isDeleted: true })}
+                        >
+                            この募集を削除する
+                        </DeleteButton>
                     </>
                 ) : (
                     <Link href={{ pathname: '/apply', query: { postId: data.id } }}>
@@ -113,7 +122,7 @@ const PostDetail = (props: Props): JSX.Element => {
                 </BackButton>
             </Wrapper>
         )
-    }, [data, isMyPost, side, user])
+    }, [data, isMyPost, side, updatePost, user])
 
     const tabElement = React.useMemo(() => {
         if (side === 'help') {
@@ -123,7 +132,13 @@ const PostDetail = (props: Props): JSX.Element => {
             return <Tab supportContents={postElement} tabSide="support" onClickSupport={(): void => Router.back()} />
         }
         if (side === 'organization') {
-            return <Tab organizationContents={postElement} tabSide="organization" onClickOrganization={(): void => Router.back()} />
+            return (
+                <Tab
+                    organizationContents={postElement}
+                    tabSide="organization"
+                    onClickOrganization={(): void => Router.back()}
+                />
+            )
         }
         return <></>
     }, [postElement, side])
@@ -169,4 +184,3 @@ const ShareWrapper = styled.div`
 const Title = styled(ThemeTitle)`
     margin-bottom: 55px;
 `
-

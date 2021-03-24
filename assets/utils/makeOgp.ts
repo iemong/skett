@@ -25,7 +25,7 @@ const drawBG = (context: CanvasRenderingContext2D, postType: Side): CanvasRender
         gradient.addColorStop(0, '#e8563a')
         gradient.addColorStop(1, '#e53a2b')
     }
-    context.fillStyle = gradient 
+    context.fillStyle = gradient
     context.rect(0, 0, WIDTH / 2, HEIGHT)
     context.fill()
     context.restore()
