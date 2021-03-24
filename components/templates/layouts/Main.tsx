@@ -82,4 +82,5 @@ const MenuButton = styled.img`
     width: 40px;
     height: 30px;
     margin-left: 20px;
+    cursor: pointer;
 `
