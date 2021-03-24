@@ -86,7 +86,7 @@ const MyPage = (): JSX.Element => {
                 <LoginStatus>
                     <Title>アカウント状況</Title>
                     {user && <User>
-                        <UserIcon src={user?.photoURL ?? ''} alt="" />
+                        <UserIcon src={user?.photoURL ?? '/img/icn_default.png'} alt="" />
                         <UserName>{user?.displayName}さん</UserName>
                     </User>}
                     <ShareInner>

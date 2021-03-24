@@ -31,7 +31,7 @@ const Main = (props: Props): JSX.Element => {
                 <RightSide>
                     {user && <Link href={'/mypage'}>
                         <a>
-                            <UserIcon src={user.photoURL ?? ''} alt="アイコン" />
+                            <UserIcon src={user.photoURL ?? '/img/icn_default.png'} alt="アイコン" />
                         </a>
                     </Link>}
                     <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} src='/img/menu.png' alt="メニュー" />
