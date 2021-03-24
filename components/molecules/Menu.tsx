@@ -68,7 +68,10 @@ export const MenuContents = (props: Props) => {
             }}>
                 使い方
             </Item>
-            <Item>
+            <Item onClick={() => {
+                Router.push('/omamori')
+                onClose?.()
+            }}>
                 しえんのおまもりについて
             </Item>
             <Item onClick={() => {
