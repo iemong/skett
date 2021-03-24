@@ -39,6 +39,6 @@ const Container = styled.footer`
 `
 
 const ShareContainer = styled.div`
-  width: calc(100% - 240px);
+  width: 510px;
   margin: 0 auto 160px;
 `
