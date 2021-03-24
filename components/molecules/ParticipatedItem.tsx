@@ -5,19 +5,19 @@ import { Side } from 'reducers/tab'
 import { DateTime } from 'luxon'
 
 type Props = {
-  side: Side
   link: string
   title: string
   createdAt: string
+  side?: Side
 }
 
 export const ParticipatedItem = (props: Props) => {
-  const { side, link, title, createdAt } = props
+  const { link, title, createdAt, side } = props
 
   return (
     <Link href={link}>
       <Container data-side={side}>
-        <LeftColumn><Dot /></LeftColumn>
+        {side && <LeftColumn><Dot /></LeftColumn>}
         <CenterColumn>
           <Title>
             {title}
