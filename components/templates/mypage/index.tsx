@@ -6,12 +6,10 @@ import { PostType } from 'types/index'
 import useLogin from 'components/hooks/useLogin'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
-import useModal from 'components/hooks/useModal'
-import TermsModal from 'components/molecules/modal/TermsModal'
-import PrivacyPolicyModal from 'components/molecules/modal/PrivacyPolicyModal'
 import Button from 'components/atoms/Button'
 import { signOut, signInFacebook, signInTwitter } from 'assets/api/auth'
 import { ParticipatedItem } from 'components/molecules/ParticipatedItem'
+import Router from 'next/router'
 
 const MyPage = (): JSX.Element => {
     const user = useLogin()
@@ -20,8 +18,6 @@ const MyPage = (): JSX.Element => {
     const docRef = db.collection(COLLECTIONS.POSTS)
     const [posts, setPosts] = React.useState<PostType[]>([])
     const [isFirst, setIsFirst] = React.useState<boolean>(true)
-    const { isShowing: isShowingTerms, toggle: toggleTerms } = useModal()
-    const { isShowing: isShowingPrivacyPolicy, toggle: togglePrivacyPolicy } = useModal()
 
     const loadPostsData = React.useCallback(async () => {
         if (!user) return
@@ -89,31 +85,36 @@ const MyPage = (): JSX.Element => {
             <Wrapper>
                 <LoginStatus>
                     <Title>アカウント状況</Title>
+                    {user && <User>
+                        <UserIcon src={user?.photoURL ?? ''} alt="" />
+                        <UserName>{user?.displayName}さん</UserName>
+                    </User>}
                     <ShareInner>
                         <TwitterButton onClick={signInTwitter} isActive={isActiveTwitter} />
                         <FacebookButton onClick={signInFacebook} isActive={isActiveFacebook} />
                     </ShareInner>
+                    <InsuranceText>
+                        保険の加入がまだの方は<br/>
+                        こちらの保険をご利用ください
+                    </InsuranceText>
+                    <ApplyButton>
+                        保険に加入する
+                        <Arrow />
+                    </ApplyButton>
                     <TextWrapper>
-                        <Terms onClick={toggleTerms}>利用規約</Terms>
-                        <PrivacyPolicy onClick={togglePrivacyPolicy}>プライバシーポリシー</PrivacyPolicy>
+                        <Logout onClick={() => {
+                            localStorage.setItem('isClient', 'false')
+                            signOut()
+                        }}>ログアウトする</Logout>
                     </TextWrapper>
-                    <LogoutButton
+                    <BackButton
                         styleType="cancel"
                         width={'510px'}
                         height={'100px'}
-                        onClick={() => {
-                            localStorage.setItem('isClient', 'false')
-                            signOut()
-                        }}
+                        onClick={() => Router.push('/')}
                     >
-                        ログアウトする
-                    </LogoutButton>
-                    <TermsModal
-                        isShowing={isShowingTerms}
-                        toggle={toggleTerms}
-                        onClickPrivacyPolicy={togglePrivacyPolicy}
-                    />
-                    <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
+                        戻る
+                    </BackButton>
                 </LoginStatus>
                 {user && (
                     <React.Fragment>
@@ -171,6 +172,22 @@ const Title = styled.p`
     }
 `
 
+const User = styled.div`
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+`
+
+const UserIcon = styled.img`
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-right: 24px;
+`
+const UserName = styled.div`
+    font-size: 22px;
+`
+
 const ShareInner = styled.div``
 
 const AlreadyLogin = css`
@@ -220,15 +237,60 @@ const TextWrapper = styled.div`
     margin: 60px auto;
 `
 
-const Terms = styled.p`
+const InsuranceText = styled.p`
+    margin: 80px 0;
+    font-size: 24px;
+    line-height: 1.5;
+    text-align: center;
+`
+
+const ApplyButton = styled.a`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 500px;
+    height: 120px;
+    border-radius: 60px;
+    margin: 0 auto;
+    background-color: #5dc3de;
+    font-size: 30px;
+    color: #fff;
+`
+
+const Arrow = styled.div`
+  position: relative;
+  width: 20px;
+  height: 20px;
+  transform: translateX(100px) rotate(45deg);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #fff;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 2px;
+    height: 100%;
+    background-color: #fff;
+  }
+`
+
+const Logout = styled.p`
     margin-bottom: 50px;
     font-size: 24px;
     text-decoration: underline;
+    color: #aaa;
 `
 
-const PrivacyPolicy = styled.p`
-    font-size: 24px;
-    text-decoration: underline;
-`
-
-const LogoutButton = styled(Button)``
+const BackButton = styled(Button)``
