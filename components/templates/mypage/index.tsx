@@ -11,7 +11,7 @@ import TermsModal from 'components/molecules/modal/TermsModal'
 import PrivacyPolicyModal from 'components/molecules/modal/PrivacyPolicyModal'
 import Button from 'components/atoms/Button'
 import { signOut, signInFacebook, signInTwitter } from 'assets/api/auth'
-import EditableCard from 'components/molecules/editableCard'
+import { ParticipatedItem } from 'components/molecules/ParticipatedItem'
 
 const MyPage = (): JSX.Element => {
     const user = useLogin()
@@ -72,23 +72,14 @@ const MyPage = (): JSX.Element => {
 
     const myPosts = React.useMemo(
         () =>
-            posts.map((post, index) => (
-                <CardWrapper key={index}>
-                    <EditableCard
-                        key={index}
-                        imgUrl={post.imageUrl}
-                        description={post.title}
-                        link={`/posts/${post.id ?? ''}`}
-                        side={post.side}
-                        isEnd={post.isEnd}
-                        onDelete={(): void => {
-                            updatePost(post.id, { isDeleted: true })
-                        }}
-                        onEnd={(): void => {
-                            updatePost(post.id, { isEnd: true })
-                        }}
-                    />
-                </CardWrapper>
+            posts.map((post) => (
+                <ParticipatedItem
+                    key={post.id}
+                    side={post.side}
+                    link={`/posts/${post.id ?? ''}`}
+                    title={post.title}
+                    createdAt={post.createDate}
+                />
             )),
         [updatePost, posts],
     )
@@ -127,9 +118,9 @@ const MyPage = (): JSX.Element => {
                 {user && (
                     <React.Fragment>
                         <Past>
-                            <Title>過去に作成した声</Title>
+                            <Title>過去に作成・参加した声</Title>
+                            {myPosts}
                         </Past>
-                        <div>{myPosts}</div>
                     </React.Fragment>
                 )}
             </Wrapper>
@@ -238,10 +229,6 @@ const Terms = styled.p`
 const PrivacyPolicy = styled.p`
     font-size: 24px;
     text-decoration: underline;
-`
-
-const CardWrapper = styled.div`
-    padding-bottom: 60px;
 `
 
 const LogoutButton = styled(Button)``
