@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 import Link from 'next/link'
 import firebase from '../../../assets/utils/firebaseApp'
 import useLogin from 'components/hooks/useLogin'
+import { Menu } from 'components/molecules/Menu'
 
 type Props = {
     children: JSX.Element | string
@@ -13,6 +14,8 @@ const Main = (props: Props): JSX.Element => {
     const { children } = props
 
     const user = useLogin()
+
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
     React.useEffect(() => {
         firebase.analytics()
@@ -30,10 +33,11 @@ const Main = (props: Props): JSX.Element => {
                             <UserIcon src={user.photoURL ?? ''} alt="アイコン" />
                         </a>
                     </Link>}
-                    <Menu src='/img/menu.png' alt="メニュー" />
+                    <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} src='/img/menu.png' alt="メニュー" />
                 </RightSide>
             </Header>
             {children}
+            {isMenuOpen && <Menu onClose={() => setIsMenuOpen(false)} />}
         </Wrapper>
     )
 }
@@ -72,7 +76,7 @@ const UserIcon = styled.img`
     border-radius: 50%;
 `
 
-const Menu = styled.img`
+const MenuButton = styled.img`
     width: 40px;
     height: 30px;
     margin-left: 20px;
