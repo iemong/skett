@@ -25,19 +25,21 @@ const Main = (props: Props): JSX.Element => {
     return (
         <Wrapper>
             <Header>
-                <Link href={'/'}>
-                    <Logo src="/img/logo.png" alt="スケット" />
-                </Link>
-                <RightSide>
-                    {user && (
-                        <Link href={'/mypage'}>
-                            <a>
-                                <UserIcon src={user.photoURL ?? '/img/icn_default.png'} alt="アイコン" />
-                            </a>
-                        </Link>
-                    )}
-                    <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} src="/img/menu.png" alt="メニュー" />
-                </RightSide>
+                <Inner>
+                    <Link href={'/'}>
+                        <Logo src="/img/logo.png" alt="スケット" />
+                    </Link>
+                    <RightSide>
+                        {user && (
+                            <Link href={'/mypage'}>
+                                <a>
+                                    <UserIcon src={user.photoURL ?? '/img/icn_default.png'} alt="アイコン" />
+                                </a>
+                            </Link>
+                        )}
+                        <MenuButton onClick={() => setIsMenuOpen(!isMenuOpen)} src="/img/menu.png" alt="メニュー" />
+                    </RightSide>
+                </Inner>
             </Header>
             {children}
             {isMenuOpen && <Menu onClose={() => setIsMenuOpen(false)} />}
@@ -54,13 +56,20 @@ const Wrapper = styled.div`
 `
 
 const Header = styled.header`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     height: 114px;
     padding: 0 30px 0 40px;
     box-sizing: border-box;
     background-color: #fff;
+`
+
+const Inner = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 780px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
 `
 
 const Logo = styled.img`
