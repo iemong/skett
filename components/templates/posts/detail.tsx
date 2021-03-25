@@ -143,6 +143,23 @@ const PostDetail = (props: Props): JSX.Element => {
         return <></>
     }, [postElement, side])
 
+    const shouldRedirect = user?.uid !== data?.user.uid
+    
+    React.useEffect(() => {
+        if (user) {
+            if (data?.isDeleted && shouldRedirect) {
+                console.log(data)
+                Router.push('/')
+            }
+        }
+    }, [data, user])
+
+    if (data?.isDeleted) {
+        if (shouldRedirect) {
+            return <div></div>
+        }
+    }
+
     return <Main>{tabElement}</Main>
 }
 
