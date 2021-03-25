@@ -68,11 +68,7 @@ const Tab = (props: Props): JSX.Element => {
         <div className={className}>
             <Container>
                 <TabInner>
-                    <Tabs
-                        onClick={() => changeTab('help')}
-                        data-selected={tabName === 'help'}
-                        data-tab="help"
-                    />
+                    <Tabs onClick={() => changeTab('help')} data-selected={tabName === 'help'} data-tab="help" />
                     <Tabs
                         onClick={() => changeTab('support')}
                         data-selected={tabName === 'support'}
@@ -138,7 +134,7 @@ const Tabs = styled.div`
         }
     }
 
-    &[data-tab="help"] {
+    &[data-tab='help'] {
         left: 0;
         background-image: url(/img/tab_help_sp.png);
 
@@ -146,7 +142,7 @@ const Tabs = styled.div`
             background-image: url(/img/tab_help_pc.png);
         }
     }
-    &[data-tab="support"] {
+    &[data-tab='support'] {
         left: 0;
         right: 0;
         width: 270px;
@@ -157,7 +153,7 @@ const Tabs = styled.div`
             background-image: url(/img/tab_support_pc.png);
         }
     }
-    &[data-tab="organization"] {
+    &[data-tab='organization'] {
         right: 0;
         background-image: url(/img/tab_organization_sp.png);
 
@@ -165,8 +161,6 @@ const Tabs = styled.div`
             background-image: url(/img/tab_organization_pc.png);
         }
     }
-
-    
 `
 
 const TabBorder = styled.div`
