@@ -20,7 +20,6 @@ const useLogin = (): firebase.User | null => {
 
     React.useEffect(() => {
         if (user) {
-            console.log(user)
             actions.initialize(user)
         }
     }, [actions, user])

@@ -148,7 +148,6 @@ const PostDetail = (props: Props): JSX.Element => {
     React.useEffect(() => {
         if (user) {
             if (data?.isDeleted && shouldRedirect) {
-                console.log(data)
                 Router.push('/')
             }
         }

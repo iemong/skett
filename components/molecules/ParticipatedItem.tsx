@@ -1,5 +1,4 @@
 import * as React from 'react'
-import Link from 'next/link'
 import styled from '@emotion/styled'
 import { DateTime } from 'luxon'
 import { Side } from 'reducers/tab'
@@ -15,22 +14,20 @@ export const ParticipatedItem = (props: Props) => {
     const { link, title, createdAt, side } = props
 
     return (
-        <Link href={link}>
-            <Container data-side={side}>
-                {side && (
-                    <LeftColumn>
-                        <Dot />
-                    </LeftColumn>
-                )}
-                <CenterColumn>
-                    <Title>{title}</Title>
-                    <Time>{DateTime.fromISO(createdAt).toFormat('yyyy/MM/dd HH:mm')}</Time>
-                </CenterColumn>
-                <RightColumn>
-                    <Arrow />
-                </RightColumn>
-            </Container>
-        </Link>
+        <Container href={link} data-side={side}>
+            {side && (
+                <LeftColumn>
+                    <Dot />
+                </LeftColumn>
+            )}
+            <CenterColumn>
+                <Title>{title}</Title>
+                <Time>{DateTime.fromISO(createdAt).toFormat('yyyy/MM/dd HH:mm')}</Time>
+            </CenterColumn>
+            <RightColumn>
+                <Arrow />
+            </RightColumn>
+        </Container>
     )
 }
 
