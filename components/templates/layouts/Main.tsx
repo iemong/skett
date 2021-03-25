@@ -27,7 +27,9 @@ const Main = (props: Props): JSX.Element => {
             <Header>
                 <Inner>
                     <Link href={'/'}>
-                        <Logo src="/img/logo.png" alt="スケット" />
+                        <a>
+                            <Logo src="/img/logo.png" alt="スケット" />
+                        </a>
                     </Link>
                     <RightSide>
                         {user && (

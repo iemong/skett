@@ -147,6 +147,7 @@ const Item = styled.div`
     padding: 40px 0;
     color: #ccc;
     border-top: 1px solid #ccc;
+    cursor: pointer;
 
     &:last-child {
         border-bottom: 1px solid #ccc;
