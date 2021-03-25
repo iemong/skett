@@ -67,33 +67,23 @@ const Tab = (props: Props): JSX.Element => {
     return (
         <div className={className}>
             <Container>
-                <Tabs
-                    style={{
-                        left: 0,
-                        backgroundImage: 'url(/img/tab_help_sp.png)',
-                    }}
-                    onClick={() => changeTab('help')}
-                    data-selected={tabName === 'help'}
-                />
-                <Tabs
-                    style={{
-                        left: 0,
-                        right: 0,
-                        width: '270px',
-                        margin: '0 auto',
-                        backgroundImage: 'url(/img/tab_support_sp.png)',
-                    }}
-                    onClick={() => changeTab('support')}
-                    data-selected={tabName === 'support'}
-                />
-                <Tabs
-                    style={{
-                        right: 0,
-                        backgroundImage: 'url(/img/tab_organization_sp.png)',
-                    }}
-                    onClick={() => changeTab('organization')}
-                    data-selected={tabName === 'organization'}
-                />
+                <TabInner>
+                    <Tabs
+                        onClick={() => changeTab('help')}
+                        data-selected={tabName === 'help'}
+                        data-tab="help"
+                    />
+                    <Tabs
+                        onClick={() => changeTab('support')}
+                        data-selected={tabName === 'support'}
+                        data-tab="support"
+                    />
+                    <Tabs
+                        onClick={() => changeTab('organization')}
+                        data-selected={tabName === 'organization'}
+                        data-tab="organization"
+                    />
+                </TabInner>
                 <TabBorder data-tab={tabName} />
             </Container>
             <div>
@@ -112,6 +102,14 @@ const Container = styled.div`
     @media (min-width: 751px) {
         height: 46px;
     }
+`
+
+const TabInner = styled.div`
+    position: relative;
+    max-width: 780px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
 `
 
 const Tabs = styled.div`
@@ -133,13 +131,42 @@ const Tabs = styled.div`
     }
 
     @media (min-width: 751px) {
-        width: 815px;
-        height: 100%;
-        background-image: url(/img/tab_support_off_pc.png);
+        width: 260px;
+        height: 45px;
+
         &[data-selected='true'] {
-            background-image: url(/img/tab_support_on_pc.png);
         }
     }
+
+    &[data-tab="help"] {
+        left: 0;
+        background-image: url(/img/tab_help_sp.png);
+
+        @media (min-width: 751px) {
+            background-image: url(/img/tab_help_pc.png);
+        }
+    }
+    &[data-tab="support"] {
+        left: 0;
+        right: 0;
+        width: 270px;
+        margin: 0 auto;
+        background-image: url(/img/tab_support_sp.png);
+
+        @media (min-width: 751px) {
+            background-image: url(/img/tab_support_pc.png);
+        }
+    }
+    &[data-tab="organization"] {
+        right: 0;
+        background-image: url(/img/tab_organization_sp.png);
+
+        @media (min-width: 751px) {
+            background-image: url(/img/tab_organization_pc.png);
+        }
+    }
+
+    
 `
 
 const TabBorder = styled.div`
@@ -157,6 +184,10 @@ const TabBorder = styled.div`
     }
     &[data-tab='organization'] {
         background-image: linear-gradient(to right, #ef6123 0%, #ef6123 66%, #e85625 100%);
+    }
+
+    @media (min-width: 751px) {
+        height: 6px;
     }
 `
 
