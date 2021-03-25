@@ -128,4 +128,17 @@ const AddButton = styled.a`
         font-weight: normal;
         margin-right: 8px;
     }
+
+    @media (min-width: 751px) {
+        max-width: 780px;
+        height: 60px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        font-size: 14px;
+
+        &::before {
+            font-size: 24px;
+        }
+    }
 `
