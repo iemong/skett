@@ -102,7 +102,7 @@ const Tab = (props: Props): JSX.Element => {
                         <Description>{'活動に参加するには\nこちらの保険をご利用ください'}</Description>
                         <Link href={'/omamori'}>
                             <Button width={'270px'} height={'50px'} styleType={styleType}>
-                                詳しく見る
+                                保険の内容はこちら
                             </Button>
                         </Link>
                     </TextBox>
@@ -230,7 +230,7 @@ const TextBox = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px 30px 30px;
+    padding: 40px 60px;
     box-sizing: border-box;
 `
 const Description = styled.p`
@@ -238,7 +238,8 @@ const Description = styled.p`
     text-align: left;
     color: #fff;
     line-height: 1.2;
-    font-size: 48px;
+    font-size: 40px;
+    white-space: pre-wrap;
     margin-bottom: 24px;
 `
 
