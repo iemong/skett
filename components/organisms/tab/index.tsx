@@ -7,6 +7,7 @@ import { Z_INDEX_LIST } from 'assets/constant'
 import * as Actions from 'reducers/tab/actions'
 import { State as rootState } from 'reducers'
 import { Side } from 'reducers/tab'
+import Button from 'components/atoms/Button'
 
 type Props = {
     helpContents?: React.ReactNode
@@ -64,6 +65,19 @@ const Tab = (props: Props): JSX.Element => {
         }
     }
 
+    const styleType = React.useMemo(() => {
+        if (side === 'help') {
+            return 'secondary'
+        }
+        if (side === 'support') {
+            return 'invertSecondary'
+        }
+        if (side === 'organization') {
+            return 'organizationSecondary'
+        }
+        return 'secondary'
+    }, [side])
+
     return (
         <div className={className}>
             <Container>
@@ -83,6 +97,16 @@ const Tab = (props: Props): JSX.Element => {
                 <TabBorder data-tab={tabName} />
             </Container>
             <div>
+                <InsuranceCard data-side={side}>
+                    <TextBox>
+                        <Description>{'活動に参加するには\nこちらの保険をご利用ください'}</Description>
+                        <Link href={'/omamori'}>
+                            <Button width={'270px'} height={'50px'} styleType={styleType}>
+                                詳しく見る
+                            </Button>
+                        </Link>
+                    </TextBox>
+                </InsuranceCard>
                 {tabName === 'help' && helpContents}
                 {tabName === 'support' && supportContents}
                 {tabName === 'organization' && organizationContents}
@@ -184,5 +208,43 @@ const TabBorder = styled.div`
         height: 6px;
     }
 `
+
+const InsuranceCard = styled.div`
+    width: 690px;
+    &[data-side='help'] {
+        background-image: linear-gradient(to left, #00b4ed, #0091db);
+    }
+    &[data-side='support'] {
+        background-image: linear-gradient(to left, #35b597, #00a968);
+    }
+    &[data-side='organization'] {
+        background-image: linear-gradient(to left, #e85625, #fd7823);
+    }
+    margin: 40px auto;
+    border-radius: 16px;
+    overflow: hidden;
+`
+
+const TextBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px 30px 30px;
+    box-sizing: border-box;
+`
+const Description = styled.p`
+    width: 100%;
+    text-align: left;
+    color: #fff;
+    line-height: 1.2;
+    font-size: 48px;
+    margin-bottom: 24px;
+`
+
+const Link = styled.a`
+    text-decoration: none;
+`
+
 
 export default Tab
