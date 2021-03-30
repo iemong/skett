@@ -2,6 +2,7 @@ import * as React from 'react'
 import { useSelector } from 'react-redux'
 import styled from '@emotion/styled'
 import { State as rootState } from 'reducers'
+import { Side } from 'reducers/tab'
 
 type Props = {
     children?: JSX.Element | string
@@ -20,7 +21,7 @@ const ThemeTitle = (props: Props): JSX.Element => {
 
 export default ThemeTitle
 
-const Title = styled.h1<{ side: 'help' | 'support' }>`
+const Title = styled.h1<{ side: Side }>`
     position: relative;
     padding-bottom: 33px;
     font-size: 38px;

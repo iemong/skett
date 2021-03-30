@@ -5,6 +5,7 @@ import { COLLECTIONS } from 'assets/constant'
 import { PostType } from 'types/index'
 import Edit from 'components/templates/edit'
 import { UPDATE } from 'reducers/tab/types'
+import { Side } from 'reducers/tab'
 
 type Props = {
     data: PostType
@@ -16,7 +17,7 @@ class PageEdit extends React.Component<Props> {
         req,
         store,
     }: {
-        query: { postId: string; side?: 'help' | 'support' }
+        query: { postId: string; side?: Side }
         req: any
         store: any
     }) {

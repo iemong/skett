@@ -4,16 +4,12 @@ import styled from '@emotion/styled'
 import css from '@emotion/css'
 import { Z_INDEX_LIST } from 'assets/constant'
 
-enum StyleType {
-    default,
-    help,
-    support,
-}
+export type StyleType = 'default' | 'help' | 'support'
 
 type StyleProps = {
     width: string
     height: string
-    styleType: keyof typeof StyleType
+    styleType: StyleType
 }
 
 type Props = StyleProps & {

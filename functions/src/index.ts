@@ -20,7 +20,7 @@ type PostType = {
     url: string
     imageUrl: string
     ogpImageUrl: string
-    side: 'help' | 'support'
+    side: 'help' | 'support' | 'organization'
     timestamp: number
     applicants?: string[]
 }

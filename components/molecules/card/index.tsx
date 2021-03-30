@@ -1,16 +1,31 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import Button from 'components/atoms/Button'
+import { Side } from 'reducers/tab'
 
 type Props = {
     imgUrl: string
     description: string
     link: string
-    side: 'help' | 'support'
+    side: Side
 }
 
 const Card = (props: Props): JSX.Element => {
     const { imgUrl, description, link, side } = props
+
+    const styleType = (() => {
+        if (side === 'help') {
+            return 'secondary'
+        }
+        if (side === 'support') {
+            return 'invertSecondary'
+        }
+        if (side === 'organization') {
+            return 'organizationSecondary'
+        }
+        return 'secondary'
+    })()
+
     return (
         <Wrapper data-side={side}>
             <ThumbnailWrapper>
@@ -19,11 +34,7 @@ const Card = (props: Props): JSX.Element => {
             <TextBox>
                 <Description>{description}</Description>
                 <Link href={`${link}?side=${side}`}>
-                    <DetailButton
-                        width={'270px'}
-                        height={'50px'}
-                        styleType={side === 'help' ? 'secondary' : 'invertSecondary'}
-                    >
+                    <DetailButton width={'270px'} height={'50px'} styleType={styleType}>
                         詳しく見る
                     </DetailButton>
                 </Link>
@@ -41,6 +52,9 @@ const Wrapper = styled.div`
     }
     &[data-side='support'] {
         background-image: linear-gradient(to left, #35b597, #00a968);
+    }
+    &[data-side='organization'] {
+        background-image: linear-gradient(to left, #e85625, #fd7823);
     }
     margin: 0 auto 40px;
     border-radius: 16px;
@@ -74,5 +88,5 @@ const Description = styled.p`
 const DetailButton = styled(Button)``
 
 const Link = styled.a`
-  text-decoration: none;
+    text-decoration: none;
 `

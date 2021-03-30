@@ -2,12 +2,13 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 import { DateTime } from 'luxon'
 import { UserType } from 'types/index'
+import { Side } from 'reducers/tab'
 
 type Props = {
     imgUrl: string
     title: string
     description: string
-    side: 'help' | 'support'
+    side: Side
     user: UserType
     updateDate: string
     className?: string
@@ -25,9 +26,9 @@ const DetailCard = (props: Props): JSX.Element => {
                 <Description>{description}</Description>
                 <Footer>
                     <User>
-                        <Icon src={user.photoURL || '/img/icn_default.png'} alt="" />
+                        {side !== 'organization' && <Icon src={user.photoURL || '/img/icn_default.png'} alt="" />}
                         <UserInfo>
-                            <UserName>{user.displayName}</UserName>
+                            {side !== 'organization' && <UserName>{user.displayName}</UserName>}
                             <UpdateDate>{DateTime.fromISO(updateDate).toFormat('yyyy/MM/dd HH:mm:ss')}</UpdateDate>
                         </UserInfo>
                     </User>
@@ -50,6 +51,9 @@ const Wrapper = styled.div`
     }
     &[data-side='support'] {
         background-image: linear-gradient(to left, #35b597, #00a968);
+    }
+    &[data-side='organization'] {
+        background-image: linear-gradient(to left, #e85625, #fd7823);
     }
     margin: 0 auto 40px;
     border-radius: 16px;

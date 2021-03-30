@@ -16,6 +16,8 @@ import * as Actions from 'reducers/tab/actions'
 import Shares from 'components/molecules/shares'
 import { createFacebookIntent, createTwitterIntent } from 'assets/utils/share'
 import ThemeTitle from 'components/molecules/theme/ThemeTitle'
+import firebaseApp from 'assets/utils/firebaseApp'
+import { COLLECTIONS } from 'assets/constant'
 
 type Props = {
     data: PostType | null
@@ -39,6 +41,21 @@ const PostDetail = (props: Props): JSX.Element => {
     const isMyPost = React.useMemo(() => {
         return user?.uid === data?.user.uid
     }, [data, user])
+
+    const db = firebaseApp.firestore()
+    const docRef = db.collection(COLLECTIONS.POSTS)
+
+    const updatePost = React.useCallback(
+        (id: string, data: Partial<PostType>) => {
+            docRef
+                .doc(id)
+                .update(data)
+                .then(() => {
+                    Router.push('/mypage')
+                })
+        },
+        [docRef],
+    )
 
     const postElement = React.useMemo(() => {
         if (!data || !side) return <>Loading</>
@@ -71,11 +88,28 @@ const PostDetail = (props: Props): JSX.Element => {
                 </ShareWrapper>
                 {isMyPost && <Applicant users={data?.applicants} side={side} />}
                 {user?.uid === data.user?.uid ? (
-                    <Link href={{ pathname: '/edit', query: { postId: data.id, side } }}>
-                        <EditButton width={'400px'} height={'80px'}>
-                            編集する
+                    <>
+                        <EditButton
+                            width={'400px'}
+                            height={'80px'}
+                            onClick={() => updatePost(data.id, { isEnd: true })}
+                        >
+                            募集終了する
                         </EditButton>
-                    </Link>
+                        <Link href={{ pathname: '/edit', query: { postId: data.id, side } }}>
+                            <EditButton width={'400px'} height={'80px'}>
+                                編集する
+                            </EditButton>
+                        </Link>
+                        <DeleteButton
+                            styleType={'organization'}
+                            width={'400px'}
+                            height={'80px'}
+                            onClick={() => updatePost(data.id, { isDeleted: true })}
+                        >
+                            この募集を削除する
+                        </DeleteButton>
+                    </>
                 ) : (
                     <Link href={{ pathname: '/apply', query: { postId: data.id } }}>
                         <ApplyButton width={'400px'} height={'80px'}>
@@ -88,15 +122,43 @@ const PostDetail = (props: Props): JSX.Element => {
                 </BackButton>
             </Wrapper>
         )
-    }, [data, isMyPost, side, user])
+    }, [data, isMyPost, side, updatePost, user])
 
     const tabElement = React.useMemo(() => {
-        return side === 'help' ? (
-            <Tab leftContent={postElement} tabSide="left" onClickLeft={(): void => Router.back()} />
-        ) : (
-            <Tab rightContent={postElement} tabSide="right" onClickRight={(): void => Router.back()} />
-        )
+        if (side === 'help') {
+            return <Tab helpContents={postElement} tabSide="help" onClickHelp={(): void => Router.back()} />
+        }
+        if (side === 'support') {
+            return <Tab supportContents={postElement} tabSide="support" onClickSupport={(): void => Router.back()} />
+        }
+        if (side === 'organization') {
+            return (
+                <Tab
+                    organizationContents={postElement}
+                    tabSide="organization"
+                    onClickOrganization={(): void => Router.back()}
+                />
+            )
+        }
+        return <></>
     }, [postElement, side])
+
+    const shouldRedirect = user?.uid !== data?.user.uid
+    
+    React.useEffect(() => {
+        if (user) {
+            if (data?.isDeleted && shouldRedirect) {
+                Router.push('/')
+            }
+        }
+    }, [data, user])
+
+    if (data?.isDeleted) {
+        if (shouldRedirect) {
+            return <div></div>
+        }
+    }
+
     return <Main>{tabElement}</Main>
 }
 
@@ -119,6 +181,10 @@ const ApplyButton = styled(ThemeButton)`
     margin: 0 auto 48px;
 `
 
+const DeleteButton = styled(Button)`
+    margin: 0 auto 48px;
+`
+
 const BackButton = styled(Button)`
     margin: 0 auto;
 `
@@ -134,4 +200,3 @@ const ShareWrapper = styled.div`
 const Title = styled(ThemeTitle)`
     margin-bottom: 55px;
 `
-

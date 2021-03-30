@@ -77,14 +77,16 @@ const Apply = (props: Props): JSX.Element => {
                 />
             </Wrapper>
         )
-    }, [currentPost, isConsent, user])
+    }, [currentPost, isConsent, side, user])
 
     return (
         <Main>
             {side === 'help' ? (
-                <Tab leftContent={innerElement} tabSide={'left'} />
+                <Tab helpContents={innerElement} tabSide={'help'} />
+            ) : side === 'support' ? (
+                <Tab supportContents={innerElement} tabSide={'support'} />
             ) : (
-                <Tab rightContent={innerElement} tabSide={'right'} />
+                <Tab organizationContents={innerElement} tabSide={'organization'} />
             )}
         </Main>
     )

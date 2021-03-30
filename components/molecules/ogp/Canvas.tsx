@@ -1,11 +1,12 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import makeOgp from 'assets/utils/makeOgp'
+import { Side } from 'reducers/tab'
 
 type Props = {
     image: string | null
     title: string
-    postType: 'help' | 'support'
+    postType: Side
 }
 
 const Canvas = (props: Props): JSX.Element => {

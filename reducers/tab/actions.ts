@@ -1,17 +1,17 @@
 import { ThunkAction } from 'redux-thunk'
-import { State } from 'reducers/tab/index'
+import { Side, State } from 'reducers/tab/index'
 import { UPDATE } from 'reducers/tab/types'
 
 type Update = {
     type: typeof UPDATE
     payload: {
-        side: 'help' | 'support'
+        side: Side
     }
 }
 
 export type Action = Update
 
-export const update = (side: 'help' | 'support'): ThunkAction<Promise<void>, State, undefined, Update> => {
+export const update = (side: Side): ThunkAction<Promise<void>, State, undefined, Update> => {
     return async (dispatch): Promise<void> => {
         try {
             dispatch({

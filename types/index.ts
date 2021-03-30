@@ -1,3 +1,5 @@
+import { Side } from 'reducers/tab'
+
 export type UserType = {
     displayName: string | null
     email: string | null
@@ -19,8 +21,9 @@ export type PostType = {
     url: string
     imageUrl: string
     ogpImageUrl: string
-    side: 'help' | 'support'
+    side: Side
     timestamp: number
     applicants?: UserType[]
     isEnd: boolean
+    isDeleted: boolean
 }

@@ -1,17 +1,15 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
 import css from '@emotion/css'
+import Router from 'next/router'
 import Main from 'components/templates/layouts/Main'
 import { PostType } from 'types/index'
 import useLogin from 'components/hooks/useLogin'
 import firebaseApp from 'assets/utils/firebaseApp'
 import { COLLECTIONS } from 'assets/constant'
-import useModal from 'components/hooks/useModal'
-import TermsModal from 'components/molecules/modal/TermsModal'
-import PrivacyPolicyModal from 'components/molecules/modal/PrivacyPolicyModal'
 import Button from 'components/atoms/Button'
 import { signOut, signInFacebook, signInTwitter } from 'assets/api/auth'
-import EditableCard from 'components/molecules/editableCard'
+import { ParticipatedItem } from 'components/molecules/ParticipatedItem'
 
 const MyPage = (): JSX.Element => {
     const user = useLogin()
@@ -20,20 +18,22 @@ const MyPage = (): JSX.Element => {
     const docRef = db.collection(COLLECTIONS.POSTS)
     const [posts, setPosts] = React.useState<PostType[]>([])
     const [isFirst, setIsFirst] = React.useState<boolean>(true)
-    const { isShowing: isShowingTerms, toggle: toggleTerms } = useModal()
-    const { isShowing: isShowingPrivacyPolicy, toggle: togglePrivacyPolicy } = useModal()
 
     const loadPostsData = React.useCallback(async () => {
         if (!user) return
         const data = await docRef
-            .where('user.uid', '==', user.uid)
             .orderBy('timestamp', 'desc')
             .get()
             .catch(e => console.error(e))
         if (!data) return
         const docs = data.docs
-        const myPosts = docs.map(doc => doc.data() as PostType)
-        setPosts(myPosts)
+        const allPosts = docs.map(doc => doc.data() as PostType)
+
+        const myPosts = allPosts.filter(post => post.user.uid === user.uid)
+        const appliedPosts = allPosts.filter(post => post.applicants?.some(applicant => applicant.uid === user.uid))
+        const participatedPosts = [...myPosts, ...appliedPosts].sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1))
+
+        setPosts(participatedPosts)
     }, [docRef, user])
 
     const isActiveFacebook = React.useMemo(
@@ -54,25 +54,11 @@ const MyPage = (): JSX.Element => {
         }
     }, [isFirst, loadPostsData, user])
 
-    const deletePost = React.useCallback(
-        (id: string) => {
+    const updatePost = React.useCallback(
+        (id: string, data: Partial<PostType>) => {
             docRef
                 .doc(id)
-                .delete()
-                .then(() => {
-                    loadPostsData()
-                })
-        },
-        [docRef, loadPostsData],
-    )
-
-    const endPost = React.useCallback(
-        (id: string) => {
-            docRef
-                .doc(id)
-                .update({
-                    isEnd: true,
-                })
+                .update(data)
                 .then(() => {
                     loadPostsData()
                 })
@@ -82,25 +68,16 @@ const MyPage = (): JSX.Element => {
 
     const myPosts = React.useMemo(
         () =>
-            posts.map((post, index) => (
-                <CardWrapper key={index}>
-                    <EditableCard
-                        key={index}
-                        imgUrl={post.imageUrl}
-                        description={post.title}
-                        link={`/posts/${post.id ?? ''}`}
-                        side={post.side}
-                        isEnd={post.isEnd}
-                        onDelete={(): void => {
-                            deletePost(post.id)
-                        }}
-                        onEnd={(): void => {
-                            endPost(post.id)
-                        }}
-                    />
-                </CardWrapper>
+            posts.map(post => (
+                <ParticipatedItem
+                    key={post.id}
+                    side={post.side}
+                    link={`/posts/${post.id ?? ''}`}
+                    title={post.title}
+                    createdAt={post.createDate}
+                />
             )),
-        [deletePost, endPost, posts],
+        [posts],
     )
 
     return (
@@ -108,38 +85,49 @@ const MyPage = (): JSX.Element => {
             <Wrapper>
                 <LoginStatus>
                     <Title>アカウント状況</Title>
+                    {user && (
+                        <User>
+                            <UserIcon src={user?.photoURL ?? '/img/icn_default.png'} alt="" />
+                            <UserName>{user?.displayName}さん</UserName>
+                        </User>
+                    )}
                     <ShareInner>
-                        <TwitterButton onClick={signInTwitter} isActive={isActiveTwitter} />
-                        <FacebookButton onClick={signInFacebook} isActive={isActiveFacebook} />
+                        <TwitterButton onClick={signInTwitter} isActive={isActiveTwitter}>
+                            {isActiveTwitter ? 'ログイン済' : 'ログインする'}
+                        </TwitterButton>
+                        <FacebookButton onClick={signInFacebook} isActive={isActiveFacebook}>
+                            {isActiveFacebook ? 'ログイン済' : 'ログインする'}
+                        </FacebookButton>
                     </ShareInner>
+                    <InsuranceText>
+                        保険の加入がまだの方は
+                        <br />
+                        こちらの保険をご利用ください
+                    </InsuranceText>
+                    <ApplyButton>
+                        保険に加入する
+                        <Arrow />
+                    </ApplyButton>
                     <TextWrapper>
-                        <Terms onClick={toggleTerms}>利用規約</Terms>
-                        <PrivacyPolicy onClick={togglePrivacyPolicy}>プライバシーポリシー</PrivacyPolicy>
+                        <Logout
+                            onClick={() => {
+                                localStorage.setItem('isClient', 'false')
+                                signOut()
+                            }}
+                        >
+                            ログアウトする
+                        </Logout>
                     </TextWrapper>
-                    <LogoutButton
-                        styleType="cancel"
-                        width={'510px'}
-                        height={'100px'}
-                        onClick={() => {
-                            localStorage.setItem('isClient', 'false')
-                            signOut()
-                        }}
-                    >
-                        ログアウトする
-                    </LogoutButton>
-                    <TermsModal
-                        isShowing={isShowingTerms}
-                        toggle={toggleTerms}
-                        onClickPrivacyPolicy={togglePrivacyPolicy}
-                    />
-                    <PrivacyPolicyModal isShowing={isShowingPrivacyPolicy} toggle={togglePrivacyPolicy} />
+                    <BackButton styleType="cancel" width={'510px'} height={'100px'} onClick={() => Router.push('/')}>
+                        戻る
+                    </BackButton>
                 </LoginStatus>
                 {user && (
                     <React.Fragment>
                         <Past>
-                            <Title>過去に作成した声</Title>
+                            <Title>過去に作成・参加した声</Title>
+                            {myPosts}
                         </Past>
-                        <div>{myPosts}</div>
                     </React.Fragment>
                 )}
             </Wrapper>
@@ -190,45 +178,64 @@ const Title = styled.p`
     }
 `
 
-const ShareInner = styled.div``
-
-const AlreadyLogin = css`
-    content: 'ログイン済';
+const User = styled.div`
     display: flex;
-    justify-content: center;
     align-items: center;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    font-size: 30px;
-    color: #fff;
+    margin-bottom: 24px;
 `
+
+const UserIcon = styled.img`
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    margin-right: 24px;
+`
+const UserName = styled.div`
+    font-size: 22px;
+`
+
+const ShareInner = styled.div``
 
 const TwitterButton = styled.div<{ isActive: boolean }>`
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
     width: 510px;
     height: 100px;
     margin-bottom: 24px;
-    background-image: url(/img/svg/btn_twitter_login.svg);
-    &::after {
-        ${props => props.isActive && AlreadyLogin}
-    }
+    padding: 0 40px;
+    box-sizing: border-box;
+    border: ${props => (props.isActive ? 'none' : '3px solid #1ba3dd;')};
+    border-radius: 16px;
+    background-size: 51px 42px;
+    background-position: 92% center;
+    background-repeat: no-repeat;
+    background-color: ${props => (props.isActive ? '#1ba3dd' : 'transparent')};
+    background-image: ${props =>
+        props.isActive ? 'url(/img/svg/icn_twitter.svg)' : 'url(/img/svg/icn_twitter_on.svg)'};
+    font-size: 22px;
+    color: ${props => (props.isActive ? '#fff' : '#1ba3dd')};
 `
 
 const FacebookButton = styled.div<{ isActive: boolean }>`
     position: relative;
-    display: block;
+    display: flex;
+    align-items: center;
     width: 510px;
     height: 100px;
-    background-image: url(/img/svg/btn_facebook_login.svg);
-    &::after {
-        ${props => props.isActive && AlreadyLogin}
-    }
+    margin-bottom: 24px;
+    padding: 0 40px;
+    box-sizing: border-box;
+    border: ${props => (props.isActive ? 'none' : '3px solid #5173a8;')};
+    border-radius: 16px;
+    background-size: 51px 51px;
+    background-position: 92% center;
+    background-repeat: no-repeat;
+    background-color: ${props => (props.isActive ? '#5173a8' : 'transparent')};
+    background-image: ${props =>
+        props.isActive ? 'url(/img/svg/icn_facebook.svg)' : 'url(/img/svg/icn_facebook_on.svg)'};
+    font-size: 22px;
+    color: ${props => (props.isActive ? '#fff' : '#5173a8')};
 `
 
 const TextWrapper = styled.div`
@@ -239,19 +246,60 @@ const TextWrapper = styled.div`
     margin: 60px auto;
 `
 
-const Terms = styled.p`
+const InsuranceText = styled.p`
+    margin: 80px 0;
+    font-size: 24px;
+    line-height: 1.5;
+    text-align: center;
+`
+
+const ApplyButton = styled.a`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 500px;
+    height: 120px;
+    border-radius: 60px;
+    margin: 0 auto;
+    background-color: #5dc3de;
+    font-size: 30px;
+    color: #fff;
+`
+
+const Arrow = styled.div`
+    position: relative;
+    width: 20px;
+    height: 20px;
+    transform: translateX(100px) rotate(45deg);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: block;
+        width: 2px;
+        height: 100%;
+        background-color: #fff;
+    }
+`
+
+const Logout = styled.p`
     margin-bottom: 50px;
     font-size: 24px;
     text-decoration: underline;
+    color: #aaa;
 `
 
-const PrivacyPolicy = styled.p`
-    font-size: 24px;
-    text-decoration: underline;
-`
-
-const CardWrapper = styled.div`
-    padding-bottom: 60px;
-`
-
-const LogoutButton = styled(Button)``
+const BackButton = styled(Button)``

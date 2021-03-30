@@ -1,13 +1,12 @@
 import * as React from 'react'
 import styled from '@emotion/styled'
-import { css } from 'emotion'
-import Button from 'components/atoms/Button'
+import { Side } from 'reducers/tab'
 
 type Props = {
     imgUrl: string
     description: string
     link: string
-    side: 'help' | 'support'
+    side: Side
     isEnd: boolean
     onDelete: () => void
     onEnd: () => void
@@ -49,6 +48,9 @@ const Wrapper = styled.div`
     }
     &[data-side='support'] {
         background-image: linear-gradient(to left, #35b597, #00a968);
+    }
+    &[data-side='organization'] {
+        background-image: linear-gradient(to left, #e85625, #fd7823);
     }
     margin: 0 auto 40px;
     border-radius: 16px;
