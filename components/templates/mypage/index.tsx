@@ -104,7 +104,7 @@ const MyPage = (): JSX.Element => {
                         <br />
                         こちらの保険をご利用ください
                     </InsuranceText>
-                    <ApplyButton>
+                    <ApplyButton href="https://s-omamori.jp/" target="_blank">
                         保険に加入する
                         <Arrow />
                     </ApplyButton>
@@ -265,6 +265,7 @@ const ApplyButton = styled.a`
     background-color: #5dc3de;
     font-size: 30px;
     color: #fff;
+    text-decoration: none;
 `
 
 const Arrow = styled.div`

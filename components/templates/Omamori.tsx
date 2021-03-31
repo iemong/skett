@@ -56,7 +56,7 @@ export const Omamori = (): JSX.Element => {
                         <br />
                     </Description>
                     <Logo src="/img/omamori_logo.png" alt="しえんのおまもり" />
-                    <ApplyButton>
+                    <ApplyButton href="https://s-omamori.jp/" target="_blank">
                         保険に加入する
                         <Arrow />
                     </ApplyButton>
@@ -155,6 +155,7 @@ const ApplyButton = styled.a`
     background-color: #5dc3de;
     font-size: 30px;
     color: #fff;
+    text-decoration: none;
 `
 
 const Arrow = styled.div`
