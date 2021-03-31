@@ -25,6 +25,7 @@ class MyApp extends App<Props> {
             <Provider store={store}>
                 <Head>
                     <title>スケット | 被災地の助っ人マッチング</title>
+                    <link rel="icon" type="image/png" href="/favicon.png" />
                     <meta name="viewport" content="width=750" />
                     <meta name="keywords" content="スケット, skett, ボランティア, 被災地, 被災, マッチング" />
                     <meta
