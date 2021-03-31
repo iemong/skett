@@ -8,6 +8,10 @@ export const Footer = () => {
     return (
         <Container>
             <MenuContents />
+            <ImgContainer>
+                <Img src="/img/fukko-design.png" alt="fukko design"/>
+                <Img src="/img/jvoad.png" alt="jvoad"/>
+            </ImgContainer>
             <ShareContainer>
                 <Shares
                     onClickTwitter={() => {
@@ -39,4 +43,14 @@ const Container = styled.footer`
 const ShareContainer = styled.div`
     width: 510px;
     margin: 0 auto 160px;
+`
+
+const ImgContainer = styled.div`
+    width: 670px;
+    margin: 0 auto;
+`
+
+const Img = styled.img`
+    width: 100%;
+    margin-bottom: 40px;
 `
