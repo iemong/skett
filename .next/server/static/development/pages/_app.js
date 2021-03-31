@@ -4805,7 +4805,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_redux_wrapper__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _store_createStore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../store/createStore */ "./store/createStore.ts");
 
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/pages/_app.tsx";
+var _jsxFileName = "/Users/itabashi/Documents/git/iemong/skett/pages/_app.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_1__["createElement"];
 
 
@@ -5135,7 +5135,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ((initialState = {}) => {
-  const middlewares = [redux_thunk__WEBPACK_IMPORTED_MODULE_2___default.a, redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a];
+  const middlewares = [redux_thunk__WEBPACK_IMPORTED_MODULE_2___default.a];
+
+  if (true) {
+    middlewares.push(redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a);
+  }
+
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
     rootReducer: _reducers__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), initialState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(...middlewares));

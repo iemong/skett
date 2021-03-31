@@ -15927,7 +15927,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _jsxFileName = "/Users/irie-shinnosuke/Documents/works/skett/skett/pages/_app.tsx";
+var _jsxFileName = "/Users/itabashi/Documents/git/iemong/skett/pages/_app.tsx";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_9__["createElement"];
 
 function _templateObject() {
@@ -16288,7 +16288,12 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var initialState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var middlewares = [redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a];
+  var middlewares = [redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]];
+
+  if (true) {
+    middlewares.push(redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a);
+  }
+
   return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
     rootReducer: _reducers__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), initialState, redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"].apply(void 0, middlewares));
