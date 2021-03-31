@@ -78,8 +78,7 @@ const Home = (): JSX.Element => {
     const supportPostElement = <ItemWrapper>{supportPosts}</ItemWrapper>
     const organizationPostElement = <ItemWrapper>{organizationPosts}</ItemWrapper>
 
-    // TODO: Google Form URL
-    const href = React.useMemo(() => (side === 'organization' ? '' : '/register'), [side])
+    const href = React.useMemo(() => (side === 'organization' ? 'https://forms.gle/xqosY3davqivXJDd7' : '/register'), [side])
     const target = React.useMemo(() => (side === 'organization' ? '_blank' : '_self'), [side])
 
     return (
