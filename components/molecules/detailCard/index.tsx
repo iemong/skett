@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { DateTime } from 'luxon'
 import { UserType } from 'types/index'
 import { Side } from 'reducers/tab'
+import { convertLinkHTML } from 'assets/utils/convertLinkHTML'
 
 type Props = {
     imgUrl: string | null
@@ -23,7 +24,7 @@ const DetailCard = (props: Props): JSX.Element => {
             </ThumbnailWrapper>}
             <TextBox>
                 <Title>{title}</Title>
-                <Description>{description}</Description>
+                <Description dangerouslySetInnerHTML={{ __html: convertLinkHTML(description) }} />
                 <Footer>
                     <User>
                         {side !== 'organization' && <Icon src={user.photoURL || '/img/icn_default.png'} alt="" />}
@@ -92,6 +93,10 @@ const Description = styled.p`
     line-height: 1.5;
     margin-bottom: 48px;
     white-space: pre-wrap;
+
+    & a {
+        color: #fff;
+    }
 `
 
 const Footer = styled.div`
