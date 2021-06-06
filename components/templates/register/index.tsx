@@ -47,7 +47,19 @@ const Register = (): JSX.Element => {
         return false
     }, [user])
 
-    const imageRequired = isFukkoDesign === false
+    const imageRequired = React.useMemo(() => {
+        return isFukkoDesign === false
+    }, [isFukkoDesign])
+
+    const onChangeFileInput = React.useCallback((event: React.FormEvent<HTMLInputElement>) => {
+        const { files } = event.target as HTMLInputElement
+        const file = files?.[0]
+        if (file) {
+            const reader = new FileReader()
+            reader.onload = (e: any) => setCurrentImgSrc(e.target.result)
+            reader.readAsDataURL(file)
+        }
+    }, [])
 
     const onRegister = (data: Record<string, any>): void => {
         setCurrentFormData(data)
@@ -176,12 +188,19 @@ const Register = (): JSX.Element => {
                                     </FormDescription>
                                     <FormImage>
                                         <TitleLabel htmlFor="image">写真アップロード</TitleLabel>
+                                        {currentImgSrc && (
+                                            <ImagePreview>
+                                                <Preview src={currentImgSrc} alt="" />
+                                            </ImagePreview>
+                                        )}
                                         <ImageLabelBox htmlFor="image">ファイルを選択</ImageLabelBox>
                                         <InputImage
                                             type="file"
                                             id="image"
                                             name="image"
+                                            accept="image/jpeg, image/png"
                                             ref={register({ required: imageRequired })}
+                                            onChange={onChangeFileInput}
                                         />
                                     </FormImage>
                                 </FormBox>
@@ -259,7 +278,7 @@ const Wrapper = styled.div`
 
 const FormBox = styled.div`
     width: 600px;
-    height: 950px;
+    min-height: 950px;
     margin: 60px auto 0;
     padding: 75px 40px 102px;
     background-color: #fff;
@@ -305,6 +324,16 @@ const TextArea = styled.textarea`
     padding: 17px 22px;
     box-sizing: border-box;
     font-family: 'Noto Sans JP', sans-serif;
+`
+
+const ImagePreview = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+`
+
+const Preview = styled.img`
+    max-width: 100%;
 `
 
 const ImageLabelBox = styled.label`
