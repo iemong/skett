@@ -69,6 +69,15 @@ const PostDetail = (props: Props): JSX.Element => {
                     side={side}
                     updateDate={data.updateDate}
                 />
+                <Notice data-type={side}>
+                    <NoticeTitle>
+                        応募の際の注意
+                    </NoticeTitle>
+                    <NoticeText>
+                        申し込む前に、自治体のボランティアの受け入れ状況を確認してください。詳しくは、全国社会福祉協議会の被災地支援、災害ボランティア情報のページをご覧ください。
+                        <NoticeLink href="https://www.saigaivc.com/archives/" target="_blank" rel="noopener">受け入れ状況を確認する</NoticeLink>
+                    </NoticeText>
+                </Notice>
                 <ShareWrapper>
                     <Title>この声をシェアする</Title>
                     <Shares
@@ -199,4 +208,74 @@ const ShareWrapper = styled.div`
 `
 const Title = styled(ThemeTitle)`
     margin-bottom: 55px;
+`
+
+const Notice = styled.div`
+    width: 690px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin: 0 auto 40px;
+    padding: 48px;
+    border: 4px solid;
+    border-radius: 16px;
+    background: #fff;
+
+    &[data-type='help'] {
+        border-color: #00B4ED;
+    }
+    &[data-type='support'] {
+        border-color: #00A968;
+    }
+    &[data-type='organization'] {
+        border-color: #e85625;
+    }
+`
+
+const NoticeTitle = styled.h3`
+    margin-bottom: 40px;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    color: #999999;
+`
+
+const NoticeText = styled.p`
+    font-size: 20px;
+    line-height: 36px;
+    color: #999999;
+`
+
+const NoticeLink = styled.a`
+    display: block;
+    position: relative;
+    margin-top: 8px;
+    padding-right: 30px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: right;
+    text-decoration: none;
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 12px;
+        right: 0;
+        width: 12px;
+        height: 12px;
+        border-top: 2px solid;
+        border-right: 2px solid;
+        transform: rotate(45deg);
+    }
+
+    [data-type='help'] & {
+        color: #00B4ED;
+    }
+    [data-type='support'] & {
+        color: #00A968;
+    }
+    [data-type='organization'] & {
+        color: #e85625;
+    }
 `
