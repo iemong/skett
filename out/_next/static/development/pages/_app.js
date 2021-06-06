@@ -15986,12 +15986,21 @@ function (_App) {
           lineNumber: 27
         },
         __self: this
-      }, "\u30B9\u30B1\u30C3\u30C8 | \u88AB\u707D\u5730\u306E\u52A9\u3063\u4EBA\u30DE\u30C3\u30C1\u30F3\u30B0"), __jsx("meta", {
+      }, "\u30B9\u30B1\u30C3\u30C8 | \u88AB\u707D\u5730\u306E\u52A9\u3063\u4EBA\u30DE\u30C3\u30C1\u30F3\u30B0"), __jsx("link", {
+        rel: "icon",
+        type: "image/png",
+        href: "/favicon.png",
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 28
+        },
+        __self: this
+      }), __jsx("meta", {
         name: "viewport",
         content: "width=750",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 28
+          lineNumber: 29
         },
         __self: this
       }), __jsx("meta", {
@@ -15999,7 +16008,7 @@ function (_App) {
         content: "\u30B9\u30B1\u30C3\u30C8, skett, \u30DC\u30E9\u30F3\u30C6\u30A3\u30A2, \u88AB\u707D\u5730, \u88AB\u707D, \u30DE\u30C3\u30C1\u30F3\u30B0",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 29
+          lineNumber: 30
         },
         __self: this
       }), __jsx("meta", {
@@ -16007,7 +16016,7 @@ function (_App) {
         content: "\u30B9\u30B1\u30C3\u30C8\u306F\u88AB\u707D\u3057\u305F\u5730\u57DF\u306E\u73FE\u5730\u306E\u58F0\u3068\u3001\u652F\u63F4\u8005\u3092\u76F4\u63A5\u7D50\u3073\u3064\u3051\u308B\u30B5\u30FC\u30D3\u30B9\u3067\u3059\u3002\u652F\u63F4\u8005\u3068\u3057\u3066\u3001\u4E8B\u524D\u306B\u767B\u9332\u3057\u3066\u304A\u304F\u3053\u3068\u3067\u3001\u4E07\u304C\u4E00\u306B\u5099\u3048\u307E\u3059\u3002",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 30
+          lineNumber: 31
         },
         __self: this
       }), __jsx("meta", {
@@ -16015,7 +16024,7 @@ function (_App) {
         content: "website",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 34
+          lineNumber: 35
         },
         __self: this
       }), __jsx("meta", {
@@ -16023,7 +16032,7 @@ function (_App) {
         content: "\u30B9\u30B1\u30C3\u30C8\u306F\u88AB\u707D\u3057\u305F\u5730\u57DF\u306E\u73FE\u5730\u306E\u58F0\u3068\u3001\u652F\u63F4\u8005\u3092\u76F4\u63A5\u7D50\u3073\u3064\u3051\u308B\u30B5\u30FC\u30D3\u30B9\u3067\u3059\u3002\u652F\u63F4\u8005\u3068\u3057\u3066\u3001\u4E8B\u524D\u306B\u767B\u9332\u3057\u3066\u304A\u304F\u3053\u3068\u3067\u3001\u4E07\u304C\u4E00\u306B\u5099\u3048\u307E\u3059\u3002",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 35
+          lineNumber: 36
         },
         __self: this
       }), __jsx("meta", {
@@ -16031,7 +16040,7 @@ function (_App) {
         content: "https://fukko-skett.jp/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 39
+          lineNumber: 40
         },
         __self: this
       }), __jsx("meta", {
@@ -16039,7 +16048,7 @@ function (_App) {
         content: "https://fukko-skett.jp/img/ogp.jpg",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 40
+          lineNumber: 41
         },
         __self: this
       }), __jsx("meta", {
@@ -16047,7 +16056,7 @@ function (_App) {
         content: "\u30B9\u30B1\u30C3\u30C8 | \u88AB\u707D\u5730\u306E\u52A9\u3063\u4EBA\u30DE\u30C3\u30C1\u30F3\u30B0",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 41
+          lineNumber: 42
         },
         __self: this
       }), __jsx("meta", {
@@ -16055,7 +16064,7 @@ function (_App) {
         content: "summary_large_image",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 42
+          lineNumber: 43
         },
         __self: this
       }), __jsx("link", {
@@ -16063,7 +16072,7 @@ function (_App) {
         href: "https://fukko-skett.jp/",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 43
+          lineNumber: 44
         },
         __self: this
       }), __jsx("link", {
@@ -16071,20 +16080,20 @@ function (_App) {
         rel: "stylesheet",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 44
+          lineNumber: 45
         },
         __self: this
       })), __jsx(_emotion_core__WEBPACK_IMPORTED_MODULE_13__["Global"], {
         styles: Object(_emotion_core__WEBPACK_IMPORTED_MODULE_13__["css"])(_templateObject(), emotion_reset__WEBPACK_IMPORTED_MODULE_14___default.a),
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 49
+          lineNumber: 50
         },
         __self: this
       }), __jsx(Component, Object(_babel_runtime_corejs2_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_2__["default"])({}, pageProps, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 84
+          lineNumber: 85
         },
         __self: this
       })));
