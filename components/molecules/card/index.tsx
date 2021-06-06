@@ -28,9 +28,7 @@ const Card = (props: Props): JSX.Element => {
 
     return (
         <Wrapper data-side={side}>
-            {imgUrl && <ThumbnailWrapper>
-                <Thumbnail src={imgUrl} alt="description" />
-            </ThumbnailWrapper>}
+            {imgUrl && <ThumbnailWrapper style={{ backgroundImage: `url(${imgUrl})` }} />}
             <TextBox>
                 <Description>{description}</Description>
                 <Link href={`${link}?side=${side}`}>
@@ -61,8 +59,17 @@ const Wrapper = styled.div`
     overflow: hidden;
 `
 const ThumbnailWrapper = styled.div`
-    min-height: 386px;
     background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    &::before {
+        display: block;
+        width: 100%;
+        padding-bottom: 56.25%;
+        content: '';
+    }
 `
 const Thumbnail = styled.img`
     width: 100%;

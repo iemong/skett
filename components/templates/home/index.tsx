@@ -84,12 +84,14 @@ const Home = (): JSX.Element => {
     return (
         <Main>
             <React.Fragment>
-                <Tab
-                    helpContents={helpPostElement}
-                    supportContents={supportPostElement}
-                    organizationContents={organizationPostElement}
-                    tabSide={side}
-                />
+                <ContentsContainer>
+                    <Tab
+                        helpContents={helpPostElement}
+                        supportContents={supportPostElement}
+                        organizationContents={organizationPostElement}
+                        tabSide={side}
+                    />
+                </ContentsContainer>
                 <Link href={href}>
                     <AddButton href={href} target={target}>
                         声をつくる
@@ -138,6 +140,27 @@ const AddButton = styled.a`
 
         &::before {
             font-size: 24px;
+        }
+    }
+`
+
+const ContentsContainer = styled.div`
+    @media (min-width: 751px) {
+        & > div > div:nth-child(2) > div:nth-child(2) {
+            display: flex;
+            flex-wrap: wrap;
+            max-width: 780px;
+            width: 100%;
+            margin: 0 auto;
+            &:after {
+                width: calc(100% / 2 - 32px);
+                display: block;
+                content: '';
+            }
+
+            & > div {
+                width: calc(100% / 2 - 32px);
+            }
         }
     }
 `
