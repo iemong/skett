@@ -6,7 +6,9 @@ type TwitterOptions = {
     hashtags: string // hashtags ハッシュタグ
 }
 export const createTwitterIntent = (opts: TwitterOptions): string =>
-    `http://twitter.com/intent/tweet?${queryString(opts)}`
+    `https://twitter.com/intent/tweet?${queryString(opts)}`
 
-export const createFacebookIntent = (url: string): string =>
-    `http://www.facebook.com/share.php?${queryString({ u: url })}`
+export const createFacebookIntent = (url: string, quote?: string): string => {
+    const queries = quote ? queryString({ u: url, quote }) : queryString({ u: url })
+    return `https://www.facebook.com/share.php?${queries}`
+}

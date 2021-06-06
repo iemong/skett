@@ -17,13 +17,13 @@ export const Footer = () => {
                     onClickTwitter={() => {
                         const intent = createTwitterIntent({
                             url: location.href,
-                            text: '',
+                            text: '被災地の助っ人募集 | スケット',
                             hashtags: '',
                         })
                         window.open(intent)
                     }}
                     onClickFacebook={() => {
-                        const intent = createFacebookIntent(location.href)
+                        const intent = createFacebookIntent(location.href, '被災地の助っ人募集 | スケット')
                         window.open(intent)
                     }}
                 />
