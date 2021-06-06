@@ -51,7 +51,6 @@ const Register = (): JSX.Element => {
     const imageRequired = isFukkoDesign === false
 
     const onRegister = (data: Record<string, any>): void => {
-        console.log('send', data)
         setCurrentFormData(data)
         const now = DateTime.local().toString()
         setTime(now)
@@ -74,7 +73,6 @@ const Register = (): JSX.Element => {
     }, [currentFormData])
 
     const onSubmit = React.useCallback(async () => {
-        console.log('submit', currentFormData, time, user)
         if (!(currentFormData && time && user)) return
         const fileList: FileList = currentFormData.image
         const file = fileList[0]
