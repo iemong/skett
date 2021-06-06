@@ -21,7 +21,8 @@ import useModal from 'components/hooks/useModal'
 import ThemeHowtoModal from 'components/molecules/theme/ThemeHowtoModal'
 import makeOgp, { exportBlob } from 'assets/utils/makeOgp'
 
-const FUKKO_DESIGN_UID = 'UeR6nHmPLKZPyIuR1yrA9d0be9t1'
+// const FUKKO_DESIGN_UID = 'UeR6nHmPLKZPyIuR1yrA9d0be9t1'
+const FUKKO_DESIGN_UID = 'qY8sGcFGtCf6gdHSHs9i89yk46r1'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
@@ -40,6 +41,15 @@ const Register = (): JSX.Element => {
     const user = useLogin()
     const { isShowing, toggle } = useModal()
 
+    const isFukkoDesign = React.useMemo(() => {
+        if (user) {
+            return user.uid === FUKKO_DESIGN_UID
+        }
+        return false
+    }, [user])
+
+    const imageRequired = isFukkoDesign === false
+
     const onRegister = (data: Record<string, any>): void => {
         console.log('send', data)
         setCurrentFormData(data)
@@ -55,35 +65,50 @@ const Register = (): JSX.Element => {
         if (!currentFormData) return
         const fileList: FileList = currentFormData.image
         const file = fileList[0]
-        if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
-        const reader = new FileReader()
-        reader.onload = (e: any) => setCurrentImgSrc(e.target.result)
-        reader.readAsDataURL(file)
+        if (file) {
+            if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
+            const reader = new FileReader()
+            reader.onload = (e: any) => setCurrentImgSrc(e.target.result)
+            reader.readAsDataURL(file)
+        }
     }, [currentFormData])
 
     const onSubmit = React.useCallback(async () => {
+        console.log('submit', currentFormData, time, user)
         if (!(currentFormData && time && user)) return
         const fileList: FileList = currentFormData.image
         const file = fileList[0]
-        if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
+        if (file) {
+            if (!['image/jpeg', 'image/png'].includes(file.type)) throw new Error('画像形式がサポートされていません')
+        }
         const now = Date.now()
-        const postType = user.uid === FUKKO_DESIGN_UID ? 'organization' : side
+        const postType = isFukkoDesign ? 'organization' : side
 
-        const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${now}.jpg`)
-        await imageRef.put(file)
-        const imageUrl = await imageRef.getDownloadURL()
+        const imageUrl = await (async () => {
+            if (imageRequired) {
+                const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${now}.jpg`)
+                await imageRef.put(file)
+                return await imageRef.getDownloadURL() as Promise<string>
+            }
+            return null
+        })()
 
-        const ogpImageRef = storageRef.child(`images/${file.name.split('.')[0]}_${now}_ogp.jpg`)
-        if (!currentImgSrc) return
-        const ogpCanvas = await makeOgp({
-            imageData: currentImgSrc,
-            postType: postType,
-            text: currentFormData.title,
-        })
-        const blob = await exportBlob(ogpCanvas)
-        if (!blob) return
-        await ogpImageRef.put(blob)
-        const ogpImageUrl = await ogpImageRef.getDownloadURL()
+        const ogpImageUrl = await (async () => {
+            if (imageRequired) {
+                const ogpImageRef = storageRef.child(`images/${file.name.split('.')[0]}_${now}_ogp.jpg`)
+                if (!currentImgSrc) return
+                const ogpCanvas = await makeOgp({
+                    imageData: currentImgSrc,
+                    postType: postType,
+                    text: currentFormData.title,
+                })
+                const blob = await exportBlob(ogpCanvas)
+                if (!blob) return
+                await ogpImageRef.put(blob)
+                return await ogpImageRef.getDownloadURL()
+            }
+            return null
+        })()
 
         const uniqDocRef = db.collection(COLLECTIONS.POSTS).doc()
         const uniqUrl = `${BASE_OGP_URL}${uniqDocRef.id}`
@@ -128,7 +153,7 @@ const Register = (): JSX.Element => {
             <Wrapper>
                 {user && isConsent ? (
                     !postUrl ? (
-                        !(currentFormData && currentImgSrc && time) ? (
+                        !(currentFormData && (imageRequired ? currentImgSrc : true) && time) ? (
                             <form onSubmit={handleSubmit(onRegister)}>
                                 <FormBox>
                                     <Title>{side === 'help' ? '募集を作る' : '支援者になる'}</Title>
@@ -159,7 +184,7 @@ const Register = (): JSX.Element => {
                                             type="file"
                                             id="image"
                                             name="image"
-                                            ref={register({ required: true })}
+                                            ref={register({ required: imageRequired })}
                                         />
                                     </FormImage>
                                 </FormBox>

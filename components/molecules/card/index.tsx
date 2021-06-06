@@ -4,7 +4,7 @@ import Button from 'components/atoms/Button'
 import { Side } from 'reducers/tab'
 
 type Props = {
-    imgUrl: string
+    imgUrl: string | null
     description: string
     link: string
     side: Side
@@ -28,9 +28,9 @@ const Card = (props: Props): JSX.Element => {
 
     return (
         <Wrapper data-side={side}>
-            <ThumbnailWrapper>
+            {imgUrl && <ThumbnailWrapper>
                 <Thumbnail src={imgUrl} alt="description" />
-            </ThumbnailWrapper>
+            </ThumbnailWrapper>}
             <TextBox>
                 <Description>{description}</Description>
                 <Link href={`${link}?side=${side}`}>

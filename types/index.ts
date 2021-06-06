@@ -19,8 +19,8 @@ export type PostType = {
     createDate: string
     updateDate: string
     url: string
-    imageUrl: string
-    ogpImageUrl: string
+    imageUrl: string | null
+    ogpImageUrl: string | null
     side: Side
     timestamp: number
     applicants?: UserType[]

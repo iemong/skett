@@ -9,7 +9,7 @@ import makeOgp, { exportDataURL } from 'assets/utils/makeOgp'
 import { Side } from 'reducers/tab'
 
 type Props = {
-    imgUrl: string
+    imgUrl: string | null
     title: string
     description: string
     updateDate: string
@@ -25,13 +25,15 @@ const Confirm = (props: Props): JSX.Element => {
     const [imgSrc, setImgSrc] = React.useState('')
 
     React.useEffect(() => {
-        makeOgp({
-            text: title,
-            imageData: imgUrl,
-            postType: side,
-        }).then(canvas => {
-            setImgSrc(exportDataURL(canvas))
-        })
+        if (imgUrl) {
+            makeOgp({
+                text: title,
+                imageData: imgUrl,
+                postType: side,
+            }).then(canvas => {
+                setImgSrc(exportDataURL(canvas))
+            })
+        }
     }, [imgUrl, side, title])
     return (
         <Wrapper>

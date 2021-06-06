@@ -5,7 +5,7 @@ import { UserType } from 'types/index'
 import { Side } from 'reducers/tab'
 
 type Props = {
-    imgUrl: string
+    imgUrl: string | null
     title: string
     description: string
     side: Side
@@ -18,9 +18,9 @@ const DetailCard = (props: Props): JSX.Element => {
     const { imgUrl, title, description, side, user, updateDate, className } = props
     return (
         <Wrapper data-side={side} className={className}>
-            <ThumbnailWrapper>
+            {imgUrl && <ThumbnailWrapper>
                 <Thumbnail src={imgUrl} alt="description" />
-            </ThumbnailWrapper>
+            </ThumbnailWrapper>}
             <TextBox>
                 <Title>{title}</Title>
                 <Description>{description}</Description>
