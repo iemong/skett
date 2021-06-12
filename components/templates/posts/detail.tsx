@@ -120,11 +120,11 @@ const PostDetail = (props: Props): JSX.Element => {
                         </DeleteButton>
                     </>
                 ) : (
-                    <Link href={{ pathname: '/apply', query: { postId: data.id } }}>
+                    data.side !== 'organization' ? <Link href={{ pathname: '/apply', query: { postId: data.id } }}>
                         <ApplyButton width={'400px'} height={'80px'}>
                             応募する
                         </ApplyButton>
-                    </Link>
+                    </Link> : null
                 )}
                 <BackButton width={'400px'} height={'80px'} styleType="cancel" onClick={(): void => Router.back()}>
                     戻る
