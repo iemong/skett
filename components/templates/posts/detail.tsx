@@ -134,22 +134,15 @@ const PostDetail = (props: Props): JSX.Element => {
     }, [data, isMyPost, side, updatePost, user])
 
     const tabElement = React.useMemo(() => {
-        if (side === 'help') {
-            return <Tab helpContents={postElement} tabSide="help" onClickHelp={(): void => Router.back()} />
+        if (side === undefined) {
+            return <></>
         }
-        if (side === 'support') {
-            return <Tab supportContents={postElement} tabSide="support" onClickSupport={(): void => Router.back()} />
-        }
-        if (side === 'organization') {
-            return (
-                <Tab
-                    organizationContents={postElement}
-                    tabSide="organization"
-                    onClickOrganization={(): void => Router.back()}
-                />
-            )
-        }
-        return <></>
+        return <Tab
+            tabSide={side}
+            helpContents={postElement}
+            supportContents={postElement}
+            organizationContents={postElement}
+        />
     }, [postElement, side])
 
     const shouldRedirect = user?.uid !== data?.user.uid

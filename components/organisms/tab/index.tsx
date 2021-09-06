@@ -47,12 +47,9 @@ const Tab = (props: Props): JSX.Element => {
     }, [side])
 
     const changeTab = (side: Side) => {
-        if (router.pathname !== '/') {
-            return
-        }
-
         setTabName(side)
         actions.update(side)
+        router.push('/')
 
         if (side === 'help') {
             onClickHelp?.()

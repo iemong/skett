@@ -261,11 +261,7 @@ const Register = (): JSX.Element => {
 
     return (
         <Main>
-            {side === 'help' ? (
-                <Tab helpContents={innerElement} tabSide={'help'} />
-            ) : (
-                <Tab supportContents={innerElement} tabSide={'support'} />
-            )}
+            <Tab tabSide={side} helpContents={innerElement} supportContents={innerElement} />
         </Main>
     )
 }

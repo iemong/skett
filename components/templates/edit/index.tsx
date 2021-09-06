@@ -142,13 +142,12 @@ const Edit = (props: Props): JSX.Element => {
 
     return (
         <Main>
-            {side === 'help' ? (
-                <Tab helpContents={innerElement} tabSide={'help'} />
-            ) : side === 'support' ? (
-                <Tab supportContents={innerElement} tabSide={'support'} />
-            ) : (
-                <Tab organizationContents={innerElement} tabSide={'organization'} />
-            )}
+            <Tab
+                tabSide={side}
+                helpContents={innerElement}
+                supportContents={innerElement}
+                organizationContents={innerElement}
+            />
         </Main>
     )
 }

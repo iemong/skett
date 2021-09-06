@@ -86,10 +86,10 @@ const Home = (): JSX.Element => {
             <React.Fragment>
                 <ContentsContainer>
                     <Tab
+                        tabSide={side}
                         helpContents={helpPostElement}
                         supportContents={supportPostElement}
                         organizationContents={organizationPostElement}
-                        tabSide={side}
                     />
                 </ContentsContainer>
                 <Link href={href}>
