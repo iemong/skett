@@ -21,8 +21,7 @@ import useModal from 'components/hooks/useModal'
 import ThemeHowtoModal from 'components/molecules/theme/ThemeHowtoModal'
 import makeOgp, { exportBlob } from 'assets/utils/makeOgp'
 
-// const FUKKO_DESIGN_UID = 'UeR6nHmPLKZPyIuR1yrA9d0be9t1'
-const FUKKO_DESIGN_UID = 'qY8sGcFGtCf6gdHSHs9i89yk46r1'
+const FUKKO_DESIGN_UID = 'UeR6nHmPLKZPyIuR1yrA9d0be9t1'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
