@@ -21,7 +21,8 @@ import useModal from 'components/hooks/useModal'
 import ThemeHowtoModal from 'components/molecules/theme/ThemeHowtoModal'
 import makeOgp, { exportBlob } from 'assets/utils/makeOgp'
 
-const FUKKO_DESIGN_UID = 'UeR6nHmPLKZPyIuR1yrA9d0be9t1'
+// const FUKKO_DESIGN_UID = 'UeR6nHmPLKZPyIuR1yrA9d0be9t1'
+const FUKKO_DESIGN_UID = 'qY8sGcFGtCf6gdHSHs9i89yk46r1'
 
 const Register = (): JSX.Element => {
     const db = firebaseApp.firestore()
@@ -46,6 +47,7 @@ const Register = (): JSX.Element => {
         }
         return false
     }, [user])
+    console.log('isFukkoDesign', isFukkoDesign)
 
     const imageRequired = React.useMemo(() => {
         return isFukkoDesign === false
@@ -94,7 +96,7 @@ const Register = (): JSX.Element => {
         const postType = isFukkoDesign ? 'organization' : side
 
         const imageUrl = await (async () => {
-            if (imageRequired) {
+            if (file) {
                 const imageRef = storageRef.child(`images/${file.name.split('.')[0]}_${now}.jpg`)
                 await imageRef.put(file)
                 return await imageRef.getDownloadURL() as Promise<string>
@@ -103,7 +105,7 @@ const Register = (): JSX.Element => {
         })()
 
         const ogpImageUrl = await (async () => {
-            if (imageRequired) {
+            if (file) {
                 const ogpImageRef = storageRef.child(`images/${file.name.split('.')[0]}_${now}_ogp.jpg`)
                 if (!currentImgSrc) return
                 const ogpCanvas = await makeOgp({
