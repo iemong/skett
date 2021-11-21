@@ -46,7 +46,6 @@ const Register = (): JSX.Element => {
         }
         return false
     }, [user])
-    console.log('isFukkoDesign', isFukkoDesign)
 
     const imageRequired = React.useMemo(() => {
         return isFukkoDesign === false
