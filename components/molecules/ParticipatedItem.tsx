@@ -7,14 +7,15 @@ type Props = {
     link: string
     title: string
     createdAt: string
+    isEnd: boolean
     side?: Side
 }
 
 export const ParticipatedItem = (props: Props) => {
-    const { link, title, createdAt, side } = props
+    const { link, title, createdAt, isEnd, side } = props
 
     return (
-        <Container href={link} data-side={side}>
+        <Container href={link} data-side={side} data-end={isEnd}>
             {side && (
                 <LeftColumn>
                     <Dot />
@@ -77,6 +78,10 @@ const Dot = styled.div`
     }
     [data-side='organization'] & {
         background: linear-gradient(to right, #e8563a 0%, #e53a2b 100%);
+    }
+
+    [data-end='true'] & {
+        background: #ccc;
     }
 `
 
