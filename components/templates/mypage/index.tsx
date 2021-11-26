@@ -17,6 +17,7 @@ const MyPage = (): JSX.Element => {
     const db = firebaseApp.firestore()
     const docRef = db.collection(COLLECTIONS.POSTS)
     const [posts, setPosts] = React.useState<PostType[]>([])
+    const [openPosts, setOpenPosts] = React.useState<PostType[]>([])
     const [isFirst, setIsFirst] = React.useState<boolean>(true)
 
     const loadPostsData = React.useCallback(async () => {
@@ -30,10 +31,13 @@ const MyPage = (): JSX.Element => {
         const allPosts = docs.map(doc => doc.data() as PostType)
 
         const myPosts = allPosts.filter(post => post.user.uid === user.uid)
+        const myPastPosts = myPosts.filter(post => post.isEnd || post.isDeleted)
         const appliedPosts = allPosts.filter(post => post.applicants?.some(applicant => applicant.uid === user.uid))
-        const participatedPosts = [...myPosts, ...appliedPosts].sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1))
+        const participatedPosts = [...myPastPosts, ...appliedPosts].sort((a, b) => (a.timestamp > b.timestamp ? -1 : 1))
+        const myOpenPosts = myPosts.filter((post) => post.isOpen && post.isEnd === false && post.isDeleted === false)
 
         setPosts(participatedPosts)
+        setOpenPosts(myOpenPosts)
     }, [docRef, user])
 
     const isActiveFacebook = React.useMemo(
@@ -66,6 +70,21 @@ const MyPage = (): JSX.Element => {
         [docRef, loadPostsData],
     )
 
+    const myOpenPosts = React.useMemo(
+        () =>
+            openPosts.map(post => (
+                <ParticipatedItem
+                    key={post.id}
+                    side={post.side}
+                    link={`/posts/${post.id ?? ''}`}
+                    title={post.title}
+                    createdAt={post.createDate}
+                    isEnd={post.isEnd || post.isDeleted}
+                />
+            )),
+        [openPosts],
+    )
+
     const myPosts = React.useMemo(
         () =>
             posts.map(post => (
@@ -75,6 +94,7 @@ const MyPage = (): JSX.Element => {
                     link={`/posts/${post.id ?? ''}`}
                     title={post.title}
                     createdAt={post.createDate}
+                    isEnd={post.isEnd || post.isDeleted}
                 />
             )),
         [posts],
@@ -124,6 +144,10 @@ const MyPage = (): JSX.Element => {
                 </LoginStatus>
                 {user && (
                     <React.Fragment>
+                        <Past>
+                            <Title>現在自分が募集している声</Title>
+                            {myOpenPosts}
+                        </Past>
                         <Past>
                             <Title>過去に作成・参加した声</Title>
                             {myPosts}
