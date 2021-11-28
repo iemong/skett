@@ -7,12 +7,12 @@ type Props = {
     link: string
     title: string
     createdAt: string
-    isEnd: boolean
+    isEnd?: boolean
     side?: Side
 }
 
 export const ParticipatedItem = (props: Props) => {
-    const { link, title, createdAt, isEnd, side } = props
+    const { link, title, createdAt, isEnd = false, side } = props
 
     return (
         <Container href={link} data-side={side} data-end={isEnd}>
