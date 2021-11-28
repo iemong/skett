@@ -1285,7 +1285,7 @@ function _templateObject6() {
 }
 
 function _templateObject5() {
-  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 20px;\n    height: 20px;\n    border-radius: 50%;\n\n    [data-side='help'] & {\n        background: linear-gradient(to right, #00b4ed, #0091db);\n    }\n    [data-side='support'] & {\n        background: linear-gradient(to right, #35b597, #00a968);\n    }\n    [data-side='organization'] & {\n        background: linear-gradient(to right, #e8563a 0%, #e53a2b 100%);\n    }\n"]);
+  var data = Object(_babel_runtime_corejs2_helpers_esm_taggedTemplateLiteral__WEBPACK_IMPORTED_MODULE_0__["default"])(["\n    width: 20px;\n    height: 20px;\n    border-radius: 50%;\n\n    [data-side='help'] & {\n        background: linear-gradient(to right, #00b4ed, #0091db);\n    }\n    [data-side='support'] & {\n        background: linear-gradient(to right, #35b597, #00a968);\n    }\n    [data-side='organization'] & {\n        background: linear-gradient(to right, #e8563a 0%, #e53a2b 100%);\n    }\n\n    [data-end='true'] & {\n        background: #ccc;\n    }\n"]);
 
   _templateObject5 = function _templateObject5() {
     return data;
@@ -1341,55 +1341,58 @@ var ParticipatedItem = function ParticipatedItem(props) {
   var link = props.link,
       title = props.title,
       createdAt = props.createdAt,
+      _props$isEnd = props.isEnd,
+      isEnd = _props$isEnd === void 0 ? false : _props$isEnd,
       side = props.side;
   return __jsx(Container, {
     href: link,
     "data-side": side,
+    "data-end": isEnd,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 18
     },
     __self: this
   }, side && __jsx(LeftColumn, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 20
     },
     __self: this
   }, __jsx(Dot, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 20
+      lineNumber: 21
     },
     __self: this
   })), __jsx(CenterColumn, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 23
+      lineNumber: 24
     },
     __self: this
   }, __jsx(Title, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 24
+      lineNumber: 25
     },
     __self: this
   }, title), __jsx(Time, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 25
+      lineNumber: 26
     },
     __self: this
   }, luxon__WEBPACK_IMPORTED_MODULE_3__["DateTime"].fromISO(createdAt).toFormat('yyyy/MM/dd HH:mm'))), __jsx(RightColumn, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 27
+      lineNumber: 28
     },
     __self: this
   }, __jsx(Arrow, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 28
+      lineNumber: 29
     },
     __self: this
   })));
@@ -2349,17 +2352,22 @@ var MyPage = function MyPage() {
       posts = _React$useState2[0],
       setPosts = _React$useState2[1];
 
-  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_5__["useState"](true),
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_5__["useState"]([]),
       _React$useState4 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__["default"])(_React$useState3, 2),
-      isFirst = _React$useState4[0],
-      setIsFirst = _React$useState4[1];
+      openPosts = _React$useState4[0],
+      setOpenPosts = _React$useState4[1];
+
+  var _React$useState5 = react__WEBPACK_IMPORTED_MODULE_5__["useState"](true),
+      _React$useState6 = Object(_babel_runtime_corejs2_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_4__["default"])(_React$useState5, 2),
+      isFirst = _React$useState6[0],
+      setIsFirst = _React$useState6[1];
 
   var loadPostsData = react__WEBPACK_IMPORTED_MODULE_5__["useCallback"](
   /*#__PURE__*/
   Object(_babel_runtime_corejs2_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])(
   /*#__PURE__*/
   _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.mark(function _callee() {
-    var data, docs, allPosts, myPosts, appliedPosts, participatedPosts;
+    var data, docs, allPosts, myPosts, myPastPosts, appliedPosts, participatedPosts, myOpenPosts;
     return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_1___default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -2395,6 +2403,9 @@ var MyPage = function MyPage() {
             myPosts = allPosts.filter(function (post) {
               return post.user.uid === user.uid;
             });
+            myPastPosts = myPosts.filter(function (post) {
+              return post.isEnd || post.isDeleted;
+            });
             appliedPosts = allPosts.filter(function (post) {
               var _post$applicants;
 
@@ -2402,12 +2413,16 @@ var MyPage = function MyPage() {
                 return applicant.uid === user.uid;
               });
             });
-            participatedPosts = [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_2__["default"])(myPosts), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_2__["default"])(appliedPosts)).sort(function (a, b) {
+            participatedPosts = [].concat(Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_2__["default"])(myPastPosts), Object(_babel_runtime_corejs2_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_2__["default"])(appliedPosts)).sort(function (a, b) {
               return a.timestamp > b.timestamp ? -1 : 1;
             });
+            myOpenPosts = myPosts.filter(function (post) {
+              return post.isOpen && post.isEnd === false && post.isDeleted === false;
+            });
             setPosts(participatedPosts);
+            setOpenPosts(myOpenPosts);
 
-          case 13:
+          case 16:
           case "end":
             return _context.stop();
         }
@@ -2438,8 +2453,8 @@ var MyPage = function MyPage() {
       loadPostsData();
     });
   }, [docRef, loadPostsData]);
-  var myPosts = react__WEBPACK_IMPORTED_MODULE_5__["useMemo"](function () {
-    return posts.map(function (post) {
+  var myOpenPosts = react__WEBPACK_IMPORTED_MODULE_5__["useMemo"](function () {
+    return openPosts.map(function (post) {
       var _post$id;
 
       return __jsx(_molecules_ParticipatedItem__WEBPACK_IMPORTED_MODULE_14__["ParticipatedItem"], {
@@ -2448,9 +2463,29 @@ var MyPage = function MyPage() {
         link: "/posts/".concat((_post$id = post.id) !== null && _post$id !== void 0 ? _post$id : ''),
         title: post.title,
         createdAt: post.createDate,
+        isEnd: post.isEnd || post.isDeleted,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 72
+          lineNumber: 76
+        },
+        __self: this
+      });
+    });
+  }, [openPosts]);
+  var myPosts = react__WEBPACK_IMPORTED_MODULE_5__["useMemo"](function () {
+    return posts.map(function (post) {
+      var _post$id2;
+
+      return __jsx(_molecules_ParticipatedItem__WEBPACK_IMPORTED_MODULE_14__["ParticipatedItem"], {
+        key: post.id,
+        side: post.side,
+        link: "/posts/".concat((_post$id2 = post.id) !== null && _post$id2 !== void 0 ? _post$id2 : ''),
+        title: post.title,
+        createdAt: post.createDate,
+        isEnd: post.isEnd || post.isDeleted,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 91
         },
         __self: this
       });
@@ -2459,31 +2494,31 @@ var MyPage = function MyPage() {
   return __jsx(_layouts_Main__WEBPACK_IMPORTED_MODULE_8__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 84
+      lineNumber: 104
     },
     __self: this
   }, __jsx(Wrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 85
+      lineNumber: 105
     },
     __self: this
   }, __jsx(LoginStatus, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 86
+      lineNumber: 106
     },
     __self: this
   }, __jsx(Title, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 87
+      lineNumber: 107
     },
     __self: this
   }, "\u30A2\u30AB\u30A6\u30F3\u30C8\u72B6\u6CC1"), user && __jsx(User, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 89
+      lineNumber: 109
     },
     __self: this
   }, __jsx(UserIcon, {
@@ -2491,19 +2526,19 @@ var MyPage = function MyPage() {
     alt: "",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 90
+      lineNumber: 110
     },
     __self: this
   }), __jsx(UserName, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 91
+      lineNumber: 111
     },
     __self: this
   }, user === null || user === void 0 ? void 0 : user.displayName, "\u3055\u3093")), __jsx(ShareInner, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 94
+      lineNumber: 114
     },
     __self: this
   }, __jsx(TwitterButton, {
@@ -2511,7 +2546,7 @@ var MyPage = function MyPage() {
     isActive: isActiveTwitter,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 95
+      lineNumber: 115
     },
     __self: this
   }, isActiveTwitter ? 'ログイン済' : 'ログインする'), __jsx(FacebookButton, {
@@ -2519,19 +2554,19 @@ var MyPage = function MyPage() {
     isActive: isActiveFacebook,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 98
+      lineNumber: 118
     },
     __self: this
   }, isActiveFacebook ? 'ログイン済' : 'ログインする')), __jsx(InsuranceText, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 102
+      lineNumber: 122
     },
     __self: this
   }, "\u4FDD\u967A\u306E\u52A0\u5165\u304C\u307E\u3060\u306E\u65B9\u306F", __jsx("br", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 104
+      lineNumber: 124
     },
     __self: this
   }), "\u3053\u3061\u3089\u306E\u4FDD\u967A\u3092\u3054\u5229\u7528\u304F\u3060\u3055\u3044"), __jsx(ApplyButton, {
@@ -2539,19 +2574,19 @@ var MyPage = function MyPage() {
     target: "_blank",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 107
+      lineNumber: 127
     },
     __self: this
   }, "\u4FDD\u967A\u306B\u52A0\u5165\u3059\u308B", __jsx(Arrow, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 109
+      lineNumber: 129
     },
     __self: this
   })), __jsx(TextWrapper, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 111
+      lineNumber: 131
     },
     __self: this
   }, __jsx(Logout, {
@@ -2561,7 +2596,7 @@ var MyPage = function MyPage() {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 112
+      lineNumber: 132
     },
     __self: this
   }, "\u30ED\u30B0\u30A2\u30A6\u30C8\u3059\u308B")), __jsx(BackButton, {
@@ -2573,25 +2608,37 @@ var MyPage = function MyPage() {
     },
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 141
     },
     __self: this
   }, "\u623B\u308B")), user && __jsx(react__WEBPACK_IMPORTED_MODULE_5__["Fragment"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126
+      lineNumber: 146
     },
     __self: this
   }, __jsx(Past, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 127
+      lineNumber: 147
     },
     __self: this
   }, __jsx(Title, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 128
+      lineNumber: 148
+    },
+    __self: this
+  }, "\u73FE\u5728\u81EA\u5206\u304C\u52DF\u96C6\u3057\u3066\u3044\u308B\u58F0"), myOpenPosts), __jsx(Past, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 151
+    },
+    __self: this
+  }, __jsx(Title, {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 152
     },
     __self: this
   }, "\u904E\u53BB\u306B\u4F5C\u6210\u30FB\u53C2\u52A0\u3057\u305F\u58F0"), myPosts))));
@@ -55769,7 +55816,7 @@ var INITIALIZE = 'user/initialize';
 
 /***/ }),
 
-/***/ 4:
+/***/ 1:
 /*!**********************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fmypage&absolutePagePath=%2FUsers%2Fitabashi%2FDocuments%2Fgit%2Fiemong%2Fskett%2Fpages%2Fmypage%2Findex.tsx ***!
   \**********************************************************************************************************************************************************/
@@ -55792,5 +55839,5 @@ module.exports = dll_13346faca0e924a89b24;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
+},[[1,"static/runtime/webpack.js"]]]);
 //# sourceMappingURL=mypage.js.map
