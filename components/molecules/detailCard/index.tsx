@@ -12,15 +12,18 @@ type Props = {
     side: Side
     user: UserType
     updateDate: string
+    isEnd: boolean
     className?: string
 }
 
 const DetailCard = (props: Props): JSX.Element => {
-    const { imgUrl, title, description, side, user, updateDate, className } = props
+    const { imgUrl, title, description, side, user, updateDate, isEnd, className } = props
+
     return (
         <Wrapper data-side={side} className={className}>
             {imgUrl && <ThumbnailWrapper>
                 <Thumbnail src={imgUrl} alt="description" />
+                {isEnd && <ClosedThumbnailCover>{'この募集は\n終了しました'}</ClosedThumbnailCover>}
             </ThumbnailWrapper>}
             <TextBox>
                 <Title>{title}</Title>
@@ -61,11 +64,29 @@ const Wrapper = styled.div`
     overflow: hidden;
 `
 const ThumbnailWrapper = styled.div`
+    position: relative;
     min-height: 386px;
     background-color: #fff;
 `
 const Thumbnail = styled.img`
     width: 100%;
+`
+
+const ClosedThumbnailCover = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 36px;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    text-align: center;
 `
 
 const TextBox = styled.div`
