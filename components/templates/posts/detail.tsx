@@ -59,6 +59,7 @@ const PostDetail = (props: Props): JSX.Element => {
 
     const postElement = React.useMemo(() => {
         if (!data || !side) return <>Loading</>
+
         return (
             <Wrapper>
                 <DetailCardWithMargin
@@ -68,6 +69,7 @@ const PostDetail = (props: Props): JSX.Element => {
                     user={data.user}
                     side={side}
                     updateDate={data.updateDate}
+                    isEnd={data.isEnd}
                 />
                 <Notice data-type={side}>
                     <NoticeTitle>
