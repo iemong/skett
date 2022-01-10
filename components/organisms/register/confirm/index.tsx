@@ -40,7 +40,7 @@ const Confirm = (props: Props): JSX.Element => {
             <ConfirmTitleWrapper>
                 <ConfirmTitle>内容確認</ConfirmTitle>
             </ConfirmTitleWrapper>
-            <DetailCard {...cardProps} title={title} imgUrl={imgUrl} side={side} user={user} />
+            <DetailCard {...cardProps} title={title} imgUrl={imgUrl} side={side} user={user} isEnd={false} />
             <ConfirmTitleWrapper>
                 <ConfirmTitle>シェアした時の見え方</ConfirmTitle>
             </ConfirmTitleWrapper>
