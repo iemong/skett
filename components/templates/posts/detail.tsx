@@ -80,23 +80,6 @@ const PostDetail = (props: Props): JSX.Element => {
                         <NoticeLink href="https://www.saigaivc.com/archives/" target="_blank" rel="noopener">受け入れ状況を確認する</NoticeLink>
                     </NoticeText>
                 </Notice>
-                <ShareWrapper>
-                    <Title>この声をシェアする</Title>
-                    <Shares
-                        onClickTwitter={(): void => {
-                            const intent = createTwitterIntent({
-                                url: data.url,
-                                text: '',
-                                hashtags: '被災地のスケット',
-                            })
-                            window.open(intent)
-                        }}
-                        onClickFacebook={(): void => {
-                            const intent = createFacebookIntent(data.url)
-                            window.open(intent)
-                        }}
-                    />
-                </ShareWrapper>
                 {isMyPost && <Applicant users={data?.applicants} side={side} />}
                 {user?.uid === data.user?.uid ? (
                     <>
@@ -128,6 +111,23 @@ const PostDetail = (props: Props): JSX.Element => {
                         </ApplyButton>
                     </Link> : null
                 )}
+                <ShareWrapper>
+                    <Title>この声をシェアする</Title>
+                    <Shares
+                        onClickTwitter={(): void => {
+                            const intent = createTwitterIntent({
+                                url: data.url,
+                                text: '',
+                                hashtags: '被災地のスケット',
+                            })
+                            window.open(intent)
+                        }}
+                        onClickFacebook={(): void => {
+                            const intent = createFacebookIntent(data.url)
+                            window.open(intent)
+                        }}
+                    />
+                </ShareWrapper>
                 <BackButton width={'400px'} height={'80px'} styleType="cancel" onClick={(): void => Router.back()}>
                     戻る
                 </BackButton>
