@@ -76,7 +76,7 @@ export const MenuContents = (props: Props) => {
                         onClose?.()
                     }}
                 >
-                    しえんのおまもりについて
+                    スケットのおまもりについて
                 </Item>
                 <Item
                     onClick={() => {
