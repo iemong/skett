@@ -23,9 +23,9 @@ export const Confirm = (): JSX.Element => {
         <Main>
             <>
                 <Container>
-                    <MainImg src="/img/omamori_hero.png" alt="しえんのおまもり" />
+                    <MainImg src="/img/omamori_hero.png" alt="スケットのおまもり" />
                     <Description>
-                    「しえんのおまもり」は、
+                    「スケットのおまもり」は、
                     <br />
                     被災地の助っ人マッチング「スケット」で募集された
                     <br />
