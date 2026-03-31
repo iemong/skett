@@ -23,7 +23,7 @@ export const Omamori = (): JSX.Element => {
         <Main>
             <>
                 <Container>
-                    <MainImg src="/img/omamori_hero.png" alt="しえんのおまもり" />
+                    <MainImg src="/img/omamori_hero.png" alt="スケットのおまもり" />
                     <Title>活動するときの保険</Title>
                     <Description>
                         被災地でボランティア活動をするときは
@@ -55,7 +55,7 @@ export const Omamori = (): JSX.Element => {
                         ぜひこちらを利用ください。
                         <br />
                     </Description>
-                    <Logo src="/img/omamori_logo.png" alt="しえんのおまもり" />
+                    <Logo src="/img/omamori_logo.png" alt="スケットのおまもり" />
                     <ApplyButton href="https://s-omamori.jp/" target="_blank">
                         保険に加入する
                         <Arrow />
